@@ -1,0 +1,134 @@
+require 'spec_helper'
+
+describe <%= controller_name %> do
+
+  describe 'GET index' do
+    subject(:get_index) { get :index }
+
+    authenticated_as(:admin) do
+      it { should be_success }
+
+      describe_assign(<%= model_configuration.as_symbol_collection %>) do
+        subject(<%= model_configuration.as_symbol_collection %>) { get_index; assigns(<%= model_configuration.as_symbol_collection %>) }
+
+        describe "sorting" do
+          it "sorts by query parameters" do
+            expect(ModelSorter).to receive(:sort).with(instance_of(<%= model_configuration.as_constant %>::ActiveRecord_Relation), anything).and_call_original
+            subject
+          end
+        end
+      end
+    end
+
+    it_behaves_like "action requiring authentication"
+    it_behaves_like "action authorizes roles", [:admin]
+  end
+
+  describe 'GET new' do
+    subject { get :new }
+
+    authenticated_as(:admin) do
+      it { should be_success }
+    end
+
+    it_behaves_like "action requiring authentication"
+    it_behaves_like "action authorizes roles", [:admin]
+  end
+
+  describe 'POST create' do
+    subject { post :create, <%= model_configuration.model_name %>: attributes }
+    let(:attributes) { {} }
+
+    authenticated_as(:admin) do
+
+      context "with valid parameters" do
+        let(:attributes) { FactoryGirl.attributes_for(<%= model_configuration.as_symbol %>) }
+
+        it "creates a <%= model_configuration.as_constant %> object with the given attributes" do
+          subject
+
+          <%= model_configuration.model_name %> = <%= model_configuration.as_constant %>.order(:created_at).last
+          expect(<%= model_configuration.model_name %>).to be_present
+          expect(<%= model_configuration.model_name %>).to have_attributes(attributes)
+        end
+
+        it { should redirect_to(<%= model_configuration.url_builder.index_path %>) }
+      end
+
+      context "with invalid parameters" do
+        let(:attributes) do
+          FactoryGirl.attributes_for(<%= model_configuration.as_symbol %>, :invalid)
+        end
+        specify { expect { subject }.not_to change(<%= model_configuration.as_constant %>, :count) }
+      end
+    end
+
+    it_behaves_like "action requiring authentication"
+    it_behaves_like "action authorizes roles", [:admin]
+  end
+
+  describe 'GET edit' do
+    subject { get :edit, id: <%= model_configuration.model_name %>.id }
+    let(<%= model_configuration.as_symbol %>) { FactoryGirl.create(<%= model_configuration.as_symbol %>) }
+
+    authenticated_as(:admin) do
+      it { should be_success }
+    end
+
+    it_behaves_like "action requiring authentication"
+    it_behaves_like "action authorizes roles", [:admin]
+  end
+
+  describe 'POST update' do
+    subject(:update_resource) { post :update, id: <%= model_configuration.model_name %>.id, <%= model_configuration.model_name %>: attributes }
+    let(:attributes) { {} }
+    let(<%= model_configuration.as_symbol %>) { FactoryGirl.create(<%= model_configuration.as_symbol %>) }
+
+    authenticated_as(:admin) do
+
+      context "with valid parameters" do
+        let(:attributes) { FactoryGirl.attributes_for(<%= model_configuration.as_symbol %>) }
+
+        it "creates a <%= model_configuration.as_constant %> object with the given attributes" do
+          update_resource
+
+          <%= model_configuration.model_name %>.reload
+          expect(<%= model_configuration.model_name %>).to have_attributes(attributes)
+        end
+
+        it { should redirect_to(<%= model_configuration.url_builder.index_path %>) }
+      end
+
+      context "with invalid parameters" do
+        let(:attributes) do
+          FactoryGirl.attributes_for(<%= model_configuration.as_symbol %>, :invalid)
+        end
+
+        it "doesn't update the <%= model_configuration.as_constant %>" do
+          update_resource
+          expect(<%= model_configuration.model_name %>).not_to have_attributes(attributes)
+        end
+      end
+    end
+
+    it_behaves_like "action requiring authentication"
+    it_behaves_like "action authorizes roles", [:admin]
+  end
+
+  describe 'DELETE destroy' do
+    subject { delete :destroy, id: <%= model_configuration.model_name %>.id }
+    let(<%= model_configuration.as_symbol %>) { FactoryGirl.create(<%= model_configuration.as_symbol %>) }
+
+    authenticated_as(:admin) do
+      it "deletes the <%= model_configuration.model_name %>" do
+        subject
+        expect(<%= model_configuration.model_name %>.reload.deleted_at).to be_present
+      end
+      it { should redirect_to(<%= model_configuration.url_builder.index_path %>) }
+    end
+
+    it_behaves_like "action requiring authentication"
+    it_behaves_like "action authorizes roles", [:admin]
+  end
+
+end

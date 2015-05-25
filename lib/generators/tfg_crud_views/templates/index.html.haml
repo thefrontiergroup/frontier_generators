@@ -1,0 +1,27 @@
+%h1 <%= model_configuration.model_name.titleize %> Management
+
+%p= link_to "Add new <%= model_configuration.model_name.titleize %>", <%= model_configuration.url_builder.new_path %>, class: "button"
+
+%table
+  %col{style: 'width: 50%'}
+  %thead
+    %tr
+<% model_configuration.attributes.each do |attribute| -%>
+<% if attribute.sortable? -%>
+      %th= sortable_heading_for(<%= attribute.as_symbol %>)
+<% else -%>
+      %th <%= attribute.name.titleize %>
+<% end -%>
+<% end -%>
+      %th.actions Actions
+  %tbody
+    - <%= model_configuration.ivar_collection %>.each do |<%= model_configuration.model_name %>|
+      %tr
+<% model_configuration.attributes.each do |attribute| -%>
+        %td= <%= "#{model_configuration.model_name}.#{attribute.name}" %>
+<% end -%>
+        %td.actions
+          = link_to "Edit", <%= model_configuration.url_builder.edit_path %>, class: "button"
+          = link_to "Delete", <%= model_configuration.url_builder.delete_path %>, method: :delete, data: { confirm: "Are you sure you want to delete this <%= model_configuration.model_name %>?" }, class: "button"
+
+= paginate <%= model_configuration.ivar_collection %>
