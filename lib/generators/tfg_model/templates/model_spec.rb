@@ -9,4 +9,9 @@ describe <%= model_configuration.as_constant %> do
 
 <% end -%>
 
+  describe "#to_s" do
+    subject { <%= model_configuration.as_constant %>.new(<%= model_configuration.primary_attribute.name %>: "Name").to_s }
+    it { should eq("Name") }
+  end
+
 end

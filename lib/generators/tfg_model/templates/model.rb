@@ -7,4 +7,8 @@ class <%= model_configuration.as_constant %> < ActiveRecord::Base
   <%= attribute.validation_implementation %>
 <% end -%>
 
+  def to_s
+    <%= model_configuration.primary_attribute.name %>
+  end
+
 end

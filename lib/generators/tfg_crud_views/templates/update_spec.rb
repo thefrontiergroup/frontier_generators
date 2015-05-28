@@ -7,7 +7,7 @@ feature 'Admin can update an existing <%= model_configuration.as_constant %>' do
 
   before do
     visit(<%= model_configuration.url_builder.index_path %>)
-    within_row(target_object.<%= model_configuration.attributes.first.name %>) do
+    within_row(target_object.<%= model_configuration.primary_attribute.name %>) do
       click_link("Edit")
     end
   end

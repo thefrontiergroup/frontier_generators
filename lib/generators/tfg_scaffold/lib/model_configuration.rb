@@ -46,6 +46,10 @@ class ModelConfiguration
     "@#{model_name}"
   end
 
+  def primary_attribute
+    attributes.first
+  end
+
 private
 
   def assign_attributes_from_model_configuration(hash)

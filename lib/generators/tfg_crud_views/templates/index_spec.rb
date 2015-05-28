@@ -11,7 +11,7 @@ feature 'Admin can view an index of <%= model_configuration.model_name.pluralize
 
   scenario "Admin can see <%= model_configuration.model_name.pluralize %>" do
     within("table") do
-      expect(page).to have_content(<%= model_configuration.model_name %>.<%= model_configuration.attributes.first.name %>)
+      expect(page).to have_content(<%= model_configuration.model_name %>.<%= model_configuration.primary_attribute.name %>)
     end
   end
 
