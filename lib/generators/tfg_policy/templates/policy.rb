@@ -34,4 +34,3 @@ class <%= policy_class_name %> < ApplicationPolicy
   alias :destroy? :is_admin?
 
 end
-

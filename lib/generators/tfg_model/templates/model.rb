@@ -8,4 +8,3 @@ class <%= model_configuration.as_constant %> < ActiveRecord::Base
 <% end -%>
 
 end
-
