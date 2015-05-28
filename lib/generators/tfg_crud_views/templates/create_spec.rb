@@ -18,12 +18,4 @@ feature 'Admin can create a new <%= model_configuration.as_constant %>' do
     target_object = <%= model_configuration.as_constant %>.order(:created_at).first
     expect(target_object).to have_attributes(attributes)
   end
-
-  scenario 'Admin creates <%= model_configuration.as_constant %> with invalid data' do
-    attributes = FactoryGirl.attributes_for(<%= model_configuration.as_symbol %>, :invalid)
-    fill_in_form("<%= model_configuration.model_name %>", attributes)
-
-    submit_form
-    expect(<%= model_configuration.as_constant %>.count).to eq(0)
-  end
 end

@@ -21,12 +21,4 @@ feature 'Admin can update an existing <%= model_configuration.as_constant %>' do
     expect(target_object).to have_attributes(attributes)
   end
 
-  scenario 'Admin updates user with invalid data' do
-    attributes = FactoryGirl.attributes_for(<%= model_configuration.as_symbol %>, :invalid)
-    fill_in_form("<%= model_configuration.model_name %>", attributes)
-
-    submit_form
-
-    expect(current_path).to eq(<%= model_configuration.url_builder.failed_edit_path('target_object') %>)
-  end
 end
