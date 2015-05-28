@@ -13,7 +13,7 @@ class <%= controller_name_and_superclass %>
   def create
     <%= model_configuration.ivar_instance %> = <%= model_configuration.as_constant %>.new
     authorize(<%= model_configuration.ivar_instance %>)
-    if <%= model_configuration.ivar_instance %>.update_attributes(form_attributes(<%= model_configuration.ivar_instance %>))
+    if <%= model_configuration.ivar_instance %>.update_attributes(strong_params_for(<%= model_configuration.ivar_instance %>))
       flash[:notice] = "<%= model_configuration.as_constant %> #{<%= model_configuration.ivar_instance %>} successfully created"
     end
 
@@ -29,7 +29,7 @@ class <%= controller_name_and_superclass %>
     <%= model_configuration.ivar_instance %> = find_<%= model_configuration.model_name %>
     authorize(<%= model_configuration.ivar_instance %>)
 
-    if <%= model_configuration.ivar_instance %>.update_attributes(form_attributes(<%= model_configuration.ivar_instance %>))
+    if <%= model_configuration.ivar_instance %>.update_attributes(strong_params_for(<%= model_configuration.ivar_instance %>))
       flash[:notice] = "<%= model_configuration.as_constant %> #{<%= model_configuration.ivar_instance %>} successfully updated"
     end
     respond_with(<%= model_configuration.ivar_instance %>, location: <%= model_configuration.url_builder.index_path %>)
@@ -50,10 +50,6 @@ private
 
   def sort(collection)
     ModelSorter.sort(collection, params)
-  end
-
-  def form_attributes(<%= model_configuration.model_name %>)
-    params.require(<%= model_configuration.as_symbol %>).permit(policy(<%= model_configuration.model_name %>).permitted_attributes)
   end
 
 end
