@@ -6,7 +6,7 @@ describe <%= controller_name %> do
     subject(:get_index) { get :index }
 
     authenticated_as(:admin) do
-      it { should be_success }
+      it { should render_template(:index) }
 
       describe_assign(<%= model_configuration.as_symbol_collection %>) do
         subject(<%= model_configuration.as_symbol_collection %>) { get_index; assigns(<%= model_configuration.as_symbol_collection %>) }
@@ -28,7 +28,7 @@ describe <%= controller_name %> do
     subject { get :new }
 
     authenticated_as(:admin) do
-      it { should be_success }
+      it { should render_template(:new) }
     end
 
     it_behaves_like "action requiring authentication"
@@ -77,7 +77,7 @@ describe <%= controller_name %> do
     let(<%= model_configuration.as_symbol %>) { FactoryGirl.create(<%= model_configuration.as_symbol %>) }
 
     authenticated_as(:admin) do
-      it { should be_success }
+      it { should render_template(:edit) }
     end
 
     it_behaves_like "action requiring authentication"
