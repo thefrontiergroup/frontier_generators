@@ -4,7 +4,9 @@ class <%= model_configuration.as_constant %> < ActiveRecord::Base
   acts_as_paranoid
 
 <% model_configuration.attributes.select(&:validation_required?).each do |attribute| -%>
-  <%= attribute.validation_implementation %>
+<% attributes.validations.each do |validation| -%>
+  <%= validation.implementation %>
+<% end -%>
 <% end -%>
 
   def to_s

@@ -19,9 +19,9 @@ class ModelConfiguration
         "validate_presence_of(#{attribute.as_symbol})"
       when "uniqueness"
         <<-RUBY
-it "ensures uniqueness of #{attribute.name}" do
-  # TODO
-end
+    it "ensures uniqueness of #{attribute.name}" do
+      # TODO
+    end
         RUBY
       else
         raise(ArgumentError, "Unknown validation: #{attribute.name}, #{validation_name}")

@@ -25,20 +25,18 @@ class ModelConfiguration
 
   # Models
 
-    def validation_required?
-      properties[:validates].present?
-    end
-
-    def validation_implementation
-      if validation_required?
-        ModelConfiguration::ValidationString.for(self)
-      else
-        ""
+    def validations
+      @validations ||= properties[:validates].collect do |key, args|
+        ModelConfiguration::Validation.new(self, key, args)
       end
     end
 
+    def validation_required?
+      validations.any?
+    end
+
     def validation_spec
-      if validation_required?
+      if validations.any?
         ModelConfiguration::ValidationSpecString.for(self)
       else
         ""
