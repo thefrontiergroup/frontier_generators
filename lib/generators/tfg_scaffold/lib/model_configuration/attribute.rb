@@ -24,7 +24,7 @@ class ModelConfiguration
   # Models
 
     def validations
-      @validations ||= properties[:validates].collect do |key, args|
+      @validations ||= (properties[:validates] || []).collect do |key, args|
         ModelConfiguration::Validation.new(self, key, args)
       end
     end
