@@ -18,7 +18,7 @@ feature 'Admin can update an existing <%= model_configuration.as_constant %>' do
 
     submit_form
 
-    expect(target_object).to have_attributes(attributes)
+    expect(target_object.reload).to have_attributes(attributes)
   end
 
 end
