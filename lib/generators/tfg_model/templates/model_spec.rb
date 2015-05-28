@@ -4,8 +4,15 @@ describe <%= model_configuration.as_constant %> do
 
 <% model_configuration.attributes.select(&:validation_required?).each do |attribute| -%>
   describe "@<%= attribute.name %>" do
-<% model_configuration.attributes.validations.each do |validation| -%>
-    <%= validation.spec %>
+<% attribute.validations.each do |validation| -%>
+<% case validation.key -%>
+<% when "presence" -%>
+    it { should validate_presence_of(<%= attribute.as_symbol %>) }
+<% when "uniqueness" -%>
+    it "does something" do
+
+    end
+<% end -%>
 <% end -%>
   end
 <% end -%>
