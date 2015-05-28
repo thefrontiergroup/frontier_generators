@@ -1,6 +1,4 @@
 require_relative "factory_attribute_declaration.rb"
-require_relative "validation_spec_string.rb"
-require_relative "validation_string.rb"
 
 class ModelConfiguration
   class Attribute
