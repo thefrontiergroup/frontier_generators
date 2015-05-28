@@ -35,14 +35,6 @@ class ModelConfiguration
       validations.any?
     end
 
-    def validation_spec
-      if validations.any?
-        ModelConfiguration::ValidationSpecString.for(self)
-      else
-        ""
-      end
-    end
-
   # Factories
 
     def factory_declaration
