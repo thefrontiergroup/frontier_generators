@@ -9,8 +9,9 @@ describe <%= model_configuration.as_constant %> do
 <% when "presence" -%>
     it { should validate_presence_of(<%= attribute.as_symbol %>) }
 <% when "uniqueness" -%>
-    it "does something" do
-
+    describe "validating uniquess" do
+      subject { FactoryGirl.create(<%= model_configuration.as_symbol %>) }
+      it { should validate_uniqueness_of(<%= attribute.as_symbol %>) }
     end
 <% end -%>
 <% end -%>
