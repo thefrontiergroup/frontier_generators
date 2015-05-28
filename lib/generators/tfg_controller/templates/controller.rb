@@ -14,7 +14,7 @@ class <%= controller_name_and_superclass %>
     <%= model_configuration.ivar_instance %> = <%= model_configuration.as_constant %>.new
     authorize(<%= model_configuration.ivar_instance %>)
     if <%= model_configuration.ivar_instance %>.update_attributes(strong_params_for(<%= model_configuration.ivar_instance %>))
-      flash[:notice] = "<%= model_configuration.as_constant %> #{<%= model_configuration.ivar_instance %>} successfully created"
+      flash[:notice] = "<%= model_configuration.as_constant %> '#{<%= model_configuration.ivar_instance %>}' successfully created"
     end
 
     respond_with(<%= model_configuration.ivar_instance %>, location: <%= model_configuration.url_builder.index_path %>)
@@ -30,7 +30,7 @@ class <%= controller_name_and_superclass %>
     authorize(<%= model_configuration.ivar_instance %>)
 
     if <%= model_configuration.ivar_instance %>.update_attributes(strong_params_for(<%= model_configuration.ivar_instance %>))
-      flash[:notice] = "<%= model_configuration.as_constant %> #{<%= model_configuration.ivar_instance %>} successfully updated"
+      flash[:notice] = "<%= model_configuration.as_constant %> '#{<%= model_configuration.ivar_instance %>}' successfully updated"
     end
     respond_with(<%= model_configuration.ivar_instance %>, location: <%= model_configuration.url_builder.index_path %>)
   end
