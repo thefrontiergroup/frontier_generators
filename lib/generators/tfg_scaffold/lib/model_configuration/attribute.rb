@@ -29,6 +29,11 @@ class ModelConfiguration
       end
     end
 
+    def validation_implementation
+      validation_string = validations.collect(&:implementation).join(", ")
+      "validates #{validation_string}"
+    end
+
     def validation_required?
       validations.any?
     end

@@ -13,16 +13,7 @@ class ModelConfiguration::Validation
   end
 
   def implementation
-    "validates #{attribute.as_symbol}, #{validations_for_attribute}"
-  end
-
-private
-
-  def validations_for_attribute
-    validations = attribute.properties[:validates].collect do |key, value|
-      "#{key}: #{value}"
-    end
-    validations.join(", ")
+    "#{key}: #{value}"
   end
 
 end
