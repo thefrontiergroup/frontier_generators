@@ -31,7 +31,7 @@ class ModelConfiguration
 
     def validation_implementation
       validation_string = validations.collect(&:implementation).join(", ")
-      "validates #{validation_string}"
+      "validates #{as_symbol}, #{validation_string}"
     end
 
     def validation_required?

@@ -13,7 +13,7 @@ class ModelConfiguration::Validation
   end
 
   def implementation
-    "#{key}: #{value}"
+    "#{key}: #{args}"
   end
 
 end
