@@ -34,6 +34,15 @@ describe <%= policy_class_name %> do
     end
   end
 
+  shared_examples_for "Policy without access to CRUD actions" do
+    it { should_not permit_access_to(:index) }
+    it { should_not permit_access_to(:new) }
+    it { should_not permit_access_to(:create) }
+    it { should_not permit_access_to(:edit) }
+    it { should_not permit_access_to(:update) }
+    it { should_not permit_access_to(:destroy) }
+  end
+
   context "for an anonymous user" do
     let(:user) { nil }
 
@@ -42,13 +51,7 @@ describe <%= policy_class_name %> do
       it { should be_empty }
     end
 
-    # CRUD actions
-    it { should_not permit_access_to(:index) }
-    it { should_not permit_access_to(:new) }
-    it { should_not permit_access_to(:create) }
-    it { should_not permit_access_to(:edit) }
-    it { should_not permit_access_to(:update) }
-    it { should_not permit_access_to(:destroy) }
+    it_behaves_like "Policy without access to CRUD actions"
   end
 
   context "for an admin" do
@@ -80,12 +83,6 @@ describe <%= policy_class_name %> do
 <% end -%>
     end
 
-    # CRUD actions
-    it { should_not permit_access_to(:index) }
-    it { should_not permit_access_to(:new) }
-    it { should_not permit_access_to(:create) }
-    it { should_not permit_access_to(:edit) }
-    it { should_not permit_access_to(:update) }
-    it { should_not permit_access_to(:destroy) }
+    it_behaves_like "Policy without access to CRUD actions"
   end
 end
