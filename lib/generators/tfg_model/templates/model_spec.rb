@@ -4,7 +4,7 @@ describe <%= model_configuration.as_constant %> do
 
 <% model_configuration.attributes.select(&:validation_required?).each do |attribute| -%>
   describe "@<%= attribute.name %>" do
-<% attributes.validations.each do |validation| -%>
+<% model_configuration.attributes.validations.each do |validation| -%>
     <%= validation.spec %>
 <% end -%>
   end
