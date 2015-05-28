@@ -1,6 +1,6 @@
-require_relative "../tfg_scaffold/lib/model_configuration.rb"
+require_relative "../frontier_scaffold/lib/model_configuration.rb"
 
-class TfgRouteGenerator < Rails::Generators::NamedBase
+class FrontierRouteGenerator < Rails::Generators::NamedBase
   source_root File.expand_path('../templates', __FILE__)
 
   attr_accessor :model_configuration

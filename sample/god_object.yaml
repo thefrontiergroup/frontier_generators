@@ -1,0 +1,10 @@
+god:
+  namespaces: ["admin"]
+  attributes:
+    name:
+      searchable: true
+      sortable: true
+      type: "String"
+      validates:
+        presence: true
+        uniqueness: true
