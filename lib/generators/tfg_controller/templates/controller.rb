@@ -13,7 +13,9 @@ class <%= controller_name_and_superclass %>
   def create
     <%= model_configuration.ivar_instance %> = <%= model_configuration.as_constant %>.new
     authorize(<%= model_configuration.ivar_instance %>)
-    <%= model_configuration.ivar_instance %>.update_attributes(form_attributes(<%= model_configuration.ivar_instance %>))
+    if <%= model_configuration.ivar_instance %>.update_attributes(form_attributes(<%= model_configuration.ivar_instance %>))
+      flash[:notice] = "<%= model_configuration.as_constant %> #{<%= model_configuration.ivar_instance %>} successfully created"
+    end
 
     respond_with(<%= model_configuration.ivar_instance %>, location: <%= model_configuration.url_builder.index_path %>)
   end

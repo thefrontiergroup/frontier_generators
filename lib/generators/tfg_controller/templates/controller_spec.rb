@@ -53,6 +53,11 @@ describe <%= controller_name %> do
         end
 
         it { should redirect_to(<%= model_configuration.url_builder.index_path %>) }
+
+        it "sets a notice for the user" do
+          subject
+          expect(flash[:notice]).to be_present
+        end
       end
 
       context "with invalid parameters" do
@@ -97,6 +102,11 @@ describe <%= controller_name %> do
         end
 
         it { should redirect_to(<%= model_configuration.url_builder.index_path %>) }
+
+        it "sets a notice for the user" do
+          subject
+          expect(flash[:notice]).to be_present
+        end
       end
 
       context "with invalid parameters" do
