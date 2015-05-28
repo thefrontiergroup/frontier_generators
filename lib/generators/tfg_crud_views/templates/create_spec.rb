@@ -16,7 +16,7 @@ feature 'Admin can create a new <%= model_configuration.as_constant %>' do
     submit_form
 
     target_object = <%= model_configuration.as_constant %>.order(:created_at).first
-    ensure_attributes_were_updated(target_object, attributes)
+    expect(target_object).to have_attributes(attributes)
   end
 
   scenario 'Admin creates <%= model_configuration.as_constant %> with invalid data' do

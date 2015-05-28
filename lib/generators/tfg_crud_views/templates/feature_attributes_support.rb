@@ -1,12 +1,5 @@
 module FeatureAttributesSupport
 
-  def ensure_attributes_were_updated(model, attributes)
-    model.reload
-    attributes.each do |name, value|
-      expect(model.public_send(name)).to eq value
-    end
-  end
-
   def fill_in_form(prefix, attributes)
     attributes.each do |attribute, value|
       field_name = prefix + "_" + attribute.to_s

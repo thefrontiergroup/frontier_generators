@@ -18,7 +18,7 @@ feature 'Admin can update an existing <%= model_configuration.as_constant %>' do
 
     submit_form
 
-    ensure_attributes_were_updated(target_object, attributes)
+    expect(target_object).to have_attributes(attributes)
   end
 
   scenario 'Admin updates user with invalid data' do
