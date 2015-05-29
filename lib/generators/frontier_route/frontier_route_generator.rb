@@ -1,4 +1,5 @@
 require_relative "../frontier_scaffold/lib/model_configuration.rb"
+require_relative "./lib/namespace.rb"
 
 class FrontierRouteGenerator < Rails::Generators::NamedBase
   source_root File.expand_path('../templates', __FILE__)
@@ -9,6 +10,10 @@ class FrontierRouteGenerator < Rails::Generators::NamedBase
 
   def scaffold
     self.model_configuration = ModelConfiguration.new(ARGV[0])
+    # model_configuration.namespaces will be an array. EG: ["admin", "groups"]
+    @namespaces = model_configuration.namespaces.each_with_index.collect do |ns, index|
+      FrontierRouteGenerator::Namespace.new(ns, index)
+    end
 
     # If we don't need to namespace (can just chuck route in file anywhere), or a namespace
     # block doesn't exist (same thing again) we can use the dumb rails generator
