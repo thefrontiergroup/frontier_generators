@@ -16,8 +16,7 @@ class FrontierRouteGenerator < Rails::Generators::NamedBase
       generate("resource_route", model_with_namespaces)
     # If the namespace block already exists, we should append this route to it.
     else
-      tabs = Array.new(number_of_tabs_in_namespace, "  ").join("")
-      route_for_resource = "#{tabs}resources :#{model_configuration.model_name.pluralize}"
+      route_for_resource = "#{tabs_before_route}resources :#{model_configuration.model_name.pluralize}"
       unless File.read(ROUTES_FILE_PATH).include?(route_for_resource)
         gsub_file(ROUTES_FILE_PATH, "namespace(:admin) do", "namespace :admin do")
         gsub_file(ROUTES_FILE_PATH, "namespace :admin do", "namespace :admin do\n#{route_for_resource}")
@@ -59,6 +58,10 @@ private
 
   def route_file_content
     @route_file_content ||= File.read("config/routes.rb")
+  end
+
+  def tabs_before_route
+    @tabs_before_route ||= Array.new(number_of_tabs_in_namespace, "  ").join("")
   end
 
 end
