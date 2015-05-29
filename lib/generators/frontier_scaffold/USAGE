@@ -8,3 +8,9 @@ Example:
         what/will/it/create
 
     You can test this out by running `rails g frontier_scaffold sample/god_object.yaml`
+
+    Model Options
+
+      - associations
+      - attributes
+      - skip_ui

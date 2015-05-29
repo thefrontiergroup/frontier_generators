@@ -26,20 +26,19 @@ class FrontierScaffoldGenerator < Rails::Generators::NamedBase
     # Generate models
     generate("frontier_model", ARGV[0])
 
-    # Generate seed files for the model
-    generate("frontier_seed", ARGV[0])
+    if model_configuration.skip_ui
+      # Generate controllers
+      generate("frontier_controller", ARGV[0])
 
-    # Generate controllers
-    generate("frontier_controller", ARGV[0])
+      # Generate views
+      generate("frontier_crud_views", ARGV[0])
 
-    # Generate views
-    generate("frontier_crud_views", ARGV[0])
+      # Generate policies
+      generate("frontier_policy", ARGV[0])
 
-    # Generate policies
-    generate("frontier_policy", ARGV[0])
-
-    # Generate routes
-    generate("frontier_route", ARGV[0])
+      # Generate routes
+      generate("frontier_route", ARGV[0])
+    end
 
     # Version 2
     #

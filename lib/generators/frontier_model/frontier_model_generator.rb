@@ -8,6 +8,9 @@ class FrontierModelGenerator < Rails::Generators::NamedBase
   def scaffold
     self.model_configuration = ModelConfiguration.new(ARGV[0])
 
+    # Generate seed files for the model
+    generate("frontier_seed", ARGV[0])
+
     # EG: CreateDriver name:string contact_number:string
     generate("migration", "Create#{model_configuration.as_constant} #{model_attributes_with_deleted_at}")
 

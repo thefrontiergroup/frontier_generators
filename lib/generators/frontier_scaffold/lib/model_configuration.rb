@@ -4,7 +4,7 @@ require_relative "./model_configuration/validation"
 
 class ModelConfiguration
 
-  attr_reader :model_name, :namespaces, :attributes, :url_builder
+  attr_reader :model_name, :namespaces, :attributes, :skip_ui, :url_builder
 
   # Example YAML:
   #   drive:
@@ -56,6 +56,7 @@ private
   def assign_attributes_from_model_configuration(hash)
     @model_name = hash.keys.first
     @namespaces = hash[@model_name][:namespaces] || []
+    @skip_ui    = hash[@model_name][:skip_ui] || false
     @attributes = hash[@model_name][:attributes].collect do |name, properties|
       ModelConfiguration::Attribute.new(name, properties)
     end
