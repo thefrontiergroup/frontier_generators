@@ -25,8 +25,15 @@ class FrontierRouteGenerator < Rails::Generators::NamedBase
     # If the namespace block already exists, we should append this route to it.
     else
       unless resource.exists_in_routes_file?
-        gsub_file(ROUTES_FILE_PATH, "namespace(:admin) do", "namespace :admin do")
-        gsub_file(ROUTES_FILE_PATH, "namespace :admin do", "namespace :admin do\n#{resource.route_string}")
+        normalized   = namespaces.last.namespace_string
+        unnormalized = namespaces.last.unnormalized_namespace_string
+        # Ensure that the namespace is in the normalized form `namespace :jordan do`
+        gsub_file(ROUTES_FILE_PATH, unnormalized, normalized)
+        # Append the route to the normalized namespace. EG:
+        # namespace :admin do
+        #   resources :jordan
+        # end
+        gsub_file(ROUTES_FILE_PATH, normalized, "#{normalized}\n#{resource.route_string}")
       end
     end
   end

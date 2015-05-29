@@ -18,6 +18,14 @@ class FrontierRouteGenerator::Namespace
     (route_file_content =~ namespace_regexp(name)).present?
   end
 
+  def namespace_string
+    "namespace :#{name} do"
+  end
+
+  def unnormalized_namespace_string
+    "namespace(:#{name}) do"
+  end
+
 private
 
   # Finds:
