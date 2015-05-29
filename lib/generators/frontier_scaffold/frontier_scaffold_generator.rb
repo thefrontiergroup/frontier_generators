@@ -26,6 +26,9 @@ class FrontierScaffoldGenerator < Rails::Generators::NamedBase
     # Generate models
     generate("frontier_model", ARGV[0])
 
+    # Generate seed files for the model
+    generate("frontier_seed", ARGV[0])
+
     # Generate controllers
     generate("frontier_controller", ARGV[0])
 
