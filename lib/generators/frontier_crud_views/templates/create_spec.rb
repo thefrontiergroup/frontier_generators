@@ -6,7 +6,7 @@ feature 'Admin can create a new <%= model_configuration.as_constant %>' do
 
   before do
     visit(<%= model_configuration.url_builder.index_path %>)
-    click_link("Add new <%= model_configuration.as_constant %>")
+    click_link("Add new <%= model_configuration.as_constant.titleize %>")
   end
 
   scenario 'Admin creates <%= model_configuration.as_constant %> with valid data' do
