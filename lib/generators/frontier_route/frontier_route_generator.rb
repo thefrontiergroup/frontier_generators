@@ -3,9 +3,10 @@ require_relative "../frontier_scaffold/lib/model_configuration.rb"
 class FrontierRouteGenerator < Rails::Generators::NamedBase
   source_root File.expand_path('../templates', __FILE__)
 
+  ROUTES_FILE_PATH = "config/routes.rb"
+
   attr_accessor :model_configuration
 
-  # TODO: Fix bug where this doesn't ensure that route doesn't already exist!
   def scaffold
     self.model_configuration = ModelConfiguration.new(ARGV[0])
 
@@ -16,8 +17,11 @@ class FrontierRouteGenerator < Rails::Generators::NamedBase
     # If the namespace block already exists, we should append this route to it.
     else
       tabs = Array.new(number_of_tabs_in_namespace, "  ").join("")
-      gsub_file("config/routes.rb", "namespace :admin do", "namespace(:admin) do")
-      gsub_file("config/routes.rb", "namespace(:admin) do", "namespace(:admin) do\n#{tabs}resources :#{model_configuration.model_name.pluralize}")
+      route_for_resource = "#{tabs}resources :#{model_configuration.model_name.pluralize}"
+      unless File.read(ROUTES_FILE_PATH).include?(route_for_resource)
+        gsub_file(ROUTES_FILE_PATH, "namespace(:admin) do", "namespace :admin do")
+        gsub_file(ROUTES_FILE_PATH, "namespace :admin do", "namespace :admin do\n#{route_for_resource}")
+      end
     end
   end
 
@@ -27,6 +31,9 @@ private
     [*model_configuration.namespaces, model_configuration.model_name].join("/")
   end
 
+  # Finds:
+  #   * namespace :name
+  #   * namespace(:name)
   def namespace_regexp(namespace)
     /namespace(\(|\s):#{namespace}/
   end
