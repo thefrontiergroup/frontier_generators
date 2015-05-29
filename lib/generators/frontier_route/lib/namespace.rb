@@ -28,7 +28,7 @@ private
   end
 
   def route_file_content
-    @route_file_content ||= File.read("config/routes.rb")
+    @route_file_content ||= File.read(ROUTES_FILE_PATH)
   end
 
 end

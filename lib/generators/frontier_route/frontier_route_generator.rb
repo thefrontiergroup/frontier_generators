@@ -24,7 +24,7 @@ class FrontierRouteGenerator < Rails::Generators::NamedBase
       generate("resource_route", model_with_namespaces)
     # If the namespace block already exists, we should append this route to it.
     else
-      unless route_file_content.include?(resource.route_string)
+      unless resource.exists_in_routes_file?
         gsub_file(ROUTES_FILE_PATH, "namespace(:admin) do", "namespace :admin do")
         gsub_file(ROUTES_FILE_PATH, "namespace :admin do", "namespace :admin do\n#{resource.route_string}")
       end
@@ -39,10 +39,6 @@ private
 
   def routes_file_contains_namespaces?
     namespaces.last.exists_in_routes_file?
-  end
-
-  def route_file_content
-    @route_file_content ||= File.read("config/routes.rb")
   end
 
 end

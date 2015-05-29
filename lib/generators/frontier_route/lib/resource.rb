@@ -1,5 +1,7 @@
 class FrontierRouteGenerator::Resource
 
+  ROUTES_FILE_PATH = "config/routes.rb"
+
   attr_reader :model_configuration, :namespaces
 
   # model_configuration: Instance of ModelConfiguration
@@ -7,6 +9,10 @@ class FrontierRouteGenerator::Resource
   def initialize(model_configuration, namespaces)
     @model_configuration = model_configuration
     @namespaces = namespaces
+  end
+
+  def exists_in_routes_file?
+    route_file_content.include?(route_string)
   end
 
   def route_string
@@ -31,6 +37,10 @@ private
   # end
   def number_of_tabs_before_route
     1 + namespaces.count
+  end
+
+  def route_file_content
+    @route_file_content ||= File.read(ROUTES_FILE_PATH)
   end
 
 end
