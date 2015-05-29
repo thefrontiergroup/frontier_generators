@@ -15,7 +15,7 @@ class FrontierRouteGenerator::Namespace
   end
 
   def exists_in_routes_file?
-    route_file_content =~ namespace_regexp(name)
+    (route_file_content =~ namespace_regexp(name)).present?
   end
 
 private

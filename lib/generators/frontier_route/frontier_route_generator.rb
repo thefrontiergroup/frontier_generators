@@ -1,7 +1,7 @@
 require_relative "../frontier_scaffold/lib/model_configuration.rb"
-require_relative "./lib/namespace.rb"
 
 class FrontierRouteGenerator < Rails::Generators::NamedBase
+  require_relative "./lib/namespace.rb"
   source_root File.expand_path('../templates', __FILE__)
 
   ROUTES_FILE_PATH = "config/routes.rb"
