@@ -34,7 +34,7 @@ class <%= controller_name_and_superclass %>
     <%= model_configuration.ivar_instance %> = find_<%= model_configuration.model_name %>
     authorize(<%= model_configuration.ivar_instance %>)
     <%= model_configuration.ivar_instance %>.destroy
-    redirect_to(<%= model_configuration.url_builder.index_path %>, notice: "'#{<%= model_configuration.ivar_instance %>}' deleted")
+    respond_with(<%= model_configuration.ivar_instance %>, location: <%= model_configuration.url_builder.index_path %>)
   end
 
 private
