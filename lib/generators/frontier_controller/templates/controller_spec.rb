@@ -94,7 +94,7 @@ describe <%= controller_name %> do
       context "with valid parameters" do
         let(:attributes) { FactoryGirl.attributes_for(<%= model_configuration.as_symbol %>) }
 
-        it "creates a <%= model_configuration.as_constant %> object with the given attributes" do
+        it "updates the <%= model_configuration.as_constant %> object with the given attributes" do
           update_resource
 
           <%= model_configuration.model_name %>.reload
