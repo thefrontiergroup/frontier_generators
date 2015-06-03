@@ -3,10 +3,12 @@ require_relative "attribute.rb"
 class ModelConfiguration
   class Association < Attribute
 
+    ID_REGEXP = /_id\z/
+
     # some_thing_id -> ":some_thing_id"
     # some_thing -> ":some_thing_id"
     def as_field_name
-      if name =~ /_id\z/
+      if name =~ ID_REGEXP
         as_symbol
       else
         "#{as_symbol}_id"
@@ -52,7 +54,7 @@ class ModelConfiguration
       if properties[:class_name].present?
         properties[:class_name]
       else
-        name.sub(/_id\z/, "").camelize
+        name.sub(ID_REGEXP, "").camelize
       end
     end
 
