@@ -14,7 +14,6 @@ class ModelConfiguration
       name.titleize.capitalize
     end
 
-    # some_thing -> ":some_thing_id"
     # some_thing -> ":some_thing"
     def as_field_name
       as_symbol
@@ -35,14 +34,7 @@ class ModelConfiguration
   # Views
 
     def as_input
-      input_declaration = as_field_name
-      if is_association?
-        # Should convert attribute :state into:
-        # f.input :state_id, collection: State.all
-        collection_class = properties[:class_name].present? ? properties[:class_name] : name.camelize
-        input_declaration = "#{as_field_name}, collection: #{collection_class}.all"
-      end
-      "f.input #{input_declaration}"
+      "f.input #{as_field_name}"
     end
 
   # Models

@@ -13,6 +13,12 @@ class ModelConfiguration
       end
     end
 
+    def is_association?
+      true
+    end
+
+    # Models
+
     def association_implementation
       without_options = case properties[:type]
       when "belongs_to"
@@ -32,8 +38,22 @@ class ModelConfiguration
       with_options = [without_options, options].join(", ")
     end
 
-    def is_association?
-      true
+    # Views
+
+    def as_input
+      # Should convert attribute "state" into:
+      # f.input :state_id, collection: State.all
+      input_declaration = "f.input #{as_field_name}, collection: #{association_class}.all"
+    end
+
+  private
+
+    def association_class
+      if properties[:class_name].present?
+        properties[:class_name]
+      else
+        name.sub(/_id\z/, "").camelize
+      end
     end
 
   end
