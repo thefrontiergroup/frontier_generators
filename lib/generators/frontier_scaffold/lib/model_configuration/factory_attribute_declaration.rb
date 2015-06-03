@@ -2,7 +2,11 @@ class ModelConfiguration
   class FactoryAttributeDeclaration
 
     def self.for(attribute)
-      "#{attribute.name} { #{data_for(attribute)} }"
+      if attribute.is_association?
+        attribute.name
+      else
+        "#{attribute.name} { #{data_for(attribute)} }"
+      end
     end
 
   private

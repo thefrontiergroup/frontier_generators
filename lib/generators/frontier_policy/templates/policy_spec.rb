@@ -60,7 +60,7 @@ describe <%= policy_class_name %> do
     describe '#permitted_attributes' do
       subject { policy.permitted_attributes }
 <% model_configuration.attributes.each do |attribute| -%>
-      it { should include(<%= attribute.as_symbol %>) }
+      it { should include(<%= attribute.as_field_name %>) }
 <% end -%>
     end
 
@@ -79,7 +79,7 @@ describe <%= policy_class_name %> do
     describe '#permitted_attributes' do
       subject { policy.permitted_attributes }
 <% model_configuration.attributes.each do |attribute| -%>
-      it { should include(<%= attribute.as_symbol %>) }
+      it { should include(<%= attribute.as_field_name %>) }
 <% end -%>
     end
 

@@ -42,7 +42,7 @@ describe <%= controller_name %> do
     authenticated_as(:admin) do
 
       context "with valid parameters" do
-        let(:attributes) { FactoryGirl.attributes_for(<%= model_configuration.as_symbol %>) }
+        let(:attributes) { parameters_for(<%= model_configuration.as_symbol %>) }
 
         it "creates a <%= model_configuration.as_constant %> object with the given attributes" do
           subject
@@ -61,9 +61,7 @@ describe <%= controller_name %> do
       end
 
       context "with invalid parameters" do
-        let(:attributes) do
-          FactoryGirl.attributes_for(<%= model_configuration.as_symbol %>, :invalid)
-        end
+        let(:attributes) { parameters_for(<%= model_configuration.as_symbol %>, :invalid) }
         specify { expect { subject }.not_to change(<%= model_configuration.as_constant %>, :count) }
       end
     end
@@ -92,7 +90,7 @@ describe <%= controller_name %> do
     authenticated_as(:admin) do
 
       context "with valid parameters" do
-        let(:attributes) { FactoryGirl.attributes_for(<%= model_configuration.as_symbol %>) }
+        let(:attributes) { parameters_for(<%= model_configuration.as_symbol %>) }
 
         it "updates the <%= model_configuration.as_constant %> object with the given attributes" do
           update_resource
@@ -110,9 +108,7 @@ describe <%= controller_name %> do
       end
 
       context "with invalid parameters" do
-        let(:attributes) do
-          FactoryGirl.attributes_for(<%= model_configuration.as_symbol %>, :invalid)
-        end
+        let(:attributes) { parameters_for(<%= model_configuration.as_symbol %>, :invalid) }
 
         it "doesn't update the <%= model_configuration.as_constant %>" do
           update_resource

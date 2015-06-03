@@ -1,7 +1,7 @@
 = simple_form_for [<%= model_configuration.namespaces.map{|ns| ":#{ns}"}.join(", ") %>, <%= model_configuration.ivar_instance %>], wrapper: "horizontal", html: { class: "form-horizontal"} do |f|
 
 <% model_configuration.attributes.each do |attribute| -%>
-  = f.input <%= attribute.as_symbol %>
+  = <%= attribute.as_input %>
 <% end -%>
   .form-actions
     = f.button :submit
