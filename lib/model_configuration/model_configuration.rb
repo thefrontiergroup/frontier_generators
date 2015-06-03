@@ -1,3 +1,4 @@
+require_relative "attribute/factory.rb"
 require_relative "attribute.rb"
 require_relative "url_builder.rb"
 require_relative "validation.rb"
@@ -58,7 +59,7 @@ private
     @namespaces = hash[@model_name][:namespaces] || []
     @skip_ui    = hash[@model_name][:skip_ui] || false
     @attributes = (hash[@model_name][:attributes] || []).collect do |name, properties|
-      ModelConfiguration::Attribute.new(name, properties)
+      ModelConfiguration::Attribute::Factory.build_attribute_or_association(name, properties)
     end
     # TODO: Assert validity of attributes
     @url_builder = ModelConfiguration::UrlBuilder.new(self)
