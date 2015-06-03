@@ -3,7 +3,13 @@ class ModelConfiguration
 
     def self.for(attribute)
       if attribute.is_association?
-        attribute.name
+        if (class_name = attribute.properties[:class_name]).present?
+          # association :delivery_address, factory: :address
+          "association #{attribute.as_symbol}, factory: :#{class_name.underscore}"
+        else
+          # association :address
+          "association #{attribute.as_symbol}"
+        end
       else
         "#{attribute.name} { #{data_for(attribute)} }"
       end

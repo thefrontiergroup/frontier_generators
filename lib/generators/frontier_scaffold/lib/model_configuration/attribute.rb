@@ -36,7 +36,8 @@ class ModelConfiguration
       if is_association?
         # Should convert attribute :state into:
         # f.input :state_id, collection: State.all
-        input_declaration = "#{as_field_name}, collection: #{name.camelize}.all"
+        collection_class = properties[:class_name].present? ? properties[:class_name] : name.camelize
+        input_declaration = "#{as_field_name}, collection: #{collection_class}.all"
       end
       "f.input #{input_declaration}"
     end
@@ -44,7 +45,7 @@ class ModelConfiguration
   # Models
 
     def association_implementation
-      case properties[:type]
+      without_options = case properties[:type]
       when "belongs_to"
         "belongs_to #{as_symbol}"
       when "has_one"
@@ -54,6 +55,12 @@ class ModelConfiguration
       when "has_and_belongs_to_many"
         "has_and_belongs_to_many #{as_symbol}"
       end
+
+      options = nil
+      if properties[:class_name].present?
+        options = "class_name: #{properties[:class_name]}"
+      end
+      with_options = [without_options, options].join(", ")
     end
 
     def is_association?
