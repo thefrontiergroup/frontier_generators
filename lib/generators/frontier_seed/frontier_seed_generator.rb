@@ -1,4 +1,4 @@
-require_relative "../frontier_scaffold/lib/model_configuration.rb"
+require_relative "../../model_configuration/model_configuration"
 
 class FrontierSeedGenerator < Rails::Generators::NamedBase
   source_root File.expand_path('../templates', __FILE__)

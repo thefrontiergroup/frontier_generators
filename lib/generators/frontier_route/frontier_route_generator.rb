@@ -1,4 +1,4 @@
-require_relative "../frontier_scaffold/lib/model_configuration.rb"
+require_relative "../../model_configuration/model_configuration"
 
 class FrontierRouteGenerator < Rails::Generators::NamedBase
   require_relative "./lib/namespace.rb"

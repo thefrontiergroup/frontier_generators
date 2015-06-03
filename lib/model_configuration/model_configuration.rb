@@ -1,6 +1,6 @@
-require_relative "./model_configuration/attribute"
-require_relative "./model_configuration/url_builder"
-require_relative "./model_configuration/validation"
+require_relative "attribute.rb"
+require_relative "url_builder.rb"
+require_relative "validation.rb"
 
 class ModelConfiguration
 
