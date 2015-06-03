@@ -26,11 +26,11 @@ class <%= policy_class_name %> < ApplicationPolicy
 
 # CRUD
 
-  alias :index? :is_admin?
-  alias :new? :is_admin?
-  alias :create? :is_admin?
-  alias :edit? :is_admin?
-  alias :update? :is_admin?
+  alias :index?   :is_admin?
+  alias :new?     :is_admin?
+  alias :create?  :is_admin?
+  alias :edit?    :is_admin?
+  alias :update?  :is_admin?
   alias :destroy? :is_admin?
 
 end
