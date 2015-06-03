@@ -35,7 +35,8 @@ private
   end
 
   def generate_feature_path(template_name, feature_name)
-    template(template_name, "spec/features/admin/#{feature_name}")
+    feature_path = File.join("spec", "features", "admin", model_configuration.model_name.pluralize, feature_name)
+    template(template_name, feature_path)
   end
 
 end
