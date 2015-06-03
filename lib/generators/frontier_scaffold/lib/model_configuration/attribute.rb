@@ -9,6 +9,13 @@ class ModelConfiguration
       @properties = properties
     end
 
+    # some_thing -> "Some thing"
+    def capitalized
+      name.titleize.capitalize
+    end
+
+    # some_thing -> ":some_thing_id"
+    # some_thing -> ":some_thing"
     def as_field_name
       if is_association?
         ":#{name}_id"
