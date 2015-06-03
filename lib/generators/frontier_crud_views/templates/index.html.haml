@@ -3,7 +3,6 @@
 %p= link_to "Add new <%= model_configuration.model_name.titleize %>", <%= model_configuration.url_builder.new_path %>, class: "button"
 
 %table
-  %col{style: 'width: 50%'}
   %thead
     %tr
 <% model_configuration.attributes.each do |attribute| -%>
