@@ -47,7 +47,16 @@ class ModelConfiguration
   # Migrations
 
     def as_migration_component
-      [name, properties[:type]].compact.join(":")
+      index_component = nil
+      # Can be 'uniq' or 'index'
+      index_component = (properties[:index] || "index") if requires_index?
+      [name, properties[:type], index_component].compact.join(":")
+    end
+
+  private
+
+    def requires_index?
+      properties[:index] || properties[:searchable] || properties[:sortable]
     end
 
   end
