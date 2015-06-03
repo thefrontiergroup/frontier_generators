@@ -57,7 +57,7 @@ private
     @model_name = hash.keys.first
     @namespaces = hash[@model_name][:namespaces] || []
     @skip_ui    = hash[@model_name][:skip_ui] || false
-    @attributes = hash[@model_name][:attributes].collect do |name, properties|
+    @attributes = (hash[@model_name][:attributes] || []).collect do |name, properties|
       ModelConfiguration::Attribute.new(name, properties)
     end
     # TODO: Assert validity of attributes
