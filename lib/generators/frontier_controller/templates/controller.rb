@@ -11,9 +11,8 @@ class <%= controller_name_and_superclass %>
   end
 
   def create
-    <%= model_configuration.ivar_instance %> = <%= model_configuration.as_constant %>.new
-    authorize(<%= model_configuration.ivar_instance %>)
-    <%= model_configuration.ivar_instance %>.update_attributes(strong_params_for(<%= model_configuration.ivar_instance %>))
+    <%= model_configuration.ivar_instance %> = <%= model_configuration.as_constant %>.new(strong_params_for(<%= model_configuration.as_constant %>))
+    <%= model_configuration.ivar_instance %>.save if authorize(<%= model_configuration.ivar_instance %>)
 
     respond_with(<%= model_configuration.ivar_instance %>, location: <%= model_configuration.url_builder.index_path %>)
   end
@@ -25,8 +24,8 @@ class <%= controller_name_and_superclass %>
 
   def update
     <%= model_configuration.ivar_instance %> = find_<%= model_configuration.model_name %>
-    authorize(<%= model_configuration.ivar_instance %>)
-    <%= model_configuration.ivar_instance %>.update_attributes(strong_params_for(<%= model_configuration.ivar_instance %>))
+    <%= model_configuration.ivar_instance %>.assign_attributes(strong_params_for(<%= model_configuration.ivar_instance %>))
+    <%= model_configuration.ivar_instance %>.save if authorize(<%= model_configuration.ivar_instance %>)
 
     respond_with(<%= model_configuration.ivar_instance %>, location: <%= model_configuration.url_builder.index_path %>)
   end

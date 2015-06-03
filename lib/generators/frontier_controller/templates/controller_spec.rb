@@ -37,7 +37,7 @@ describe <%= controller_name %> do
 
   describe 'POST create' do
     subject { post :create, <%= model_configuration.model_name %>: attributes }
-    let(:attributes) { {} }
+    let(:attributes) { {id: 666} }
 
     authenticated_as(:admin) do
 
@@ -86,7 +86,7 @@ describe <%= controller_name %> do
 
   describe 'POST update' do
     subject(:update_resource) { post :update, id: <%= model_configuration.model_name %>.id, <%= model_configuration.model_name %>: attributes }
-    let(:attributes) { {} }
+    let(:attributes) { {id: <%= model_configuration.model_name %>.id} }
     let(<%= model_configuration.as_symbol %>) { FactoryGirl.create(<%= model_configuration.as_symbol %>) }
 
     authenticated_as(:admin) do
