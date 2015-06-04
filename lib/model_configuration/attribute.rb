@@ -34,8 +34,23 @@ class ModelConfiguration
 
   # Views
 
+    def as_enum
+      # Should look like:
+      #   enum attribute_name: ["one", "two"]
+      if is_enum?
+        enum_options_as_string = properties[:enum_options].collect {|x| "\"#{x}\""}.join(", ")
+        "enum #{name}: [#{enum_options_as_string}]"
+      else
+        raise(ArgumentError, "Attempting to display field #{name} as enum, but is #{type}")
+      end
+    end
+
     def as_input
       "f.input #{as_field_name}"
+    end
+
+    def is_enum?
+      properties[:type] == "enum"
     end
 
   # Models
