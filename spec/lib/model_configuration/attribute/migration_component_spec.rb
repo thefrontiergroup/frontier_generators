@@ -9,6 +9,11 @@ describe ModelConfiguration::Attribute::MigrationComponent do
     let(:options)   { {type: type} }
     let(:type)      { "string" }
 
+    context "type is an enum" do
+      let(:type) { "enum" }
+      it { should eq("field_name:integer") }
+    end
+
     context "requiring an index" do
       let(:options) { {type: type}.merge(index_options) }
 

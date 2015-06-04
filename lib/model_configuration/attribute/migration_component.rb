@@ -9,7 +9,7 @@ class ModelConfiguration::Attribute::MigrationComponent
   end
 
   def to_s
-    [attribute.name, attribute.properties[:type], index_component].compact.join(":")
+    [attribute.name, migration_type, index_component].compact.join(":")
   end
 
 private
@@ -24,6 +24,15 @@ private
       else
         "index"
       end
+    end
+  end
+
+  def migration_type
+    case attribute.properties[:type]
+    when "enum"
+      "integer"
+    else
+      attribute.properties[:type]
     end
   end
 
