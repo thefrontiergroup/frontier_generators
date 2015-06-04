@@ -1,4 +1,5 @@
 require_relative "attribute.rb"
+require_relative "association/factory_declaration.rb"
 
 class ModelConfiguration
   class Association < Attribute
@@ -38,6 +39,12 @@ class ModelConfiguration
         options = "class_name: #{properties[:class_name]}"
       end
       with_options = [without_options, options].join(", ")
+    end
+
+    # Factories
+
+    def as_factory_declaration
+      ModelConfiguration::Association::FactoryDeclaration.new(self).to_s
     end
 
     # Views

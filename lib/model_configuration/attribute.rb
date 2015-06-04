@@ -1,7 +1,8 @@
-require_relative "factory_attribute_declaration.rb"
-
 class ModelConfiguration
   class Attribute
+
+    require_relative "attribute/factory_declaration.rb"
+
     attr_reader :name, :properties
 
     def initialize(name, properties)
@@ -60,8 +61,8 @@ class ModelConfiguration
 
   # Factories
 
-    def factory_declaration
-      ModelConfiguration::FactoryAttributeDeclaration.for(self)
+    def as_factory_declaration
+      ModelConfiguration::Attribute::FactoryDeclaration.new(self).to_s
     end
 
   # Migrations
