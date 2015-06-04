@@ -18,6 +18,21 @@ describe ModelConfiguration::Attribute::FactoryDeclaration do
       it { should eq("field_name { 5.days.from_now }") }
     end
 
+    context "type is 'enum'" do
+      let(:options) { {enum_options: enum_options, type: type} }
+      let(:type)    { "enum" }
+
+      context "when enum_options is set" do
+        let(:enum_options) { ["one", "two"] }
+        it { should eq("field_name { [\"one\", \"two\"].sample }") }
+      end
+
+      context "when enum_options is not set" do
+        let(:enum_options) { nil }
+        specify { expect { subject }.to raise_error(ArgumentError) }
+      end
+    end
+
     context "type is 'string'" do
       let(:type) { "string" }
 

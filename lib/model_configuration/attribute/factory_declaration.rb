@@ -7,17 +7,19 @@ class ModelConfiguration::Attribute::FactoryDeclaration
   end
 
   def to_s
-    "#{attribute.name} { #{data_for(attribute)} }"
+    "#{attribute.name} { #{data_for_attribute} }"
   end
 
 private
 
-  def data_for(attribute)
+  def data_for_attribute
     case attribute.type
     when "datetime", "date"
-      date_data(attribute)
+      date_data
+    when "enum"
+      enum_data
     when "string"
-      string_data(attribute)
+      string_data
     else
       raise(ArgumentError, "Unsupported Type: #{attribute.type}")
     end
@@ -25,11 +27,19 @@ private
 
 # Specific Types
 
-  def date_data(attribute)
+  def date_data
     "5.days.from_now"
   end
 
-  def string_data(attribute)
+  def enum_data
+    if attribute.properties[:enum_options].present?
+      "#{attribute.properties[:enum_options]}.sample"
+    else
+      raise(ArgumentError, "No enum_options provided for attribute: #{attribute.name}")
+    end
+  end
+
+  def string_data
     if attribute.name =~ /name/
       "FFaker::Name.name"
     elsif attribute.name =~ /email/
