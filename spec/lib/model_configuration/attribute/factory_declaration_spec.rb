@@ -18,6 +18,11 @@ describe ModelConfiguration::Attribute::FactoryDeclaration do
       it { should eq("field_name { 5.days.from_now }") }
     end
 
+    context "type is 'decimal'" do
+      let(:type) { "decimal" }
+      it { should eq("field_name { rand(9999) }") }
+    end
+
     context "type is 'enum'" do
       let(:options) { {enum_options: enum_options, type: type} }
       let(:type)    { "enum" }
@@ -31,6 +36,11 @@ describe ModelConfiguration::Attribute::FactoryDeclaration do
         let(:enum_options) { nil }
         specify { expect { subject }.to raise_error(ArgumentError) }
       end
+    end
+
+    context "type is 'integer'" do
+      let(:type) { "integer" }
+      it { should eq("field_name { rand(9999) }") }
     end
 
     context "type is 'string'" do
