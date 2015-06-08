@@ -39,4 +39,27 @@ describe ModelConfiguration::Attribute do
     end
   end
 
+  describe "#validations" do
+    subject { attribute.validations }
+    let(:options) { {validates: validates} }
+
+    context "when there are no validations specified" do
+      let(:validates) { {presence: true} }
+      it "constructs a validation object" do
+        validation = subject.first
+        expect(validation).to be_present
+        expect(validation).to be_kind_of(ModelConfiguration::Attribute::Validation)
+        expect(validation.attribute).to eq(attribute)
+        expect(validation.key).to eq(:presence)
+        expect(validation.args).to eq(true)
+      end
+    end
+
+    context "when there are validations specified" do
+      let(:validates) { nil }
+      it { should be_empty }
+    end
+
+  end
+
 end

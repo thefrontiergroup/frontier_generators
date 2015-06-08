@@ -59,7 +59,7 @@ class ModelConfiguration
 
     def validations
       @validations ||= (properties[:validates] || []).collect do |key, args|
-        ModelConfiguration::Validation.new(self, key, args)
+        ModelConfiguration::Attribute::Validation.new(self, key, args)
       end
     end
 
@@ -89,3 +89,4 @@ end
 
 require_relative "attribute/factory_declaration.rb"
 require_relative "attribute/migration_component.rb"
+require_relative "attribute/validation.rb"
