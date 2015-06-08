@@ -1,3 +1,5 @@
+require_relative "attribute.rb"
+
 class ModelConfiguration
   class Association < Attribute
 
@@ -65,5 +67,4 @@ class ModelConfiguration
   end
 end
 
-require_relative "attribute.rb"
 require_relative "association/factory_declaration.rb"
