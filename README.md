@@ -8,35 +8,31 @@ You can create a YAML specification of your entities that you can pass directly 
 rails g frontier_scaffold /path/to/yml
 ```
 
-## Supported Data-Types
+Frontier Generators also provides unit and features specs where applicable.
 
-You can set the type of the attribute with the following:
+## Attributes
+
+You can specify which attributes should be on your model thusly:
 
 ```yaml
 model_name:
   attributes:
     attribute_name:
-      type: "string"
+      # Choose one of the following
+      type: datetime
+      type: date
+      type: decimal
+      type: integer
+      type: string
+
+      # enum should also provide enum_options
+      type: enum
+      enum_options: [:admin, :public]
 ```
 
-### Attributes
+## Associations
 
-- datetime
-- date
-- decimal
-- enum
-- integer
-- string
-
-### Associations
-
-- belongs_to
-
-#### Extra arguments
-
-##### class_name
-
-Associations can set class_name, which will set it on the association and use it when determining the factory and fields.
+You can add validations the same way you would add an attribute. Currently supported:
 
 EG:
 
@@ -45,5 +41,29 @@ model_name:
   attributes:
     attribute_name:
       type: "belongs_to"
+      # Optional - this will use this model in factories and in the model
       class_name: "User"
+```
+
+## Validations
+
+You can add validations to your models. This will provide implementations and specs when generated.
+
+Frontier currently supports the following validations:
+
+```yaml
+model_name:
+  attributes:
+    attribute_name:
+      validates:
+        numericality: true
+        # Or, numericality can use one or more args
+        numericality:
+          greater_than: 0
+          greater_than_or_equal_to: 0
+          equal_to: 0
+          less_than: 100
+          less_than_or_equal_to: 100
+        presence: true
+        uniqueness: true
 ```
