@@ -22,22 +22,7 @@ class ModelConfiguration
     # Models
 
     def association_implementation
-      without_options = case properties[:type]
-      when "belongs_to"
-        "belongs_to #{as_symbol}"
-      when "has_one"
-        "has_one #{as_symbol}"
-      when "has_many"
-        "has_many #{as_symbol}"
-      when "has_and_belongs_to_many"
-        "has_and_belongs_to_many #{as_symbol}"
-      end
-
-      options = nil
-      if properties[:class_name].present?
-        options = "class_name: #{properties[:class_name]}"
-      end
-      with_options = [without_options, options].join(", ")
+      ModelConfiguration::Association::ModelImplementation.new(self).to_s
     end
 
     # Factories
@@ -68,3 +53,4 @@ class ModelConfiguration
 end
 
 require_relative "association/factory_declaration.rb"
+require_relative "association/model_implementation.rb"
