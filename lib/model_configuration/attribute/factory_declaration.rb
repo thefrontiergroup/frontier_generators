@@ -16,6 +16,8 @@ private
     case attribute.type
     when "datetime", "date"
       date_data
+    when "decimal", "integer"
+      number_data
     when "enum"
       enum_data
     when "string"
@@ -37,6 +39,10 @@ private
     else
       raise(ArgumentError, "No enum_options provided for attribute: #{attribute.name}")
     end
+  end
+
+  def number_data
+    "rand(9999)"
   end
 
   def string_data
