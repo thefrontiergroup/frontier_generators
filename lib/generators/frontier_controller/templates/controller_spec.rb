@@ -94,9 +94,7 @@ describe <%= controller_name %> do
 
         it "updates the <%= model_configuration.as_constant %> object with the given attributes" do
           update_resource
-
-          <%= model_configuration.model_name %>.reload
-          expect(<%= model_configuration.model_name %>).to have_attributes(attributes)
+          expect(<%= model_configuration.model_name %>.reload).to have_attributes(attributes)
         end
 
         it { should redirect_to(<%= model_configuration.url_builder.index_path %>) }
@@ -112,7 +110,7 @@ describe <%= controller_name %> do
 
         it "doesn't update the <%= model_configuration.as_constant %>" do
           update_resource
-          expect(<%= model_configuration.model_name %>).not_to have_attributes(attributes)
+          expect(<%= model_configuration.model_name %>.reload).not_to have_attributes(attributes)
         end
       end
     end
