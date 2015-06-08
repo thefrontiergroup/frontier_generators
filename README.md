@@ -10,6 +10,15 @@ rails g frontier_scaffold /path/to/yml
 
 ## Supported Data-Types
 
+You can set the type of the attribute with the following:
+
+```yaml
+model_name:
+  attributes:
+    attribute_name:
+      type: "string"
+```
+
 ### Attributes
 
 - datetime
@@ -22,3 +31,19 @@ rails g frontier_scaffold /path/to/yml
 ### Associations
 
 - belongs_to
+
+#### Extra arguments
+
+##### class_name
+
+Associations can set class_name, which will set it on the association and use it when determining the factory and fields.
+
+EG:
+
+```yaml
+model_name:
+  attributes:
+    attribute_name:
+      type: "belongs_to"
+      class_name: "User"
+```
