@@ -21,17 +21,29 @@ describe ModelConfiguration::Association do
   end
 
   describe "#as_input" do
-    subject { association.as_input }
-    let(:expected_output) { "f.input :model_id, collection: Model.all" }
+    subject { association.as_input(options) }
+    let(:options) { {} }
 
-    context "when field_name includes _id already" do
+    describe "providing additional options" do
+      let(:expected_output) { "f.input :model_id, collection: Model.all, my_option: :jordan_rules" }
       let(:name) { "model_id" }
+      let(:options) { {my_option: ":jordan_rules"} }
+
       it { should eq(expected_output) }
     end
 
-    context "when field_name doesn't include _id" do
-      let(:name) { "model" }
-      it { should eq(expected_output) }
+    describe "setting name of input" do
+      let(:expected_output) { "f.input :model_id, collection: Model.all" }
+
+      context "when field_name includes _id already" do
+        let(:name) { "model_id" }
+        it { should eq(expected_output) }
+      end
+
+      context "when field_name doesn't include _id" do
+        let(:name) { "model" }
+        it { should eq(expected_output) }
+      end
     end
   end
 

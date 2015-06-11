@@ -33,10 +33,9 @@ class ModelConfiguration
 
     # Views
 
-    def as_input
-      # Should convert attribute "state" into:
-      # f.input :state_id, collection: State.all
-      input_declaration = "f.input #{as_field_name}, collection: #{association_class}.all"
+    def as_input(options={})
+      options = options.merge({collection: "#{association_class}.all"})
+      super
     end
 
   private

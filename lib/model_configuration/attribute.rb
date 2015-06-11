@@ -43,8 +43,15 @@ class ModelConfiguration
       end
     end
 
-    def as_input
-      "f.input #{as_field_name}"
+    def as_input(options={})
+      # Take options like {one: ':two', abacus: 666} and create collection of strings
+      # ["abacus: 666", "one: :two"]
+      options_as_strings = options.map {|key, value| "#{key}: #{value}"}.sort
+      # Should convert attribute "state" into:
+      #   f.input :state_id, collection: State.all
+      # With additional options as above you'd get:
+      #   f.input :state_id, abacus: 666, collection: State.all, one: :two
+      input_declaration = ["f.input #{as_field_name}", *options_as_strings].join(", ")
     end
 
     def is_enum?
