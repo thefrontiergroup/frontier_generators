@@ -51,6 +51,10 @@ class ModelConfiguration
       properties[:type] == "enum"
     end
 
+    def show_on_index?
+      properties[:show_on_index].nil? ? true : properties[:show_on_index]
+    end
+
   # Models
 
     def is_association?

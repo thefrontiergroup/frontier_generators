@@ -18,6 +18,10 @@ You can specify which attributes should be on your model thusly:
 model_name:
   attributes:
     attribute_name:
+      # Set to false if you don't want this attribute to be represented on the index
+      # Note: This is true by default
+      show_on_index: false
+
       # Choose one of the following
       type: datetime
       type: date
