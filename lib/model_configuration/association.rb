@@ -5,6 +5,10 @@ class ModelConfiguration
 
     ID_REGEXP = /_id\z/
 
+    def as_factory_name
+      ":#{association_class.underscore}"
+    end
+
     # some_thing_id -> ":some_thing_id"
     # some_thing -> ":some_thing_id"
     def as_field_name
