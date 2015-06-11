@@ -42,11 +42,4 @@ private
   def find_<%= model_configuration.model_name %>
     <%= model_configuration.as_constant %>.find(params[:id])
   end
-
-  def sort(collection)
-    # Sort by :id by default, so there is a consistent order even when no order has been
-    # selected via the interface
-    ModelSorter.sort(collection, params, {id: :desc})
-  end
-
 end

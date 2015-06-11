@@ -8,7 +8,7 @@ You can create a YAML specification of your entities that you can pass directly 
 rails g frontier_scaffold /path/to/yml
 ```
 
-Frontier Generators also provides unit and features specs where applicable.
+Frontier Generators also provides unit and feature specs where applicable.
 
 ## Attributes
 
