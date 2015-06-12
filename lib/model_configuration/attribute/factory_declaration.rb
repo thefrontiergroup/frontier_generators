@@ -14,7 +14,7 @@ private
 
   def data_for_attribute
     case attribute.type
-    when "datetime", "date"
+    when "datetime", "date", "time"
       date_data
     when "decimal", "integer"
       number_data

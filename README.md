@@ -25,6 +25,7 @@ model_name:
       # Choose one of the following
       type: datetime
       type: date
+      type: time
       type: decimal
       type: integer
       type: string
