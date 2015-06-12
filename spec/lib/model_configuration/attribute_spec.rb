@@ -51,6 +51,26 @@ describe ModelConfiguration::Attribute do
     end
   end
 
+  describe "#show_on_index?" do
+    subject { attribute.show_on_index? }
+
+    context "when show_on_index property is set" do
+      context "when show_on_index is true" do
+        let(:options) { {show_on_index: true} }
+        it { should eq(true) }
+      end
+
+      context "when show_on_index is false" do
+        let(:options) { {show_on_index: false} }
+        it { should eq(false) }
+      end
+    end
+
+    context "when show_on_index property is not set" do
+      it { should eq(true) }
+    end
+  end
+
   describe "#validations" do
     subject { attribute.validations }
     let(:options) { {validates: validates} }
