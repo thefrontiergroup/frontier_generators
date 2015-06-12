@@ -8,19 +8,11 @@ describe ModelConfiguration::Attribute::FactoryDeclaration do
     let(:name)      { "field_name" }
     let(:options)   { {type: type} }
 
-    context "type is 'date'" do
-      let(:type) { "date" }
-      it { should eq("field_name { 5.days.from_now }") }
-    end
-
-    context "type is 'datetime'" do
-      let(:type) { "datetime" }
-      it { should eq("field_name { 5.days.from_now }") }
-    end
-
-    context "type is 'time'" do
-      let(:type) { "time" }
-      it { should eq("field_name { 5.days.from_now }") }
+    [:date, :datetime, :time].each do |type|
+      context "type is '#{type}'" do
+        let(:type) { type.to_s }
+        it { should eq("field_name { 5.days.from_now }") }
+      end
     end
 
     context "type is 'decimal'" do
