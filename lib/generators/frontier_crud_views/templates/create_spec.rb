@@ -3,8 +3,8 @@ require 'spec_helper'
 feature 'Admin can create a new <%= model_configuration.as_constant %>' do
 
   sign_in_as(:admin)
-<% model_configuration.attributes.select(&:is_association?).each do |attribute| -%>
-  let!(<%= attribute.as_symbol %>) { FactoryGirl.create(:<%= attribute.properties[:class_name].underscore || attribute.name %>) }
+<% model_configuration.attributes.select(&:is_association?).each do |association| -%>
+  let!(<%= association.as_symbol %>) { FactoryGirl.create(<%= association.as_factory_name %>) }
 <% end -%>
 
   before do
