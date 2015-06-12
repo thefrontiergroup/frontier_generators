@@ -5,7 +5,7 @@
 %table
   %thead
     %tr
-<% model_configuration.attributes.map(&:show_on_index?).each do |attribute| -%>
+<% model_configuration.attributes.select(&:show_on_index?).each do |attribute| -%>
 <% if attribute.sortable? -%>
       %th= sortable_heading_for(<%= attribute.as_symbol %>)
 <% else -%>
