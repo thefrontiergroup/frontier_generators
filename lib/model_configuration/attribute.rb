@@ -5,7 +5,7 @@ class ModelConfiguration
 
     def initialize(model_configuration, name, properties)
       @model_configuration = model_configuration
-      @name = name
+      @name = name.to_s
       @properties = properties
     end
 
@@ -32,7 +32,7 @@ class ModelConfiguration
     end
 
     def type
-      properties[:type]
+      properties[:type].to_s
     end
 
   # Views
