@@ -8,6 +8,11 @@ describe ModelConfiguration::Attribute::FactoryDeclaration do
     let(:name)      { "field_name" }
     let(:options)   { {type: type} }
 
+    context "type is 'boolean'" do
+      let(:type) { "boolean" }
+      it { should eq("field_name { [true, false].sample }") }
+    end
+
     context "type is 'date'" do
       let(:type) { "date" }
       it { should eq("field_name { 5.days.from_now }") }

@@ -14,6 +14,8 @@ private
 
   def data_for_attribute
     case attribute.type
+    when "boolean"
+      "[true, false].sample"
     when "datetime", "date"
       date_data
     when "decimal", "integer"
