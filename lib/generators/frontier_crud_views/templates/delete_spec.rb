@@ -1,4 +1,4 @@
-require 'spec_helper'
+require 'rails_helper'
 
 feature 'Admin can delete an existing <%= model_configuration.as_constant %>' do
 

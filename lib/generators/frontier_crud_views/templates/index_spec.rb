@@ -1,4 +1,4 @@
-require 'spec_helper'
+require 'rails_helper'
 
 feature 'Admin can view an index of <%= model_configuration.model_name.pluralize %>' do
 

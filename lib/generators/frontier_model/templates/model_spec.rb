@@ -1,4 +1,4 @@
-require 'spec_helper'
+require 'rails_helper'
 
 describe <%= model_configuration.as_constant %> do
 

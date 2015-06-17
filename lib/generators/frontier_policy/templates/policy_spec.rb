@@ -1,4 +1,4 @@
-require 'spec_helper'
+require 'rails_helper'
 
 describe <%= policy_class_name %> do
   subject { policy }
