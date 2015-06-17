@@ -38,6 +38,12 @@ describe ModelConfiguration::Attribute::Validation do
     let(:options)   { {} }
     let(:args)      { {} }
 
+    context "validation is 'inclusion'" do
+      let(:key)  { "inclusion" }
+      let(:args) { [1, 2, 3] }
+      it { should eq("it { should validate_inclusion_of(:field_name).in_array([1, 2, 3]) }") }
+    end
+
     context "validation is 'numericality'" do
       let(:key) { "numericality" }
       it "passes the responsibility to ModelConfiguration::Attribute::Validation::Numericality" do

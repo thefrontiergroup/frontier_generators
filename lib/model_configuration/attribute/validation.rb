@@ -18,6 +18,8 @@ class ModelConfiguration::Attribute::Validation
 
   def as_spec
     case key
+    when "inclusion"
+      "it { should validate_inclusion_of(#{attribute.as_symbol}).in_array(#{args}) }"
     when "numericality"
       ModelConfiguration::Attribute::Validation::Numericality.new(attribute, key, args).as_spec
     when "presence"
