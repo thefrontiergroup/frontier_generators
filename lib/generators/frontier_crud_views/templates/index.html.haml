@@ -16,7 +16,7 @@
   %tbody
     - <%= model_configuration.ivar_collection %>.each do |<%= model_configuration.model_name %>|
       %tr
-<% model_configuration.attributes.each do |attribute| -%>
+<% model_configuration.attributes.select(&:show_on_index?).each do |attribute| -%>
         %td= <%= "#{model_configuration.model_name}.#{attribute.name}" %>
 <% end -%>
         %td.actions
