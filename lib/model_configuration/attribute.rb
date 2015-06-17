@@ -14,6 +14,10 @@ class ModelConfiguration
       name.titleize.capitalize
     end
 
+    def constants
+      validations.collect(&:corresponding_constant).compact
+    end
+
     # some_thing -> ":some_thing"
     def as_field_name
       as_symbol
@@ -92,6 +96,7 @@ class ModelConfiguration
   end
 end
 
+require_relative "attribute/constant.rb"
 require_relative "attribute/factory_declaration.rb"
 require_relative "attribute/input_implementation.rb"
 require_relative "attribute/migration_component.rb"

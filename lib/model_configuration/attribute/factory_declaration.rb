@@ -13,6 +13,14 @@ class ModelConfiguration::Attribute::FactoryDeclaration
 private
 
   def data_for_attribute
+    if constant = attribute.constants.first
+      "#{constant.name}.sample"
+    else
+      attributes_based_on_type
+    end
+  end
+
+  def attributes_based_on_type
     case attribute.type
     when "boolean"
       "[true, false].sample"

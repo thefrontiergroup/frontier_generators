@@ -8,6 +8,12 @@ describe ModelConfiguration::Attribute::FactoryDeclaration do
     let(:name)      { "field_name" }
     let(:options)   { {type: type} }
 
+    context "attribute has an inclusion validation" do
+      let(:options) { {type: "string", validates: {inclusion: [1, 2]}} }
+
+      it { should eq("field_name { TestModel::FIELD_NAME_VALUES.sample }")}
+    end
+
     context "type is 'boolean'" do
       let(:type) { "boolean" }
       it { should eq("field_name { [true, false].sample }") }

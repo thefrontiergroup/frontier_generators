@@ -20,6 +20,25 @@ describe ModelConfiguration::Attribute do
     end
   end
 
+  describe "#constants" do
+    subject(:constants) { attribute.constants }
+
+    context "with no constants" do
+      it { should be_empty }
+    end
+
+    context "with a constant provided by an inclusion validations" do
+      let(:options) { {validates: {inclusion: [1, 2, 3]}} }
+
+      it "returns a constant matching the inclusion matcher" do
+        constant = constants.first
+        expect(constant).to be_present
+        expect(constant.name).to eq("TestModel::ATTRIBUTE_NAME_VALUES")
+        expect(constant.values).to eq([1, 2, 3])
+      end
+    end
+  end
+
   describe "#is_association?" do
     subject { attribute.is_association? }
     it { should eq(false) }
@@ -82,7 +101,7 @@ describe ModelConfiguration::Attribute do
         expect(validation).to be_present
         expect(validation).to be_kind_of(ModelConfiguration::Attribute::Validation)
         expect(validation.attribute).to eq(attribute)
-        expect(validation.key).to eq(:presence)
+        expect(validation.key).to eq("presence")
         expect(validation.args).to eq(true)
       end
     end

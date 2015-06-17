@@ -20,7 +20,7 @@ describe ModelConfiguration::Attribute::InputImplementation do
     describe "attribute must be included in a given collection" do
       let(:options) { {validates: {inclusion: [1,2,3]} } }
 
-      it { should eq("f.input :attribute_name, collection: [1, 2, 3]") }
+      it { should eq("f.input :attribute_name, collection: TestModel::ATTRIBUTE_NAME_VALUES") }
     end
   end
 

@@ -31,7 +31,7 @@ private
     # f.input :attribute_name, collection: [1, 2, 3]
     #
     if inclusion_validation = attribute.validations.find {|val| val.key.to_s == "inclusion" }
-      options[:collection] = inclusion_validation.args
+      options[:collection] = inclusion_validation.corresponding_constant.name
     end
 
     options

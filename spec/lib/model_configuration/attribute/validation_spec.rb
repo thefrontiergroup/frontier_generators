@@ -9,25 +9,33 @@ describe ModelConfiguration::Attribute::Validation do
     let(:name)      { "field_name" }
     let(:options)   { {} }
 
-    context "when args are a hash" do
-      context "with a single arg" do
-        let(:args) { {greater_than: 1} }
-        it { should eq("presence: {greater_than: 1}") }
-      end
-
-      context "with many args" do
-        let(:args) { {greater_than: 1, less_than: 100} }
-        it { should eq("presence: {greater_than: 1, less_than: 100}") }
-      end
+    context "inclusion" do
+      let(:key)  { "inclusion" }
+      let(:args) { [1, 2] }
+      it { should eq("inclusion: TestModel::FIELD_NAME_VALUES") }
     end
 
-    # EG:
-    # attribute_name
-    #   validates:
-    #     presence: true
-    context "when args are not a hash" do
-      let(:args) { true }
-      it { should eq("presence: true") }
+    describe "including arguments" do
+      context "when args are a hash" do
+        context "with a single arg" do
+          let(:args) { {greater_than: 1} }
+          it { should eq("presence: {greater_than: 1}") }
+        end
+
+        context "with many args" do
+          let(:args) { {greater_than: 1, less_than: 100} }
+          it { should eq("presence: {greater_than: 1, less_than: 100}") }
+        end
+      end
+
+      # EG:
+      # attribute_name
+      #   validates:
+      #     presence: true
+      context "when args are not a hash" do
+        let(:args) { true }
+        it { should eq("presence: true") }
+      end
     end
   end
 
@@ -40,7 +48,7 @@ describe ModelConfiguration::Attribute::Validation do
     context "validation is 'inclusion'" do
       let(:key)  { "inclusion" }
       let(:args) { [1, 2, 3] }
-      it { should eq("it { should validate_inclusion_of(:field_name).in_array([1, 2, 3]) }") }
+      it { should eq("it { should validate_inclusion_of(:field_name).in_array(TestModel::FIELD_NAME_VALUES) }") }
     end
 
     context "validation is 'numericality'" do
