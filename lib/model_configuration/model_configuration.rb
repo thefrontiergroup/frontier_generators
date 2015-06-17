@@ -58,7 +58,7 @@ private
     @namespaces = hash[@model_name][:namespaces] || []
     @skip_ui    = hash[@model_name][:skip_ui] || false
     @attributes = (hash[@model_name][:attributes] || []).collect do |name, properties|
-      ModelConfiguration::Attribute::Factory.build_attribute_or_association(name, properties)
+      ModelConfiguration::Attribute::Factory.build_attribute_or_association(self, name, properties)
     end
     # TODO: Assert validity of attributes
     @url_builder = ModelConfiguration::UrlBuilder.new(self)

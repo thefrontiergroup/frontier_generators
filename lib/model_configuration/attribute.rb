@@ -1,9 +1,10 @@
 class ModelConfiguration
   class Attribute
 
-    attr_reader :name, :properties
+    attr_reader :model_configuration, :name, :properties
 
-    def initialize(name, properties)
+    def initialize(model_configuration, name, properties)
+      @model_configuration = model_configuration
       @name = name
       @properties = properties
     end

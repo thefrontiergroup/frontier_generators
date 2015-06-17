@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe ModelConfiguration::Association do
 
-  let(:association) { ModelConfiguration::Association.new(name, options) }
+  let(:association) { ModelConfiguration::Association.new(build_model_configuration, name, options) }
   let(:name) { "association_name" }
   let(:options) { {} }
 

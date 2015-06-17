@@ -1,10 +1,10 @@
 require 'spec_helper'
 
 describe ModelConfiguration::Attribute::Validation do
+  let(:attribute) { ModelConfiguration::Attribute.new(build_model_configuration, name, options) }
 
   describe "#as_implementation" do
     subject { ModelConfiguration::Attribute::Validation.new(attribute, key, args).as_implementation }
-    let(:attribute) { ModelConfiguration::Attribute.new(name, options) }
     let(:key)       { "presence" }
     let(:name)      { "field_name" }
     let(:options)   { {} }
@@ -33,7 +33,6 @@ describe ModelConfiguration::Attribute::Validation do
 
   describe "#as_spec" do
     subject { ModelConfiguration::Attribute::Validation.new(attribute, key, args).as_spec }
-    let(:attribute) { ModelConfiguration::Attribute.new(name, options) }
     let(:name)      { "field_name" }
     let(:options)   { {} }
     let(:args)      { {} }

@@ -3,7 +3,7 @@ require 'spec_helper'
 describe ModelConfiguration::Attribute::InputImplementation do
 
   let(:input_implementation) { ModelConfiguration::Attribute::InputImplementation.new(attribute) }
-  let(:attribute) { ModelConfiguration::Attribute.new(name, options) }
+  let(:attribute) { ModelConfiguration::Attribute.new(build_model_configuration, name, options) }
   let(:name) { "attribute_name" }
   let(:options) { {} }
 
