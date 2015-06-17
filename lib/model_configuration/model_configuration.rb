@@ -39,6 +39,10 @@ class ModelConfiguration
     ":#{model_name.pluralize}"
   end
 
+  def as_title
+    model_name.titleize
+  end
+
   def ivar_collection
     "@#{model_name.pluralize}"
   end
