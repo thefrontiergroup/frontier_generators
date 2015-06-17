@@ -23,6 +23,7 @@ model_name:
       show_on_index: false
 
       # Choose one of the following
+      type: boolean
       type: datetime
       type: date
       type: decimal
