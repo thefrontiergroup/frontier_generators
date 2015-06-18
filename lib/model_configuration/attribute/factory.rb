@@ -3,8 +3,8 @@ require_relative '../association'
 
 class ModelConfiguration::Attribute::Factory
 
-  def self.build_attribute_or_association(name, options)
-    get_class_for_name_and_options(name, options).new(name, options)
+  def self.build_attribute_or_association(model_configuration, name, options)
+    get_class_for_name_and_options(name, options).new(model_configuration, name, options)
   end
 
 private

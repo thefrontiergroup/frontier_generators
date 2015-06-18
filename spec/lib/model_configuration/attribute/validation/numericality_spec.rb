@@ -4,7 +4,7 @@ describe ModelConfiguration::Attribute::Validation::Numericality do
 
   describe "#as_spec" do
     subject { ModelConfiguration::Attribute::Validation::Numericality.new(attribute, key, args).as_spec }
-    let(:attribute) { ModelConfiguration::Attribute.new(name, {}) }
+    let(:attribute) { ModelConfiguration::Attribute.new(build_model_configuration, name, {}) }
     let(:name)      { "field_name" }
     let(:key)       { "numericality" }
 

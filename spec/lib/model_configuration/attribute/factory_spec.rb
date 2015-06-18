@@ -3,7 +3,7 @@ require 'spec_helper'
 describe ModelConfiguration::Attribute::Factory do
 
   describe ".build_attribute_or_association" do
-    subject { ModelConfiguration::Attribute::Factory.build_attribute_or_association(name, options) }
+    subject { ModelConfiguration::Attribute::Factory.build_attribute_or_association(build_model_configuration, name, options) }
     let(:name)    { "field_name" }
     let(:options) { {type: type} }
 

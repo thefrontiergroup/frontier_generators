@@ -4,9 +4,15 @@ describe ModelConfiguration::Attribute::FactoryDeclaration do
 
   describe "#to_s" do
     subject { ModelConfiguration::Attribute::FactoryDeclaration.new(attribute).to_s }
-    let(:attribute) { ModelConfiguration::Attribute.new(name, options) }
+    let(:attribute) { ModelConfiguration::Attribute.new(build_model_configuration, name, options) }
     let(:name)      { "field_name" }
     let(:options)   { {type: type} }
+
+    context "attribute has an inclusion validation" do
+      let(:options) { {type: "string", validates: {inclusion: [1, 2]}} }
+
+      it { should eq("field_name { TestModel::FIELD_NAME_VALUES.sample }")}
+    end
 
     context "type is 'boolean'" do
       let(:type) { "boolean" }

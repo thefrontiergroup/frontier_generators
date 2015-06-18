@@ -4,7 +4,7 @@ describe ModelConfiguration::Attribute::MigrationComponent do
 
   describe "#to_s" do
     subject { ModelConfiguration::Attribute::MigrationComponent.new(attribute).to_s }
-    let(:attribute) { ModelConfiguration::Attribute.new(name, options) }
+    let(:attribute) { ModelConfiguration::Attribute.new(build_model_configuration, name, options) }
     let(:name)      { "field_name" }
     let(:options)   { {type: type} }
     let(:type)      { "string" }

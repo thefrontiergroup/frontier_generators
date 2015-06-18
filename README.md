@@ -61,6 +61,7 @@ model_name:
   attributes:
     attribute_name:
       validates:
+        inclusion: [1,2,3,4]
         numericality: true
         # Or, numericality can use one or more args
         numericality:

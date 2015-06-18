@@ -8,16 +8,23 @@ class ModelConfiguration::Attribute::Validation
   # args: true OR {message: "YOLO"}
   def initialize(attribute, key, args)
     @attribute = attribute
-    @key = key
+    @key = key.to_s
     @args = args
   end
 
   def as_implementation
-    "#{key}: #{print_args}"
+    case key
+    when "inclusion"
+      "#{key}: #{corresponding_constant.name}"
+    else
+      "#{key}: #{print_args}"
+    end
   end
 
   def as_spec
     case key
+    when "inclusion"
+      "it { should validate_inclusion_of(#{attribute.as_symbol}).in_array(#{corresponding_constant.name}) }"
     when "numericality"
       ModelConfiguration::Attribute::Validation::Numericality.new(attribute, key, args).as_spec
     when "presence"
@@ -26,6 +33,12 @@ class ModelConfiguration::Attribute::Validation
       raise(ArgumentError, "uniqueness is a special validation that requires multiple lines of specs")
     else
       raise(ArgumentError, "unhandled validation requested: #{key}")
+    end
+  end
+
+  def corresponding_constant
+    if key == "inclusion"
+      ModelConfiguration::Attribute::Constant.build_from_validation(attribute, self)
     end
   end
 
