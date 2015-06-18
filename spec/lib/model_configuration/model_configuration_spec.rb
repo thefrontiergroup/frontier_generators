@@ -20,6 +20,11 @@ describe ModelConfiguration do
     it { should eq(":test_models") }
   end
 
+  describe "#as_title" do
+    subject { configuration.as_title }
+    it { should eq("Test Model") }
+  end
+
   describe "#ivar_collection" do
     subject { configuration.ivar_collection }
     it { should eq("@test_models") }
