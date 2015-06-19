@@ -21,6 +21,13 @@ private
   def attribute_options
     options = {}
 
+    # datetimes and dates should use the date_picker input type
+    #
+    # f.input :attribute_name, as: :date_picker
+    if attribute.type.in?(["datetime", "date"])
+      options[:as] = ":date_picker"
+    end
+
     # For inclusion validations, we should ensure that the required values are passed as a
     # collection to the input. EG:
     #
