@@ -25,7 +25,9 @@ private
 
   # We include deleted_at for paranoia (soft delete)
   def model_attributes_with_deleted_at
-    (model_attributes << "deleted_at:datetime:index created_at:datetime updated_at:datetime").join(" ")
+    default_columns = ["created_at:datetime", "updated_at:datetime"]
+    default_columns << "deleted_at:datetime:index" if model_configuration.soft_delete
+    (model_attributes + default_columns).join(" ")
   end
 
   # Should be in the format attribute_name:type attribute_name:type

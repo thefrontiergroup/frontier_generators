@@ -1,18 +1,18 @@
 # -*- encoding: utf-8 -*-
-$:.push File.expand_path("../lib", __FILE__)
+# stub: frontier_generators 0.5.0 ruby lib
 
 Gem::Specification.new do |s|
-  s.name        = "frontier_generators"
-  s.version     = "0.5.0"
-  s.authors     = ["Jordan Maguire"]
-  s.email       = ["jordan@thefrontiergroup.com.au"]
-  s.homepage    = "https://github.com/thefrontiergroup/frontier_generators"
-  s.summary     = "Comprehensive generators for CRUD"
-  s.description = <<-EOF
-    Use in conjunction with the Rails Template (https://github.com/thefrontiergroup/rails-template)
-    to quickly scaffold usable admin interfaces for models.
-  EOF
+  s.name = "frontier_generators"
+  s.version = "0.5.0"
 
-  s.files         = Dir['README.md', 'lib/**/{*,.[a-z]*}']
+  s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.require_paths = ["lib"]
+  s.authors = ["Jordan Maguire"]
+  s.date = "2015-06-26"
+  s.description = "    Use in conjunction with the Rails Template (https://github.com/thefrontiergroup/rails-template)\n    to quickly scaffold usable admin interfaces for models.\n"
+  s.email = ["jordan@thefrontiergroup.com.au"]
+  s.files = ["README.md", "lib/generators", "lib/generators/frontier_controller", "lib/generators/frontier_controller/USAGE", "lib/generators/frontier_controller/frontier_controller_generator.rb", "lib/generators/frontier_controller/templates", "lib/generators/frontier_controller/templates/controller.rb", "lib/generators/frontier_controller/templates/controller_spec.rb", "lib/generators/frontier_crud_views", "lib/generators/frontier_crud_views/USAGE", "lib/generators/frontier_crud_views/frontier_crud_views_generator.rb", "lib/generators/frontier_crud_views/templates", "lib/generators/frontier_crud_views/templates/_form.html.haml", "lib/generators/frontier_crud_views/templates/create_spec.rb", "lib/generators/frontier_crud_views/templates/delete_spec.rb", "lib/generators/frontier_crud_views/templates/edit.html.haml", "lib/generators/frontier_crud_views/templates/feature_attributes_support.rb", "lib/generators/frontier_crud_views/templates/index.html.haml", "lib/generators/frontier_crud_views/templates/index_spec.rb", "lib/generators/frontier_crud_views/templates/new.html.haml", "lib/generators/frontier_crud_views/templates/update_spec.rb", "lib/generators/frontier_model", "lib/generators/frontier_model/USAGE", "lib/generators/frontier_model/frontier_model_generator.rb", "lib/generators/frontier_model/templates", "lib/generators/frontier_model/templates/factory.rb", "lib/generators/frontier_model/templates/model.rb", "lib/generators/frontier_model/templates/model_spec.rb", "lib/generators/frontier_policy", "lib/generators/frontier_policy/USAGE", "lib/generators/frontier_policy/frontier_policy_generator.rb", "lib/generators/frontier_policy/templates", "lib/generators/frontier_policy/templates/policy.rb", "lib/generators/frontier_policy/templates/policy_spec.rb", "lib/generators/frontier_route", "lib/generators/frontier_route/USAGE", "lib/generators/frontier_route/frontier_route_generator.rb", "lib/generators/frontier_route/lib", "lib/generators/frontier_route/lib/namespace.rb", "lib/generators/frontier_route/lib/resource.rb", "lib/generators/frontier_scaffold", "lib/generators/frontier_scaffold/USAGE", "lib/generators/frontier_scaffold/frontier_scaffold_generator.rb", "lib/generators/frontier_seed", "lib/generators/frontier_seed/frontier_seed_generator.rb", "lib/generators/frontier_seed/templates", "lib/generators/frontier_seed/templates/seed.rake", "lib/model_configuration", "lib/model_configuration/association", "lib/model_configuration/association.rb", "lib/model_configuration/association/factory_declaration.rb", "lib/model_configuration/association/model_implementation.rb", "lib/model_configuration/attribute", "lib/model_configuration/attribute.rb", "lib/model_configuration/attribute/constant.rb", "lib/model_configuration/attribute/factory.rb", "lib/model_configuration/attribute/factory_declaration.rb", "lib/model_configuration/attribute/input_implementation.rb", "lib/model_configuration/attribute/migration_component.rb", "lib/model_configuration/attribute/validation", "lib/model_configuration/attribute/validation.rb", "lib/model_configuration/attribute/validation/numericality.rb", "lib/model_configuration/model_configuration.rb", "lib/model_configuration/url_builder.rb"]
+  s.homepage = "https://github.com/thefrontiergroup/frontier_generators"
+  s.rubygems_version = "2.4.6"
+  s.summary = "Comprehensive generators for CRUD"
 end
