@@ -1,2 +1,10 @@
 test_model:
+  namespaces: "admin"
+  soft_delete: false
   skip_ui: true
+  skip_seeds: false
+  attributes:
+    name:
+      type: "string"
+      sortable: true
+      searchable: true

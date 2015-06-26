@@ -1,6 +1,7 @@
 class <%= model_configuration.as_constant %> < ActiveRecord::Base
 
 <% if model_configuration.soft_delete -%>
+  # Soft delete - uses deleted_at field
   acts_as_paranoid
 
 <% end -%>

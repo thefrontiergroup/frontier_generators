@@ -61,15 +61,19 @@ class ModelConfiguration
 private
 
   def assign_attributes_from_model_configuration(hash)
-    @model_name = hash.keys.first
-    @namespaces = hash[@model_name][:namespaces] || []
-    @skip_seeds = hash[@model_name][:skip_seeds] || false
-    @skip_ui    = hash[@model_name][:skip_ui] || false
-    @soft_delete = hash[@model_name][:soft_delete].nil? ? true : hash[@model_name][:soft_delete]
-    @attributes = (hash[@model_name][:attributes] || []).collect do |name, properties|
+    @model_name  = hash.keys.first
+    @namespaces  = hash[@model_name][:namespaces] || []
+    @skip_seeds  = configuration_for(hash[@model_name][:skip_seeds])
+    @skip_ui     = configuration_for(hash[@model_name][:skip_ui])
+    @soft_delete = configuration_for(hash[@model_name][:soft_delete], default: true)
+    @attributes  = (hash[@model_name][:attributes] || []).collect do |name, properties|
       ModelConfiguration::Attribute::Factory.build_attribute_or_association(self, name, properties)
     end
     # TODO: Assert validity of attributes
     @url_builder = ModelConfiguration::UrlBuilder.new(self)
+  end
+
+  def configuration_for(attr, options={ default: false })
+    attr.nil? ? options[:default] : attr
   end
 end
