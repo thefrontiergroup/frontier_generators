@@ -22,10 +22,6 @@ class FrontierCrudViewsGenerator < Rails::Generators::NamedBase
     generate_feature_path("delete_spec.rb", "admin_delete_#{plural}_spec.rb")
     generate_feature_path("create_spec.rb", "admin_create_#{plural}_spec.rb")
     generate_feature_path("update_spec.rb", "admin_update_#{plural}_spec.rb")
-
-    # This file contains helpers that are required for the above specs
-    filename = "feature_attributes_support.rb"
-    template(filename, File.join("spec", "support", filename))
   end
 
 private
