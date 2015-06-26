@@ -10,6 +10,18 @@ rails g frontier_scaffold /path/to/yml
 
 Frontier Generators also provides unit and feature specs where applicable.
 
+## Model Options
+
+You can define a model with some options as follows:
+
+```yaml
+model_name:
+  # Do not generate a blank seed rake task for this model. `false` by default.
+  skip_seeds: true
+  # Do not create controller, routes, views, or specs for the above. `false` by default.
+  skip_ui: true
+```
+
 ## Attributes
 
 You can specify which attributes should be on your model thusly:

@@ -4,7 +4,7 @@ require_relative "url_builder.rb"
 
 class ModelConfiguration
 
-  attr_reader :model_name, :namespaces, :attributes, :skip_ui, :url_builder
+  attr_reader :model_name, :namespaces, :attributes, :skip_seeds, :skip_ui, :url_builder
 
   # Example YAML:
   #   drive:
@@ -60,6 +60,7 @@ private
   def assign_attributes_from_model_configuration(hash)
     @model_name = hash.keys.first
     @namespaces = hash[@model_name][:namespaces] || []
+    @skip_seeds = hash[@model_name][:skip_seeds] || false
     @skip_ui    = hash[@model_name][:skip_ui] || false
     @attributes = (hash[@model_name][:attributes] || []).collect do |name, properties|
       ModelConfiguration::Attribute::Factory.build_attribute_or_association(self, name, properties)
