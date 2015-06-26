@@ -28,6 +28,8 @@ You can specify which attributes should be on your model thusly:
 
 ```yaml
 model_name:
+  soft_delete: false # true by default
+  skip_ui: false # true by default (only used by scaffold generator)
   attributes:
     attribute_name:
       # Set to false if you don't want this attribute to be represented on the index

@@ -1,8 +1,10 @@
 class <%= model_configuration.as_constant %> < ActiveRecord::Base
 
+<% if model_configuration.soft_delete -%>
   # Soft delete - uses deleted_at field
   acts_as_paranoid
 
+<% end -%>
 <% # The whitespace here is very important, we only want to include a blank line if there are some enums, etc -%>
 <% if model_configuration.attributes.flat_map(&:constants).any? -%>
 <% model_configuration.attributes.flat_map(&:constants).each do |constant| -%>
