@@ -73,7 +73,7 @@ private
     @url_builder = ModelConfiguration::UrlBuilder.new(self)
   end
 
-  def configuration_for(attr, options={ default: false })
-    attr.nil? ? options[:default] : attr
+  def configuration_for(attribute, options={ default: false })
+    attribute.nil? ? options[:default] : attribute
   end
 end

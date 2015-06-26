@@ -12,7 +12,7 @@ describe MigrationStringBuilder do
     it { should eq "CreateTestModel name:string:index created_at:datetime updated_at:datetime" }
 
     describe "option: soft_delete" do
-      before { allow(configuration).to receive(:soft_delete) { soft_delete } }
+      before { allow(configuration).to receive(:soft_delete).and_return(soft_delete) }
 
       context "when soft_delete is false" do
         let(:soft_delete) { false }
