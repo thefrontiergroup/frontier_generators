@@ -26,6 +26,6 @@ describe ModelConfiguration::Attribute::Constant do
     let(:options)    { {} }
     let(:validation) { ModelConfiguration::Attribute::Validation.new(attribute, "inclusion", [1,2,3]) }
 
-    it { should eq("FIELD_NAME_VALUES = [1, 2, 3]") }
+    it { should eq("FIELD_NAME_VALUES = [1, 2, 3].map(&:freeze).freeze") }
   end
 end
