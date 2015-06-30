@@ -15,7 +15,7 @@ class ModelConfiguration::Attribute::Constant
   end
 
   def model_implementation
-    "#{name.split("::").last} = #{values}"
+    "#{name.split("::").last} = #{values}.map(&:freeze).freeze"
   end
 
 end
