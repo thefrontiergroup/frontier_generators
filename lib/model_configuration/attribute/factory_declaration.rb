@@ -32,6 +32,8 @@ private
       enum_data
     when "string"
       string_data
+    when "text"
+      text_data
     else
       raise(ArgumentError, "Unsupported Type: #{attribute.type}")
     end
@@ -53,6 +55,10 @@ private
 
   def number_data
     "rand(9999)"
+  end
+
+  def text_data
+    "Faker::Lorem.paragraph(5)"
   end
 
   def string_data

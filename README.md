@@ -43,6 +43,7 @@ model_name:
       type: decimal
       type: integer
       type: string
+      type: text
 
       # enum should also provide enum_options
       type: enum
