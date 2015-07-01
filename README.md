@@ -20,6 +20,8 @@ model_name:
   skip_seeds: true
   # Do not create controller, routes, views, or specs for the above. `false` by default.
   skip_ui: true
+  # Adds support to soft delete for this model (acts_as_paranoid). `true` by default
+  soft_delete: true
 ```
 
 ## Attributes
@@ -28,7 +30,7 @@ You can specify which attributes should be on your model thusly:
 
 ```yaml
 model_name:
-  soft_delete: false # true by default
+  soft_delete: false
   skip_ui: false # true by default (only used by scaffold generator)
   attributes:
     attribute_name:
