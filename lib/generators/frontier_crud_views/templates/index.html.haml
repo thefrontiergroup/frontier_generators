@@ -17,14 +17,12 @@
     - <%= model_configuration.ivar_collection %>.each do |<%= model_configuration.model_name %>|
       %tr
 <% model_configuration.attributes.select(&:show_on_index?).each do |attribute| -%>
-<% if attribute.type == 'text' -%>
-        %td= truncate(<%= "#{model_configuration.model_name}.#{attribute.name}" %>, length: 30)
-<% else -%>
-        %td= <%= "#{model_configuration.model_name}.#{attribute.name}" %>
-<% end -%>
+        %td= attribute.as_index_string
 <% end -%>
         %td.actions
-          = link_to("Edit", <%= model_configuration.url_builder.edit_path %>, class: "button") if policy(<%= model_configuration.model_name %>).edit?
-          = link_to("Delete", <%= model_configuration.url_builder.delete_path %>, method: :delete, data: { confirm: "Are you sure you want to delete this <%= model_configuration.as_title %>?" }, class: "button") if policy(<%= model_configuration.model_name %>).destroy?
+          - if policy(<%= model_configuration.model_name %>).edit?
+            = link_to("Edit", <%= model_configuration.url_builder.edit_path %>, class: "button")
+          - if policy(<%= model_configuration.model_name %>).destroy?
+            = link_to("Delete", <%= model_configuration.url_builder.delete_path %>, method: :delete, data: { confirm: "Are you sure you want to delete this <%= model_configuration.as_title %>?" }, class: "button")
 
 = paginate <%= model_configuration.ivar_collection %>
