@@ -14,11 +14,11 @@ feature 'Admin can delete an existing <%= model_configuration.as_constant %>' do
       click_link("Delete")
     end
 
-    # Ensure object is deleted
-    expect(<%= model_configuration.as_constant %>.count).to eq(0)
     expect(page).to have_flash(:notice)
     within("table") do
       expect(page).not_to have_content(target_object.<%= model_configuration.primary_attribute.name %>)
     end
+    # Ensure object is deleted
+    expect(<%= model_configuration.as_constant %>.count).to eq(0)
   end
 end
