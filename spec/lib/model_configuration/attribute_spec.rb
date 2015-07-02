@@ -90,6 +90,20 @@ describe ModelConfiguration::Attribute do
     end
   end
 
+  describe "#as_index_string" do
+    subject { attribute.as_index_string }
+
+    context "when attribute type is text" do
+      before { allow(attribute).to receive(:type) { "text" } }
+
+      it { should eq "truncate(test_model.attribute_name, length: 30)" }
+    end
+
+    context "when attribute type is not text" do
+      it { should eq "test_model.attribute_name" }
+    end
+  end
+
   describe "#validations" do
     subject { attribute.validations }
     let(:options) { {validates: validates} }

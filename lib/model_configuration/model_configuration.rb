@@ -8,7 +8,7 @@ class ModelConfiguration
 
   # Example YAML:
   #   driver:
-  #     namespaces: "admin"
+  #     namespaces: ["admin"]
   #     soft_delete: false
   #     skip_ui: false
   #     skip_seeds: false

@@ -60,6 +60,14 @@ class ModelConfiguration
       properties[:show_on_index].nil? ? true : properties[:show_on_index]
     end
 
+    # index refers to the index.html.haml template, nothing to do with DB.
+    def as_index_string
+      case type
+        when "text" then "truncate(#{model_configuration.model_name}.#{name}, length: 30)"
+        else "#{model_configuration.model_name}.#{name}"
+      end
+    end
+
   # Models
 
     def is_association?
