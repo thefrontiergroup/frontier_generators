@@ -51,14 +51,6 @@ describe ModelConfiguration::Attribute::Validation do
       it { should eq("it { should validate_inclusion_of(:field_name).in_array(TestModel::FIELD_NAME_VALUES) }") }
     end
 
-    context "validation is 'numericality'" do
-      let(:key) { "numericality" }
-      it "passes the responsibility to ModelConfiguration::Attribute::Validation::Numericality" do
-        expect_any_instance_of(ModelConfiguration::Attribute::Validation::Numericality).to receive(:as_spec)
-        subject
-      end
-    end
-
     context "validation is 'presence'" do
       let(:key) { "presence" }
       it { should eq("it { should validate_presence_of(:field_name) }") }
