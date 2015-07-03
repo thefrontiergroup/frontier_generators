@@ -2,11 +2,31 @@ require 'spec_helper'
 
 describe ModelConfiguration::Attribute::Validation::Numericality do
 
+  let(:validation) do
+    ModelConfiguration::Attribute::Validation::Numericality.new(attribute, key, args)
+  end
+  let(:attribute) { ModelConfiguration::Attribute.new(build_model_configuration, name, {}) }
+  let(:name)      { "field_name" }
+  let(:key)       { "numericality" }
+
+  describe "#as_implementation" do
+    subject { validation.as_implementation }
+    let(:args) do
+      {
+        allow_nil: true,
+        greater_than: 0,
+        greater_than_or_equal_to: 0,
+        equal_to: 0,
+        less_than: 100,
+        less_than_or_equal_to: 100
+      }
+    end
+
+    it { should eq("numericality: {allow_nil: true, greater_than: 0, greater_than_or_equal_to: 0, equal_to: 0, less_than: 100, less_than_or_equal_to: 100}") }
+  end
+
   describe "#as_spec" do
-    subject { ModelConfiguration::Attribute::Validation::Numericality.new(attribute, key, args).as_spec }
-    let(:attribute) { ModelConfiguration::Attribute.new(build_model_configuration, name, {}) }
-    let(:name)      { "field_name" }
-    let(:key)       { "numericality" }
+    subject { validation.as_spec }
 
     context "when args is nil" do
       let(:args) { nil }
