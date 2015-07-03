@@ -82,6 +82,7 @@ model_name:
         numericality: true
         # Or, numericality can use one or more args
         numericality:
+          allow_nil: true
           greater_than: 0
           greater_than_or_equal_to: 0
           equal_to: 0

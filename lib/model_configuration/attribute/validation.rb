@@ -25,8 +25,6 @@ class ModelConfiguration::Attribute::Validation
     case key
     when "inclusion"
       "it { should validate_inclusion_of(#{attribute.as_symbol}).in_array(#{corresponding_constant.name}) }"
-    when "numericality"
-      ModelConfiguration::Attribute::Validation::Numericality.new(attribute, key, args).as_spec
     when "presence"
       "it { should validate_presence_of(#{attribute.as_symbol}) }"
     when "uniqueness"

@@ -76,7 +76,7 @@ class ModelConfiguration
 
     def validations
       @validations ||= (properties[:validates] || []).collect do |key, args|
-        ModelConfiguration::Attribute::Validation.new(self, key, args)
+        ModelConfiguration::Attribute::Validation::Factory.new.build(self, key, args)
       end
     end
 

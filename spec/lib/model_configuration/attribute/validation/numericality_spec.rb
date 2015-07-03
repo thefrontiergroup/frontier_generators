@@ -28,6 +28,20 @@ describe ModelConfiguration::Attribute::Validation::Numericality do
         it { should eq("it { should validate_numericality_of(:field_name) }") }
       end
 
+      context "allow_nil" do
+        let(:args) { {allow_nil: allow_nil} }
+
+        context "is true" do
+          let(:allow_nil) { true }
+          it { should eq("it { should validate_numericality_of(:field_name).allow_nil }") }
+        end
+
+        context "is false" do
+          let(:allow_nil) { false }
+          it { should eq("it { should validate_numericality_of(:field_name) }") }
+        end
+      end
+
       context "greater_than" do
         let(:args) { {greater_than: 666} }
         it { should eq("it { should validate_numericality_of(:field_name).is_greater_than(666) }") }
