@@ -1,12 +1,5 @@
 class <%= policy_class_name %> < ApplicationPolicy
-  class Scope
-    attr_reader :user, :scope
-
-    def initialize(user, scope)
-      @user = user
-      @scope = scope
-    end
-
+  class Scope < ApplicationPolicy::Scope
     def resolve
       if user.present? && (user.admin? || user.member?)
         scope
