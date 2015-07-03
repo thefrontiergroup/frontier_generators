@@ -9,6 +9,11 @@ describe ModelConfiguration::Attribute::Validation::Factory do
     subject { factory.build(attribute, key, args) }
     let(:args) { {} }
 
+    context "when key is 'length'" do
+      let(:key) { "length" }
+      it { should be_kind_of(ModelConfiguration::Attribute::Validation::Length) }
+    end
+
     context "when key is 'numericality'" do
       let(:key) { "numericality" }
       it { should be_kind_of(ModelConfiguration::Attribute::Validation::Numericality) }

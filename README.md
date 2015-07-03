@@ -79,6 +79,13 @@ model_name:
     attribute_name:
       validates:
         inclusion: [1,2,3,4]
+        length:
+          minimum: 0
+          maximum: 666
+          is: 100
+          # in and within are aliases for eachother
+          in: 0..100
+          within: 0..100
         numericality: true
         # Or, numericality can use one or more args
         numericality:
