@@ -17,7 +17,7 @@
     - <%= model_configuration.ivar_collection %>.each do |<%= model_configuration.model_name %>|
       %tr
 <% model_configuration.attributes.select(&:show_on_index?).each do |attribute| -%>
-        %td= attribute.as_index_string
+        %td= <%= attribute.as_index_string %>
 <% end -%>
         %td.actions
           - if policy(<%= model_configuration.model_name %>).edit?
