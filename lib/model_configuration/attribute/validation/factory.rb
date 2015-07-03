@@ -1,3 +1,7 @@
+require_relative '../validation'
+require_relative 'length'
+require_relative 'numericality'
+
 class ModelConfiguration::Attribute::Validation::Factory
 
   def build(attribute, key, args)
