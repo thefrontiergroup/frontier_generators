@@ -11,14 +11,8 @@ private
   end
 
   def additional_spec_options
-    if args.present?
-      if args.is_a?(Hash)
-        additional_spec_options_collection
-      else
-        nil
-      end
-    else
-      nil
+    if args.present? && args.is_a?(Hash)
+      additional_spec_options_collection
     end
   end
 
