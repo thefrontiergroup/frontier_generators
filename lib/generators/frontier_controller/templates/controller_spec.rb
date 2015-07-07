@@ -2,6 +2,7 @@ require 'rails_helper'
 
 describe <%= controller_name %> do
 
+<% if model_configuration.show_index? -%>
   describe 'GET index' do
     subject(:get_index) { get :index }
 
@@ -24,6 +25,8 @@ describe <%= controller_name %> do
     it_behaves_like "action authorizes roles", [:admin]
   end
 
+<% end -%>
+<% if model_configuration.show_create? -%>
   describe 'GET new' do
     subject { get :new }
 
@@ -70,6 +73,8 @@ describe <%= controller_name %> do
     it_behaves_like "action authorizes roles", [:admin]
   end
 
+<% end -%>
+<% if model_configuration.show_update? -%>
   describe 'GET edit' do
     subject { get :edit, id: <%= model_configuration.model_name %>.id }
     let(<%= model_configuration.as_symbol %>) { FactoryGirl.create(<%= model_configuration.as_symbol %>) }
@@ -119,6 +124,8 @@ describe <%= controller_name %> do
     it_behaves_like "action authorizes roles", [:admin]
   end
 
+<% end -%>
+<% if model_configuration.show_delete? -%>
   describe 'DELETE destroy' do
     subject { delete :destroy, id: <%= model_configuration.model_name %>.id }
     let(<%= model_configuration.as_symbol %>) { FactoryGirl.create(<%= model_configuration.as_symbol %>) }
@@ -135,4 +142,5 @@ describe <%= controller_name %> do
     it_behaves_like "action authorizes roles", [:admin]
   end
 
+<% end -%>
 end

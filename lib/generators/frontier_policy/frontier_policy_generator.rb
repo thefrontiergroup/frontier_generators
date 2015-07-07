@@ -8,8 +8,10 @@ class FrontierPolicyGenerator < Rails::Generators::NamedBase
   def scaffold
     self.model_configuration = ModelConfiguration.new(ARGV[0])
 
-    template "policy.rb", policy_path
-    template "policy_spec.rb", policy_spec_path
+    unless model_configuration.skip_ui?
+      template "policy.rb", policy_path
+      template "policy_spec.rb", policy_spec_path
+    end
   end
 
 # Scaffold methods - called from within template

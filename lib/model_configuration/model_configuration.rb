@@ -58,13 +58,33 @@ class ModelConfiguration
     attributes.first
   end
 
+  def skip_ui?
+    skip_ui == true
+  end
+
+  def show_index?
+    @show_index && !skip_ui?
+  end
+
+  def show_delete?
+    @show_delete && !skip_ui?
+  end
+
+  def show_create?
+    @show_create && !skip_ui?
+  end
+
+  def show_update?
+    @show_update && !skip_ui?
+  end
+
 private
 
   def assign_attributes_from_model_configuration(hash)
     @model_name  = hash.keys.first
     @namespaces  = hash[@model_name][:namespaces] || []
     @skip_seeds  = configuration_for(hash[@model_name][:skip_seeds])
-    @skip_ui     = configuration_for(hash[@model_name][:skip_ui])
+    parse_skip_ui(configuration_for(hash[@model_name][:skip_ui]))
     @soft_delete = configuration_for(hash[@model_name][:soft_delete], default: true)
     @attributes  = (hash[@model_name][:attributes] || []).collect do |name, properties|
       ModelConfiguration::Attribute::Factory.build_attribute_or_association(self, name, properties)
@@ -75,5 +95,16 @@ private
 
   def configuration_for(attribute, options={ default: false })
     attribute.nil? ? options[:default] : attribute
+  end
+
+  def parse_skip_ui(skip_ui_raw)
+    if skip_ui_raw.is_a?(Array)
+      @show_index = !skip_ui_raw.include?("index")
+      @show_delete = !skip_ui_raw.include?("delete")
+      @show_create = !skip_ui_raw.include?("create")
+      @show_update = !skip_ui_raw.include?("update")
+    else
+      @skip_ui = skip_ui_raw
+    end
   end
 end

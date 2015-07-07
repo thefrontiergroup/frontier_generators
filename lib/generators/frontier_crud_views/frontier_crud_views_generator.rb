@@ -8,20 +8,25 @@ class FrontierCrudViewsGenerator < Rails::Generators::NamedBase
   def scaffold
     self.model_configuration = ModelConfiguration.new(ARGV[0])
 
-    [
-      "index.html.haml",
-      "_form.html.haml",
-      "new.html.haml",
-      "edit.html.haml"
-    ].each do |template_filename|
-      template template_filename, File.join(generate_base_path, template_filename)
-    end
+    unless model_configuration.skip_ui?
+      [
+        ["index.html.haml", model_configuration.show_index?],
+        ["_form.html.haml", model_configuration.show_create? || model_configuration.show_update?],
+        ["new.html.haml", model_configuration.show_create?],
+        ["edit.html.haml", model_configuration.show_update?]
+      ].each do |template_filename, should_generate|
+        if should_generate
+          template template_filename, File.join(generate_base_path, template_filename)
+        end
+      end
 
-    plural = model_configuration.model_name.pluralize
-    generate_feature_path("index_spec.rb", "admin_index_#{plural}_spec.rb")
-    generate_feature_path("delete_spec.rb", "admin_delete_#{plural}_spec.rb")
-    generate_feature_path("create_spec.rb", "admin_create_#{plural}_spec.rb")
-    generate_feature_path("update_spec.rb", "admin_update_#{plural}_spec.rb")
+      plural = model_configuration.model_name.pluralize
+
+      generate_feature_path("index_spec.rb", "admin_index_#{plural}_spec.rb") if model_configuration.show_index?
+      generate_feature_path("delete_spec.rb", "admin_delete_#{plural}_spec.rb") if model_configuration.show_delete?
+      generate_feature_path("create_spec.rb", "admin_create_#{plural}_spec.rb") if model_configuration.show_create?
+      generate_feature_path("update_spec.rb", "admin_update_#{plural}_spec.rb") if model_configuration.show_update?
+    end
   end
 
 private
