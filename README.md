@@ -20,6 +20,8 @@ model_name:
   skip_seeds: true
   # Do not create controller, routes, views, or specs for the above. `false` by default.
   skip_ui: true
+  # Or skip specific controllers, views and specs
+  skip_ui: [create, index, update, delete]
   # Adds support to soft delete for this model (acts_as_paranoid). `true` by default
   soft_delete: true
 ```
