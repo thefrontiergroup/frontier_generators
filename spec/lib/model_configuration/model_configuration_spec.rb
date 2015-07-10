@@ -2,8 +2,7 @@ require 'spec_helper'
 
 describe ModelConfiguration do
 
-  let(:configuration)   { ModelConfiguration.new(test_model_path) }
-  let(:test_model_path) { File.join("spec", "support", "test_model.yaml") }
+  let(:configuration) { build_model_configuration }
 
   describe "#as_constant" do
     subject { configuration.as_constant }
@@ -33,6 +32,10 @@ describe ModelConfiguration do
   describe "#ivar_instance" do
     subject { configuration.ivar_instance }
     it { should eq("@test_model") }
+  end
+
+  describe "hiding/showing UI elements" do
+
   end
 
 end

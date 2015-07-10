@@ -11,7 +11,7 @@ class FrontierRouteGenerator < Rails::Generators::NamedBase
   attr_reader :namespaces
 
   def scaffold
-    self.model_configuration = ModelConfiguration.new(ARGV[0])
+    self.model_configuration = ModelConfiguration::YamlParser.new(ARGV[0]).model_configuration
 
     unless model_configuration.skip_ui?
       # model_configuration.namespaces will be an array. EG: ["admin", "groups"]
