@@ -53,19 +53,19 @@ class ModelConfiguration
   end
 
   def show_index?
-    @show_index && !skip_ui?
+    !@skip_index && !skip_ui?
   end
 
   def show_delete?
-    @show_delete && !skip_ui?
+    !@skip_delete && !skip_ui?
   end
 
   def show_create?
-    @show_create && !skip_ui?
+    !@skip_create && !skip_ui?
   end
 
   def show_update?
-    @show_update && !skip_ui?
+    !@skip_update && !skip_ui?
   end
 
 private
@@ -76,10 +76,10 @@ private
 
   def parse_skip_ui(skip_ui_raw)
     if skip_ui_raw.is_a?(Array)
-      @show_index = !skip_ui_raw.include?("index")
-      @show_delete = !skip_ui_raw.include?("delete")
-      @show_create = !skip_ui_raw.include?("create")
-      @show_update = !skip_ui_raw.include?("update")
+      @skip_index = skip_ui_raw.include?("index")
+      @skip_delete = skip_ui_raw.include?("delete")
+      @skip_create = skip_ui_raw.include?("create")
+      @skip_update = skip_ui_raw.include?("update")
     else
       @skip_ui = skip_ui_raw
     end
