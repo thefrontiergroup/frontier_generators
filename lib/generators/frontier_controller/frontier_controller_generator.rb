@@ -6,10 +6,12 @@ class FrontierControllerGenerator < Rails::Generators::NamedBase
   attr_accessor :model_configuration
 
   def scaffold
-    self.model_configuration = ModelConfiguration.new(ARGV[0])
+    self.model_configuration = ModelConfiguration::YamlParser.new(ARGV[0]).model_configuration
 
-    template "controller.rb", generate_controller_path
-    template "controller_spec.rb", generate_controller_spec_path
+    unless model_configuration.skip_ui?
+      template "controller.rb", generate_controller_path
+      template "controller_spec.rb", generate_controller_spec_path
+    end
   end
 
 protected

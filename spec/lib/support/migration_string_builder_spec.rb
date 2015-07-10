@@ -2,9 +2,8 @@ require 'spec_helper'
 
 describe MigrationStringBuilder do
 
-  let(:builder) { MigrationStringBuilder.new(configuration) }
-  let(:configuration)   { ModelConfiguration.new(test_model_path) }
-  let(:test_model_path) { File.join("spec", "support", "test_model.yaml") }
+  let(:builder)       { MigrationStringBuilder.new(configuration) }
+  let(:configuration) { build_model_configuration }
 
   describe "#to_s" do
     subject(:output) { builder.to_s }

@@ -6,22 +6,27 @@ class FrontierCrudViewsGenerator < Rails::Generators::NamedBase
   attr_accessor :model_configuration
 
   def scaffold
-    self.model_configuration = ModelConfiguration.new(ARGV[0])
+    self.model_configuration = ModelConfiguration::YamlParser.new(ARGV[0]).model_configuration
 
-    [
-      "index.html.haml",
-      "_form.html.haml",
-      "new.html.haml",
-      "edit.html.haml"
-    ].each do |template_filename|
-      template template_filename, File.join(generate_base_path, template_filename)
+    unless model_configuration.skip_ui?
+      [
+        ["index.html.haml", model_configuration.show_index?],
+        ["_form.html.haml", model_configuration.show_create? || model_configuration.show_update?],
+        ["new.html.haml", model_configuration.show_create?],
+        ["edit.html.haml", model_configuration.show_update?]
+      ].each do |template_filename, should_generate|
+        if should_generate
+          template template_filename, File.join(generate_base_path, template_filename)
+        end
+      end
+
+      plural = model_configuration.model_name.pluralize
+
+      generate_feature_path("index_spec.rb", "admin_index_#{plural}_spec.rb") if model_configuration.show_index?
+      generate_feature_path("delete_spec.rb", "admin_delete_#{plural}_spec.rb") if model_configuration.show_delete?
+      generate_feature_path("create_spec.rb", "admin_create_#{plural}_spec.rb") if model_configuration.show_create?
+      generate_feature_path("update_spec.rb", "admin_update_#{plural}_spec.rb") if model_configuration.show_update?
     end
-
-    plural = model_configuration.model_name.pluralize
-    generate_feature_path("index_spec.rb", "admin_index_#{plural}_spec.rb")
-    generate_feature_path("delete_spec.rb", "admin_delete_#{plural}_spec.rb")
-    generate_feature_path("create_spec.rb", "admin_create_#{plural}_spec.rb")
-    generate_feature_path("update_spec.rb", "admin_update_#{plural}_spec.rb")
   end
 
 private
@@ -31,7 +36,7 @@ private
   end
 
   def generate_feature_path(template_name, feature_name)
-    feature_path = File.join("spec", "features", "admin", model_configuration.model_name.pluralize, feature_name)
+    feature_path = File.join("spec", "features", *model_configuration.namespaces, model_configuration.model_name.pluralize, feature_name)
     template(template_name, feature_path)
   end
 
