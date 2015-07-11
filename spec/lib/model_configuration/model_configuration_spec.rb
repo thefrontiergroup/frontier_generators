@@ -34,6 +34,44 @@ describe ModelConfiguration do
     it { should eq("@test_model") }
   end
 
+  describe "#primary_attribute" do
+    subject(:primary_attribute) { model_configuration.primary_attribute }
+
+    let(:model_configuration) { ModelConfiguration.new(model_options) }
+    let(:model_options) do
+      {
+        test_model: {
+          attributes: attributes
+        }
+      }
+    end
+
+    context "when there is a primary attribute" do
+      let(:attributes) do
+          {
+            primary_attribute: {primary: true},
+            other_attribute: {}
+          }
+      end
+      it "returns the primary attribute" do
+        expect(primary_attribute.name).to eq("primary_attribute")
+      end
+    end
+
+    context "when there is no primary attribute" do
+      let(:attributes) do
+        {
+          primary_attribute: {},
+          other_attribute: {}
+        }
+      end
+
+      it "returns the first attribute" do
+        expect(primary_attribute.name).to eq("primary_attribute")
+      end
+    end
+  end
+
   describe "hiding/showing UI elements" do
     let(:model_configuration) { ModelConfiguration.new(model_options) }
     let(:model_options) { {test_model: {skip_ui: skip_ui}} }

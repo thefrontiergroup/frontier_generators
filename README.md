@@ -36,6 +36,9 @@ model_name:
   skip_ui: false # true by default (only used by scaffold generator)
   attributes:
     attribute_name:
+      # Set primary to true if you want this attribute to be used for #to_s and for
+      # checks in the feature specs. Chooses first attribute by default.
+      primary: true
       # Set to false if you don't want this attribute to be represented on the index
       # Note: This is true by default
       show_on_index: false

@@ -44,8 +44,11 @@ class ModelConfiguration
     "@#{model_name}"
   end
 
+  # The primary attribute is used for:
+  #   * Model#to_s (and spec)
+  #   * Determining whether or not an instance of the model is visible in feature specs
   def primary_attribute
-    attributes.first
+    attributes.find(&:is_primary?) || attributes.first
   end
 
   def skip_ui?

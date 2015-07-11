@@ -1,12 +1,13 @@
 class ModelConfiguration
   class Attribute
 
-    attr_reader :model_configuration, :name, :properties
+    attr_reader :model_configuration, :is_primary, :name, :properties
 
     def initialize(model_configuration, name, properties)
       @model_configuration = model_configuration
       @name = name.to_s
       @properties = properties
+      @is_primary = @properties[:primary] == true
     end
 
     # some_thing -> "Some thing"
@@ -25,6 +26,10 @@ class ModelConfiguration
 
     def as_symbol
       ":#{name}"
+    end
+
+    def is_primary?
+      !!@is_primary
     end
 
     def sortable?
