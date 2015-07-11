@@ -17,7 +17,7 @@ class FrontierScaffoldGenerator < Rails::Generators::NamedBase
   #   * Build feature tests (index, create, update, destroy with soft-delete)
   #
   def scaffold
-    self.model_configuration = ModelConfiguration.new(ARGV[0])
+    self.model_configuration = ModelConfiguration::YamlParser.new(ARGV[0]).model_configuration
 
     puts "Namespaces: #{model_configuration.namespaces}"
     puts "Model Name: #{model_configuration.model_name}"

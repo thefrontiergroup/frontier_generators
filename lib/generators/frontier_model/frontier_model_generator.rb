@@ -7,7 +7,7 @@ class FrontierModelGenerator < Rails::Generators::NamedBase
   attr_accessor :model_configuration
 
   def scaffold
-    self.model_configuration = ModelConfiguration.new(ARGV[0])
+    self.model_configuration = ModelConfiguration::YamlParser.new(ARGV[0]).model_configuration
 
     unless model_configuration.skip_seeds
       # Generate seed files for the model
