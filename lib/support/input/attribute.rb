@@ -1,6 +1,6 @@
-require_relative '../attribute'
+require_relative '../input.rb'
 
-class ModelConfiguration::Attribute::InputImplementation
+class Frontier::Input::Attribute
 
   attr_reader :attribute
 

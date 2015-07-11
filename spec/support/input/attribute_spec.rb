@@ -1,8 +1,8 @@
 require 'spec_helper'
 
-describe ModelConfiguration::Attribute::InputImplementation do
+describe Frontier::Input::Attribute do
 
-  let(:input_implementation) { ModelConfiguration::Attribute::InputImplementation.new(attribute) }
+  let(:input_implementation) { Frontier::Input::Attribute.new(attribute) }
   let(:attribute) { ModelConfiguration::Attribute.new(build_model_configuration, name, options) }
   let(:name) { "attribute_name" }
   let(:options) { {} }

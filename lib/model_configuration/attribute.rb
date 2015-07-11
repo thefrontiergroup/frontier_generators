@@ -53,10 +53,6 @@ class ModelConfiguration
       end
     end
 
-    def as_input(options={})
-      ModelConfiguration::Attribute::InputImplementation.new(self).to_s(options)
-    end
-
     def is_enum?
       properties[:type] == "enum"
     end
@@ -111,6 +107,5 @@ end
 
 require_relative "attribute/constant.rb"
 require_relative "attribute/factory_declaration.rb"
-require_relative "attribute/input_implementation.rb"
 require_relative "attribute/migration_component.rb"
 require_relative "attribute/validation/factory.rb"
