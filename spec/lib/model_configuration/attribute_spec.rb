@@ -58,6 +58,26 @@ describe ModelConfiguration::Attribute do
     end
   end
 
+  describe "#is_primary?" do
+    subject { attribute.is_primary? }
+    let(:options) { {primary: primary} }
+
+    context "when primary is true" do
+      let(:primary) { true }
+      it { should eq(true) }
+    end
+
+    context "when primary is false" do
+      let(:primary) { false }
+      it { should eq(false) }
+    end
+
+    context "when primary is nil" do
+      let(:primary) { nil }
+      it { should eq(false) }
+    end
+  end
+
   describe "#as_input" do
     subject { attribute.as_input(options) }
     let(:options) { {} }
