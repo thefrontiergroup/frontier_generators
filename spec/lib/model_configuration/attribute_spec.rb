@@ -78,18 +78,6 @@ describe ModelConfiguration::Attribute do
     end
   end
 
-  describe "#as_input" do
-    subject { attribute.as_input(options) }
-    let(:options) { {} }
-
-    describe "providing additional options" do
-      let(:expected_output) { "f.input :attribute_name, my_option: :jordan_rules" }
-      let(:options) { {my_option: ":jordan_rules"} }
-
-      it { should eq(expected_output) }
-    end
-  end
-
   describe "#show_on_index?" do
     subject { attribute.show_on_index? }
 

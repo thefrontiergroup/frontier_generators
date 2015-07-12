@@ -5,6 +5,14 @@ class ModelConfiguration
 
     ID_REGEXP = /_id\z/
 
+    def association_class
+      if properties[:class_name].present?
+        properties[:class_name]
+      else
+        name.sub(ID_REGEXP, "").camelize
+      end
+    end
+
     def as_factory_name
       ":#{association_class.underscore}"
     end
@@ -33,23 +41,6 @@ class ModelConfiguration
 
     def as_factory_declaration
       ModelConfiguration::Association::FactoryDeclaration.new(self).to_s
-    end
-
-    # Views
-
-    def as_input(options={})
-      options = options.merge({collection: "#{association_class}.all"})
-      super
-    end
-
-  private
-
-    def association_class
-      if properties[:class_name].present?
-        properties[:class_name]
-      else
-        name.sub(ID_REGEXP, "").camelize
-      end
     end
 
   end

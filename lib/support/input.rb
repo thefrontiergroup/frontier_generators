@@ -1,6 +1,6 @@
-require_relative '../attribute'
+require_relative '../frontier.rb'
 
-class ModelConfiguration::Attribute::InputImplementation
+class Frontier::Input
 
   attr_reader :attribute
 
@@ -8,15 +8,7 @@ class ModelConfiguration::Attribute::InputImplementation
     @attribute = attribute
   end
 
-  def to_s(options={})
-    # Should convert attribute "state" into:
-    #   f.input :state_id, collection: State.all
-    # With additional options as above you'd get:
-    #   f.input :state_id, abacus: 666, collection: State.all, one: :two
-    input_declaration = ["f.input #{attribute.as_field_name}", *input_options(options)].join(", ")
-  end
-
-private
+protected
 
   def attribute_options
     options = {}
