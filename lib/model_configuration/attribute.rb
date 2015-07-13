@@ -45,9 +45,14 @@ class ModelConfiguration
     def as_enum
       # Should look like:
       #   enum attribute_name: ["one", "two"]
+
       if is_enum?
-        enum_options_as_hash = properties[:enum_options].each_with_index.collect {|key, index| "#{key}: #{index}"}.join(", ")
-        "enum #{name}: {#{enum_options_as_hash}}"
+        if (enum_options = properties[:enum_options]).present?
+          enum_options_as_hash = enum_options.each_with_index.collect {|key, index| "#{key}: #{index}"}.join(", ")
+          "enum #{name}: {#{enum_options_as_hash}}"
+        else
+          raise(ArgumentError, "No enum_options provided for attribute: #{name}")
+        end
       else
         raise(ArgumentError, "Attempting to display field #{name} as enum, but is #{type}")
       end

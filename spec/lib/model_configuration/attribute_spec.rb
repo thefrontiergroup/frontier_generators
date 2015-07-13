@@ -15,8 +15,19 @@ describe ModelConfiguration::Attribute do
     end
 
     context "when field is an enum" do
-      let(:options) { {type: "enum", enum_options: ["zero", "one"]} }
-      it { should eq("enum attribute_name: {zero: 0, one: 1}") }
+      before { options[:type] = "enum" }
+
+      context "enum_options is present" do
+        before { options[:enum_options] = ["zero", "one"] }
+
+        it { should eq("enum attribute_name: {zero: 0, one: 1}") }
+      end
+
+      context "enum_options is blank" do
+        before { options[:enum_options] = double(present?: false) }
+
+        specify { expect { subject }.to raise_error(ArgumentError) }
+      end
     end
   end
 

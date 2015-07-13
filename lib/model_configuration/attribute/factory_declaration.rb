@@ -46,11 +46,7 @@ private
   end
 
   def enum_data
-    if attribute.properties[:enum_options].present?
-      "#{attribute.properties[:enum_options]}.sample"
-    else
-      raise(ArgumentError, "No enum_options provided for attribute: #{attribute.name}")
-    end
+    "#{attribute.model_configuration.as_constant}.#{attribute.name.pluralize}.keys"
   end
 
   def number_data
