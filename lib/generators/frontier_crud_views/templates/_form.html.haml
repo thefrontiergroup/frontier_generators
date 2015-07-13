@@ -1,4 +1,4 @@
-= simple_form_for [<%= model_configuration.namespaces.map{|ns| ":#{ns}"}.join(", ") %>, <%= model_configuration.ivar_instance %>], wrapper: "horizontal", html: { class: "form-horizontal"} do |f|
+= <%= Frontier::FormHeader.new(model_configuration).to_s %>
 
 <% model_configuration.attributes.each_with_index do |attribute, index| -%>
 <% options = {} -%>
