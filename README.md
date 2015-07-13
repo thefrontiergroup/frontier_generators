@@ -54,7 +54,7 @@ model_name:
 
       # enum should also provide enum_options
       type: enum
-      enum_options: [:admin, :public]
+      enum_options: ['admin', 'public']
 ```
 
 ## Associations
