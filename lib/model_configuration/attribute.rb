@@ -46,8 +46,8 @@ class ModelConfiguration
       # Should look like:
       #   enum attribute_name: ["one", "two"]
       if is_enum?
-        enum_options_as_string = properties[:enum_options].collect {|x| "\"#{x}\""}.join(", ")
-        "enum #{name}: [#{enum_options_as_string}]"
+        enum_options_as_hash = properties[:enum_options].each_with_index.collect {|key, index| "#{key}: #{index}"}.join(", ")
+        "enum #{name}: {#{enum_options_as_hash}}"
       else
         raise(ArgumentError, "Attempting to display field #{name} as enum, but is #{type}")
       end

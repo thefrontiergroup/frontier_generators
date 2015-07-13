@@ -15,8 +15,8 @@ describe ModelConfiguration::Attribute do
     end
 
     context "when field is an enum" do
-      let(:options) { {type: "enum", enum_options: ["one", "two"]} }
-      it { should eq("enum attribute_name: [\"one\", \"two\"]") }
+      let(:options) { {type: "enum", enum_options: ["zero", "one"]} }
+      it { should eq("enum attribute_name: {zero: 0, one: 1}") }
     end
   end
 
