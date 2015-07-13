@@ -54,7 +54,7 @@ private
   end
 
   def text_data
-    "Faker::Lorem.paragraph(5)"
+    "FFaker::Lorem.paragraph(5)"
   end
 
   def string_data

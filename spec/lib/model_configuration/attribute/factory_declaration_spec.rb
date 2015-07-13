@@ -102,7 +102,7 @@ describe ModelConfiguration::Attribute::FactoryDeclaration do
 
     context "type is 'text'" do
       let(:type) { "text" }
-      it { should eq("field_name { Faker::Lorem.paragraph(5) }") }
+      it { should eq("field_name { FFaker::Lorem.paragraph(5) }") }
     end
 
     context "type is something else" do
