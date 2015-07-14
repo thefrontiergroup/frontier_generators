@@ -48,7 +48,7 @@ class ModelConfiguration
 
       if is_enum?
         if (enum_options = properties[:enum_options]).present?
-          enum_options_as_hash = enum_options.each_with_index.collect {|key, index| "#{key}: #{index}"}.join(", ")
+          enum_options_as_hash = Frontier::HashDecorator.new array_as_hash(enum_options)
           "enum #{name}: {#{enum_options_as_hash}}"
         else
           raise(ArgumentError, "No enum_options provided for attribute: #{name}")
@@ -107,6 +107,11 @@ class ModelConfiguration
       ModelConfiguration::Attribute::MigrationComponent.new(self).to_s
     end
 
+  private
+
+    def array_as_hash(array)
+      array.zip(0..array.length).to_h
+    end
   end
 end
 
