@@ -38,7 +38,7 @@ describe ModelConfiguration::Attribute::FactoryDeclaration do
       let(:options) { {type: type} }
       let(:type)    { "enum" }
 
-      it { should eq("field_name { TestModel.field_names.keys }") }
+      it { should eq("field_name { TestModel.field_names.keys.sample }") }
     end
 
     context "type is 'integer'" do
