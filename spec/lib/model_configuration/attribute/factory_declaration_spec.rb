@@ -35,18 +35,10 @@ describe ModelConfiguration::Attribute::FactoryDeclaration do
     end
 
     context "type is 'enum'" do
-      let(:options) { {enum_options: enum_options, type: type} }
+      let(:options) { {type: type} }
       let(:type)    { "enum" }
 
-      context "when enum_options is set" do
-        let(:enum_options) { ["one", "two"] }
-        it { should eq("field_name { [\"one\", \"two\"].sample }") }
-      end
-
-      context "when enum_options is not set" do
-        let(:enum_options) { nil }
-        specify { expect { subject }.to raise_error(ArgumentError) }
-      end
+      it { should eq("field_name { TestModel.field_names.keys.sample }") }
     end
 
     context "type is 'integer'" do
@@ -110,7 +102,7 @@ describe ModelConfiguration::Attribute::FactoryDeclaration do
 
     context "type is 'text'" do
       let(:type) { "text" }
-      it { should eq("field_name { Faker::Lorem.paragraph(5) }") }
+      it { should eq("field_name { FFaker::Lorem.paragraph(5) }") }
     end
 
     context "type is something else" do
