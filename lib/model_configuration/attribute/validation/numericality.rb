@@ -28,6 +28,11 @@ private
         if value
           "allow_nil"
         end
+      when "only_integer"
+        # only_integer could be set to false, which we should just ignore
+        if value
+          "only_integer"
+        end
       when "greater_than"
         "is_greater_than(#{value})"
       when "greater_than_or_equal_to"
