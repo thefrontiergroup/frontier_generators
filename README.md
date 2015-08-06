@@ -100,6 +100,7 @@ model_name:
           equal_to: 0
           less_than: 100
           less_than_or_equal_to: 100
+          only_integer: true
         presence: true
         uniqueness: true
 ```

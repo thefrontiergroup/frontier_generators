@@ -14,6 +14,7 @@ describe ModelConfiguration::Attribute::Validation::Numericality do
     let(:args) do
       {
         allow_nil: true,
+        only_integer: true,
         greater_than: 0,
         greater_than_or_equal_to: 0,
         equal_to: 0,
@@ -22,7 +23,7 @@ describe ModelConfiguration::Attribute::Validation::Numericality do
       }
     end
 
-    it { should eq("numericality: {allow_nil: true, greater_than: 0, greater_than_or_equal_to: 0, equal_to: 0, less_than: 100, less_than_or_equal_to: 100}") }
+    it { should eq("numericality: {allow_nil: true, only_integer: true, greater_than: 0, greater_than_or_equal_to: 0, equal_to: 0, less_than: 100, less_than_or_equal_to: 100}") }
   end
 
   describe "#as_spec" do
@@ -58,6 +59,20 @@ describe ModelConfiguration::Attribute::Validation::Numericality do
 
         context "is false" do
           let(:allow_nil) { false }
+          it { should eq("it { should validate_numericality_of(:field_name) }") }
+        end
+      end
+
+      context "only_integer" do
+        let(:args) { {only_integer: only_integer} }
+
+        context "is true" do
+          let(:only_integer) { true }
+          it { should eq("it { should validate_numericality_of(:field_name).only_integer }") }
+        end
+
+        context "is false" do
+          let(:only_integer) { false }
           it { should eq("it { should validate_numericality_of(:field_name) }") }
         end
       end
