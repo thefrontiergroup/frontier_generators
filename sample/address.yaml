@@ -1,22 +1,24 @@
 address:
+  skip_seeds: true
+  skip_ui: true
   attributes:
     line_1:
-      type: "string"
+      type: string
       validates:
         presence: true
     line_2:
-      type: "string"
+      type: string
     city:
-      type: "string"
+      type: string
     suburb:
-      type: "string"
+      type: string
       validates:
         presence: true
     postal_code:
-      type: "string"
+      type: string
       validates:
         presence: true
     state:
-      type: "belongs_to"
+      type: belongs_to
       validates:
         presence: true

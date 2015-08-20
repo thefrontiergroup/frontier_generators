@@ -1,0 +1,13 @@
+state:
+  skip_ui: true
+  attributes:
+    name:
+      type: string
+      validates:
+        presence: true
+        uniqueness: true
+    abbreviation:
+      type: string
+      validates:
+        presence: true
+        uniqueness: true
