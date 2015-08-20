@@ -9,7 +9,7 @@ class ModelConfiguration
       if properties[:class_name].present?
         properties[:class_name]
       else
-        name.sub(ID_REGEXP, "").camelize
+        without_id.camelize
       end
     end
 
@@ -27,6 +27,12 @@ class ModelConfiguration
       end
     end
 
+    # some_thing_id -> ":some_thing"
+    # some_thing -> ":some_thing"
+    def as_symbol_without_id
+      ":#{without_id}"
+    end
+
     def is_association?
       true
     end
@@ -41,6 +47,12 @@ class ModelConfiguration
 
     def as_factory_declaration
       ModelConfiguration::Association::FactoryDeclaration.new(self).to_s
+    end
+
+  private
+
+    def without_id
+      name.sub(ID_REGEXP, "")
     end
 
   end

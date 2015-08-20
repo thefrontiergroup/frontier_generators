@@ -45,6 +45,20 @@ describe ModelConfiguration::Association do
     end
   end
 
+  describe "#as_symbol_without_id" do
+    subject { association.as_symbol_without_id }
+
+    context "when field_name includes _id already" do
+      let(:name) { "model_id" }
+      it { should eq(":model") }
+    end
+
+    context "when field_name doesn't include _id" do
+      let(:name) { "model" }
+      it { should eq(":model") }
+    end
+  end
+
   describe "#is_association?" do
     subject { association.is_association? }
     it { should eq(true) }
