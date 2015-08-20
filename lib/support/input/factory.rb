@@ -1,4 +1,3 @@
-require_relative '../input.rb'
 require_relative 'association.rb'
 require_relative 'attribute.rb'
 

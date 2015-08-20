@@ -1,5 +1,3 @@
-require_relative 'attribute.rb'
-
 class Frontier::Input::Association < Frontier::Input
 
   def to_s(options={})

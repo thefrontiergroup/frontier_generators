@@ -44,3 +44,8 @@ protected
   end
 
 end
+
+# Include these files after Frontier::Input has been defined
+require_relative './input/association.rb'
+require_relative './input/attribute.rb'
+require_relative './input/factory.rb'
