@@ -12,7 +12,7 @@ describe Frontier::Input::Association do
     let(:input_options) { {} }
 
     describe "providing additional options" do
-      let(:expected_output) { "f.association :association_name_id, collection: AssociationName.all, my_option: :jordan_rules" }
+      let(:expected_output) { "f.association :association_name, collection: AssociationName.all, my_option: :jordan_rules" }
       let(:name) { "association_name_id" }
       let(:input_options) { {my_option: ":jordan_rules"} }
 
@@ -21,14 +21,14 @@ describe Frontier::Input::Association do
 
     describe "setting name of input" do
       context "with class_name declared" do
-        let(:expected_output) { "f.association :association_name_id, collection: Dong.all" }
+        let(:expected_output) { "f.association :association_name, collection: Dong.all" }
         let(:options) { {class_name: "Dong"} }
 
         it { should eq(expected_output) }
       end
 
       context "without class_name declared" do
-        let(:expected_output) { "f.association :association_name_id, collection: AssociationName.all" }
+        let(:expected_output) { "f.association :association_name, collection: AssociationName.all" }
 
         context "when field_name includes _id already" do
           let(:name) { "association_name_id" }
