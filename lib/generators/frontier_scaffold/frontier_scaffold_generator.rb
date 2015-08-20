@@ -19,10 +19,6 @@ class FrontierScaffoldGenerator < Rails::Generators::NamedBase
   def scaffold
     self.model_configuration = ModelConfiguration::YamlParser.new(ARGV[0]).model_configuration
 
-    puts "Namespaces: #{model_configuration.namespaces}"
-    puts "Model Name: #{model_configuration.model_name}"
-    puts "Attributes: #{model_configuration.attributes}"
-
     # Generate models
     generate("frontier_model", ARGV[0])
 
