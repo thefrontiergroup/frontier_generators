@@ -110,7 +110,7 @@ class ModelConfiguration
   private
 
     def array_as_hash(array)
-      array.zip(0..array.length).to_h
+      Hash[array.zip(0..array.length)]
     end
   end
 end
