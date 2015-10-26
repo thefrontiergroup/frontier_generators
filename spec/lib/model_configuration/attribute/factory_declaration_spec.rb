@@ -35,15 +35,66 @@ describe ModelConfiguration::Attribute::FactoryDeclaration do
     end
 
     context "type is 'enum'" do
-      let(:options) { {type: type} }
-      let(:type)    { "enum" }
+      let(:type) { "enum" }
 
       it { should eq("field_name { TestModel.field_names.keys.sample }") }
     end
 
     context "type is 'integer'" do
       let(:type) { "integer" }
-      it { should eq("field_name { rand(9999) }") }
+
+      context "when attribute has a validation on numericality" do
+        let(:options) do
+          {
+            type: type,
+            validates: {
+              numericality: numericality_rules
+            }
+          }
+        end
+
+        context "when validation is for greater_than/less_than" do
+          let(:numericality_rules) do
+            {
+              greater_than: 44,
+              less_than: 99
+            }
+          end
+          it { should eq("field_name { rand(44..99) }") }
+        end
+
+        context "when validation is for greater_than_or_equal_to/less_than_or_equal_to" do
+          let(:numericality_rules) do
+            {
+              greater_than_or_equal_to: 44,
+              less_than_or_equal_to: 99
+            }
+          end
+          it { should eq("field_name { rand(44..99) }") }
+        end
+
+        context "when validation doesn't include a greater_than or greater_than_or_equal_to component" do
+          let(:numericality_rules) do
+            {
+              less_than: 99
+            }
+          end
+          it { should eq("field_name { rand(0..99) }") }
+        end
+
+        context "when validation doesn't include a less_than or less_than_or_equal_to component" do
+          let(:numericality_rules) do
+            {
+              greater_than: 99
+            }
+          end
+          it { should eq("field_name { rand(99..9999) }") }
+        end
+      end
+
+      context "when attribute has not validation on numericality" do
+        it { should eq("field_name { rand(9999) }") }
+      end
     end
 
     context "type is 'string'" do
