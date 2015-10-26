@@ -6,7 +6,7 @@ Use the Frontier Generators on the [Frontier Template](https://github.com/thefro
 
 Add the following to the development group in your Gemfile:
 
-`gem 'frontier_generators', github: "git@github.com:thefrontiergroup/frontier_generators.git"`
+`gem 'frontier_generators', github: "thefrontiergroup/frontier_generators"`
 
 ## Basic Usage
 
