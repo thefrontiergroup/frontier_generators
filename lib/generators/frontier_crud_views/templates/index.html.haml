@@ -1,6 +1,8 @@
 %h1 <%= model_configuration.as_title %> Management
 
+<% if model_configuration.show_create? -%>
 %p= link_to "Add new <%= model_configuration.as_title %>", <%= model_configuration.url_builder.new_path %>, class: "button"
+<% end -%>
 
 %table
   %thead
