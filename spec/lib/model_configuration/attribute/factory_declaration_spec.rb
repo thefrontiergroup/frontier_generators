@@ -31,7 +31,12 @@ describe ModelConfiguration::Attribute::FactoryDeclaration do
 
     context "type is 'decimal'" do
       let(:type) { "decimal" }
-      it { should eq("field_name { rand(9999) }") }
+
+      before do
+        expect_any_instance_of(ModelConfiguration::Attribute::FactoryDeclaration::Number).to receive(:to_s).and_return("some_number_value")
+      end
+
+      it { should eq("field_name { some_number_value }") }
     end
 
     context "type is 'enum'" do
@@ -43,58 +48,11 @@ describe ModelConfiguration::Attribute::FactoryDeclaration do
     context "type is 'integer'" do
       let(:type) { "integer" }
 
-      context "when attribute has a validation on numericality" do
-        let(:options) do
-          {
-            type: type,
-            validates: {
-              numericality: numericality_rules
-            }
-          }
-        end
-
-        context "when validation is for greater_than/less_than" do
-          let(:numericality_rules) do
-            {
-              greater_than: 44,
-              less_than: 99
-            }
-          end
-          it { should eq("field_name { rand(44..99) }") }
-        end
-
-        context "when validation is for greater_than_or_equal_to/less_than_or_equal_to" do
-          let(:numericality_rules) do
-            {
-              greater_than_or_equal_to: 44,
-              less_than_or_equal_to: 99
-            }
-          end
-          it { should eq("field_name { rand(44..99) }") }
-        end
-
-        context "when validation doesn't include a greater_than or greater_than_or_equal_to component" do
-          let(:numericality_rules) do
-            {
-              less_than: 99
-            }
-          end
-          it { should eq("field_name { rand(0..99) }") }
-        end
-
-        context "when validation doesn't include a less_than or less_than_or_equal_to component" do
-          let(:numericality_rules) do
-            {
-              greater_than: 99
-            }
-          end
-          it { should eq("field_name { rand(99..9999) }") }
-        end
+      before do
+        expect_any_instance_of(ModelConfiguration::Attribute::FactoryDeclaration::Number).to receive(:to_s).and_return("some_number_value")
       end
 
-      context "when attribute has not validation on numericality" do
-        it { should eq("field_name { rand(9999) }") }
-      end
+      it { should eq("field_name { some_number_value }") }
     end
 
     context "type is 'string'" do
