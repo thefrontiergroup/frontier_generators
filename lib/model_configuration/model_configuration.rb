@@ -2,6 +2,7 @@ require_relative "attribute/factory.rb"
 require_relative "attribute.rb"
 require_relative "url_builder.rb"
 require_relative "yaml_parser.rb"
+require_relative "../frontier.rb"
 
 class ModelConfiguration
 
