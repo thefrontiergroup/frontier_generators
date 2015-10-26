@@ -2,6 +2,14 @@
 
 Use the Frontier Generators on the [Frontier Template](https://github.com/thefrontiergroup/rails-template) to quickly spin up CRUD interfaces.
 
+## Installing
+
+Add the following to the development group in your Gemfile:
+
+`gem 'frontier_generators', github: "git@github.com:thefrontiergroup/frontier_generators.git"`
+
+## Basic Usage
+
 You can create a YAML specification of your entities that you can pass directly to any of the generators. EG:
 
 ```
