@@ -58,55 +58,11 @@ describe ModelConfiguration::Attribute::FactoryDeclaration do
     context "type is 'string'" do
       let(:type) { "string" }
 
-      context "attribute name contains city" do
-        let(:name) { "city" }
-        it { should eq("city { FFaker::AddressAU.city }") }
+      before do
+        expect_any_instance_of(ModelConfiguration::Attribute::FactoryDeclaration::String).to receive(:to_s).and_return("some_string_value")
       end
 
-      context "attribute name contains email" do
-        let(:name) { "field_email" }
-        it { should eq("field_email { FFaker::Internet.email }") }
-      end
-
-      context "attribute name contains line_1" do
-        let(:name) { "line_1" }
-        it { should eq("line_1 { FFaker::AddressAU.street_address }") }
-      end
-
-      context "attribute name contains line_2" do
-        let(:name) { "line_2" }
-        it { should eq("line_2 { FFaker::AddressAU.secondary_address }") }
-      end
-
-      context "attribute name contains name" do
-        let(:name) { "field_name" }
-        it { should eq("field_name { FFaker::Name.name }") }
-      end
-
-      context "attribute name contains number" do
-        let(:name) { "field_number" }
-        it { should eq("field_number { FFaker::PhoneNumberAU.phone_number }") }
-      end
-
-      context "attribute name contains post_code" do
-        let(:name) { "post_code" }
-        it { should eq("post_code { FFaker::AddressAU.postcode }") }
-      end
-
-      context "attribute name contains postcode" do
-        let(:name) { "postcode" }
-        it { should eq("postcode { FFaker::AddressAU.postcode }") }
-      end
-
-      context "attribute name contains suburb" do
-        let(:name) { "suburb" }
-        it { should eq("suburb { FFaker::AddressAU.suburb }") }
-      end
-
-      context "attribute name doesn't contain any of the above matches" do
-        let(:name) { "field" }
-        it { should eq("field { FFaker::Company.bs }") }
-      end
+      it { should eq("field_name { some_string_value }") }
     end
 
     context "type is 'text'" do
