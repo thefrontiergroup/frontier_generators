@@ -19,6 +19,6 @@ feature 'Admin can delete an existing <%= model_configuration.as_constant %>' do
       expect(page).not_to have_content(target_object.<%= model_configuration.primary_attribute.name %>)
     end
     # Ensure object is deleted
-    expect(<%= model_configuration.as_constant %>.count).to eq(0)
+    expect(target_object.reload).to be_deleted
   end
 end
