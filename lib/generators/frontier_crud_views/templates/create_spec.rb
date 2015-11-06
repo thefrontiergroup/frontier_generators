@@ -21,7 +21,7 @@ feature 'Admin can create a new <%= model_configuration.as_constant %>' do
 
     submit_form
 
-    target_object = <%= model_configuration.as_constant %>.order(:created_at).first
+    target_object = <%= model_configuration.as_constant %>.order(created_at: :desc).first
     expect(target_object).to have_attributes(attributes)
   end
 end
