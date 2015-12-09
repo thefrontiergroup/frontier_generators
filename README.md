@@ -40,8 +40,6 @@ You can specify which attributes should be on your model thusly:
 
 ```yaml
 model_name:
-  soft_delete: false
-  skip_ui: false # true by default (only used by scaffold generator)
   attributes:
     attribute_name:
       # Set primary to true if you want this attribute to be used for #to_s and for
