@@ -8,7 +8,7 @@ class FrontierPolicyGenerator < Rails::Generators::NamedBase
   def scaffold
     self.model_configuration = ModelConfiguration::YamlParser.new(ARGV[0]).model_configuration
 
-    unless model_configuration.skip_ui?
+    unless model_configuration.skip_ui? || model_configuration.skip_policies?
       template "policy.rb", policy_path
       template "policy_spec.rb", policy_spec_path
     end

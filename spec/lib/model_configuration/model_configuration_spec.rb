@@ -72,6 +72,50 @@ describe ModelConfiguration do
     end
   end
 
+  describe "assigning @skip_seeds" do
+    subject { model_configuration.skip_seeds }
+
+    let(:model_configuration) { ModelConfiguration.new(model_options) }
+    let(:model_options) { {test_model: {skip_seeds: skip_seeds}} }
+
+    context "when skip_seeds is true" do
+      let(:skip_seeds) { true }
+      it { should eq(true) }
+    end
+
+    context "when skip_seeds is false" do
+      let(:skip_seeds) { false }
+      it { should eq(false) }
+    end
+
+    context "when skip_seeds is nil" do
+      let(:skip_seeds) { nil }
+      it { should eq(false) }
+    end
+  end
+
+  describe "assigning @skip_policies" do
+    subject { model_configuration.skip_policies }
+
+    let(:model_configuration) { ModelConfiguration.new(model_options) }
+    let(:model_options) { {test_model: {skip_policies: skip_policies}} }
+
+    context "when skip_policies is true" do
+      let(:skip_policies) { true }
+      it { should eq(true) }
+    end
+
+    context "when skip_policies is false" do
+      let(:skip_policies) { false }
+      it { should eq(false) }
+    end
+
+    context "when skip_policies is nil" do
+      let(:skip_policies) { nil }
+      it { should eq(false) }
+    end
+  end
+
   describe "hiding/showing UI elements" do
     let(:model_configuration) { ModelConfiguration.new(model_options) }
     let(:model_options) { {test_model: {skip_ui: skip_ui}} }

@@ -24,6 +24,8 @@ You can define a model with some options as follows:
 
 ```yaml
 model_name:
+  # Do not generate policies. `false` by default.
+  skip_policies: true
   # Do not generate a blank seed rake task for this model. `false` by default.
   skip_seeds: true
   # Do not create controller, routes, views, or specs for the above. `false` by default.
@@ -40,8 +42,6 @@ You can specify which attributes should be on your model thusly:
 
 ```yaml
 model_name:
-  soft_delete: false
-  skip_ui: false # true by default (only used by scaffold generator)
   attributes:
     attribute_name:
       # Set primary to true if you want this attribute to be used for #to_s and for
