@@ -2,6 +2,15 @@
 
 Use the Frontier Generators on the [Frontier Template](https://github.com/thefrontiergroup/rails-template) to quickly spin up CRUD interfaces.
 
+By default, you get:
+- Models with validations
+- Factories for models using [FFaker](https://github.com/ffaker/ffaker). Factoried attributes take validations into account.
+- Index, new, edit, destroy actions
+- Sortable headings on index page via [rails_sort](https://github.com/thefrontiergroup/rails_sort)
+- Authorization via [Pundit](https://github.com/elabs/pundit) policies
+- Feature and unit tests for all of the above
+- Empty seed rake task
+
 ## Installing
 
 Add the following to the development group in your Gemfile:
