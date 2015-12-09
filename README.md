@@ -24,6 +24,8 @@ You can define a model with some options as follows:
 
 ```yaml
 model_name:
+  # Do not generate policies. `false` by default.
+  skip_policies: true
   # Do not generate a blank seed rake task for this model. `false` by default.
   skip_seeds: true
   # Do not create controller, routes, views, or specs for the above. `false` by default.

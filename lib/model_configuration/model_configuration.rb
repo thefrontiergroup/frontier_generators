@@ -6,18 +6,33 @@ require_relative "../frontier.rb"
 
 class ModelConfiguration
 
-  attr_reader :model_name, :namespaces, :attributes, :skip_seeds, :skip_ui, :url_builder, :soft_delete
+  attr_reader *[
+    :attributes,
+    :model_name,
+    :namespaces,
+    :skip_policies,
+    :skip_seeds,
+    :skip_ui,
+    :soft_delete,
+    :url_builder
+  ]
 
   def initialize(attributes)
-    @model_name  = attributes.keys.first
-    @namespaces  = attributes[@model_name][:namespaces] || []
-    @skip_seeds  = configuration_for(attributes[@model_name][:skip_seeds])
-    parse_skip_ui(configuration_for(attributes[@model_name][:skip_ui]))
-    @soft_delete = configuration_for(attributes[@model_name][:soft_delete], default: true)
-    @attributes  = (attributes[@model_name][:attributes] || []).collect do |name, properties|
+    # Basic data about the model
+    @model_name    = attributes.keys.first
+    @namespaces    = attributes[@model_name][:namespaces] || []
+    # TODO: Assert validity of attributes
+    @attributes    = (attributes[@model_name][:attributes] || []).collect do |name, properties|
       ModelConfiguration::Attribute::Factory.build_attribute_or_association(self, name, properties)
     end
-    # TODO: Assert validity of attributes
+
+    # Configuration of generated items
+    @skip_seeds    = configuration_for(attributes[@model_name][:skip_seeds])
+    @skip_policies = configuration_for(attributes[@model_name][:skip_policies])
+    parse_skip_ui_options(configuration_for(attributes[@model_name][:skip_ui]))
+    @soft_delete   = configuration_for(attributes[@model_name][:soft_delete], default: true)
+
+    # Additional utility items
     @url_builder = ModelConfiguration::UrlBuilder.new(self)
   end
 
@@ -78,7 +93,7 @@ private
     attribute.nil? ? options[:default] : attribute
   end
 
-  def parse_skip_ui(skip_ui_raw)
+  def parse_skip_ui_options(skip_ui_raw)
     if skip_ui_raw.is_a?(Array)
       @skip_index = skip_ui_raw.include?("index")
       @skip_delete = skip_ui_raw.include?("delete")
