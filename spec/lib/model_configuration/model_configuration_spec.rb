@@ -73,7 +73,7 @@ describe ModelConfiguration do
   end
 
   describe "assigning @skip_factory" do
-    subject { model_configuration.skip_factory }
+    subject { model_configuration.skip_factory? }
 
     let(:model_configuration) { ModelConfiguration.new(model_options) }
     let(:model_options) { {test_model: {skip_factory: skip_factory}} }
@@ -95,7 +95,7 @@ describe ModelConfiguration do
   end
 
   describe "assigning @skip_model" do
-    subject { model_configuration.skip_model }
+    subject { model_configuration.skip_model? }
 
     let(:model_configuration) { ModelConfiguration.new(model_options) }
     let(:model_options) { {test_model: {skip_model: skip_model}} }
@@ -117,7 +117,7 @@ describe ModelConfiguration do
   end
 
   describe "assigning @skip_seeds" do
-    subject { model_configuration.skip_seeds }
+    subject { model_configuration.skip_seeds? }
 
     let(:model_configuration) { ModelConfiguration.new(model_options) }
     let(:model_options) { {test_model: {skip_seeds: skip_seeds}} }
@@ -139,7 +139,7 @@ describe ModelConfiguration do
   end
 
   describe "assigning @skip_policies" do
-    subject { model_configuration.skip_policies }
+    subject { model_configuration.skip_policies? }
 
     let(:model_configuration) { ModelConfiguration.new(model_options) }
     let(:model_options) { {test_model: {skip_policies: skip_policies}} }

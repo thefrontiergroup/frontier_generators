@@ -71,8 +71,18 @@ class ModelConfiguration
     attributes.find(&:is_primary?) || attributes.first
   end
 
-  def skip_ui?
-    skip_ui == true
+  [
+    :skip_factory,
+    :skip_model,
+    :skip_policies,
+    :skip_seeds,
+    :skip_ui
+  ].each do |method_name|
+
+    define_method("#{method_name}?") do
+      !!send(method_name)
+    end
+
   end
 
   def show_index?
