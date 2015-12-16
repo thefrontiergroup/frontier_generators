@@ -29,7 +29,7 @@ class ModelConfiguration
     end
 
     # Configuration of generated items
-    @skip_factory    = configuration_for(attributes[@model_name][:skip_factory])
+    @skip_factory  = configuration_for(attributes[@model_name][:skip_factory])
     @skip_model    = configuration_for(attributes[@model_name][:skip_model])
     @skip_seeds    = configuration_for(attributes[@model_name][:skip_seeds])
     @skip_policies = configuration_for(attributes[@model_name][:skip_policies])
