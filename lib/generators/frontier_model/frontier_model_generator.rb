@@ -14,9 +14,13 @@ class FrontierModelGenerator < Rails::Generators::NamedBase
       generate("frontier_seed", ARGV[0])
     end
 
-    generate("migration", MigrationStringBuilder.new(model_configuration).to_s)
-    template("model.rb", "app/models/#{model_configuration.model_name}.rb")
-    template("model_spec.rb", "spec/models/#{model_configuration.model_name}_spec.rb")
-    template("factory.rb", "spec/factories/#{model_configuration.model_name.pluralize}.rb")
+    unless model_configuration.skip_model
+      generate("migration", MigrationStringBuilder.new(model_configuration).to_s)
+      template("model.rb", "app/models/#{model_configuration.model_name}.rb")
+      template("model_spec.rb", "spec/models/#{model_configuration.model_name}_spec.rb")
+    end
+    unless model_configuration.skip_factory
+      template("factory.rb", "spec/factories/#{model_configuration.model_name.pluralize}.rb")
+    end
   end
 end

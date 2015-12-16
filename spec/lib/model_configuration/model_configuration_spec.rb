@@ -72,6 +72,50 @@ describe ModelConfiguration do
     end
   end
 
+  describe "assigning @skip_factory" do
+    subject { model_configuration.skip_factory }
+
+    let(:model_configuration) { ModelConfiguration.new(model_options) }
+    let(:model_options) { {test_model: {skip_factory: skip_factory}} }
+
+    context "when skip_factory is true" do
+      let(:skip_factory) { true }
+      it { should eq(true) }
+    end
+
+    context "when skip_factory is false" do
+      let(:skip_factory) { false }
+      it { should eq(false) }
+    end
+
+    context "when skip_factory is nil" do
+      let(:skip_factory) { nil }
+      it { should eq(false) }
+    end
+  end
+
+  describe "assigning @skip_model" do
+    subject { model_configuration.skip_model }
+
+    let(:model_configuration) { ModelConfiguration.new(model_options) }
+    let(:model_options) { {test_model: {skip_model: skip_model}} }
+
+    context "when skip_model is true" do
+      let(:skip_model) { true }
+      it { should eq(true) }
+    end
+
+    context "when skip_model is false" do
+      let(:skip_model) { false }
+      it { should eq(false) }
+    end
+
+    context "when skip_model is nil" do
+      let(:skip_model) { nil }
+      it { should eq(false) }
+    end
+  end
+
   describe "assigning @skip_seeds" do
     subject { model_configuration.skip_seeds }
 

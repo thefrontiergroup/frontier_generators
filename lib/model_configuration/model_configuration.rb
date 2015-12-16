@@ -10,6 +10,8 @@ class ModelConfiguration
     :attributes,
     :model_name,
     :namespaces,
+    :skip_factory,
+    :skip_model,
     :skip_policies,
     :skip_seeds,
     :skip_ui,
@@ -27,6 +29,8 @@ class ModelConfiguration
     end
 
     # Configuration of generated items
+    @skip_factory    = configuration_for(attributes[@model_name][:skip_factory])
+    @skip_model    = configuration_for(attributes[@model_name][:skip_model])
     @skip_seeds    = configuration_for(attributes[@model_name][:skip_seeds])
     @skip_policies = configuration_for(attributes[@model_name][:skip_policies])
     parse_skip_ui_options(configuration_for(attributes[@model_name][:skip_ui]))
