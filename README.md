@@ -33,6 +33,10 @@ You can define a model with some options as follows:
 
 ```yaml
 model_name:
+  # Do not generate factory. `false` by default.
+  skip_factory: true
+  # Do not generate model. `false` by default.
+  skip_model: true
   # Do not generate policies. `false` by default.
   skip_policies: true
   # Do not generate a blank seed rake task for this model. `false` by default.

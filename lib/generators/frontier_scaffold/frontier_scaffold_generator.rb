@@ -22,7 +22,7 @@ class FrontierScaffoldGenerator < Rails::Generators::NamedBase
     # Generate models
     generate("frontier_model", ARGV[0])
 
-    unless model_configuration.skip_ui
+    unless model_configuration.skip_ui?
       # Generate controllers
       generate("frontier_controller", ARGV[0])
 
