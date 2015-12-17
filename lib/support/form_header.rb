@@ -18,9 +18,9 @@ private
     if model_configuration.namespaces.any?
       # [:namespace, @instance]
       namespaces = model_configuration.namespaces.map{|ns| ":#{ns}"}.join(", ")
-      "[#{namespaces}, #{model_configuration.ivar_instance}]"
+      "[#{namespaces}, #{model_configuration.as_ivar_instance}]"
     else
-      model_configuration.ivar_instance
+      model_configuration.as_ivar_instance
     end
   end
 

@@ -9,6 +9,11 @@ describe ModelConfiguration do
     it { should eq("TestModel") }
   end
 
+  describe "#as_ivar_collection" do
+    subject { model_configuration.as_ivar_collection }
+    it { should eq("@test_models") }
+  end
+
   describe "#as_symbol" do
     subject { model_configuration.as_symbol }
     it { should eq(":test_model") }
@@ -24,13 +29,9 @@ describe ModelConfiguration do
     it { should eq("Test Model") }
   end
 
-  describe "#ivar_collection" do
-    subject { model_configuration.ivar_collection }
-    it { should eq("@test_models") }
-  end
 
-  describe "#ivar_instance" do
-    subject { model_configuration.ivar_instance }
+  describe "#as_ivar_instance" do
+    subject { model_configuration.as_ivar_instance }
     it { should eq("@test_model") }
   end
 

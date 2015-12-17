@@ -16,7 +16,7 @@
 <% end -%>
       %th.actions Actions
   %tbody
-    - <%= model_configuration.ivar_collection %>.each do |<%= model_configuration.model_name %>|
+    - <%= model_configuration.as_ivar_collection %>.each do |<%= model_configuration.model_name %>|
       %tr
 <% model_configuration.attributes.select(&:show_on_index?).each do |attribute| -%>
         %td= <%= attribute.as_index_string %>
@@ -31,4 +31,4 @@
             = link_to("Delete", <%= model_configuration.url_builder.delete_path %>, method: :delete, data: { confirm: "Are you sure you want to delete this <%= model_configuration.as_title %>?" }, class: "button")
 <% end -%>
 
-= paginate <%= model_configuration.ivar_collection %>
+= paginate <%= model_configuration.as_ivar_collection %>
