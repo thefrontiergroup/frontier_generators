@@ -3,7 +3,8 @@ class <%= controller_name_and_superclass %>
 <% if model_configuration.show_index? -%>
   def index
     <%= Frontier::Controller::AuthorizeStatement.new(model_configuration, :index).to_s %>
-    <%= model_configuration.as_ivar_collection %> = sort(policy_scope(<%= model_configuration.as_constant %>.all)).page(params[:page])
+    <%= model_configuration.as_ivar_collection %> = <%= Frontier::Controller::AuthorizeScope.new(model_configuration).to_s %>
+    <%= model_configuration.as_ivar_collection %> = sort(<%= model_configuration.as_ivar_collection %>).page(params[:page])
   end
 
 <% end -%>
