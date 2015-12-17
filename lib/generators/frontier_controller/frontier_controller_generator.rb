@@ -22,7 +22,10 @@ protected
   # EG: Admin::DriversController
   # EG: DriversController
   def controller_name
-    [*model_configuration.namespaces.map(&:camelize), "#{model_configuration.model_name.pluralize.camelize}Controller"].join("::")
+    [
+      *model_configuration.namespaces.map(&:camelize),
+      "#{model_configuration.model_name.pluralize.camelize}Controller"
+    ].join("::")
   end
 
   # EG: Admin::DriversController < Admin::BaseController
