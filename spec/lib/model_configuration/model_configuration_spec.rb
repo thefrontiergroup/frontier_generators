@@ -29,7 +29,6 @@ describe ModelConfiguration do
     it { should eq("Test Model") }
   end
 
-
   describe "#as_ivar_instance" do
     subject { model_configuration.as_ivar_instance }
     it { should eq("@test_model") }
@@ -70,6 +69,22 @@ describe ModelConfiguration do
       it "returns the first attribute" do
         expect(primary_attribute.name).to eq("primary_attribute")
       end
+    end
+  end
+
+  describe "assigning @authorization" do
+    subject { model_configuration.authorization }
+    let(:model_configuration) { ModelConfiguration.new(model_options) }
+    let(:model_options) { {test_model: {authorization: authorization}} }
+
+    context "when authorization is provided as a config option" do
+      let(:authorization) { "cancancan" }
+      it { should eq("cancancan") }
+    end
+
+    context "when no authorization is provided as a config option" do
+      let(:authorization) { nil }
+      it { should eq("pundit") }
     end
   end
 
@@ -202,6 +217,27 @@ describe ModelConfiguration do
       end
     end
 
+  end
+
+  describe "#using_pundit?" do
+    subject { model_configuration.using_pundit? }
+    let(:model_configuration) { ModelConfiguration.new(model_options) }
+    let(:model_options) { {test_model: {authorization: authorization}} }
+
+    context "when authorization is pundit" do
+      let(:authorization) { "pundit" }
+      it { should eq(true) }
+    end
+
+    context "when authorization is not pundit" do
+      let(:authorization) { "cancancan" }
+      it { should eq(false) }
+    end
+
+    context "when no authorization is provided as a config option" do
+      let(:authorization) { nil }
+      it { should eq(true) }
+    end
   end
 
 end

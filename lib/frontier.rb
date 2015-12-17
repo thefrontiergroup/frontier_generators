@@ -1,6 +1,7 @@
 class Frontier
 end
 
+require_relative "./support/controller"
 require_relative "./support/form_header"
 require_relative "./support/hash_decorator"
 require_relative "./support/input"

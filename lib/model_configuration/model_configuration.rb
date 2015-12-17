@@ -8,6 +8,7 @@ class ModelConfiguration
 
   attr_reader *[
     :attributes,
+    :authorization,
     :model_name,
     :namespaces,
     :skip_factory,
@@ -29,6 +30,7 @@ class ModelConfiguration
     end
 
     # Configuration of generated items
+    @authorization = configuration_for(attributes[@model_name][:authorization], default: "pundit")
     @skip_factory  = configuration_for(attributes[@model_name][:skip_factory])
     @skip_model    = configuration_for(attributes[@model_name][:skip_model])
     @skip_seeds    = configuration_for(attributes[@model_name][:skip_seeds])
@@ -100,6 +102,10 @@ class ModelConfiguration
 
   def show_update?
     !@skip_update && !skip_ui?
+  end
+
+  def using_pundit?
+    authorization.downcase == "pundit"
   end
 
 private
