@@ -1,10 +1,10 @@
 require 'spec_helper'
 
-describe Frontier::Controller::AuthorizeStatement do
+describe Frontier::Authorization::Assertion do
 
   describe "#to_s" do
     subject { authorize_statement.to_s }
-    let(:authorize_statement) { Frontier::Controller::AuthorizeStatement.new(model_configuration, action) }
+    let(:authorize_statement) { Frontier::Authorization::Assertion.new(model_configuration, action) }
     let(:model_configuration) { ModelConfiguration.new(attributes) }
     let(:attributes) { {test_model: {authorization: authorization}}.stringify_keys }
 

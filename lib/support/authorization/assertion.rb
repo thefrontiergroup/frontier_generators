@@ -1,4 +1,4 @@
-class Frontier::Controller::AuthorizeStatement
+class Frontier::Authorization::Assertion
 
   attr_reader :action, :model_configuration
 

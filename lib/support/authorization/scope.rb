@@ -1,4 +1,4 @@
-class Frontier::Controller::AuthorizeScope
+class Frontier::Authorization::Scope
 
   attr_reader :model_configuration
 
