@@ -31,7 +31,7 @@ protected
   # EG: Admin::DriversController < Admin::BaseController
   # EG: DriversController < ApplicationController
   def controller_name_and_superclass
-    "#{controller_name} < #{get_superclass_for_controller}"
+    "#{controller_name} < #{superclass_for_controller}"
   end
 
 private
@@ -46,11 +46,10 @@ private
     File.join("spec", "controllers", *model_configuration.namespaces, file_name)
   end
 
-
   # EG: Admin::Users::BaseController
   # EG: Admin::BaseController
   # EG: ApplicationController
-  def get_superclass_for_controller
+  def superclass_for_controller
     if model_configuration.namespaces.any?
       [*model_configuration.namespaces.map(&:camelize), "BaseController"].join("::")
     else
