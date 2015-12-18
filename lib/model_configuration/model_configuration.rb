@@ -8,6 +8,7 @@ class ModelConfiguration
 
   attr_reader *[
     :attributes,
+    :authorization,
     :model_name,
     :namespaces,
     :skip_factory,
@@ -29,6 +30,7 @@ class ModelConfiguration
     end
 
     # Configuration of generated items
+    @authorization = configuration_for(attributes[@model_name][:authorization], default: "pundit")
     @skip_factory  = configuration_for(attributes[@model_name][:skip_factory])
     @skip_model    = configuration_for(attributes[@model_name][:skip_model])
     @skip_seeds    = configuration_for(attributes[@model_name][:skip_seeds])
@@ -44,6 +46,14 @@ class ModelConfiguration
     "#{model_name.camelize}"
   end
 
+  def as_ivar_collection
+    "@#{model_name.pluralize}"
+  end
+
+  def as_ivar_instance
+    "@#{model_name}"
+  end
+
   def as_symbol
     ":#{model_name}"
   end
@@ -56,13 +66,6 @@ class ModelConfiguration
     model_name.titleize
   end
 
-  def ivar_collection
-    "@#{model_name.pluralize}"
-  end
-
-  def ivar_instance
-    "@#{model_name}"
-  end
 
   # The primary attribute is used for:
   #   * Model#to_s (and spec)
@@ -99,6 +102,10 @@ class ModelConfiguration
 
   def show_update?
     !@skip_update && !skip_ui?
+  end
+
+  def using_pundit?
+    authorization.downcase == "pundit"
   end
 
 private

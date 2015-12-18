@@ -33,6 +33,8 @@ You can define a model with some options as follows:
 
 ```yaml
 model_name:
+  # Use CanCanCan instead of Pundit (`pundit` by default)
+  authorization: cancancan
   # Do not generate factory. `false` by default.
   skip_factory: true
   # Do not generate model. `false` by default.
