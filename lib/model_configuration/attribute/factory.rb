@@ -1,6 +1,3 @@
-require_relative '../attribute'
-require_relative '../association'
-
 class ModelConfiguration::Attribute::Factory
 
   def self.build_attribute_or_association(model_configuration, name, options)
@@ -27,3 +24,8 @@ private
   end
 
 end
+
+# TODO: Resolve by moving this class up a level. It is not an Attribute factory if it creates
+# either an Attribute or an Association.
+require_relative '../attribute'
+require_relative '../association'

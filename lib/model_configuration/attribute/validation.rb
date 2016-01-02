@@ -60,4 +60,6 @@ private
 
 end
 
+require_relative "./validation/factory"
+require_relative "./validation/length"
 require_relative "./validation/numericality"

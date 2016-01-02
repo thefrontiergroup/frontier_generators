@@ -1,5 +1,3 @@
-require_relative '../association.rb'
-
 class ModelConfiguration::Association::FactoryDeclaration
 
   attr_reader :association

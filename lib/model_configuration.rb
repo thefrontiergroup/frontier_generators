@@ -1,8 +1,3 @@
-require_relative "./model_configuration/attribute/factory.rb"
-require_relative "./model_configuration/attribute.rb"
-require_relative "./model_configuration/url_builder.rb"
-require_relative "./model_configuration/yaml_parser.rb"
-
 class ModelConfiguration
 
   attr_reader *[
@@ -124,3 +119,7 @@ private
     end
   end
 end
+
+require_relative "./model_configuration/attribute.rb"
+require_relative "./model_configuration/url_builder.rb"
+require_relative "./model_configuration/yaml_parser.rb"
