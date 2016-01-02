@@ -1,4 +1,4 @@
-class MigrationStringBuilder
+class Frontier::MigrationStringBuilder
   attr_reader :model_configuration
 
   def initialize(model_configuration)

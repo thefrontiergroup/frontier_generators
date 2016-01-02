@@ -1,8 +1,8 @@
 require 'spec_helper'
 
-describe MigrationStringBuilder do
+describe Frontier::MigrationStringBuilder do
 
-  let(:builder)       { MigrationStringBuilder.new(configuration) }
+  let(:builder)       { Frontier::MigrationStringBuilder.new(configuration) }
   let(:configuration) { build_model_configuration }
 
   describe "#to_s" do
