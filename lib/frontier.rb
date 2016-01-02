@@ -2,8 +2,8 @@ class Frontier
 end
 
 require_relative "./model_configuration"
-require_relative "./support/authorization"
-require_relative "./support/form_header"
-require_relative "./support/hash_decorator"
-require_relative "./support/input"
-require_relative "./support/migration_string_builder"
+require_relative "./frontier/authorization"
+require_relative "./frontier/form_header"
+require_relative "./frontier/hash_decorator"
+require_relative "./frontier/input"
+require_relative "./frontier/migration_string_builder"
