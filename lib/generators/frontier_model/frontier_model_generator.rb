@@ -1,14 +1,9 @@
-require_relative "../../model_configuration/model_configuration"
-require_relative "../../support/migration_string_builder"
+require_relative "../../generator"
 
-class FrontierModelGenerator < Rails::Generators::NamedBase
+class FrontierModelGenerator < Frontier::Generator
   source_root File.expand_path('../templates', __FILE__)
 
-  attr_accessor :model_configuration
-
   def scaffold
-    self.model_configuration = ModelConfiguration::YamlParser.new(ARGV[0]).model_configuration
-
     unless model_configuration.skip_seeds?
       # Generate seed files for the model
       generate("frontier_seed", ARGV[0])

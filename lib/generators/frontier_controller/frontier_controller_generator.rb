@@ -1,13 +1,9 @@
-require_relative "../../model_configuration/model_configuration"
+require_relative "../../generator"
 
-class FrontierControllerGenerator < Rails::Generators::NamedBase
+class FrontierControllerGenerator < Frontier::Generator
   source_root File.expand_path('../templates', __FILE__)
 
-  attr_accessor :model_configuration
-
   def scaffold
-    self.model_configuration = ModelConfiguration::YamlParser.new(ARGV[0]).model_configuration
-
     unless model_configuration.skip_ui?
       template "controller.rb", generate_controller_path
       template "controller_spec.rb", generate_controller_spec_path
