@@ -2,8 +2,7 @@ require 'bundler'
 Bundler.require
 require 'rails/all'
 
-Dir.glob("./lib/model_configuration/**/*.rb", &method(:require))
-Dir.glob("./lib/support/**/*.rb", &method(:require))
+require './lib/frontier'
 
 def build_model_configuration
   test_model_path = File.join("spec", "support", "test_model.yaml")

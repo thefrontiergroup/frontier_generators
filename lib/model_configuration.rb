@@ -1,8 +1,7 @@
-require_relative "attribute/factory.rb"
-require_relative "attribute.rb"
-require_relative "url_builder.rb"
-require_relative "yaml_parser.rb"
-require_relative "../frontier.rb"
+require_relative "./model_configuration/attribute/factory.rb"
+require_relative "./model_configuration/attribute.rb"
+require_relative "./model_configuration/url_builder.rb"
+require_relative "./model_configuration/yaml_parser.rb"
 
 class ModelConfiguration
 

@@ -1,7 +1,7 @@
 class Frontier
 end
 
-require_relative "./model_configuration/model_configuration"
+require_relative "./model_configuration"
 require_relative "./support/authorization"
 require_relative "./support/form_header"
 require_relative "./support/hash_decorator"
