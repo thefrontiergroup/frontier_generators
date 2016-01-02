@@ -1,5 +1,3 @@
-require_relative '../frontier.rb'
-
 class Frontier::FormHeader
 
   attr_reader :model_configuration

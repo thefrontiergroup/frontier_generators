@@ -1,5 +1,3 @@
-require_relative "../frontier.rb"
-
 class Frontier::HashDecorator
 
   attr_reader :hash
