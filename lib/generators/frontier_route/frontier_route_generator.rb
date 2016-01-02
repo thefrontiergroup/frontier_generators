@@ -1,4 +1,4 @@
-require_relative "../../generator"
+require_relative "../../frontier"
 
 class FrontierRouteGenerator < Frontier::Generator
   require_relative "./lib/namespace.rb"

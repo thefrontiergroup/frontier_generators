@@ -1,5 +1,3 @@
-require_relative './frontier'
-
 class Frontier::Generator < Rails::Generators::NamedBase
 
   attr_reader :model_configuration

@@ -1,4 +1,4 @@
-require_relative "../../generator"
+require_relative "../../frontier"
 
 class FrontierControllerGenerator < Frontier::Generator
   source_root File.expand_path('../templates', __FILE__)
