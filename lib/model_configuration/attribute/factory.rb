@@ -25,7 +25,5 @@ private
 
 end
 
-# TODO: Resolve by moving this class up a level. It is not an Attribute factory if it creates
-# either an Attribute or an Association.
 require_relative '../attribute'
 require_relative '../association'
