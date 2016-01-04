@@ -3,7 +3,7 @@ require 'spec_helper'
 describe Frontier::FormHeader do
 
   let(:form_header) { Frontier::FormHeader.new(model_configuration) }
-  let(:model_configuration) { ModelConfiguration.new(attributes) }
+  let(:model_configuration) { Frontier::ModelConfiguration.new(attributes) }
 
   describe "#to_s" do
     subject { form_header.to_s }

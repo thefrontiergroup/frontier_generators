@@ -22,7 +22,7 @@ private
 
   def parse_model_configuration(file_path)
     if File.exists?(file_path)
-      ModelConfiguration::YamlParser.new(file_path).model_configuration
+      Frontier::YamlParser.new(file_path).model_configuration
     else
       raise(ArgumentError, "No file exists for path: #{file_path}")
     end

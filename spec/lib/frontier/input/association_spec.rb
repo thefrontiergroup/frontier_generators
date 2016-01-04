@@ -3,7 +3,7 @@ require 'spec_helper'
 describe Frontier::Input::Association do
 
   let(:input_implementation) { Frontier::Input::Association.new(association) }
-  let(:association) { ModelConfiguration::Association.new(build_model_configuration, name, options) }
+  let(:association) { Frontier::Association.new(build_model_configuration, name, options) }
   let(:name) { "association_name_id" }
   let(:options) { {} }
 
