@@ -1,18 +1,15 @@
-require_relative "../../model_configuration/model_configuration"
+require_relative "../../frontier"
 
-class FrontierRouteGenerator < Rails::Generators::NamedBase
+class FrontierRouteGenerator < Frontier::Generator
   require_relative "./lib/namespace.rb"
   require_relative "./lib/resource.rb"
   source_root File.expand_path('../templates', __FILE__)
 
   ROUTES_FILE_PATH = "config/routes.rb"
 
-  attr_accessor :model_configuration
   attr_reader :namespaces
 
   def scaffold
-    self.model_configuration = ModelConfiguration::YamlParser.new(ARGV[0]).model_configuration
-
     unless model_configuration.skip_ui?
       # model_configuration.namespaces will be an array. EG: ["admin", "groups"]
       @namespaces = model_configuration.namespaces.each_with_index.collect do |ns, index|

@@ -1,14 +1,9 @@
-require_relative "../../model_configuration/model_configuration"
 require_relative "../../frontier"
 
-class FrontierCrudViewsGenerator < Rails::Generators::NamedBase
+class FrontierCrudViewsGenerator < Frontier::Generator
   source_root File.expand_path('../templates', __FILE__)
 
-  attr_accessor :model_configuration
-
   def scaffold
-    self.model_configuration = ModelConfiguration::YamlParser.new(ARGV[0]).model_configuration
-
     unless model_configuration.skip_ui?
       [
         ["index.html.haml", model_configuration.show_index?],
