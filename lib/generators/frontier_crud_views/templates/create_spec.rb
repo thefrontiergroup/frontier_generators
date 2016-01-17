@@ -14,9 +14,8 @@ feature 'Admin can create a new <%= model_configuration.as_constant %>' do
 
   scenario 'Admin creates <%= model_configuration.as_constant %> with valid data' do
     attributes = FactoryGirl.attributes_for(<%= model_configuration.as_symbol %>)
-    fill_in_form("<%= model_configuration.model_name %>", attributes)
-<% model_configuration.attributes.select(&:is_association?).each do |attribute| -%>
-    select(<%= attribute.name %>, from: "<%= attribute.capitalized %>")
+<% model_configuration.attributes.each do |attribute| -%>
+    <%= Frontier::FeatureSpecAssignment.new(attribute).to_s %>
 <% end -%>
 
     submit_form
