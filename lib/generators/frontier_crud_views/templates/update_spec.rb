@@ -14,7 +14,9 @@ feature 'Admin can update an existing <%= model_configuration.as_constant %>' do
 
   scenario 'Admin updates user with valid data' do
     attributes = FactoryGirl.attributes_for(<%= model_configuration.as_symbol %>)
-    fill_in_form("<%= model_configuration.model_name %>", attributes)
+<% model_configuration.attributes.each do |attribute| -%>
+    <%= Frontier::FeatureSpecAssignment.new(attribute).to_s %>
+<% end -%>
 
     submit_form
 

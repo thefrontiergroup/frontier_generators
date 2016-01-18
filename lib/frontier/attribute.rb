@@ -116,5 +116,6 @@ end
 require_relative "attribute/constant.rb"
 require_relative "attribute/factory.rb"
 require_relative "attribute/factory_declaration.rb"
+require_relative "attribute/feature_spec_assignment.rb"
 require_relative "attribute/migration_component.rb"
 require_relative "attribute/validation.rb"

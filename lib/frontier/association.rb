@@ -57,4 +57,5 @@ private
 end
 
 require_relative "association/factory_declaration.rb"
+require_relative "association/feature_spec_assignment.rb"
 require_relative "association/model_implementation.rb"
