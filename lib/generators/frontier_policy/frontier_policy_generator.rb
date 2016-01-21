@@ -4,7 +4,7 @@ class FrontierPolicyGenerator < Frontier::Generator
   source_root File.expand_path('../templates', __FILE__)
 
   def scaffold
-    if using_pundit? && !model_configuration.skip_ui? && !model_configuration.skip_policies?
+    if model_configuration.using_pundit? && !model_configuration.skip_ui? && !model_configuration.skip_policies?
       template "policy.rb", policy_path
       template "policy_spec.rb", policy_spec_path
     end
