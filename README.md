@@ -11,6 +11,14 @@ By default, you get:
 - Feature and unit tests for all of the above
 - Empty seed rake task
 
+## Important Caveat
+
+This gem is specifically made to be paired with the [Frontier Template](https://github.com/thefrontiergroup/rails-template). Technology choices in these generators are completely dependent on what is in the latest version of Frontier Template.
+
+If you want to use this gem in another rails project, you'd need to rewrite some of the output of the generators.
+
+When I use these generators in other rails projects I only enable the model and seeds generators.
+
 ## Installing
 
 Add the following to the development group in your Gemfile:
