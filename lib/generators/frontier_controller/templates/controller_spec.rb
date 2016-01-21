@@ -14,7 +14,7 @@ describe <%= controller_name %> do
 
         describe "sorting" do
           it "sorts by query parameters" do
-            expect(ModelSorter).to receive(:sort).with(instance_of(<%= model_configuration.as_constant %>::ActiveRecord_Relation), anything, anything).and_call_original
+            expect(RailsSort).to receive(:sort).with(instance_of(<%= model_configuration.as_constant %>::ActiveRecord_Relation), anything, anything).and_call_original
             subject
           end
         end
