@@ -34,6 +34,6 @@
 <% end -%>
     - else
       %tr
-        %td{colspan: <%= model_configuration.attributes.select(&:show_on_index?).count %>} There are no <%= model_configuration.as_title.pluralize %>
+        %td{colspan: <%= model_configuration.attributes.select(&:show_on_index?).count + 1 %>} There are no <%= model_configuration.as_title.pluralize %>
 
 = paginate <%= model_configuration.as_ivar_collection %>
