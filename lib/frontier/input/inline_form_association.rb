@@ -1,12 +1,16 @@
 class Frontier::Input::InlineFormAssociation < Frontier::Input::Association
 
+  # Will generate an inline form, something like:
+  #
+  # f.simple_fields_for :association_name do |ff|
+  #   ff.input :name
+  #
+  # The Frontier::HamlRenderer class can append = to these statements, so that it the output
+  # will look like:
+  #
+  # = f.simple_fields_for :association_name do |ff|
+  #   = ff.input :name
   def to_s(options={})
-    # options = options.merge({collection: "#{association.association_class}.all"})
-    # # Should convert attribute "state" into:
-    # #   f.association :state, collection: State.all
-    # # With additional options as above you'd get:
-    # #   f.association :state, abacus: 666, collection: State.all, one: :two
-    # ["f.association #{attribute.as_symbol_without_id}", *input_options(options)].join(", ")
     <<-CODE
 f.simple_fields_for #{association.as_symbol_without_id} do |ff|
 #{generate_inputs(options)}
