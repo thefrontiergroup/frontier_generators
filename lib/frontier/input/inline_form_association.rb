@@ -16,13 +16,17 @@ CODE
 
 private
 
+  def input_for_attribute(attribute)
+    Frontier::Input::Factory.build_for(attribute).to_s(form_name: "ff")
+  end
+
   def generate_inputs(options)
     # Only provide the whitespace indenting if there are some attributes. If there aren't,
     # don't inject any whitespace
     if association.attributes.length > 0
       [
         "  ",
-        association.attributes.map {|attribute| Frontier::Input::Factory.build_for(attribute).to_s(form_name: "ff")}.join("\n  ")
+        association.attributes.map {|attribute| input_for_attribute(attribute)}.join("\n  ")
       ].join
     end
   end
