@@ -20,6 +20,11 @@ private
     end
   end
 
+  def embed_template(source, indent_level)
+    template = File.join(self.class.source_root, source)
+    ERB.new(IO.read(template), nil, '-').result(binding).gsub(/^/, Array.new(indent_level, "  ").join)
+  end
+
   def parse_model_configuration(file_path)
     if File.exists?(file_path)
       Frontier::YamlParser.new(file_path).model_configuration
