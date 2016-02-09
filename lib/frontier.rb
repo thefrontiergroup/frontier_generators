@@ -1,6 +1,8 @@
 class Frontier
 end
 
+require_relative "./frontier/error_reporter"
+
 require_relative "./frontier/association"
 require_relative "./frontier/attribute"
 require_relative "./frontier/authorization"

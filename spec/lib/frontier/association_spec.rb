@@ -6,6 +6,45 @@ describe Frontier::Association do
   let(:name) { "association_name" }
   let(:options) { {} }
 
+  describe "#initialize" do
+    subject(:initialize_association) { association }
+
+    describe "parsing attributes" do
+      let(:options) { {attributes: {name: {type: "string"}}} }
+
+      it "can parse attributes" do
+        expect(association.attributes.count).to eq(1)
+        expect(association.attributes.first.name).to eq("name")
+        expect(association.attributes.first.type).to eq("string")
+      end
+    end
+
+    describe "parsing form_type" do
+      subject { initialize_association.form_type }
+      let(:options) { {form_type: form_type} }
+
+      context "when 'inline'" do
+        let(:form_type) { "inline" }
+        it { should eq("inline") }
+      end
+
+      context "when 'select'" do
+        let(:form_type) { "select" }
+        it { should eq("select") }
+      end
+
+      context "when something blank" do
+        let(:form_type) { "" }
+        it { should eq("select") }
+      end
+
+      context "when something unexpected" do
+        let(:form_type) { "jordan_rules" }
+        it { should eq("select") }
+      end
+    end
+  end
+
   describe "#as_factory_name" do
     subject { association.as_factory_name }
 

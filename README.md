@@ -98,9 +98,13 @@ EG:
 model_name:
   attributes:
     attribute_name:
-      type: "belongs_to"
       # Optional - this will use this model in factories and in the model
       class_name: "User"
+      # One of inline or select
+      form_type: "inline"
+      attributes:
+        # This should be a collection similar to the above. Show all the attributes and their type that you want to show in the inline form
+      type: "belongs_to"
 ```
 
 ## Validations
