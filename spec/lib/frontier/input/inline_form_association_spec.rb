@@ -16,7 +16,6 @@ describe Frontier::Input::InlineFormAssociation do
         <<-CODE
 f.simple_fields_for(:association_name) do |ff|
 
-end
 CODE
       end
 
@@ -37,7 +36,6 @@ CODE
 f.simple_fields_for(:association_name) do |ff|
   ff.input :name
   ff.association :other_association, collection: OtherAssociation.all
-end
 CODE
       end
 

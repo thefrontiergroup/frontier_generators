@@ -10,7 +10,6 @@ class Frontier::Input::InlineFormAssociation < Frontier::Input::Association
     <<-CODE
 f.simple_fields_for(#{association.as_symbol_without_id}) do |ff|
 #{generate_inputs(options)}
-end
 CODE
   end
 
