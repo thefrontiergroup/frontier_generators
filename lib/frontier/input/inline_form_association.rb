@@ -8,7 +8,7 @@ class Frontier::Input::InlineFormAssociation < Frontier::Input::Association
     # #   f.association :state, abacus: 666, collection: State.all, one: :two
     # ["f.association #{attribute.as_symbol_without_id}", *input_options(options)].join(", ")
     <<-CODE
-f.simple_fields_for(#{association.as_symbol_without_id}) do |ff|
+f.simple_fields_for #{association.as_symbol_without_id} do |ff|
 #{generate_inputs(options)}
 CODE
   end

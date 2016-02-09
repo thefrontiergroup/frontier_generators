@@ -14,7 +14,7 @@ describe Frontier::Input::InlineFormAssociation do
     context "with no attributes passed through" do
       let(:expected) do
         <<-CODE
-f.simple_fields_for(:association_name) do |ff|
+f.simple_fields_for :association_name do |ff|
 
 CODE
       end
@@ -33,7 +33,7 @@ CODE
       end
       let(:expected) do
         <<-CODE
-f.simple_fields_for(:association_name) do |ff|
+f.simple_fields_for :association_name do |ff|
   ff.input :name
   ff.association :other_association, collection: OtherAssociation.all
 CODE
