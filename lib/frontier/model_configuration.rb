@@ -36,6 +36,10 @@ class Frontier::ModelConfiguration
     @url_builder = Frontier::UrlBuilder.new(self)
   end
 
+  def associations
+    attributes.select(&:is_association?)
+  end
+
   def as_constant
     "#{model_name.camelize}"
   end
