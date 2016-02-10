@@ -103,4 +103,20 @@ describe Frontier::Association do
     it { should eq(true) }
   end
 
+  describe "#is_nested?" do
+    subject { association.is_nested? }
+    let(:options) { {form_type: form_type} }
+
+    context "when form is 'inline'" do
+      let(:form_type) { "inline" }
+      it { should eq(true) }
+    end
+
+    context "when form is 'select'" do
+      let(:form_type) { "select" }
+      it { should eq(false) }
+    end
+
+  end
+
 end

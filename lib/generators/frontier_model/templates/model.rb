@@ -20,7 +20,7 @@ class <%= model_configuration.as_constant %> < ActiveRecord::Base
 <% end -%>
 <% if model_configuration.attributes.select(&:is_association?).any? -%>
 <% model_configuration.attributes.select(&:is_association?).each do |attribute| -%>
-  <%= attribute.association_implementation %>
+<%= Frontier::RubyRenderer.new(attribute.association_implementation).render(1) %>
 <% end -%>
 
 <% end -%>

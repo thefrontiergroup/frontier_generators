@@ -47,6 +47,10 @@ class Frontier::Association < Frontier::Attribute
     true
   end
 
+  def is_nested?
+    form_type == "inline"
+  end
+
   # Models
 
   def association_implementation
