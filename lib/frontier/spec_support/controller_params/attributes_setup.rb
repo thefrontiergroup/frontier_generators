@@ -7,7 +7,7 @@ class Frontier::SpecSupport::ControllerParams::AttributesSetup
   end
 
   # Provide the let declarations that will be the basis of the attributes to be used in
-  # the form:
+  # the params:
   #
   #   let(:attributes) { FactoryGirl.attributes_for(:model) }
   #   let(:address_attributes) { FactoryGirl.attributes_for(:address) }
