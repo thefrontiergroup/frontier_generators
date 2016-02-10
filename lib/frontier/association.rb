@@ -15,6 +15,10 @@ class Frontier::Association < Frontier::Attribute
     @form_type  = parse_form_type(properties[:form_type])
   end
 
+  def associations
+    attributes.select(&:is_association?)
+  end
+
   def association_class
     if properties[:class_name].present?
       properties[:class_name]

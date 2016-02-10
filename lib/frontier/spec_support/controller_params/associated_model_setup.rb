@@ -15,9 +15,14 @@ class Frontier::SpecSupport::ControllerParams::AssociatedModelSetup
   #   let(:params) { {address_id: address.id} }
   #
   def to_s
-    model_configuration.associations.select {|a| !a.is_nested?}.map do |association|
-      factory_statement = Frontier::FactoryGirlSupport::Declaration.new("create", association).to_s
-      Frontier::SpecSupport::LetStatement.new(association.name, factory_statement).to_s
+    model_configuration.associations.map do |association|
+      # Nested forms can have their own associations
+      if association.is_nested?
+        Frontier::SpecSupport::ControllerParams::AssociatedModelSetup.new(association).to_s
+      else
+        factory_statement = Frontier::FactoryGirlSupport::Declaration.new("create", association).to_s
+        Frontier::SpecSupport::LetStatement.new(association.name, factory_statement).to_s
+      end
     end.join("\n")
   end
 

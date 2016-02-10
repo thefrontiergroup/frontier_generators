@@ -8,27 +8,30 @@ RSpec.describe Frontier::SpecSupport::ControllerParams::AssociatedModelSetup do
       Frontier::ModelConfiguration.new({
         model_name: {
           attributes: {
-            address: {type: "belongs_to", form_type: form_type},
+            address: {type: "belongs_to", form_type: "select"},
+            other_address: {
+              type: "belongs_to",
+              form_type: "inline",
+              attributes: {
+                line_1: {type: "string"},
+                state: {type: "belongs_to", form_type: "select"}
+              }
+            },
             name: {type: "string"},
           }
         }
       })
     end
 
-    context "without nested attributes" do
-      let(:form_type) { "select" }
-      let(:expected) do
-        "let(:address) { FactoryGirl.create(:address) }"
-      end
-
-      it { should eq(expected) }
+    let(:expected) do
+      raw = <<STRING
+let(:address) { FactoryGirl.create(:address) }
+let(:state) { FactoryGirl.create(:state) }
+STRING
+      raw.rstrip
     end
 
-    context "with nested attributes" do
-      let(:form_type) { "inline" }
-
-      it { should be_empty }
-    end
+    it { should eq(expected) }
 
   end
 
