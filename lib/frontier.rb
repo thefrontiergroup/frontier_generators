@@ -4,6 +4,7 @@ end
 require_relative "./frontier/association"
 require_relative "./frontier/attribute"
 require_relative "./frontier/authorization"
+require_relative "./frontier/factory_girl_support"
 require_relative "./frontier/feature_spec_assignment"
 require_relative "./frontier/form_header"
 require_relative "./frontier/generator"
