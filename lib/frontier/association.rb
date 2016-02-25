@@ -36,12 +36,6 @@ class Frontier::Association < Frontier::Attribute
     true
   end
 
-  # Models
-
-  def association_implementation
-    Frontier::Association::ModelImplementation.new(self).to_s
-  end
-
   # Factories
 
   def as_factory_declaration
