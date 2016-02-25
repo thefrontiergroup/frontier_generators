@@ -1,4 +1,4 @@
-class Frontier::SpecSupport::ControllerParams::Attributes
+class Frontier::SpecSupport::ControllerParams::AttributesHash
 
   attr_reader :attributes_name, :model_configuration
 
