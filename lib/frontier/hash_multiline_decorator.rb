@@ -26,31 +26,39 @@ class Frontier::HashMultilineDecorator
   #     }
   #   }
   #
-  def to_s
+  def to_s(indent_level=0)
     if depth == 0
-      "{\n#{hash_contents}\n}"
+      [
+        "#{indent_for_level(indent_level)}{",
+        "#{hash_contents(indent_level)}",
+        "#{indent_for_level(indent_level)}}"
+      ].join("\n")
     else
-      hash_contents
+      hash_contents(indent_level)
     end
   end
 
 private
 
-  def hash_contents
+  def hash_contents(indent_level)
     hash.collect do |key, value|
       case value
       when Hash
-        value = Frontier::HashMultilineDecorator.new(value, depth+1).to_s
-        value = "{\n#{value}\n#{current_indent}}"
+        value = Frontier::HashMultilineDecorator.new(value, depth+1).to_s(indent_level)
+        value = "{\n#{value}\n#{current_indent(indent_level)}}"
       when String
         value = value
       end
-      "#{current_indent}#{key}: #{value}"
+      "#{current_indent(indent_level)}#{key}: #{value}"
     end.join(",\n")
   end
 
-  def current_indent
-    Array.new(depth+1, "  ").join
+  def current_indent(indent_level)
+    indent_for_level(depth+1+indent_level)
+  end
+
+  def indent_for_level(level)
+    Array.new(level, "  ").join
   end
 
 end
