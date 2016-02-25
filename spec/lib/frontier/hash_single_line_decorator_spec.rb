@@ -1,8 +1,8 @@
 require 'spec_helper'
 
-describe Frontier::HashDecorator do
+describe Frontier::HashSingleLineDecorator do
 
-  let(:decorator) { Frontier::HashDecorator.new(hash) }
+  let(:decorator) { Frontier::HashSingleLineDecorator.new(hash) }
 
   describe "#to_s" do
     subject { decorator.to_s }
