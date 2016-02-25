@@ -6,6 +6,21 @@ class Frontier::HamlRenderer
     @string = string
   end
 
+  # When provided some ruby code like:
+  #
+  # f.simple_fields_for :association_name do |ff|
+  #   ff.input :name
+  #
+  # The #render method will output that same code as it would appear in a HAML template:
+  #
+  # = f.simple_fields_for :association_name do |ff|
+  #   = ff.input :name
+  #
+  # Provide a number_of_indents to nest it as you choose. EG: with 1:
+  #
+  #   = f.simple_fields_for :association_name do |ff|
+  #     = ff.input :name
+  #
   def render(number_of_indents)
     string.split("\n").map {|string_component| hamelize_string(string_component, number_of_indents)}.join("\n")
   end
