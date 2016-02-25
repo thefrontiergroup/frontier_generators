@@ -32,7 +32,6 @@ STRING
     end
 
     it { should eq(expected) }
-
   end
 
 end
