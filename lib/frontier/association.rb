@@ -55,12 +55,6 @@ class Frontier::Association < Frontier::Attribute
     form_type == "inline"
   end
 
-  # Models
-
-  def association_implementation
-    Frontier::Association::ModelImplementation.new(self).to_s
-  end
-
   # Factories
 
   def as_factory_declaration
