@@ -6,6 +6,17 @@ describe Frontier::Association do
   let(:name) { "association_name" }
   let(:options) { {} }
 
+  describe "#initialize" do
+    subject(:initialize_association) { association }
+
+    context "when name contains _id" do
+      let(:name) { "address_id" }
+      it "strips the id from the name" do
+        expect(association.name).to eq("address")
+      end
+    end
+  end
+
   describe "#as_factory_name" do
     subject { association.as_factory_name }
 
@@ -45,8 +56,8 @@ describe Frontier::Association do
     end
   end
 
-  describe "#as_symbol_without_id" do
-    subject { association.as_symbol_without_id }
+  describe "#as_symbol" do
+    subject { association.as_symbol }
 
     context "when field_name includes _id already" do
       let(:name) { "model_id" }

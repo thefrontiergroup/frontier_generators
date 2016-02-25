@@ -4,11 +4,20 @@ class Frontier::Association < Frontier::Attribute
 
   ID_REGEXP = /_id\z/
 
+  def initialize(model_configuration, name, properties)
+    super
+
+    # Convert:
+    #   address_id -> address
+    #   address -> address
+    @name = name.to_s.sub(ID_REGEXP, "")
+  end
+
   def association_class
     if properties[:class_name].present?
       properties[:class_name]
     else
-      without_id.camelize
+      name.camelize
     end
   end
 
@@ -19,17 +28,7 @@ class Frontier::Association < Frontier::Attribute
   # some_thing_id -> ":some_thing_id"
   # some_thing -> ":some_thing_id"
   def as_field_name
-    if name =~ ID_REGEXP
-      as_symbol
-    else
-      "#{as_symbol}_id"
-    end
-  end
-
-  # some_thing_id -> ":some_thing"
-  # some_thing -> ":some_thing"
-  def as_symbol_without_id
-    ":#{without_id}"
+    "#{as_symbol}_id"
   end
 
   def is_association?
@@ -40,12 +39,6 @@ class Frontier::Association < Frontier::Attribute
 
   def as_factory_declaration
     Frontier::Association::FactoryDeclaration.new(self).to_s
-  end
-
-private
-
-  def without_id
-    name.sub(ID_REGEXP, "")
   end
 
 end
