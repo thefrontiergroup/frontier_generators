@@ -44,4 +44,5 @@ class Frontier::SpecSupport::ControllerParams
 end
 
 require_relative "./controller_params/associated_model_setup"
+require_relative "./controller_params/attributes"
 require_relative "./controller_params/attributes_setup"
