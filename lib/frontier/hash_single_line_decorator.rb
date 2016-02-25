@@ -1,4 +1,4 @@
-class Frontier::HashDecorator
+class Frontier::HashSingleLineDecorator
 
   attr_reader :hash
 
@@ -11,7 +11,7 @@ class Frontier::HashDecorator
     hash.collect do |key, value|
       case value
       when Hash
-        value = Frontier::HashDecorator.new(value).to_s
+        value = Frontier::HashSingleLineDecorator.new(value).to_s
         value = "{#{value}}"
       when String
         value = "\"#{value}\""

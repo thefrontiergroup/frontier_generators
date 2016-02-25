@@ -48,7 +48,7 @@ class Frontier::Attribute
 
     if is_enum?
       if (enum_options = properties[:enum_options]).present?
-        enum_options_as_hash = Frontier::HashDecorator.new array_as_hash(enum_options)
+        enum_options_as_hash = Frontier::HashSingleLineDecorator.new array_as_hash(enum_options)
         "enum #{name}: {#{enum_options_as_hash}}"
       else
         raise(ArgumentError, "No enum_options provided for attribute: #{name}")
