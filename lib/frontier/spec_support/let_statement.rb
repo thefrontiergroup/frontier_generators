@@ -11,8 +11,31 @@ class Frontier::SpecSupport::LetStatement
   #
   #   let(:key) { body }
   #
-  def to_s(includes_bang=false)
-    "let#{includes_bang ? "!" : nil}(:#{key}) { #{body} }"
+  # or:
+  #
+  #   let(:key) do
+  #     body
+  #   end
+  #
+  def to_s(options={})
+    has_bang = options[:has_bang] || false
+    is_multiline  = options[:is_multiline] || false
+
+    "#{let(has_bang)} #{let_block(is_multiline)}"
+  end
+
+private
+
+  def let(has_bang)
+    "let#{has_bang ? "!" : nil}(:#{key})"
+  end
+
+  def let_block(is_multiline)
+    if is_multiline
+      "do\n  #{body}\nend"
+    else
+      "{ #{body} }"
+    end
   end
 
 end
