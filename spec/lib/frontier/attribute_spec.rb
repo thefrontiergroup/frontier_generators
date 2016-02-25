@@ -50,6 +50,11 @@ describe Frontier::Attribute do
     end
   end
 
+  describe "#is_attribute?" do
+    subject { attribute.is_attribute? }
+    it { should eq(true) }
+  end
+
   describe "#is_association?" do
     subject { attribute.is_association? }
     it { should eq(false) }

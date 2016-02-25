@@ -75,6 +75,10 @@ class Frontier::Attribute
 
 # Models
 
+  def is_attribute?
+    !is_association?
+  end
+
   def is_association?
     false
   end
