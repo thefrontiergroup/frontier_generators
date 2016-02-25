@@ -11,6 +11,10 @@ class Frontier::Association < Frontier::Attribute
   def initialize(model_configuration, name, properties)
     super
 
+    # Convert:
+    #   address_id -> address
+    #   address -> address
+    @name = name.to_s.sub(ID_REGEXP, "")
     @attributes = parse_attributes(properties[:attributes] || [])
     @form_type  = parse_form_type(properties[:form_type])
   end
@@ -23,7 +27,7 @@ class Frontier::Association < Frontier::Attribute
     if properties[:class_name].present?
       properties[:class_name]
     else
-      without_id.camelize
+      name.camelize
     end
   end
 
@@ -34,17 +38,7 @@ class Frontier::Association < Frontier::Attribute
   # some_thing_id -> ":some_thing_id"
   # some_thing -> ":some_thing_id"
   def as_field_name
-    if name =~ ID_REGEXP
-      as_symbol
-    else
-      "#{as_symbol}_id"
-    end
-  end
-
-  # some_thing_id -> ":some_thing"
-  # some_thing -> ":some_thing"
-  def as_symbol_without_id
-    ":#{without_id}"
+    "#{as_symbol}_id"
   end
 
   def is_association?
@@ -79,9 +73,6 @@ private
     end
   end
 
-  def without_id
-    name.sub(ID_REGEXP, "")
-  end
 
 end
 

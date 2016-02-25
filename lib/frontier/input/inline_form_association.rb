@@ -12,7 +12,7 @@ class Frontier::Input::InlineFormAssociation < Frontier::Input::Association
   #   = ff.input :name
   def to_s(options={})
     <<-CODE
-f.simple_fields_for #{association.as_symbol_without_id} do |ff|
+f.simple_fields_for #{association.as_symbol} do |ff|
 #{generate_inputs(options)}
 CODE
   end

@@ -17,6 +17,13 @@ describe Frontier::Association do
         expect(association.attributes.first.name).to eq("name")
         expect(association.attributes.first.type).to eq("string")
       end
+
+      context "when name contains _id" do
+        let(:name) { "address_id" }
+        it "strips the id from the name" do
+          expect(association.name).to eq("address")
+        end
+      end
     end
 
     describe "parsing form_type" do
@@ -84,8 +91,8 @@ describe Frontier::Association do
     end
   end
 
-  describe "#as_symbol_without_id" do
-    subject { association.as_symbol_without_id }
+  describe "#as_symbol" do
+    subject { association.as_symbol }
 
     context "when field_name includes _id already" do
       let(:name) { "model_id" }
