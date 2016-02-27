@@ -101,6 +101,7 @@ describe <%= controller_name %> do
 
         it "updates the <%= model_configuration.as_constant %> object with the given attributes" do
           update_resource
+
           <%= model_configuration.model_name %>.reload
 <%= Frontier::RubyRenderer.new(Frontier::SpecSupport::ObjectAttributesAssertion.new(model_configuration).to_s).render(5) %>
         end
