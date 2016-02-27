@@ -10,6 +10,12 @@ class Frontier::Generator < Rails::Generators::NamedBase
     super
   end
 
+protected
+
+  def render_with_indent(indent_level, content)
+    Frontier::RubyRenderer.new(content).render(indent_level)
+  end
+
 private
 
   def build_model_configuration(file_path)
