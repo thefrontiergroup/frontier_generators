@@ -12,9 +12,7 @@ feature 'Admin can create a new <%= model_configuration.as_constant %>' do
   end
 
   scenario 'Admin creates <%= model_configuration.as_constant %> with valid data' do
-<% model_configuration.attributes.each do |attribute| -%>
-    <%= Frontier::FeatureSpecAssignment.new(attribute).to_s %>
-<% end -%>
+<%= render_with_indent(2, Frontier::SpecSupport::FeatureSpecAssignmentSet.new(model_configuration).to_s) %>
 
     submit_form
 

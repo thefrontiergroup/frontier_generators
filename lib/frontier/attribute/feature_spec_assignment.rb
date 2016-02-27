@@ -6,21 +6,21 @@ class Frontier::Attribute::FeatureSpecAssignment
     @attribute = attribute
   end
 
-  def to_s
+  def to_s(attributes_name="attributes")
     case attribute.type.to_sym
     when :boolean
       "check(\"#{attribute.capitalized}\")"
     when :date, :datetime, :decimal, :integer, :string, :text
-      "fill_in(\"#{attribute.capitalized}\", with: #{get_value_from_attributes})"
+      "fill_in(\"#{attribute.capitalized}\", with: #{get_value_from_attributes(attributes_name)})"
     when :enum
-      "select(#{get_value_from_attributes}, from: \"#{attribute.capitalized}\")"
+      "select(#{get_value_from_attributes(attributes_name)}, from: \"#{attribute.capitalized}\")"
     end
   end
 
 private
 
-  def get_value_from_attributes
-    "attributes[#{attribute.as_symbol}]"
+  def get_value_from_attributes(attributes_name)
+    "#{attributes_name}[#{attribute.as_symbol}]"
   end
 
 end
