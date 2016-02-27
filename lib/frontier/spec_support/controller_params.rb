@@ -14,7 +14,7 @@ class Frontier::SpecSupport::ControllerParams
   #   let(:attributes) { FactoryGirl.attributes_for(:model) }
   #   let(:model_name_params) do
   #     {
-  #       name: attributes[:name],
+  #       name: attributes[:name]
   #     }
   #   end
   #
@@ -30,7 +30,7 @@ class Frontier::SpecSupport::ControllerParams
   #         line_1: address_attributes[:line_1],
   #         line_2: address_attributes[:line_2],
   #         city: address_attributes[:city],
-  #         state: state,
+  #         state: state
   #       }
   #     }
   #   end
@@ -38,6 +38,7 @@ class Frontier::SpecSupport::ControllerParams
     [
       Frontier::SpecSupport::ControllerParams::AttributesSetup.new(model_configuration).to_s,
       Frontier::SpecSupport::ControllerParams::AssociatedModelSetup.new(model_configuration).to_s,
+      Frontier::SpecSupport::ControllerParams::Attributes.new(model_configuration).to_s
     ].compact.join("\n")
   end
 
@@ -45,4 +46,5 @@ end
 
 require_relative "./controller_params/associated_model_setup"
 require_relative "./controller_params/attributes"
+require_relative "./controller_params/attributes_hash"
 require_relative "./controller_params/attributes_setup"

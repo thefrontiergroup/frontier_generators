@@ -32,7 +32,7 @@ private
 
   def let_block(is_multiline)
     if is_multiline
-      "do\n  #{body}\nend"
+      "do\n  #{body.lstrip}\nend"
     else
       "{ #{body} }"
     end
