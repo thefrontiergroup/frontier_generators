@@ -1,11 +1,7 @@
 class <%= controller_name_and_superclass %>
 
 <% if model_configuration.show_index? -%>
-  def index
-    <%= Frontier::Authorization::Assertion.new(model_configuration, :index).to_s %>
-    <%= model_configuration.as_ivar_collection %> = <%= Frontier::Authorization::Scope.new(model_configuration).to_s %>
-    <%= model_configuration.as_ivar_collection %> = sort(<%= model_configuration.as_ivar_collection %>).page(params[:page])
-  end
+<%= render_with_indent(1, Frontier::ControllerAction::IndexAction.new(model_configuration).to_s) %>
 
 <% end -%>
 <% if model_configuration.show_create? -%>
