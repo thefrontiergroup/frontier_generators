@@ -2,8 +2,8 @@ class Frontier::SpecSupport::ControllerParams::AttributesHash
 
   attr_reader :attributes_name, :model_configuration
 
-  def initialize(model_configuration, attributes_name="attributes")
-    @attributes_name = attributes_name
+  def initialize(model_configuration, attributes_name=nil)
+    @attributes_name = attributes_name || "#{model_configuration.model_name}_attributes"
     @model_configuration = model_configuration
   end
 
@@ -13,7 +13,7 @@ class Frontier::SpecSupport::ControllerParams::AttributesHash
   #   let(:model_name_params) do
   #     {
   #       address_id: address.id,
-  #       name: attributes[:name],
+  #       name: model_name_attributes[:name],
   #       address_attributes: {
   #         line_1: address_attributes[:line_1],
   #         line_2: address_attributes[:line_2],
@@ -27,7 +27,7 @@ class Frontier::SpecSupport::ControllerParams::AttributesHash
   #
   #  {
   #    address_id: "address.id",
-  #    name: "attributes[:name]",
+  #    name: "model_name_attributes[:name]",
   #    address_attributes: {
   #      line_1: "address_attributes[:line_1]",
   #      line_2: "address_attributes[:line_2]",

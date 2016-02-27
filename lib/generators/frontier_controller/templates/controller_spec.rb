@@ -39,7 +39,9 @@ describe <%= controller_name %> do
   end
 
   describe 'POST create' do
-    subject { post :create, <%= model_configuration.model_name %>: <%= model_configuration.model_name %>_params }
+    subject { post :create, <%= model_configuration.model_name %>: attributes }
+    # params.require(<%= model_configuration.as_symbol %>) will raise an exception if the
+    # attributes hash provided is blank, so we pass through a fake value to prevent this.
     let(:attributes) { {id: 666} }
 
     authenticated_as(:admin) do
@@ -95,7 +97,7 @@ describe <%= controller_name %> do
     authenticated_as(:admin) do
 
       context "with valid parameters" do
-        let(:attributes) { parameters_for(<%= model_configuration.as_symbol %>) }
+<%= Frontier::RubyRenderer.new(Frontier::SpecSupport::ControllerParams.new(model_configuration).to_s).render(4) %>
 
         it "updates the <%= model_configuration.as_constant %> object with the given attributes" do
           update_resource

@@ -26,14 +26,14 @@ RSpec.describe Frontier::SpecSupport::ControllerParams::Attributes do
 
     let(:expected) do
       raw = <<STRING
-let(:model_name_params) do
+let(:attributes) do
   {
     address_id: address.id,
     other_address_attributes: {
       line_1: other_address_attributes[:line_1],
       state_id: state.id
     },
-    name: attributes[:name]
+    name: model_name_attributes[:name]
   }
 end
 STRING

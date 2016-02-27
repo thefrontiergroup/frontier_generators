@@ -26,18 +26,18 @@ RSpec.describe Frontier::SpecSupport::ControllerParams do
 
     let(:expected) do
       raw = <<STRING
-let(:attributes) { FactoryGirl.attributes_for(:model_name) }
+let(:model_name_attributes) { FactoryGirl.attributes_for(:model_name) }
 let(:other_address_attributes) { FactoryGirl.attributes_for(:address) }
 let(:address) { FactoryGirl.create(:address) }
 let(:state) { FactoryGirl.create(:state) }
-let(:model_name_params) do
+let(:attributes) do
   {
     address_id: address.id,
     other_address_attributes: {
       line_1: other_address_attributes[:line_1],
       state_id: state.id
     },
-    name: attributes[:name]
+    name: model_name_attributes[:name]
   }
 end
 STRING

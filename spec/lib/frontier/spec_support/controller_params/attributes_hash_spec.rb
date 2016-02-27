@@ -19,8 +19,8 @@ RSpec.describe Frontier::SpecSupport::ControllerParams::AttributesHash do
 
       let(:expected) do
         {
-          name: "attributes[:name]",
-          other_attribute: "attributes[:other_attribute]"
+          name: "model_name_attributes[:name]",
+          other_attribute: "model_name_attributes[:other_attribute]"
         }
       end
 
@@ -43,8 +43,8 @@ RSpec.describe Frontier::SpecSupport::ControllerParams::AttributesHash do
       let(:expected) do
         {
           address_id: "address.id",
-          name: "attributes[:name]",
-          other_attribute: "attributes[:other_attribute]"
+          name: "model_name_attributes[:name]",
+          other_attribute: "model_name_attributes[:other_attribute]"
         }
       end
 
@@ -78,7 +78,7 @@ RSpec.describe Frontier::SpecSupport::ControllerParams::AttributesHash do
             line_1: "other_address_attributes[:line_1]",
             state_id: "state.id"
           },
-          name: "attributes[:name]"
+          name: "model_name_attributes[:name]"
         }
       end
 
@@ -120,7 +120,7 @@ RSpec.describe Frontier::SpecSupport::ControllerParams::AttributesHash do
               name: "state_attributes[:name]"
             }
           },
-          name: "attributes[:name]"
+          name: "model_name_attributes[:name]"
         }
       end
 
