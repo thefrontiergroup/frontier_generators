@@ -3,6 +3,7 @@ require 'rails_helper'
 feature 'Admin can update an existing <%= model_configuration.as_constant %>' do
 
   sign_in_as(:admin)
+  <%= Frontier::SpecSupport::LetStatement.new(model_configuration.as_symbol, "FactoryGirl.create(<%= model_configuration.as_symbol").to_s(has_bang: true) %>
 <%= render_with_indent(1, Frontier::SpecSupport::ObjectSetup::AttributesSetup.new(model_configuration).to_s) %>
 <%= render_with_indent(1, Frontier::SpecSupport::ObjectSetup::AssociatedModelSetup.new(model_configuration).to_s) %>
 
