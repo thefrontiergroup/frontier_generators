@@ -54,7 +54,7 @@ describe <%= controller_name %> do
 
           <%= model_configuration.model_name %> = <%= model_configuration.as_constant %>.order(:created_at).last
           expect(<%= model_configuration.model_name %>).to be_present
-          expect(<%= model_configuration.model_name %>).to have_attributes(attributes)
+<%= Frontier::RubyRenderer.new(Frontier::SpecSupport::ObjectAttributesAssertion.new(model_configuration).to_s).render(4) %>
         end
 
         it { should redirect_to(<%= model_configuration.url_builder.index_path %>) }
@@ -117,7 +117,9 @@ describe <%= controller_name %> do
 
         it "doesn't update the <%= model_configuration.as_constant %>" do
           update_resource
-          expect(<%= model_configuration.model_name %>.reload).not_to have_attributes(attributes)
+
+          <%= model_configuration.model_name %>.reload
+<%= Frontier::RubyRenderer.new(Frontier::SpecSupport::ObjectAttributesAssertion.new(model_configuration).to_s).render(4) %>
         end
       end
     end
