@@ -15,10 +15,7 @@ class <%= controller_name_and_superclass %>
 
 <% end -%>
 <% if model_configuration.show_update? -%>
-  def edit
-    <%= model_configuration.as_ivar_instance %> = find_<%= model_configuration.model_name %>
-    <%= Frontier::Authorization::Assertion.new(model_configuration, :edit).to_s %>
-  end
+  <%= render_with_indent(1, Frontier::ControllerAction::EditAction.new(model_configuration).to_s) %>
 
   def update
     <%= model_configuration.as_ivar_instance %> = find_<%= model_configuration.model_name %>
