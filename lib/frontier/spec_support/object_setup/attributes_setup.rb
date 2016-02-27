@@ -1,4 +1,4 @@
-class Frontier::SpecSupport::ControllerParams::AttributesSetup
+class Frontier::SpecSupport::ObjectSetup::AttributesSetup
 
   attr_reader :model_configuration
 

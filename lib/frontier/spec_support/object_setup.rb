@@ -1,4 +1,4 @@
-class Frontier::SpecSupport::ControllerParams
+class Frontier::SpecSupport::ObjectSetup
 
   attr_reader :model_configuration
 
@@ -36,15 +36,15 @@ class Frontier::SpecSupport::ControllerParams
   #   end
   def to_s
     [
-      Frontier::SpecSupport::ControllerParams::AttributesSetup.new(model_configuration).to_s,
-      Frontier::SpecSupport::ControllerParams::AssociatedModelSetup.new(model_configuration).to_s,
-      Frontier::SpecSupport::ControllerParams::Attributes.new(model_configuration).to_s
+      Frontier::SpecSupport::ObjectSetup::AttributesSetup.new(model_configuration).to_s,
+      Frontier::SpecSupport::ObjectSetup::AssociatedModelSetup.new(model_configuration).to_s,
+      Frontier::SpecSupport::ObjectSetup::Attributes.new(model_configuration).to_s
     ].compact.join("\n")
   end
 
 end
 
-require_relative "./controller_params/associated_model_setup"
-require_relative "./controller_params/attributes"
-require_relative "./controller_params/attributes_hash"
-require_relative "./controller_params/attributes_setup"
+require_relative "./object_setup/associated_model_setup"
+require_relative "./object_setup/attributes"
+require_relative "./object_setup/attributes_hash"
+require_relative "./object_setup/attributes_setup"

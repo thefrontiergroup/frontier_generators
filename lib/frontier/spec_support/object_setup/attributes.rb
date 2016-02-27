@@ -1,4 +1,4 @@
-class Frontier::SpecSupport::ControllerParams::Attributes
+class Frontier::SpecSupport::ObjectSetup::Attributes
 
   attr_reader :model_configuration
 
@@ -29,7 +29,7 @@ class Frontier::SpecSupport::ControllerParams::Attributes
 private
 
   def let_body
-    attributes_hash = Frontier::SpecSupport::ControllerParams::AttributesHash.new(model_configuration).to_hash
+    attributes_hash = Frontier::SpecSupport::ObjectSetup::AttributesHash.new(model_configuration).to_hash
     Frontier::HashMultilineDecorator.new(attributes_hash).to_s(1)
   end
 

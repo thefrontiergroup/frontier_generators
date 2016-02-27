@@ -1,9 +1,9 @@
 require 'spec_helper'
 
-RSpec.describe Frontier::SpecSupport::ControllerParams::AttributesHash do
+RSpec.describe Frontier::SpecSupport::ObjectSetup::AttributesHash do
 
   describe "#to_hash" do
-    subject { Frontier::SpecSupport::ControllerParams::AttributesHash.new(model_configuration).to_hash }
+    subject { Frontier::SpecSupport::ObjectSetup::AttributesHash.new(model_configuration).to_hash }
 
     context "with a simple set of attributes" do
       let(:model_configuration) do

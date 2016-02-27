@@ -47,7 +47,7 @@ describe <%= controller_name %> do
     authenticated_as(:admin) do
 
       context "with valid parameters" do
-<%= Frontier::RubyRenderer.new(Frontier::SpecSupport::ControllerParams.new(model_configuration).to_s).render(4) %>
+<%= Frontier::RubyRenderer.new(Frontier::SpecSupport::ObjectSetup.new(model_configuration).to_s).render(4) %>
 
         it "creates a <%= model_configuration.as_constant %> object with the given attributes" do
           subject
@@ -97,7 +97,7 @@ describe <%= controller_name %> do
     authenticated_as(:admin) do
 
       context "with valid parameters" do
-<%= Frontier::RubyRenderer.new(Frontier::SpecSupport::ControllerParams.new(model_configuration).to_s).render(4) %>
+<%= Frontier::RubyRenderer.new(Frontier::SpecSupport::ObjectSetup.new(model_configuration).to_s).render(4) %>
 
         it "updates the <%= model_configuration.as_constant %> object with the given attributes" do
           update_resource

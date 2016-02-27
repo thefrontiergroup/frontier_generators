@@ -1,9 +1,9 @@
 require 'spec_helper'
 
-RSpec.describe Frontier::SpecSupport::ControllerParams::Attributes do
+RSpec.describe Frontier::SpecSupport::ObjectSetup do
 
   describe '#to_s' do
-    subject { Frontier::SpecSupport::ControllerParams::Attributes.new(model_configuration).to_s }
+    subject { Frontier::SpecSupport::ObjectSetup.new(model_configuration).to_s }
     let(:model_configuration) do
       Frontier::ModelConfiguration.new({
         model_name: {
@@ -26,6 +26,10 @@ RSpec.describe Frontier::SpecSupport::ControllerParams::Attributes do
 
     let(:expected) do
       raw = <<STRING
+let(:model_name_attributes) { FactoryGirl.attributes_for(:model_name) }
+let(:other_address_attributes) { FactoryGirl.attributes_for(:address) }
+let(:address) { FactoryGirl.create(:address) }
+let(:state) { FactoryGirl.create(:state) }
 let(:attributes) do
   {
     address_id: address.id,
