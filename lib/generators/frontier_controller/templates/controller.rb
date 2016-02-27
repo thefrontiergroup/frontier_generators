@@ -15,15 +15,9 @@ class <%= controller_name_and_superclass %>
 
 <% end -%>
 <% if model_configuration.show_update? -%>
-  <%= render_with_indent(1, Frontier::ControllerAction::EditAction.new(model_configuration).to_s) %>
+<%= render_with_indent(1, Frontier::ControllerAction::EditAction.new(model_configuration).to_s) %>
 
-  def update
-    <%= model_configuration.as_ivar_instance %> = find_<%= model_configuration.model_name %>
-    <%= model_configuration.as_ivar_instance %>.assign_attributes(strong_params_for(<%= model_configuration.as_ivar_instance %>))
-    <%= model_configuration.as_ivar_instance %>.save if <%= Frontier::Authorization::Assertion.new(model_configuration, :update).to_s %>
-
-    respond_with(<%= model_configuration.as_ivar_instance %>, location: <%= model_configuration.url_builder.index_path %>)
-  end
+<%= render_with_indent(1, Frontier::ControllerAction::UpdateAction.new(model_configuration).to_s) %>
 
 <% end -%>
 <% if model_configuration.show_delete? -%>
