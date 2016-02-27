@@ -47,14 +47,14 @@ describe <%= controller_name %> do
     authenticated_as(:admin) do
 
       context "with valid parameters" do
-<%= Frontier::RubyRenderer.new(Frontier::SpecSupport::ObjectSetup.new(model_configuration).to_s).render(4) %>
+<%= render_with_indent(4, Frontier::SpecSupport::ObjectSetup.new(model_configuration).to_s) %>
 
         it "creates a <%= model_configuration.as_constant %> object with the given attributes" do
           subject
 
           <%= model_configuration.model_name %> = <%= model_configuration.as_constant %>.order(:created_at).last
           expect(<%= model_configuration.model_name %>).to be_present
-<%= Frontier::RubyRenderer.new(Frontier::SpecSupport::ObjectAttributesAssertion.new(model_configuration).to_s).render(5) %>
+<%= render_with_indent(5, Frontier::SpecSupport::ObjectAttributesAssertion.new(model_configuration).to_s) %>
         end
 
         it { should redirect_to(<%= model_configuration.url_builder.index_path %>) }
@@ -97,13 +97,13 @@ describe <%= controller_name %> do
     authenticated_as(:admin) do
 
       context "with valid parameters" do
-<%= Frontier::RubyRenderer.new(Frontier::SpecSupport::ObjectSetup.new(model_configuration).to_s).render(4) %>
+<%= render_with_indent(4, Frontier::SpecSupport::ObjectSetup.new(model_configuration).to_s) %>
 
         it "updates the <%= model_configuration.as_constant %> object with the given attributes" do
           update_resource
 
           <%= model_configuration.model_name %>.reload
-<%= Frontier::RubyRenderer.new(Frontier::SpecSupport::ObjectAttributesAssertion.new(model_configuration).to_s).render(5) %>
+<%= render_with_indent(5, Frontier::SpecSupport::ObjectAttributesAssertion.new(model_configuration).to_s) %>
         end
 
         it { should redirect_to(<%= model_configuration.url_builder.index_path %>) }
