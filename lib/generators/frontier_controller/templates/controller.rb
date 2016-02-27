@@ -11,12 +11,7 @@ class <%= controller_name_and_superclass %>
 <% if model_configuration.show_create? -%>
 <%= render_with_indent(1, Frontier::ControllerAction::NewAction.new(model_configuration).to_s) %>
 
-  def create
-    <%= model_configuration.as_ivar_instance %> = <%= model_configuration.as_constant %>.new(strong_params_for(<%= model_configuration.as_constant %>))
-    <%= model_configuration.as_ivar_instance %>.save if <%= Frontier::Authorization::Assertion.new(model_configuration, :create).to_s %>
-
-    respond_with(<%= model_configuration.as_ivar_instance %>, location: <%= model_configuration.url_builder.index_path %>)
-  end
+<%= render_with_indent(1, Frontier::ControllerAction::CreateAction.new(model_configuration).to_s) %>
 
 <% end -%>
 <% if model_configuration.show_update? -%>
