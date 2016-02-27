@@ -8,7 +8,7 @@ class Frontier::ControllerAction::DestroyAction
 
   def to_s
     raw = <<-STRING
-def new
+def destroy
   #{model_configuration.as_ivar_instance} = find_#{model_configuration.model_name}
   #{Frontier::Authorization::Assertion.new(model_configuration, :destroy).to_s}
   #{model_configuration.as_ivar_instance}.destroy

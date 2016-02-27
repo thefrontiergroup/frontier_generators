@@ -8,7 +8,7 @@ class Frontier::ControllerAction::EditAction
 
   def to_s
     raw = <<-STRING
-def new
+def edit
   #{model_configuration.as_ivar_instance} = find_#{model_configuration.model_name}
   #{Frontier::Authorization::Assertion.new(model_configuration, :edit).to_s}
 end

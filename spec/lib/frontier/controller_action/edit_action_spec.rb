@@ -8,7 +8,7 @@ RSpec.describe Frontier::ControllerAction::EditAction do
 
     let(:expected) do
       raw = <<-STRING
-def new
+def edit
   @test_model = find_test_model
   authorize(TestModel)
 end

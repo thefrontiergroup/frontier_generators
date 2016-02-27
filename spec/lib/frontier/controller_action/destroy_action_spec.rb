@@ -8,7 +8,7 @@ RSpec.describe Frontier::ControllerAction::DestroyAction do
 
     let(:expected) do
       raw = <<-STRING
-def new
+def destroy
   @test_model = find_test_model
   authorize(TestModel)
   @test_model.destroy
