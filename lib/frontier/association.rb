@@ -30,6 +30,7 @@ class Frontier::Association < Frontier::Attribute
       name.camelize
     end
   end
+  alias as_constant association_class
 
   def as_factory_name
     ":#{association_class.underscore}"
@@ -48,6 +49,8 @@ class Frontier::Association < Frontier::Attribute
   def is_nested?
     form_type == "inline"
   end
+
+  alias model_name name
 
   # Factories
 
