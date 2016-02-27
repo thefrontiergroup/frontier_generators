@@ -39,13 +39,13 @@ describe <%= controller_name %> do
   end
 
   describe 'POST create' do
-    subject { post :create, <%= model_configuration.model_name %>: attributes }
+    subject { post :create, <%= model_configuration.model_name %>: <%= model_configuration.model_name %>_params }
     let(:attributes) { {id: 666} }
 
     authenticated_as(:admin) do
 
       context "with valid parameters" do
-        let(:attributes) { parameters_for(<%= model_configuration.as_symbol %>) }
+<%= Frontier::RubyRenderer.new(Frontier::SpecSupport::ControllerParams.new(model_configuration).to_s).render(4) %>
 
         it "creates a <%= model_configuration.as_constant %> object with the given attributes" do
           subject
