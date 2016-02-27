@@ -9,10 +9,7 @@ class <%= controller_name_and_superclass %>
 
 <% end -%>
 <% if model_configuration.show_create? -%>
-  def new
-    <%= model_configuration.as_ivar_instance %> = <%= model_configuration.as_constant %>.new
-    <%= Frontier::Authorization::Assertion.new(model_configuration, :new).to_s %>
-  end
+<%= render_with_indent(1, Frontier::ControllerAction::NewAction.new(model_configuration).to_s) %>
 
   def create
     <%= model_configuration.as_ivar_instance %> = <%= model_configuration.as_constant %>.new(strong_params_for(<%= model_configuration.as_constant %>))
