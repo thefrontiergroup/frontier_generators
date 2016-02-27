@@ -21,12 +21,7 @@ class <%= controller_name_and_superclass %>
 
 <% end -%>
 <% if model_configuration.show_delete? -%>
-  def destroy
-    <%= model_configuration.as_ivar_instance %> = find_<%= model_configuration.model_name %>
-    <%= Frontier::Authorization::Assertion.new(model_configuration, :destroy).to_s %>
-    <%= model_configuration.as_ivar_instance %>.destroy
-    respond_with(<%= model_configuration.as_ivar_instance %>, location: <%= model_configuration.url_builder.index_path %>)
-  end
+<%= render_with_indent(1, Frontier::ControllerAction::DestroyAction.new(model_configuration).to_s) %>
 <% end -%>
 <% if model_configuration.show_create? || model_configuration.show_update? || model_configuration.show_delete? -%>
 
