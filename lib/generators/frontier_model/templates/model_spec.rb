@@ -7,7 +7,7 @@ describe <%= model_configuration.as_constant %> do
 <% attribute.validations.each do |validation| -%>
 <% case validation.key -%>
 <% when "uniqueness" -%>
-    describe "validating uniquess" do
+    describe "validating uniqueness" do
       subject { FactoryGirl.create(<%= model_configuration.as_symbol %>) }
       it { should validate_uniqueness_of(<%= attribute.as_symbol %>) }
     end
