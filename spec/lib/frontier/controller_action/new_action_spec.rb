@@ -47,7 +47,9 @@ STRING
 def new
   @test_model = TestModel.new
   authorize(TestModel)
-  @test_model.build_other_address
+  if @test_model.other_address.blank?
+    @test_model.build_other_address
+  end
 end
 STRING
         raw.rstrip
@@ -88,8 +90,10 @@ STRING
 def new
   @test_model = TestModel.new
   authorize(TestModel)
-  @test_model.build_other_address
-  @test_model.other_address.build_state
+  if @test_model.other_address.blank?
+    @test_model.build_other_address
+    @test_model.other_address.build_state
+  end
 end
 STRING
         raw.rstrip
@@ -137,9 +141,11 @@ STRING
 def new
   @test_model = TestModel.new
   authorize(TestModel)
-  @test_model.build_other_address
-  @test_model.other_address.build_state
-  @test_model.other_address.build_contact_person
+  if @test_model.other_address.blank?
+    @test_model.build_other_address
+    @test_model.other_address.build_state
+    @test_model.other_address.build_contact_person
+  end
 end
 STRING
         raw.rstrip
