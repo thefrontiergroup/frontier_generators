@@ -15,7 +15,8 @@ describe Frontier::Input::InlineFormAssociation do
       let(:expected) do
         <<-CODE
 f.simple_fields_for :association_name do |ff|
-
+  %fieldset
+    %legend Association Name
 CODE
       end
 
@@ -32,11 +33,14 @@ CODE
         }
       end
       let(:expected) do
-        <<-CODE
+        raw = <<-CODE
 f.simple_fields_for :association_name do |ff|
-  ff.input :name
-  ff.association :other_association, collection: OtherAssociation.all
+  %fieldset
+    %legend Association Name
+    ff.input :name
+    ff.association :other_association, collection: OtherAssociation.all
 CODE
+        raw.rstrip
       end
 
       it { should eq(expected) }

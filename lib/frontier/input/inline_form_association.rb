@@ -11,10 +11,12 @@ class Frontier::Input::InlineFormAssociation < Frontier::Input::Association
   # = f.simple_fields_for :association_name do |ff|
   #   = ff.input :name
   def to_s(options={})
-    <<-CODE
+    preamble = <<-CODE
 f.simple_fields_for #{association.as_symbol} do |ff|
-#{Frontier::RubyRenderer.new(generate_inputs(options)).render(1)}
+  %fieldset
+    %legend #{association.name.titleize}
 CODE
+    preamble + Frontier::RubyRenderer.new(generate_inputs(options)).render(2).rstrip
   end
 
 private
