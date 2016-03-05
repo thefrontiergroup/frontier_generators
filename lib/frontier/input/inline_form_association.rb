@@ -2,17 +2,11 @@ class Frontier::Input::InlineFormAssociation < Frontier::Input::Association
 
   # Will generate an inline form, something like:
   #
-  # f.simple_fields_for :association_name do |ff|
-  #   ff.input :name
-  #
-  # The Frontier::HamlRenderer class can append = to these statements, so that it the output
-  # will look like:
-  #
   # = f.simple_fields_for :association_name do |ff|
   #   = ff.input :name
   def to_s(options={})
     preamble = <<-CODE
-f.simple_fields_for #{association.as_symbol} do |ff|
+= f.simple_fields_for #{association.as_symbol} do |ff|
   %fieldset
     %legend #{association.name.titleize}
 CODE
