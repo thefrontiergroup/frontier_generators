@@ -13,7 +13,7 @@ class Frontier::Input::InlineFormAssociation < Frontier::Input::Association
   def to_s(options={})
     <<-CODE
 f.simple_fields_for #{association.as_symbol} do |ff|
-#{generate_inputs(options)}
+#{Frontier::RubyRenderer.new(generate_inputs(options)).render(1)}
 CODE
   end
 
@@ -27,10 +27,9 @@ private
     # Only provide the whitespace indenting if there are some attributes. If there aren't,
     # don't inject any whitespace
     if association.attributes.length > 0
-      [
-        "  ",
-        association.attributes.map {|attribute| input_for_attribute(attribute)}.join("\n  ")
-      ].join
+      association.attributes.map {|attribute| input_for_attribute(attribute)}.join("\n")
+    else
+      ""
     end
   end
 
