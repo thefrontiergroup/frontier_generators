@@ -76,7 +76,6 @@ private
     end
   end
 
-
 end
 
 require_relative "association/factory_declaration.rb"

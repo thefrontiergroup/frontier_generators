@@ -22,7 +22,7 @@ class Frontier::HamlRenderer
   #     = ff.input :name
   #
   def render(number_of_indents)
-    string.split("\n").map {|string_component| hamelize_string(string_component, number_of_indents)}.join("\n")
+    string.split("\n").map {|string_component| hamlize_string(string_component, number_of_indents)}.join("\n")
   end
 
 private
@@ -34,7 +34,7 @@ private
     string_component.sub(string_component.strip, "= #{string_component.strip}")
   end
 
-  def hamelize_string(string_component, number_of_indents)
+  def hamlize_string(string_component, number_of_indents)
     [
       indents_as_whitespace(number_of_indents),
       component_prependend_with_haml(string_component)

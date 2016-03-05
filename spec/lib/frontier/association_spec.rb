@@ -17,13 +17,6 @@ describe Frontier::Association do
         expect(association.attributes.first.name).to eq("name")
         expect(association.attributes.first.type).to eq("string")
       end
-
-      context "when name contains _id" do
-        let(:name) { "address_id" }
-        it "strips the id from the name" do
-          expect(association.name).to eq("address")
-        end
-      end
     end
 
     describe "parsing form_type" do
@@ -48,6 +41,22 @@ describe Frontier::Association do
       context "when something unexpected" do
         let(:form_type) { "jordan_rules" }
         it { should eq("select") }
+      end
+    end
+
+    describe "setting name" do
+      context "when name doesn't contain _id" do
+        let(:name) { "address" }
+        it "returns the name" do
+          expect(association.name).to eq("address")
+        end
+      end
+
+      context "when name contains _id" do
+        let(:name) { "address_id" }
+        it "strips the id from the name" do
+          expect(association.name).to eq("address")
+        end
       end
     end
   end

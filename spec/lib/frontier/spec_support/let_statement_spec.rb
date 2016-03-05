@@ -4,13 +4,15 @@ RSpec.describe Frontier::SpecSupport::LetStatement do
 
   describe "#to_s" do
     subject { Frontier::SpecSupport::LetStatement.new("jordan", text).to_s(options) }
+
     let(:options) do
       {
         has_bang: has_bang,
         is_multiline: is_multiline
       }
     end
-    let(:text) { "rules" }
+
+    let(:text)         { "rules" }
     let(:has_bang)     { false }
     let(:is_multiline) { false }
 
