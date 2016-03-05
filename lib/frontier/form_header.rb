@@ -7,7 +7,7 @@ class Frontier::FormHeader
   end
 
   def to_s
-    "simple_form_for #{form_name}, #{Frontier::HashDecorator.new(form_options)} do |f|"
+    "simple_form_for #{form_name}, #{Frontier::HashSingleLineDecorator.new(form_options)} do |f|"
   end
 
 private
