@@ -97,6 +97,56 @@ STRING
 
       it { should eq(expected) }
     end
+
+    context "a model with a nested association that has multiple nested associations" do
+      let(:model_configuration) do
+        Frontier::ModelConfiguration.new({
+          test_model: {
+            attributes: {
+              address: {type: "belongs_to", form_type: "select"},
+              other_address: {
+                class_name: "Address",
+                type: "belongs_to",
+                form_type: "inline",
+                attributes: {
+                  line_1: {type: "string"},
+                  state: {
+                    type: "belongs_to",
+                    form_type: "inline",
+                    attributes: {
+                      name: {type: "string"}
+                    }
+                  },
+                  contact_person: {
+                    type: "belongs_to",
+                    form_type: "inline",
+                    attributes: {
+                      name: {type: "string"}
+                    }
+                  }
+                }
+              },
+              name: {type: "string"},
+            }
+          }
+        })
+      end
+
+      let(:expected) do
+        raw = <<-STRING
+def new
+  @test_model = TestModel.new
+  authorize(TestModel)
+  @test_model.build_other_address
+  @test_model.other_address.build_state
+  @test_model.other_address.build_contact_person
+end
+STRING
+        raw.rstrip
+      end
+
+      it { should eq(expected) }
+    end
   end
 
 end
