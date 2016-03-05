@@ -22,7 +22,7 @@ class Frontier::SpecSupport::ObjectSetup
   #
   #   let(:model_attributes) { FactoryGirl.attributes_for(:model) }
   #   let(:address_attributes) { FactoryGirl.attributes_for(:address) }
-  #   let(:state) { FactoryGirl.create(:state) }
+  #   let!(:state) { FactoryGirl.create(:state) }
   #   let(:attributes) do
   #     {
   #       name: model_attributes[:name],

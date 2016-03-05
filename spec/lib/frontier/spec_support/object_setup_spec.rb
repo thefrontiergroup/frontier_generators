@@ -28,8 +28,8 @@ RSpec.describe Frontier::SpecSupport::ObjectSetup do
       raw = <<STRING
 let(:model_name_attributes) { FactoryGirl.attributes_for(:model_name) }
 let(:other_address_attributes) { FactoryGirl.attributes_for(:address) }
-let(:address) { FactoryGirl.create(:address) }
-let(:state) { FactoryGirl.create(:state) }
+let!(:address) { FactoryGirl.create(:address) }
+let!(:state) { FactoryGirl.create(:state) }
 let(:attributes) do
   {
     address_id: address.id,
