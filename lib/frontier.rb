@@ -3,6 +3,10 @@ end
 
 require_relative "./frontier/error_reporter"
 
+# Modules
+require_relative "./frontier/indent_renderer"
+
+# Classes
 require_relative "./frontier/association"
 require_relative "./frontier/attribute"
 require_relative "./frontier/authorization"

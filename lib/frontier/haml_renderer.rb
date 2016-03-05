@@ -1,5 +1,7 @@
 class Frontier::HamlRenderer
 
+  include Frontier::IndentRenderer
+
   attr_reader :string
 
   def initialize(string)
@@ -35,10 +37,7 @@ private
   end
 
   def hamlize_string(string_component, number_of_indents)
-    [
-      indents_as_whitespace(number_of_indents),
-      component_prependend_with_haml(string_component)
-    ].join
+    render_with_indent(number_of_indents, component_prependend_with_haml(string_component))
   end
 
   def indents_as_whitespace(number_of_indents)

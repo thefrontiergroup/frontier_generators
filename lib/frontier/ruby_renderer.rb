@@ -1,5 +1,7 @@
 class Frontier::RubyRenderer
 
+  include Frontier::IndentRenderer
+
   attr_reader :string
 
   def initialize(string)
@@ -13,10 +15,7 @@ class Frontier::RubyRenderer
 private
 
   def rubyify_string(string_component, number_of_indents)
-    [
-      indents_as_whitespace(number_of_indents),
-      string_component
-    ].join
+    render_with_indent(number_of_indents, string_component)
   end
 
   def indents_as_whitespace(number_of_indents)
