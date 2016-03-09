@@ -1,8 +1,9 @@
-%h1 <%= model_configuration.as_title %> Management
-
+.content-header
+  %h1 <%= model_configuration.as_title %> Management
 <% if model_configuration.show_create? -%>
-- if <%= Frontier::Authorization::Check.new(model_configuration, model_configuration.as_constant, :new) %>
-  %p= link_to "Add new <%= model_configuration.as_title %>", <%= model_configuration.url_builder.new_path %>, class: "btn"
+  .collection-actions
+    - if <%= Frontier::Authorization::Check.new(model_configuration, model_configuration.as_constant, :new) %>
+      = link_to "Add new <%= model_configuration.as_title %>", <%= model_configuration.url_builder.new_path %>, class: "btn"
 <% end -%>
 
 %table
