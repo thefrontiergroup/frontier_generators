@@ -7,6 +7,10 @@ class Frontier::ControllerActionSupport::StrongParamsAttributes
     @object_with_attributes = object_with_attributes
   end
 
+  def count
+    strong_params_count(to_array)
+  end
+
   # Returns an array of strong params
   #
   # EG: [:id, :name, :email]                      # with attributes
@@ -42,6 +46,17 @@ private
     else
       association_as_strong_params(attribute_or_association)
     end
+  end
+
+  def strong_params_count(strong_params_array)
+    attributes_count = strong_params_array.map do |param|
+      if param.is_a?(Hash)
+        strong_params_count(param.values.flatten)
+      else
+        1
+      end
+    end
+    attributes_count.inject {|total, i| total += i}
   end
 
 end
