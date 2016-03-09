@@ -25,7 +25,7 @@ describe Frontier::ControllerAction::StrongParamsMethod do
         let(:expected) do
           raw = <<-STRING
 def attributes_for_test_model
-  params.require(:test_model).permit(:address_id, :bravo, :charlie)
+  params.require(:test_model).permit([:address_id, :bravo, :charlie])
 end
 STRING
           raw.rstrip
@@ -53,12 +53,12 @@ STRING
         let(:expected) do
           raw = <<-STRING
 def attributes_for_test_model
-  params.require(:test_model).permit(
+  params.require(:test_model).permit([
     :address_id,
     :bravo,
     :charlie,
     :delta
-  )
+  ])
 end
 STRING
           raw.rstrip
@@ -93,10 +93,10 @@ STRING
       let(:expected) do
         raw = <<-STRING
 def attributes_for_test_model
-  params.require(:test_model).permit(
+  params.require(:test_model).permit([
     :address_id,
-    other_address_attributes: [:line_1, :state_id]
-  )
+    {other_address_attributes: [:line_1, :state_id]}
+  ])
 end
 STRING
         raw.rstrip
@@ -137,10 +137,10 @@ STRING
       let(:expected) do
         raw = <<-STRING
 def attributes_for_test_model
-  params.require(:test_model).permit(
+  params.require(:test_model).permit([
     :address_id,
-    other_address_attributes: [:line_1, state_attributes: [:name]]
-  )
+    {other_address_attributes: [:line_1, {state_attributes: [:name]}]}
+  ])
 end
 STRING
         raw.rstrip
