@@ -18,8 +18,4 @@ private
     render_with_indent(number_of_indents, string_component)
   end
 
-  def indents_as_whitespace(number_of_indents)
-    Array.new(number_of_indents, "  ").join
-  end
-
 end
