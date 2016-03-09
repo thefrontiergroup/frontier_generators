@@ -44,7 +44,17 @@ describe Frontier::ControllerActionSupport::StrongParamsAttributes do
         })
       end
 
-      it { should eq([:address_id, other_address_attributes: [:line_1, :state_id]]) }
+      specify do
+        should eq([
+          :address_id,
+          {
+            other_address_attributes: [
+              :line_1,
+              :state_id
+            ]
+          }
+        ])
+      end
     end
 
     context "a model with a deeply nested association" do
@@ -73,7 +83,17 @@ describe Frontier::ControllerActionSupport::StrongParamsAttributes do
         })
       end
 
-      it { should eq([:address_id, other_address_attributes: [:line_1, state_attributes: [:name]]]) }
+      specify do
+        should eq([
+          :address_id,
+          {
+            other_address_attributes: [
+              :line_1,
+              {state_attributes: [:name]}
+            ]
+          }
+        ])
+      end
     end
   end
 
