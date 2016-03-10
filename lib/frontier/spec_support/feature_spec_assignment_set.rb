@@ -6,8 +6,16 @@ class Frontier::SpecSupport::FeatureSpecAssignmentSet
     @model_configuration_or_association = model_configuration_or_association
   end
 
+  ##
   # Render a set of form assignments for the attributes and associations of a model using
-  # Capybara syntax.
+  # Capybara syntax. EG:
+  #
+  # # User Assignments
+  # fill_in("Name", with: user_attributes[:name])
+  # select(address, from: "Address")
+  # # Address Assignments
+  # fill_in("Line 1", with: other_address_attributes[:line_1])
+  # select(state, from: "State")
   #
   def to_s
     [
