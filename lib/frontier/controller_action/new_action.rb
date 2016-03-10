@@ -6,6 +6,9 @@ class Frontier::ControllerAction::NewAction
     @model_configuration = model_configuration
   end
 
+  ##
+  # Renders the new action for a controller. EG:
+  #
   # def new
   #   @model_name = ModelName.new
   #   authorize!(@model_name)

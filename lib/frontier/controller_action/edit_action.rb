@@ -8,6 +8,9 @@ class Frontier::ControllerAction::EditAction
     @model_configuration = model_configuration
   end
 
+  ##
+  # Renders the edit action for a controller. EG:
+  #
   # def edit
   #   @model_name = find_model_name
   #   authorize!(@model_name)
@@ -16,6 +19,7 @@ class Frontier::ControllerAction::EditAction
   #     @model_name.address.build_state # if deeply nested
   #   end
   # end
+  #
   def to_s
     [
       "def edit",

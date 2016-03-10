@@ -6,6 +6,16 @@ class Frontier::ControllerAction::CreateAction
     @model_configuration = model_configuration
   end
 
+  ##
+  # Renders the create action for a controller. EG:
+  #
+  # def create
+  #   @user = User.new(strong_params_for(User))
+  #   @user.save if authorize(@user)
+  #
+  #   respond_with(@user, location: admin_users_path)
+  # end
+  #
   def to_s
     raw = <<-STRING
 def create
