@@ -9,10 +9,54 @@ describe Frontier::Association do
   describe "#initialize" do
     subject(:initialize_association) { association }
 
-    context "when name contains _id" do
-      let(:name) { "address_id" }
-      it "strips the id from the name" do
-        expect(association.name).to eq("address")
+    describe "parsing attributes" do
+      let(:options) { {attributes: {name: {type: "string"}}} }
+
+      it "can parse attributes" do
+        expect(association.attributes.count).to eq(1)
+        expect(association.attributes.first.name).to eq("name")
+        expect(association.attributes.first.type).to eq("string")
+      end
+    end
+
+    describe "parsing form_type" do
+      subject { initialize_association.form_type }
+      let(:options) { {form_type: form_type} }
+
+      context "when 'inline'" do
+        let(:form_type) { "inline" }
+        it { should eq("inline") }
+      end
+
+      context "when 'select'" do
+        let(:form_type) { "select" }
+        it { should eq("select") }
+      end
+
+      context "when something blank" do
+        let(:form_type) { "" }
+        it { should eq("select") }
+      end
+
+      context "when something unexpected" do
+        let(:form_type) { "jordan_rules" }
+        it { should eq("select") }
+      end
+    end
+
+    describe "setting name" do
+      context "when name doesn't contain _id" do
+        let(:name) { "address" }
+        it "returns the name" do
+          expect(association.name).to eq("address")
+        end
+      end
+
+      context "when name contains _id" do
+        let(:name) { "address_id" }
+        it "strips the id from the name" do
+          expect(association.name).to eq("address")
+        end
       end
     end
   end
@@ -73,6 +117,22 @@ describe Frontier::Association do
   describe "#is_association?" do
     subject { association.is_association? }
     it { should eq(true) }
+  end
+
+  describe "#is_nested?" do
+    subject { association.is_nested? }
+    let(:options) { {form_type: form_type} }
+
+    context "when form is 'inline'" do
+      let(:form_type) { "inline" }
+      it { should eq(true) }
+    end
+
+    context "when form is 'select'" do
+      let(:form_type) { "select" }
+      it { should eq(false) }
+    end
+
   end
 
 end

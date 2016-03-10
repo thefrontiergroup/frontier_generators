@@ -3,7 +3,9 @@ require 'rails_helper'
 feature 'Admin can update an existing <%= model_configuration.as_constant %>' do
 
   sign_in_as(:admin)
-  let!(<%= model_configuration.as_symbol %>) { FactoryGirl.create(<%= model_configuration.as_symbol %>) }
+  <%= Frontier::SpecSupport::LetStatement.new(model_configuration.model_name, Frontier::FactoryGirlSupport::Declaration.new("create", model_configuration).to_s).to_s(has_bang: true) %>
+<%= render_with_indent(1, Frontier::SpecSupport::ObjectSetup::AttributesSetup.new(model_configuration).to_s) %>
+<%= render_with_indent(1, Frontier::SpecSupport::ObjectSetup::AssociatedModelSetup.new(model_configuration).to_s) %>
 
   before do
     visit(<%= model_configuration.url_builder.index_path %>)
@@ -13,14 +15,12 @@ feature 'Admin can update an existing <%= model_configuration.as_constant %>' do
   end
 
   scenario 'Admin updates user with valid data' do
-    attributes = FactoryGirl.attributes_for(<%= model_configuration.as_symbol %>)
-<% model_configuration.attributes.each do |attribute| -%>
-    <%= Frontier::FeatureSpecAssignment.new(attribute).to_s %>
-<% end -%>
+<%= render_with_indent(2, Frontier::SpecSupport::FeatureSpecAssignmentSet.new(model_configuration).to_s) %>
 
     submit_form
 
-    expect(<%= model_configuration.model_name %>.reload).to have_attributes(attributes)
+    <%= model_configuration.model_name %>.reload
+<%= render_with_indent(2, Frontier::SpecSupport::ObjectAttributesAssertion.new(model_configuration).to_s) %>
   end
 
 end

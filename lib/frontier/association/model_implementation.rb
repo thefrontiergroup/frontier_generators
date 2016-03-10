@@ -7,10 +7,21 @@ class Frontier::Association::ModelImplementation
   end
 
   def to_s
-    [implementation_without_options, implementation_options].compact.join(", ")
+    [
+      association_declaration,
+      (nested_declaration if association.is_nested?)
+    ].compact.join("\n")
   end
 
 private
+
+  def association_declaration
+    [implementation_without_options, implementation_options].compact.join(", ")
+  end
+
+  def class_name
+    association.properties[:class_name]
+  end
 
   def implementation_without_options
     case association.properties[:type]
@@ -33,8 +44,8 @@ private
     options
   end
 
-  def class_name
-    association.properties[:class_name]
+  def nested_declaration
+    "accepts_nested_attributes_for #{association.as_symbol}"
   end
 
 end

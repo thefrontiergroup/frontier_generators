@@ -6,11 +6,11 @@ class Frontier::FeatureSpecAssignment
     @attribute_or_association = attribute_or_association
   end
 
-  def to_s
+  def to_s(attributes_name="attributes")
     if attribute_or_association.is_a?(Frontier::Association)
       Frontier::Association::FeatureSpecAssignment.new(attribute_or_association).to_s
     else
-      Frontier::Attribute::FeatureSpecAssignment.new(attribute_or_association).to_s
+      Frontier::Attribute::FeatureSpecAssignment.new(attribute_or_association).to_s(attributes_name)
     end
   end
 

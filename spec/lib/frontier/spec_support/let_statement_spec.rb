@@ -3,13 +3,16 @@ require 'spec_helper'
 RSpec.describe Frontier::SpecSupport::LetStatement do
 
   describe "#to_s" do
-    subject { Frontier::SpecSupport::LetStatement.new("jordan", "rules").to_s(options) }
+    subject { Frontier::SpecSupport::LetStatement.new("jordan", text).to_s(options) }
+
     let(:options) do
       {
         has_bang: has_bang,
         is_multiline: is_multiline
       }
     end
+
+    let(:text)         { "rules" }
     let(:has_bang)     { false }
     let(:is_multiline) { false }
 
@@ -37,10 +40,18 @@ TEXT
           raw.rstrip
         end
 
-        it { should eq(expected) }
+        context "and the given string has no indents" do
+          it { should eq(expected) }
+        end
+
+        context "and the given string has indents" do
+          let(:text) { "\nrules" }
+          it { should eq(expected) }
+        end
+
       end
 
-      context "whe !is_multiline" do
+      context "when !is_multiline" do
         let(:is_multiline) { false }
         it { should eq("let(:jordan) { rules }") }
       end

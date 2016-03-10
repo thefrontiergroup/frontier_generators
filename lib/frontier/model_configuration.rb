@@ -36,8 +36,12 @@ class Frontier::ModelConfiguration
     @url_builder = Frontier::UrlBuilder.new(self)
   end
 
+  def associations
+    attributes.select(&:is_association?)
+  end
+
   def as_constant
-    "#{model_name.camelize}"
+    "#{model_name.to_s.camelize}"
   end
 
   def as_ivar_collection
@@ -59,7 +63,6 @@ class Frontier::ModelConfiguration
   def as_title
     model_name.titleize
   end
-
 
   # The primary attribute is used for:
   #   * Model#to_s (and spec)

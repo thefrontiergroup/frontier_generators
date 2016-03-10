@@ -6,6 +6,17 @@ class Frontier::ControllerAction::DestroyAction
     @model_configuration = model_configuration
   end
 
+  ##
+  # Renders the destroy action for a controller. EG:
+  #
+  # def destroy
+  #   @user = find_user
+  #   authorize(@user)
+  #   @user.destroy
+  #
+  #   respond_with(@user, location: admin_users_path)
+  # end
+  #
   def to_s
     raw = <<-STRING
 def destroy

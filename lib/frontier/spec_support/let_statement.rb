@@ -1,5 +1,7 @@
 class Frontier::SpecSupport::LetStatement
 
+  include Frontier::IndentRenderer
+
   attr_reader :key, :body
 
   def initialize(key, body)
@@ -32,7 +34,11 @@ private
 
   def let_block(is_multiline)
     if is_multiline
-      "do\n  #{body}\nend"
+      [
+        "do",
+        render_with_indent(1, body.lstrip),
+        "end"
+      ].join("\n")
     else
       "{ #{body} }"
     end

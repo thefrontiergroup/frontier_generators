@@ -5,40 +5,27 @@ describe Frontier::Input::Association do
   let(:input_implementation) { Frontier::Input::Association.new(association) }
   let(:association) { Frontier::Association.new(build_model_configuration, name, options) }
   let(:name) { "association_name_id" }
-  let(:options) { {} }
+  let(:options) { {form_type: form_type} }
 
   describe "#to_s" do
     subject { input_implementation.to_s(input_options) }
     let(:input_options) { {} }
 
-    describe "providing additional options" do
-      let(:expected_output) { "f.association :association_name, collection: AssociationName.all, my_option: :jordan_rules" }
-      let(:name) { "association_name_id" }
-      let(:input_options) { {my_option: ":jordan_rules"} }
+    context "when form_type is 'inline'" do
+      let(:form_type) { "inline" }
 
-      it { should eq(expected_output) }
+      it "delegates to the Frontier::Input::InlineFormAssociation" do
+        expect_any_instance_of(Frontier::Input::InlineFormAssociation).to receive(:to_s)
+        subject
+      end
     end
 
-    describe "setting name of input" do
-      context "with class_name declared" do
-        let(:expected_output) { "f.association :association_name, collection: Dong.all" }
-        let(:options) { {class_name: "Dong"} }
+    context "when form_type is 'select'" do
+      let(:form_type) { "select" }
 
-        it { should eq(expected_output) }
-      end
-
-      context "without class_name declared" do
-        let(:expected_output) { "f.association :association_name, collection: AssociationName.all" }
-
-        context "when field_name includes _id already" do
-          let(:name) { "association_name_id" }
-          it { should eq(expected_output) }
-        end
-
-        context "when field_name doesn't include _id" do
-          let(:name) { "association_name" }
-          it { should eq(expected_output) }
-        end
+      it "delegates to the Frontier::Input::SelectFormAssociation" do
+        expect_any_instance_of(Frontier::Input::SelectFormAssociation).to receive(:to_s)
+        subject
       end
     end
   end

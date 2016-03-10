@@ -6,6 +6,17 @@ class Frontier::ControllerAction::UpdateAction
     @model_configuration = model_configuration
   end
 
+  ##
+  # Renders the update action for a controller. EG:
+  #
+  # def update
+  #   @user = find_user
+  #   @user.assign_attributes(strong_params_for(User))
+  #   @user.save if authorize(@user)
+  #
+  #   respond_with(@user, location: admin_users_path)
+  # end
+  #
   def to_s
     raw = <<-STRING
 def update

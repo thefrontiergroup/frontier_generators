@@ -34,7 +34,14 @@ protected
     options
   end
 
+  def form_name(options)
+    options[:form_name] || "f"
+  end
+
   def input_options(additional_options)
+    # Ignore the form_name attribute
+    additional_options = additional_options.dup
+    additional_options.delete(:form_name)
     # Take options like {one: ':two', abacus: 666} and create collection of strings
     # ["abacus: 666", "one: :two"]
     additional_options_as_strings = attribute_options.merge(additional_options).map {|key, value| "#{key}: #{value}"}.sort
@@ -47,3 +54,5 @@ end
 require_relative './input/association.rb'
 require_relative './input/attribute.rb'
 require_relative './input/factory.rb'
+require_relative './input/inline_form_association.rb'
+require_relative './input/select_form_association.rb'

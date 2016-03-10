@@ -1,23 +1,14 @@
 require 'spec_helper'
 
-RSpec.describe Frontier::ControllerAction::EditAction do
+RSpec.describe Frontier::ControllerActionSupport::NestedAssociationBuilder do
 
   describe "#to_s" do
-    subject { Frontier::ControllerAction::EditAction.new(model_configuration).to_s }
+    subject { Frontier::ControllerActionSupport::NestedAssociationBuilder.new(model_configuration, "@test_model").to_s }
 
     context "a model without any associations" do
       let(:model_configuration) { build_model_configuration }
-      let(:expected) do
-        raw = <<-STRING
-def edit
-  @test_model = find_test_model
-  authorize(TestModel)
-end
-STRING
-        raw.rstrip
-      end
 
-      it { should eq(expected) }
+      it { should eq("") }
     end
 
     context "a model with shallow nested associations" do
@@ -43,12 +34,8 @@ STRING
 
       let(:expected) do
         raw = <<-STRING
-def edit
-  @test_model = find_test_model
-  authorize(TestModel)
-  if @test_model.other_address.blank?
-    @test_model.build_other_address
-  end
+if @test_model.other_address.blank?
+  @test_model.build_other_address
 end
 STRING
         raw.rstrip
@@ -86,13 +73,9 @@ STRING
 
       let(:expected) do
         raw = <<-STRING
-def edit
-  @test_model = find_test_model
-  authorize(TestModel)
-  if @test_model.other_address.blank?
-    @test_model.build_other_address
-    @test_model.other_address.build_state
-  end
+if @test_model.other_address.blank?
+  @test_model.build_other_address
+  @test_model.other_address.build_state
 end
 STRING
         raw.rstrip
@@ -137,14 +120,10 @@ STRING
 
       let(:expected) do
         raw = <<-STRING
-def edit
-  @test_model = find_test_model
-  authorize(TestModel)
-  if @test_model.other_address.blank?
-    @test_model.build_other_address
-    @test_model.other_address.build_state
-    @test_model.other_address.build_contact_person
-  end
+if @test_model.other_address.blank?
+  @test_model.build_other_address
+  @test_model.other_address.build_state
+  @test_model.other_address.build_contact_person
 end
 STRING
         raw.rstrip

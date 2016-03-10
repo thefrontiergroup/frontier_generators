@@ -41,6 +41,7 @@ class Frontier::Attribute
 
 # Views
 
+  # TODO: Break this out into own class
   def as_enum
     # Should look like:
     #   enum attribute_name: ["one", "two"]

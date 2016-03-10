@@ -3,9 +3,8 @@ require 'rails_helper'
 feature 'Admin can create a new <%= model_configuration.as_constant %>' do
 
   sign_in_as(:admin)
-<% model_configuration.attributes.select(&:is_association?).each do |association| -%>
-  let!(<%= association.as_symbol %>) { FactoryGirl.create(<%= association.as_factory_name %>) }
-<% end -%>
+<%= render_with_indent(1, Frontier::SpecSupport::ObjectSetup::AttributesSetup.new(model_configuration).to_s) %>
+<%= render_with_indent(1, Frontier::SpecSupport::ObjectSetup::AssociatedModelSetup.new(model_configuration).to_s) %>
 
   before do
     visit(<%= model_configuration.url_builder.index_path %>)
@@ -13,14 +12,11 @@ feature 'Admin can create a new <%= model_configuration.as_constant %>' do
   end
 
   scenario 'Admin creates <%= model_configuration.as_constant %> with valid data' do
-    attributes = FactoryGirl.attributes_for(<%= model_configuration.as_symbol %>)
-<% model_configuration.attributes.each do |attribute| -%>
-    <%= Frontier::FeatureSpecAssignment.new(attribute).to_s %>
-<% end -%>
+<%= render_with_indent(2, Frontier::SpecSupport::FeatureSpecAssignmentSet.new(model_configuration).to_s) %>
 
     submit_form
 
     <%= model_configuration.model_name %> = <%= model_configuration.as_constant %>.order(created_at: :desc).first
-    expect(<%= model_configuration.model_name %>).to have_attributes(attributes)
+<%= render_with_indent(2, Frontier::SpecSupport::ObjectAttributesAssertion.new(model_configuration).to_s) %>
   end
 end

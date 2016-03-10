@@ -40,19 +40,21 @@ describe <%= controller_name %> do
 
   describe 'POST create' do
     subject { post :create, <%= model_configuration.model_name %>: attributes }
+    # params.require(<%= model_configuration.as_symbol %>) will raise an exception if the
+    # attributes hash provided is blank, so we pass through a fake value to prevent this.
     let(:attributes) { {id: 666} }
 
     authenticated_as(:admin) do
 
       context "with valid parameters" do
-        let(:attributes) { parameters_for(<%= model_configuration.as_symbol %>) }
+<%= render_with_indent(4, Frontier::SpecSupport::ObjectSetup.new(model_configuration).to_s) %>
 
         it "creates a <%= model_configuration.as_constant %> object with the given attributes" do
           subject
 
           <%= model_configuration.model_name %> = <%= model_configuration.as_constant %>.order(:created_at).last
           expect(<%= model_configuration.model_name %>).to be_present
-          expect(<%= model_configuration.model_name %>).to have_attributes(attributes)
+<%= render_with_indent(5, Frontier::SpecSupport::ObjectAttributesAssertion.new(model_configuration).to_s) %>
         end
 
         it { should redirect_to(<%= model_configuration.url_builder.index_path %>) }
@@ -95,11 +97,13 @@ describe <%= controller_name %> do
     authenticated_as(:admin) do
 
       context "with valid parameters" do
-        let(:attributes) { parameters_for(<%= model_configuration.as_symbol %>) }
+<%= render_with_indent(4, Frontier::SpecSupport::ObjectSetup.new(model_configuration).to_s) %>
 
         it "updates the <%= model_configuration.as_constant %> object with the given attributes" do
           update_resource
-          expect(<%= model_configuration.model_name %>.reload).to have_attributes(attributes)
+
+          <%= model_configuration.model_name %>.reload
+<%= render_with_indent(5, Frontier::SpecSupport::ObjectAttributesAssertion.new(model_configuration).to_s) %>
         end
 
         it { should redirect_to(<%= model_configuration.url_builder.index_path %>) }
