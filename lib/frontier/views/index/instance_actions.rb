@@ -1,12 +1,6 @@
 class Frontier::Views::Index::InstanceActions
 
-  include Frontier::IndentRenderer
-
-  attr_reader :model_configuration
-
-  def initialize(model_configuration)
-    @model_configuration = model_configuration
-  end
+  include Frontier::ModelConfigurationProperty
 
   def has_actions?
     model_configuration.show_update? || model_configuration.show_delete?
