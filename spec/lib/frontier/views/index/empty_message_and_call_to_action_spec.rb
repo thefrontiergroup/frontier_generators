@@ -23,12 +23,10 @@ describe Frontier::Views::Index::EmptyMessageAndCallToAction do
       let(:show_create) { true }
       let(:expected) do
         raw = <<-STRING
-- if can?(:new, User)
-  %p
-    There are no users,
-    = link_to("click here to create one.", new_admin_user_path)
-- else
-  %p There are no users.
+%p
+  There are no users.
+  - if can?(:new, User)
+    = link_to("Click here to create one.", new_admin_user_path)
 STRING
         raw.rstrip
 end

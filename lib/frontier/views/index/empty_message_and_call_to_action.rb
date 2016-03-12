@@ -6,7 +6,7 @@ class Frontier::Views::Index::EmptyMessageAndCallToAction
     if model_configuration.show_create?
       empty_message_with_call_to_action
     else
-      empty_message_without_call_to_action
+      "%p #{empty_message_without_call_to_action}"
     end
   end
 
@@ -14,18 +14,16 @@ private
 
   def empty_message_with_call_to_action
     raw = <<-STRING
-- if #{Frontier::Authorization::Check.new(model_configuration, model_configuration.as_constant, :new)}
-  %p
-    There are no #{model_pluralized},
-    = link_to(\"click here to create one.\", #{model_configuration.url_builder.new_path})
-- else
+%p
   #{empty_message_without_call_to_action}
+  - if #{Frontier::Authorization::Check.new(model_configuration, model_configuration.as_constant, :new)}
+    = link_to(\"Click here to create one.\", #{model_configuration.url_builder.new_path})
 STRING
     raw.rstrip
   end
 
   def empty_message_without_call_to_action
-    "%p There are no #{model_pluralized}."
+    "There are no #{model_pluralized}."
   end
 
   def model_pluralized
