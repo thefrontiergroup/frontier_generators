@@ -1,9 +1,6 @@
 class Frontier::MigrationStringBuilder
-  attr_reader :model_configuration
 
-  def initialize(model_configuration)
-    @model_configuration = model_configuration
-  end
+  include Frontier::ModelConfigurationProperty
 
   # EG: CreateDriver name:string contact_number:string
   def to_s

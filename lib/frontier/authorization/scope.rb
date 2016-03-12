@@ -1,10 +1,6 @@
 class Frontier::Authorization::Scope
 
-  attr_reader :model_configuration
-
-  def initialize(model_configuration)
-    @model_configuration = model_configuration
-  end
+  include Frontier::ModelConfigurationProperty
 
   def to_s
     if model_configuration.using_pundit?

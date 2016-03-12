@@ -1,10 +1,6 @@
 class Frontier::FormHeader
 
-  attr_reader :model_configuration
-
-  def initialize(model_configuration)
-    @model_configuration = model_configuration
-  end
+  include Frontier::ModelConfigurationProperty
 
   def to_s
     "simple_form_for #{form_name}, #{Frontier::HashSingleLineDecorator.new(form_options)} do |f|"

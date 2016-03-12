@@ -1,10 +1,6 @@
 class Frontier::SpecSupport::ObjectSetup::Attributes
 
-  attr_reader :model_configuration
-
-  def initialize(model_configuration)
-    @model_configuration = model_configuration
-  end
+  include Frontier::ModelConfigurationProperty
 
   # Return a string that represents the attributes that would be used in the setup for a controller
   # spec. EG:

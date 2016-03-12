@@ -1,10 +1,6 @@
 class Frontier::SpecSupport::ObjectSetup
 
-  attr_reader :model_configuration
-
-  def initialize(model_configuration)
-    @model_configuration = model_configuration
-  end
+  include Frontier::ModelConfigurationProperty
 
   # Render a set of params that can be used in the controller specs. We need to use FactoryGirl
   # as much as possible to reduce duplication in the code.

@@ -1,10 +1,6 @@
 class Frontier::ControllerAction::IndexAction
 
-  attr_reader :model_configuration
-
-  def initialize(model_configuration)
-    @model_configuration = model_configuration
-  end
+  include Frontier::ModelConfigurationProperty
 
   def to_s
     raw = <<-STRING

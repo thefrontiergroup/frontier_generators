@@ -1,10 +1,6 @@
 class Frontier::SpecSupport::ObjectSetup::AssociatedModelSetup
 
-  attr_reader :model_configuration
-
-  def initialize(model_configuration)
-    @model_configuration = model_configuration
-  end
+  include Frontier::ModelConfigurationProperty
 
   # Provide the let declarations that will setup the associated models to be used in the params:
   #

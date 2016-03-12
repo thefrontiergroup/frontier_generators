@@ -1,10 +1,6 @@
 class Frontier::ControllerAction::UpdateAction
 
-  attr_reader :model_configuration
-
-  def initialize(model_configuration)
-    @model_configuration = model_configuration
-  end
+  include Frontier::ModelConfigurationProperty
 
   ##
   # Renders the update action for a controller. EG:

@@ -5,6 +5,7 @@ require_relative "./frontier/error_reporter"
 
 # Modules
 require_relative "./frontier/indent_renderer"
+require_relative "./frontier/model_configuration_property"
 
 # Classes
 require_relative "./frontier/association"

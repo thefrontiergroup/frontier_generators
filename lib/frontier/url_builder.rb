@@ -1,10 +1,6 @@
 class Frontier::UrlBuilder
 
-  attr_reader :model_configuration
-
-  def initialize(model_configuration)
-    @model_configuration = model_configuration
-  end
+  include Frontier::ModelConfigurationProperty
 
   def index_path
     "#{plural_resource_with_namespaces}"

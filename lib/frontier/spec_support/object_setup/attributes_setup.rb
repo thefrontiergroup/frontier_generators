@@ -1,10 +1,6 @@
 class Frontier::SpecSupport::ObjectSetup::AttributesSetup
 
-  attr_reader :model_configuration
-
-  def initialize(model_configuration)
-    @model_configuration = model_configuration
-  end
+  include Frontier::ModelConfigurationProperty
 
   # Provide the let declarations that will be the basis of the attributes to be used in
   # the params:
