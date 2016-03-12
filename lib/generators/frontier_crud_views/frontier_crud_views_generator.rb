@@ -27,6 +27,10 @@ class FrontierCrudViewsGenerator < Frontier::Generator
 
 private
 
+  def instance_actions
+    @instance_actions ||= Frontier::Views::Index::InstanceActions.new(model_configuration)
+  end
+
   def generate_base_path
     File.join("app", "views", *model_configuration.namespaces, model_configuration.model_name.pluralize)
   end

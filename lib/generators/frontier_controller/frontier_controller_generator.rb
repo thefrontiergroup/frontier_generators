@@ -12,10 +12,6 @@ class FrontierControllerGenerator < Frontier::Generator
 
 protected
 
-  def instance_actions
-    @instance_actions ||= Frontier::Views::Index::InstanceActions.new(model_configuration)
-  end
-
   # Scaffold methods - called from within template
 
   # EG: Admin::Users::DriversController
