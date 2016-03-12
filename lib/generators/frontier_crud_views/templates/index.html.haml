@@ -33,4 +33,4 @@
 
   = paginate <%= model_configuration.as_ivar_collection %>
 - else
-  %p<%= model_configuration.attributes.select(&:show_on_index?).count + 1 %>} There are no <%= model_configuration.as_title.pluralize.downcase %>
+<%= render_with_indent(1, Frontier::Views::Index::EmptyMessageAndCallToAction.new(model_configuration).to_s) %>
