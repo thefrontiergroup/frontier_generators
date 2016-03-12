@@ -28,5 +28,6 @@ work_site:
             presence: true
         state:
           type: belongs_to
+          form_type: select
           validates:
             presence: true
