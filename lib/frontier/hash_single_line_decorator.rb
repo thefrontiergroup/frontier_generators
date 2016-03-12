@@ -13,6 +13,8 @@ class Frontier::HashSingleLineDecorator
       when Hash
         value = Frontier::HashSingleLineDecorator.new(value).to_s
         value = "{#{value}}"
+      when Symbol
+        value = ":#{value}"
       when String
         value = "\"#{value}\""
       end
