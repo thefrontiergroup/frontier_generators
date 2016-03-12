@@ -45,7 +45,7 @@ class Frontier::ModelConfiguration
   end
 
   def as_ivar_collection
-    "@#{model_name.pluralize}"
+    "@#{model_name.to_s.pluralize}"
   end
 
   def as_ivar_instance
@@ -57,11 +57,11 @@ class Frontier::ModelConfiguration
   end
 
   def as_symbol_collection
-    ":#{model_name.pluralize}"
+    ":#{model_name.to_s.pluralize}"
   end
 
   def as_title
-    model_name.titleize
+    model_name.to_s.titleize
   end
 
   # The primary attribute is used for:
