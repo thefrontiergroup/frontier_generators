@@ -3,8 +3,8 @@ class Frontier::ModelConfiguration
   attr_reader *[
     :attributes,
     :authorization,
+    :controller_prefixes,
     :model_name,
-    :namespaces,
     :skip_factory,
     :skip_model,
     :skip_policies,
@@ -17,7 +17,11 @@ class Frontier::ModelConfiguration
   def initialize(attributes)
     # Basic data about the model
     @model_name    = attributes.keys.first
-    @namespaces    = attributes[@model_name][:namespaces] || []
+    @controller_prefixes = attributes[@model_name][:controller_prefixes] || []
+    unless controller_prefixes.is_a?(Array)
+      raise(ArgumentError, "Invalid value for 'controller_prefixes' passed through: #{controller_prefixes}. Must be an array. EG: [:admin]")
+    end
+    @controller_prefixes = @controller_prefixes.map {|prefix| Frontier::ControllerPrefix.new(prefix)}
     # TODO: Assert validity of attributes
     @attributes    = (attributes[@model_name][:attributes] || []).collect do |name, properties|
       Frontier::Attribute::Factory.build_attribute_or_association(self, name, properties)
