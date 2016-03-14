@@ -9,14 +9,14 @@ describe Frontier::HashSingleLineDecorator do
     let(:hash) do
       {
         a: 1,
-        "b" => 2,
+        "b" => :a_symbol,
         c: {d: "some_string"},
         e: {f: {"g" => 4}}
       }
     end
 
     it "decorates the hash" do
-      should eq("a: 1, b: 2, c: {d: \"some_string\"}, e: {f: {g: 4}}")
+      should eq("a: 1, b: :a_symbol, c: {d: \"some_string\"}, e: {f: {g: 4}}")
     end
   end
 

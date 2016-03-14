@@ -6,35 +6,31 @@
       = link_to "Add new <%= model_configuration.as_title %>", <%= model_configuration.url_builder.new_path %>, class: "btn"
 <% end -%>
 
-%table
-  %thead
-    %tr
+- if <%= model_configuration.as_ivar_collection %>.exists?
+  %table
+    %thead
+      %tr
 <% model_configuration.attributes.select(&:show_on_index?).each do |attribute| -%>
 <% if attribute.sortable? -%>
-      %th= sortable_heading_for(<%= attribute.as_symbol %>)
+        %th= sortable_heading_for(<%= attribute.as_symbol %>)
 <% else -%>
-      %th <%= attribute.name.titleize %>
+        %th <%= attribute.name.titleize %>
 <% end -%>
 <% end -%>
-      %th.actions Actions
-  %tbody
-    - if <%= model_configuration.as_ivar_collection %>.exists?
+<% if instance_actions.has_actions? -%>
+        %th.actions Actions
+<% end -%>
+    %tbody
       - <%= model_configuration.as_ivar_collection %>.each do |<%= model_configuration.model_name %>|
         %tr
 <% model_configuration.attributes.select(&:show_on_index?).each do |attribute| -%>
           %td= <%= attribute.as_index_string %>
 <% end -%>
+<% if instance_actions.has_actions? -%>
           %td.actions
-<% if model_configuration.show_update? -%>
-            - if <%= Frontier::Authorization::Check.new(model_configuration, model_configuration.model_name, :edit) %>
-              = link_to("Edit", <%= model_configuration.url_builder.edit_path %>, class: "btn btn-small")
+<%= render_with_indent(6, instance_actions.to_s) %>
 <% end -%>
-<% if model_configuration.show_delete? -%>
-            - if <%= Frontier::Authorization::Check.new(model_configuration, model_configuration.model_name, :destroy) %>
-              = link_to("Delete", <%= model_configuration.url_builder.delete_path %>, method: :delete, data: { confirm: "Are you sure you want to delete this <%= model_configuration.as_title %>?" }, class: "btn btn-small btn-danger")
-<% end -%>
-    - else
-      %tr
-        %td{colspan: <%= model_configuration.attributes.select(&:show_on_index?).count + 1 %>} There are no <%= model_configuration.as_title.pluralize.downcase %>
 
-= paginate <%= model_configuration.as_ivar_collection %>
+  = paginate <%= model_configuration.as_ivar_collection %>
+- else
+<%= render_with_indent(1, Frontier::Views::Index::EmptyMessageAndCallToAction.new(model_configuration).to_s) %>
