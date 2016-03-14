@@ -1,6 +1,8 @@
 class Frontier
 end
 
+require 'indefinite_article'
+
 require_relative "./frontier/error_reporter"
 
 # Modules
