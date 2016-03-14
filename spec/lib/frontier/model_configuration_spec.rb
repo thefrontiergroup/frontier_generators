@@ -24,6 +24,11 @@ describe Frontier::ModelConfiguration do
     it { should eq(":test_models") }
   end
 
+  describe "#as_name" do
+    subject { model_configuration.as_name }
+    it { should eq("test model") }
+  end
+
   describe "#as_title" do
     subject { model_configuration.as_title }
     it { should eq("Test Model") }

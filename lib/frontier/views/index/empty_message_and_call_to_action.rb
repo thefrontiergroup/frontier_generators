@@ -17,7 +17,7 @@ private
 %p
   #{empty_message_without_call_to_action}
   - if #{Frontier::Authorization::Check.new(model_configuration, model_configuration.as_constant, :new)}
-    = link_to(\"Create #{model_configuration.model_name.with_indefinite_article}.\", #{model_configuration.url_builder.new_path})
+    = link_to(\"Create #{model_configuration.as_name.with_indefinite_article}.\", #{model_configuration.url_builder.new_path})
 STRING
     raw.rstrip
   end
@@ -47,7 +47,5 @@ Regarding terminology:
   - Make Links Click with Users Without Saying “Click Here”
 
 * https://www.smashingmagazine.com/2012/06/links-should-never-say-click-here/
-
-
 
 =end

@@ -60,6 +60,10 @@ class Frontier::ModelConfiguration
     ":#{model_name.to_s.pluralize}"
   end
 
+  def as_name
+    model_name.to_s.gsub("_", " ")
+  end
+
   def as_title
     model_name.to_s.titleize
   end

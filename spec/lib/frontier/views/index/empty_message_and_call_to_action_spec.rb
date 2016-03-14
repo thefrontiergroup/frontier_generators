@@ -11,7 +11,7 @@ describe Frontier::Views::Index::EmptyMessageAndCallToAction do
       skip_ui_options << "create" unless show_create
 
       Frontier::ModelConfiguration.new({
-        user: {
+        user_setting: {
           authorization: "cancancan",
           namespaces: ["admin"],
           skip_ui: skip_ui_options
@@ -24,9 +24,9 @@ describe Frontier::Views::Index::EmptyMessageAndCallToAction do
       let(:expected) do
         raw = <<-STRING
 %p
-  There are no users.
-  - if can?(:new, User)
-    = link_to("Create a user.", new_admin_user_path)
+  There are no user settings.
+  - if can?(:new, UserSetting)
+    = link_to("Create a user setting.", new_admin_user_setting_path)
 STRING
         raw.rstrip
 end
@@ -36,7 +36,7 @@ end
 
     context "when there is no new action" do
       let(:show_create) { false }
-      let(:expected) { "%p There are no users." }
+      let(:expected) { "%p There are no user settings." }
 
       it { should eq(expected) }
     end
