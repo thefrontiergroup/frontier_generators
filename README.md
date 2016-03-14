@@ -59,6 +59,36 @@ model_name:
   soft_delete: true
 ```
 
+## Namespaces and nested routes
+
+You can specify a set of namespaces or a collection of models that your generated controller will be nested under using the `controller_prefixes` option.
+
+NOTE: Support for nested resources is a WIP.
+
+```yaml
+model_name:
+  # Example: A single namespace
+  #
+  # Controller: Admin::ModelNamesController
+  # Route:      admin_model_names_path (admin/model_names)
+  # Views:      views/admin/model_names
+  controller_prefixes: [:admin]
+
+  # Example: A single nested resource
+  #
+  # Controller: Client::ModelNamesController
+  # Route:      client_model_names_path(@client) (client/:id/model_names)
+  # Views:      views/client/model_names
+  controller_prefixes: [@client]
+
+  # Example: A namespace and a nested resource
+  #
+  # Controller: Admin::Client::ModelNamesController
+  # Route:      admin_client_model_names_path(@client) (admin/client/:id/model_names)
+  # Views:      views/admin/client/model_names
+  controller_prefixes: [:admin, @client]
+```
+
 ## Attributes
 
 You can specify which attributes should be on your model thusly:
