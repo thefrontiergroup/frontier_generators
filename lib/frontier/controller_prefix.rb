@@ -16,6 +16,14 @@ class Frontier::ControllerPrefix
     end
   end
 
+  def as_route_component
+    name.sub("@", "")
+  end
+
+  def as_route_object
+    name if nested_model?
+  end
+
   def namespace?
     !nested_model?
   end

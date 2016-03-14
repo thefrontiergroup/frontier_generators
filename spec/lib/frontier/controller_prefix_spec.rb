@@ -18,6 +18,34 @@ describe Frontier::ControllerPrefix do
     end
   end
 
+  describe "#as_route_component" do
+    subject { prefix.as_route_component }
+
+    context "when namespace" do
+      let(:name) { "model_name" }
+      it { should eq("model_name") }
+    end
+
+    context "when nested resource" do
+      let(:name) { "@model_name" }
+      it { should eq("model_name") }
+    end
+  end
+
+  describe "#as_route_object" do
+    subject { prefix.as_route_object }
+
+    context "when namespace" do
+      let(:name) { "model_name" }
+      it { should eq(nil) }
+    end
+
+    context "when nested resource" do
+      let(:name) { "@model_name" }
+      it { should eq("@model_name") }
+    end
+  end
+
   describe "#namespace?" do
     subject { prefix.namespace? }
 
