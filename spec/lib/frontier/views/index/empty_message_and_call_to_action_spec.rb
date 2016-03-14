@@ -13,7 +13,6 @@ describe Frontier::Views::Index::EmptyMessageAndCallToAction do
       Frontier::ModelConfiguration.new({
         user_setting: {
           authorization: "cancancan",
-          namespaces: ["admin"],
           skip_ui: skip_ui_options
         }
       })
@@ -26,7 +25,7 @@ describe Frontier::Views::Index::EmptyMessageAndCallToAction do
 %p
   There are no user settings.
   - if can?(:new, UserSetting)
-    = link_to("Create a user setting.", new_admin_user_setting_path)
+    = link_to("Create a user setting.", new_user_setting_path)
 STRING
         raw.rstrip
 end
