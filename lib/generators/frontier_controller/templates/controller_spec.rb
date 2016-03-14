@@ -8,17 +8,6 @@ describe <%= controller_name %> do
 
     authenticated_as(:admin) do
       it { should render_template(:index) }
-
-      describe_assign(<%= model_configuration.as_symbol_collection %>) do
-        subject(<%= model_configuration.as_symbol_collection %>) { get_index; assigns(<%= model_configuration.as_symbol_collection %>) }
-
-        describe "sorting" do
-          it "sorts by query parameters" do
-            expect(RailsSort).to receive(:sort).with(instance_of(<%= model_configuration.as_constant %>::ActiveRecord_Relation), anything, anything).and_call_original
-            subject
-          end
-        end
-      end
     end
 
     it_behaves_like "action requiring authentication"
