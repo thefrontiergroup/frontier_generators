@@ -16,7 +16,8 @@ class Frontier::ControllerAction::CreateAction
     raw = <<-STRING
 def create
   #{model_configuration.as_ivar_instance} = #{model_configuration.as_constant}.new(strong_params_for(#{model_configuration.as_constant}))
-  #{model_configuration.as_ivar_instance}.save if #{Frontier::Authorization::Assertion.new(model_configuration, :create).to_s}
+  #{Frontier::Authorization::Assertion.new(model_configuration, :create).to_s}
+  #{model_configuration.as_ivar_instance}.save
 
   respond_with(#{model_configuration.as_ivar_instance}, location: #{model_configuration.url_builder.index_path})
 end

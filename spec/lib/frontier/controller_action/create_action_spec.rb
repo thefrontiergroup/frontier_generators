@@ -10,7 +10,8 @@ RSpec.describe Frontier::ControllerAction::CreateAction do
       raw = <<-STRING
 def create
   @test_model = TestModel.new(strong_params_for(TestModel))
-  @test_model.save if authorize(TestModel)
+  authorize(TestModel)
+  @test_model.save
 
   respond_with(@test_model, location: admin_test_models_path)
 end
