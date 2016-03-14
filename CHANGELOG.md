@@ -6,3 +6,25 @@
 - Feature: Add a call to action to the 'no results message'
 - Feature: Improve the 'no results message'
 - Bug Fix: Only show actions %td if there are some actions on the index
+
+## 0.14.0
+
+Code refactoring only
+
+## 0.13.0
+
+- Feature: Add authorization option with support for CanCanCan and Pundit
+
+## 0.12.0
+
+- Feature: Add skip_model and skip_factory options
+
+## 0.11.0
+
+- Feature: Add skip_policy option
+
+# 0.10.0
+
+- Feature: Don't show new, edit, or delete actions when they are disabled
+- Feature: Numericality validations will effect the output factories
+- Feature: Nicer assertions in delete specs
