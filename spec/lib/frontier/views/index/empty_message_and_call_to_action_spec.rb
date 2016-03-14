@@ -26,7 +26,7 @@ describe Frontier::Views::Index::EmptyMessageAndCallToAction do
 %p
   There are no users.
   - if can?(:new, User)
-    = link_to("Click here to create one.", new_admin_user_path)
+    = link_to("Create a user now.", new_admin_user_path)
 STRING
         raw.rstrip
 end

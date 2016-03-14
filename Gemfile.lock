@@ -46,6 +46,8 @@ GEM
     globalid (0.3.5)
       activesupport (>= 4.1.0)
     i18n (0.7.0)
+    indefinite_article (0.2.4)
+      activesupport
     json (1.8.3)
     loofah (2.0.2)
       nokogiri (>= 1.5.9)
@@ -113,5 +115,9 @@ PLATFORMS
 
 DEPENDENCIES
   byebug
+  indefinite_article
   rails
   rspec
+
+BUNDLED WITH
+   1.10.6
