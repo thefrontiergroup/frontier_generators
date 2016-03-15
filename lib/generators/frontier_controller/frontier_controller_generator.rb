@@ -5,8 +5,8 @@ class FrontierControllerGenerator < Frontier::Generator
 
   def scaffold
     unless model_configuration.skip_ui?
-      template "controller.rb", generate_controller_path
-      template "controller_spec.rb", generate_controller_spec_path
+      template "controller.rb", Frontier::Controller::ImplementationPath.new(model_configuration).to_s
+      template "controller_spec.rb", Frontier::Controller::SpecPath.new(model_configuration).to_s
     end
   end
 
@@ -30,16 +30,6 @@ protected
   end
 
 private
-
-  def generate_controller_path
-    file_name = "#{model_configuration.model_name.pluralize}_controller.rb"
-    File.join("app", "controllers", *model_configuration.namespaces, file_name)
-  end
-
-  def generate_controller_spec_path
-    file_name = "#{model_configuration.model_name.pluralize}_controller_spec.rb"
-    File.join("spec", "controllers", *model_configuration.namespaces, file_name)
-  end
 
   # EG: Admin::Users::BaseController
   # EG: Admin::BaseController
