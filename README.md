@@ -67,7 +67,8 @@ NOTE: Support for nested resources is a WIP.
 
 Missing features:
 - routes
-- controller specs
+- controllers (use nested resources to find resoures)
+- controller specs (pass nested resources through in subject. This will be a whole shitload of work)
 
 ```yaml
 model_name:
