@@ -65,6 +65,10 @@ You can specify a set of namespaces or a collection of models that your generate
 
 NOTE: Support for nested resources is a WIP.
 
+Missing features:
+- routes
+- controller specs
+
 ```yaml
 model_name:
   # Example: A single namespace
