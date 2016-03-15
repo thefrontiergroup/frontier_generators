@@ -12,7 +12,7 @@ class FrontierCrudViewsGenerator < Frontier::Generator
         ["edit.html.haml", model_configuration.show_update?]
       ].each do |template_filename, should_generate|
         if should_generate
-          template template_filename, File.join(generate_base_path, template_filename)
+          template template_filename, File.join(Frontier::Views::ViewsFolderPath.new(model_configuration).to_s, template_filename)
         end
       end
 
@@ -31,12 +31,8 @@ private
     @instance_actions ||= Frontier::Views::Index::InstanceActions.new(model_configuration)
   end
 
-  def generate_base_path
-    File.join("app", "views", *model_configuration.namespaces, model_configuration.model_name.pluralize)
-  end
-
   def generate_feature_path(template_name, feature_name)
-    feature_path = File.join("spec", "features", *model_configuration.namespaces, model_configuration.model_name.pluralize, feature_name)
+    feature_path = File.join(Frontier::Views::FeatureSpecPath.new(model_configuration).to_s, feature_name)
     template(template_name, feature_path)
   end
 
