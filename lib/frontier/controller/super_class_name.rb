@@ -8,7 +8,7 @@ class Frontier::Controller::SuperClassName
   def to_s
     if model_configuration.controller_prefixes.any?
       [
-        *model_configuration.controller_prefixes.map(&:as_route_component).map(&:camelize),
+        *model_configuration.controller_prefixes.map(&:as_snake_case).map(&:camelize),
         "BaseController"
       ].join("::")
     else

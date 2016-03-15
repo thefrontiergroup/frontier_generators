@@ -12,7 +12,7 @@ class FrontierRouteGenerator < Frontier::Generator
   def scaffold
     unless model_configuration.skip_ui?
       @route_namespaces = model_configuration.controller_prefixes.each_with_index.collect do |ns, index|
-        FrontierRouteGenerator::Namespace.new(ns.as_route_component, index)
+        FrontierRouteGenerator::Namespace.new(ns.as_snake_case, index)
       end
       resource = FrontierRouteGenerator::Resource.new(model_configuration, namespaces)
 
@@ -43,7 +43,7 @@ private
   # EG: admin/user
   def model_with_namespaces
     [
-      *model_configuration.controller_prefixes.map(&:as_route_component),
+      *model_configuration.controller_prefixes.map(&:as_snake_case),
       model_configuration.model_name
     ].join("/")
   end

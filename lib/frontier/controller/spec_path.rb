@@ -9,7 +9,7 @@ class Frontier::Controller::SpecPath
     File.join(
       "spec",
       "controllers",
-      *model_configuration.controller_prefixes.map(&:as_route_component),
+      *model_configuration.controller_prefixes.map(&:as_snake_case),
       file_name
     ).to_s
   end

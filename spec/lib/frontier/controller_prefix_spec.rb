@@ -18,8 +18,8 @@ describe Frontier::ControllerPrefix do
     end
   end
 
-  describe "#as_route_component" do
-    subject { prefix.as_route_component }
+  describe "#as_snake_case" do
+    subject { prefix.as_snake_case }
 
     context "when namespace" do
       let(:name) { "model_name" }

@@ -46,7 +46,7 @@ private
 
   def resource_with_controller_prefixes(resource)
     [
-      *model_configuration.controller_prefixes.map(&:as_route_component),
+      *model_configuration.controller_prefixes.map(&:as_snake_case),
       resource,
       "path"
     ].join("_")
