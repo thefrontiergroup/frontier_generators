@@ -14,6 +14,8 @@ protected
 
   # Scaffold methods - called from within template
 
+  # Used in implementation and spec
+  #
   # EG: Admin::Users::DriversController
   # EG: Admin::DriversController
   # EG: DriversController
@@ -24,7 +26,7 @@ protected
   # EG: Admin::DriversController < Admin::BaseController
   # EG: DriversController < ApplicationController
   def controller_name_and_superclass
-    "#{controller_name} < #{superclass_for_controller}"
+    "#{controller_name} < #{controller_superclass_name}"
   end
 
 private
@@ -42,12 +44,8 @@ private
   # EG: Admin::Users::BaseController
   # EG: Admin::BaseController
   # EG: ApplicationController
-  def superclass_for_controller
-    if model_configuration.namespaces.any?
-      [*model_configuration.namespaces.map(&:camelize), "BaseController"].join("::")
-    else
-      "ApplicationController"
-    end
+  def controller_superclass_name
+    Frontier::Controller::SuperClassName.new(model_configuration).to_s
   end
 
 end
