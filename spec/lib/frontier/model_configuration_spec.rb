@@ -96,7 +96,7 @@ describe Frontier::ModelConfiguration do
     end
 
     describe "assigning @controller_prefixes" do
-      subject { model_configuration.controller_prefixes }
+      subject { model_configuration.controller_prefixes.map(&:name) }
       let(:model_configuration) { Frontier::ModelConfiguration.new(model_options) }
       let(:model_options) { {test_model: {controller_prefixes: controller_prefixes}} }
 
