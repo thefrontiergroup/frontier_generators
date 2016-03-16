@@ -11,7 +11,6 @@ describe Frontier::Views::Index::InstanceActions do
     Frontier::ModelConfiguration.new({
       user: {
         authorization: "cancancan",
-        namespaces: ["admin"],
         skip_ui: skip_ui_options
       }
     })
@@ -31,9 +30,9 @@ describe Frontier::Views::Index::InstanceActions do
       let(:expected) do
         raw = <<-STRING
 - if can?(:edit, user)
-  = link_to("Edit", edit_admin_user_path(user), class: "btn btn-small")
+  = link_to("Edit", edit_user_path(user), class: "btn btn-small")
 - if can?(:destroy, user)
-  = link_to("Delete", admin_user_path(user), method: :delete, data: {confirm: "Are you sure you want to delete this user?"}, class: "btn btn-small btn-danger")
+  = link_to("Delete", user_path(user), method: :delete, data: {confirm: "Are you sure you want to delete this user?"}, class: "btn btn-small btn-danger")
 STRING
         raw.rstrip
       end
@@ -56,7 +55,7 @@ STRING
       let(:expected) do
         raw = <<-STRING
 - if can?(:edit, user)
-  = link_to("Edit", edit_admin_user_path(user), class: "btn btn-small")
+  = link_to("Edit", edit_user_path(user), class: "btn btn-small")
 STRING
         raw.rstrip
       end
@@ -79,7 +78,7 @@ STRING
       let(:expected) do
         raw = <<-STRING
 - if can?(:destroy, user)
-  = link_to("Delete", admin_user_path(user), method: :delete, data: {confirm: "Are you sure you want to delete this user?"}, class: "btn btn-small btn-danger")
+  = link_to("Delete", user_path(user), method: :delete, data: {confirm: "Are you sure you want to delete this user?"}, class: "btn btn-small btn-danger")
 STRING
         raw.rstrip
       end

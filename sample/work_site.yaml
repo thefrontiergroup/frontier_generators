@@ -1,5 +1,6 @@
 work_site:
-  namespaces: ["admin"]
+  controller_prefixes: ["admin"]
+
   attributes:
     name:
       primary: true

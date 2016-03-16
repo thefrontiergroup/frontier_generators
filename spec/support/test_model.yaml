@@ -1,10 +1,12 @@
 test_model:
-  namespaces: "admin"
+  controller_prefixes: ["admin"]
+
   soft_delete: false
   skip_ui: true
   skip_seeds: false
+
   attributes:
     name:
-      type: "string"
+      type: string
       sortable: true
       searchable: true

@@ -4,7 +4,7 @@ class FrontierRouteGenerator::Namespace
 
   attr_reader :name, :depth
 
-  # namespaces: ["admin", "groups"]
+  # controller_prefixes: ["admin", "groups"]
   #
   # Would generate two FrontierRouteGenerator::Namespaces:
   #   name: "admin", depth: 0

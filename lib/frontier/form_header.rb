@@ -9,10 +9,12 @@ class Frontier::FormHeader
 private
 
   def form_name
-    if model_configuration.namespaces.any?
-      # [:namespace, @instance]
-      namespaces = model_configuration.namespaces.map{|ns| ":#{ns}"}.join(", ")
-      "[#{namespaces}, #{model_configuration.as_ivar_instance}]"
+    # [:namespace, @instance], or
+    # [@nested_model, @instance]
+    if model_configuration.controller_prefixes.any?
+      form_components = model_configuration.controller_prefixes.map(&:as_form_component)
+      "[#{form_components.join(", ")}, #{model_configuration.as_ivar_instance}]"
+    # @instance
     else
       model_configuration.as_ivar_instance
     end
