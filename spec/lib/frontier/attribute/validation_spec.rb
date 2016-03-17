@@ -58,7 +58,17 @@ describe Frontier::Attribute::Validation do
 
     context "type is 'uniqueness'" do
       let(:key) { "uniqueness" }
-      specify { expect { subject }.to raise_error(ArgumentError) }
+      let(:expected) do
+        raw = <<STRING
+describe "validating uniqueness" do
+  subject { FactoryGirl.create(:test_model) }
+  it { should validate_uniqueness_of(:field_name) }
+end
+STRING
+        raw.rstrip
+      end
+
+      it { should eq(expected) }
     end
 
     context "type is something else" do

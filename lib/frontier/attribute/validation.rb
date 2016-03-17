@@ -28,7 +28,13 @@ class Frontier::Attribute::Validation
     when "presence"
       "it { should validate_presence_of(#{attribute.as_symbol}) }"
     when "uniqueness"
-      raise(ArgumentError, "uniqueness is a special validation that requires multiple lines of specs")
+      raw = <<-STRING
+describe "validating uniqueness" do
+  subject { FactoryGirl.create(#{attribute.model_configuration.as_symbol}) }
+  it { should validate_uniqueness_of(#{attribute.as_symbol}) }
+end
+STRING
+      raw.rstrip
     else
       raise(ArgumentError, "unhandled validation requested: #{key}")
     end
