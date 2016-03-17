@@ -10,12 +10,12 @@ describe Frontier::Association::FactoryDeclaration do
 
     context "class_name is set" do
       let(:class_name) { "ClassName" }
-      it { should eq("association :association_name, factory: :class_name") }
+      it { should eq("association :association_name, strategy: :build, factory: :class_name") }
     end
 
     context "class_name is not set" do
       let(:class_name) { nil }
-      it { should eq("association :association_name") }
+      it { should eq("association :association_name, strategy: :build") }
     end
   end
 
