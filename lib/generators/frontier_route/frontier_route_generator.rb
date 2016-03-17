@@ -14,7 +14,7 @@ class FrontierRouteGenerator < Frontier::Generator
       @route_namespaces = model_configuration.controller_prefixes.each_with_index.collect do |ns, index|
         FrontierRouteGenerator::Namespace.new(ns.as_snake_case, index)
       end
-      resource = FrontierRouteGenerator::Resource.new(model_configuration, namespaces)
+      resource = FrontierRouteGenerator::Resource.new(model_configuration, route_namespaces)
 
       # If we don't need to namespace (can just chuck route in file anywhere), or a namespace
       # block doesn't exist (same thing again) we can use the dumb rails generator
