@@ -6,7 +6,7 @@ feature 'Admin can view an index of <%= model_configuration.model_name.pluralize
   let!(<%= model_configuration.as_symbol %>) { FactoryGirl.create(<%= model_configuration.as_symbol %>) }
 
   before do
-    visit(<%= model_configuration.url_builder.index_path %>)
+    visit(<%= model_configuration.url_builder.index_path(show_nested_model_as_ivar: false) %>)
   end
 
   scenario "Admin can see <%= model_configuration.model_name.pluralize %>" do

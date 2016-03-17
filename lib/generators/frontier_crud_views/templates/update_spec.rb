@@ -8,7 +8,7 @@ feature 'Admin can update an existing <%= model_configuration.as_constant %>' do
 <%= render_with_indent(1, Frontier::SpecSupport::ObjectSetup::AssociatedModelSetup.new(model_configuration).to_s) %>
 
   before do
-    visit(<%= model_configuration.url_builder.index_path %>)
+    visit(<%= model_configuration.url_builder.index_path(show_nested_model_as_ivar: false) %>)
     within_row(<%= model_configuration.model_name %>.<%= model_configuration.primary_attribute.name %>) do
       click_link("Edit")
     end

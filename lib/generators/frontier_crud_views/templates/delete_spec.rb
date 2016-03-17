@@ -6,7 +6,7 @@ feature 'Admin can delete an existing <%= model_configuration.as_constant %>' do
   let!(<%= model_configuration.as_symbol %>) { FactoryGirl.create(<%= model_configuration.as_symbol %>) }
 
   before do
-    visit(<%= model_configuration.url_builder.index_path %>)
+    visit(<%= model_configuration.url_builder.index_path(show_nested_model_as_ivar: false) %>)
   end
 
   scenario 'Admin can delete <%= model_configuration.model_name.pluralize %>' do

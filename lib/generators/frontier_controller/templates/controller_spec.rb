@@ -46,7 +46,7 @@ describe <%= controller_name %> do
 <%= render_with_indent(5, Frontier::SpecSupport::ObjectAttributesAssertion.new(model_configuration).to_s) %>
         end
 
-        it { should redirect_to(<%= model_configuration.url_builder.index_path %>) }
+        it { should redirect_to(<%= model_configuration.url_builder.index_path(show_nested_model_as_ivar: false) %>) }
 
         it "sets a notice for the user" do
           subject
@@ -95,7 +95,7 @@ describe <%= controller_name %> do
 <%= render_with_indent(5, Frontier::SpecSupport::ObjectAttributesAssertion.new(model_configuration).to_s) %>
         end
 
-        it { should redirect_to(<%= model_configuration.url_builder.index_path %>) }
+        it { should redirect_to(<%= model_configuration.url_builder.index_path(show_nested_model_as_ivar: false) %>) }
 
         it "sets a notice for the user" do
           subject
@@ -128,7 +128,7 @@ describe <%= controller_name %> do
         subject
         expect(<%= model_configuration.model_name %>.reload.deleted_at).to be_present
       end
-      it { should redirect_to(<%= model_configuration.url_builder.index_path %>) }
+      it { should redirect_to(<%= model_configuration.url_builder.index_path(show_nested_model_as_ivar: false) %>) }
     end
 
     it_behaves_like "action requiring authentication"

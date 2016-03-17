@@ -13,6 +13,23 @@ describe Frontier::UrlBuilder do
     specify { expect(url_builder.public_send(path_method)).to eq(to_eq) }
   end
 
+  describe "forcing nested models to be local variables" do
+    let(:controller_prefixes) { ["@client"] }
+
+    specify do
+      expect(url_builder.index_path(show_nested_model_as_ivar: false)).to eq("client_users_path(client)")
+    end
+    specify do
+      expect(url_builder.new_path(show_nested_model_as_ivar: false)).to eq("new_client_user_path(client)")
+    end
+    specify do
+      expect(url_builder.edit_path(show_nested_model_as_ivar: false)).to eq("edit_client_user_path(client, user)")
+    end
+    specify do
+      expect(url_builder.delete_path(show_nested_model_as_ivar: false)).to eq("client_user_path(client, user)")
+    end
+  end
+
   describe "model with no namespaces or nested models" do
     let(:controller_prefixes) { nil }
 
