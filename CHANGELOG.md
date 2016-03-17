@@ -1,3 +1,7 @@
+## 0.16.0
+
+- Feature: Add partial support for nested objects with new controller_prefixes argument
+
 ## 0.15.0
 
 - Bug Fix: Fix typo in spec for validating uniqueness
