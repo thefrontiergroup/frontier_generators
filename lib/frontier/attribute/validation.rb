@@ -27,14 +27,6 @@ class Frontier::Attribute::Validation
       "it { should validate_inclusion_of(#{attribute.as_symbol}).in_array(#{corresponding_constant.name}) }"
     when "presence"
       "it { should validate_presence_of(#{attribute.as_symbol}) }"
-    when "uniqueness"
-      raw = <<-STRING
-describe "validating uniqueness" do
-  subject { FactoryGirl.create(#{attribute.model_configuration.as_symbol}) }
-  it { should validate_uniqueness_of(#{attribute.as_symbol}) }
-end
-STRING
-      raw.rstrip
     else
       raise(ArgumentError, "unhandled validation requested: #{key}")
     end
@@ -69,3 +61,4 @@ end
 require_relative "./validation/factory"
 require_relative "./validation/length"
 require_relative "./validation/numericality"
+require_relative "./validation/uniqueness"

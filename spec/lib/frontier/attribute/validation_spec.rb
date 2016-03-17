@@ -56,21 +56,6 @@ describe Frontier::Attribute::Validation do
       it { should eq("it { should validate_presence_of(:field_name) }") }
     end
 
-    context "type is 'uniqueness'" do
-      let(:key) { "uniqueness" }
-      let(:expected) do
-        raw = <<STRING
-describe "validating uniqueness" do
-  subject { FactoryGirl.create(:test_model) }
-  it { should validate_uniqueness_of(:field_name) }
-end
-STRING
-        raw.rstrip
-      end
-
-      it { should eq(expected) }
-    end
-
     context "type is something else" do
       let(:key) { "heroin" }
       specify { expect { subject }.to raise_error(ArgumentError) }

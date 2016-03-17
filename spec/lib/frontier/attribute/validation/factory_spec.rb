@@ -23,6 +23,11 @@ describe Frontier::Attribute::Validation::Factory do
       let(:key) { "presence" }
       it { should be_kind_of(Frontier::Attribute::Validation) }
     end
+
+    context "when key is 'uniqueness'" do
+      let(:key) { "uniqueness" }
+      it { should be_kind_of(Frontier::Attribute::Validation::Uniqueness) }
+    end
   end
 
 end

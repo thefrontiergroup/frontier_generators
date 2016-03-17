@@ -173,4 +173,7 @@ model_name:
           only_integer: true
         presence: true
         uniqueness: true
+        # Or, uniquenss can support the scope argument
+        uniqueness:
+          scope: user_id
 ```

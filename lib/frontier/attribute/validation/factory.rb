@@ -10,6 +10,8 @@ class Frontier::Attribute::Validation::Factory
       Frontier::Attribute::Validation::Length.new(attribute, key, args)
     when "numericality"
       Frontier::Attribute::Validation::Numericality.new(attribute, key, args)
+    when "uniqueness"
+      Frontier::Attribute::Validation::Uniqueness.new(attribute, key, args)
     else
       Frontier::Attribute::Validation.new(attribute, key, args)
     end
