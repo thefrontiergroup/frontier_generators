@@ -56,11 +56,6 @@ describe Frontier::Attribute::Validation do
       it { should eq("it { should validate_presence_of(:field_name) }") }
     end
 
-    context "type is 'uniqueness'" do
-      let(:key) { "uniqueness" }
-      specify { expect { subject }.to raise_error(ArgumentError) }
-    end
-
     context "type is something else" do
       let(:key) { "heroin" }
       specify { expect { subject }.to raise_error(ArgumentError) }
