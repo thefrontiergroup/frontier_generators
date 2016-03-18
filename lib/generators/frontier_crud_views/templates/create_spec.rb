@@ -7,7 +7,7 @@ feature 'Admin can create a new <%= model_configuration.as_constant %>' do
 <%= render_with_indent(1, Frontier::SpecSupport::ObjectSetup::AssociatedModelSetup.new(model_configuration).to_s) %>
 
   before do
-    visit(<%= model_configuration.url_builder.index_path %>)
+    visit(<%= model_configuration.url_builder.index_path(show_nested_model_as_ivar: false) %>)
     click_link("Add new <%= model_configuration.as_title %>")
   end
 
