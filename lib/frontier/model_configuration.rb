@@ -40,6 +40,10 @@ class Frontier::ModelConfiguration
     @url_builder = Frontier::UrlBuilder.new(self)
   end
 
+  def attributes_only
+    attributes.select(&:is_attribute?)
+  end
+
   def associations
     attributes.select(&:is_association?)
   end
