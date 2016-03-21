@@ -26,6 +26,8 @@ private
   def find_<%= model_configuration.model_name %>
     <%= model_configuration.as_constant %>.find(params[:id])
   end
+
+<%= render_with_indent(1, Frontier::ControllerAction::StrongParamsMethod.new(model_configuration).to_s) %>
 <% end -%>
 
 end
