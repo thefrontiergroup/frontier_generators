@@ -1,3 +1,10 @@
+## 0.17.0
+
+- Feature #96: Support scope argument in uniqueness validation
+- Bug Fix #112: Don't use ivar @whatever in nested routes in specs
+- Feature #111: Use build strategy in factories
+- By default, don't order in controller index action
+
 ## 0.16.0
 
 - Feature: Add partial support for nested objects with new controller_prefixes argument
