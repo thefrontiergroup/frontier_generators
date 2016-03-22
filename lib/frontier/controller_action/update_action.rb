@@ -17,7 +17,7 @@ class Frontier::ControllerAction::UpdateAction
     raw = <<-STRING
 def update
   #{model_configuration.as_ivar_instance} = find_#{model_configuration.model_name}
-  #{model_configuration.as_ivar_instance}.assign_attributes(strong_params_for(#{model_configuration.as_constant}))
+  #{model_configuration.as_ivar_instance}.assign_attributes(strong_params_for_#{model_configuration.model_name})
   #{Frontier::Authorization::Assertion.new(model_configuration, :update).to_s}
   #{model_configuration.as_ivar_instance}.save
 

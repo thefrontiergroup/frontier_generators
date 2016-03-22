@@ -10,7 +10,7 @@ RSpec.describe Frontier::ControllerAction::UpdateAction do
       raw = <<-STRING
 def update
   @test_model = find_test_model
-  @test_model.assign_attributes(strong_params_for(TestModel))
+  @test_model.assign_attributes(strong_params_for_test_model)
   authorize(TestModel)
   @test_model.save
 
