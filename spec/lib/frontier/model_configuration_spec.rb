@@ -4,6 +4,11 @@ describe Frontier::ModelConfiguration do
 
   let(:model_configuration) { build_model_configuration }
 
+  describe "#as_collection" do
+    subject { model_configuration.as_collection }
+    it { should eq("test_models") }
+  end
+
   describe "#as_constant" do
     subject { model_configuration.as_constant }
     it { should eq("TestModel") }
