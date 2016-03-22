@@ -48,6 +48,10 @@ class Frontier::ModelConfiguration
     attributes.select(&:is_association?)
   end
 
+  def as_collection
+    model_name.to_s.pluralize
+  end
+
   def as_constant
     "#{model_name.to_s.camelize}"
   end
@@ -65,7 +69,7 @@ class Frontier::ModelConfiguration
   end
 
   def as_symbol_collection
-    ":#{model_name.to_s.pluralize}"
+    ":#{as_collection}"
   end
 
   def as_name
