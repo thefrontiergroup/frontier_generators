@@ -23,10 +23,14 @@ private
 
   def action_contents
     [
-      "#{model_configuration.as_ivar_instance} = #{model_configuration.as_constant}.new",
+      "#{model_configuration.as_ivar_instance} = #{scopable_object}.new",
       Frontier::Authorization::Assertion.new(model_configuration, :new).to_s,
       Frontier::ControllerActionSupport::NestedAssociationBuilder.new(model_configuration, model_configuration.as_ivar_instance).to_s
     ].flatten.compact
+  end
+
+  def scopable_object
+    Frontier::ControllerActionSupport::ScopableObject.new(model_configuration).to_s
   end
 
 end
