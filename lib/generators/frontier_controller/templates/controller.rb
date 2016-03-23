@@ -23,6 +23,8 @@ class <%= controller_name_and_superclass %>
 
 private
 
+<%= render_with_indent(1, Frontier::ControllerAction::StrongParamsMethod.new(model_configuration).to_s) %>
+
 <%= render_with_indent(1, Frontier::ControllerAction::FindMethod.new(model_configuration).to_s) %>
 <% end -%>
 

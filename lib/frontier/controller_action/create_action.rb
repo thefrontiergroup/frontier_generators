@@ -15,7 +15,7 @@ class Frontier::ControllerAction::CreateAction
   def to_s
     raw = <<-STRING
 def create
-  #{model_configuration.as_ivar_instance} = #{scopable_object}.new(strong_params_for(#{model_configuration.as_constant}))
+  #{model_configuration.as_ivar_instance} = #{scopable_object}.new(strong_params_for_#{model_configuration.model_name})
   #{Frontier::Authorization::Assertion.new(model_configuration, :create).to_s}
   #{model_configuration.as_ivar_instance}.save
 

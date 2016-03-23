@@ -9,7 +9,7 @@ RSpec.describe Frontier::ControllerAction::CreateAction do
     let(:expected) do
       raw = <<-STRING
 def create
-  @test_model = TestModel.new(strong_params_for(TestModel))
+  @test_model = TestModel.new(strong_params_for_test_model)
   authorize(TestModel)
   @test_model.save
 
