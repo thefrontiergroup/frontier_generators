@@ -10,7 +10,7 @@ RSpec.describe Frontier::ControllerAction::IndexAction do
       raw = <<-STRING
 def index
   authorize(TestModel)
-  @test_models = policy_scope(TestModel.all).page(params[:page])
+  @test_models = TestModel.page(params[:page])
 end
 STRING
       raw.rstrip

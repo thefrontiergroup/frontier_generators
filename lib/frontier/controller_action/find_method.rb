@@ -20,12 +20,11 @@ class Frontier::ControllerAction::FindMethod
 private
 
   def action_contents
-    deepest_nested_model = model_configuration.controller_prefixes.select(&:nested_model?).last
-    if deepest_nested_model.present?
-      "#{deepest_nested_model.name}.#{model_configuration.as_collection}.find(params[:id])"
-    else
-      "#{model_configuration.as_constant}.find(params[:id])"
-    end
+    "#{scopable_object}.find(params[:id])"
+  end
+
+  def scopable_object
+    Frontier::ControllerActionSupport::ScopableObject.new(model_configuration).to_s
   end
 
 end
