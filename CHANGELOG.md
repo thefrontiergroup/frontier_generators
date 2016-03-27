@@ -1,3 +1,8 @@
+## 0.18.0
+
+- Feature: Support nested models in find methods in controllers
+- Feature #119: Provide strong params
+
 ## 0.17.0
 
 - Feature #96: Support scope argument in uniqueness validation
