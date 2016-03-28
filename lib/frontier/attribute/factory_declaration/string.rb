@@ -15,6 +15,10 @@ class Frontier::Attribute::FactoryDeclaration::String
       "FFaker::AddressAU.street_address"
     elsif attribute.name =~ /line_2/
       "FFaker::AddressAU.secondary_address"
+    elsif attribute.name =~ /first_name/
+      "FFaker::Name.first_name"
+    elsif attribute.name =~ /last_name/
+      "FFaker::Name.last_name"
     elsif attribute.name =~ /name/
       "FFaker::Name.name"
     # Guessing since this is a string, it would be phone_number or mobile_number

@@ -28,6 +28,16 @@ describe Frontier::Attribute::FactoryDeclaration::String do
       it { should eq("FFaker::AddressAU.secondary_address") }
     end
 
+    context "attribute name contains first_name" do
+      let(:name) { "field_first_name" }
+      it { should eq("FFaker::Name.first_name") }
+    end
+
+    context "attribute name contains last_name" do
+      let(:name) { "field_last_name" }
+      it { should eq("FFaker::Name.last_name") }
+    end
+
     context "attribute name contains name" do
       let(:name) { "field_name" }
       it { should eq("FFaker::Name.name") }
