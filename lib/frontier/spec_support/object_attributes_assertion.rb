@@ -26,19 +26,15 @@ class Frontier::SpecSupport::ObjectAttributesAssertion
   #
   # We would want to assert:
   #
-  #  # ModelName assertions
   #  expect(model_name.name).to eq(model_attributes[:name])
-  #  # Address asertions
+  #
   #  expect(model_name.address.line_1).to eq(address_attributes[:line_1])
   #  expect(model_name.address.line_2).to eq(address_attributes[:line_2])
   #  expect(model_name.address.city).to eq(address_attributes[:city])
   #  expect(model_name.address.state).to eq(state)
   #
   def to_s
-    [
-      "# #{model_configuration_or_association.as_constant} assertions",
-      expectations_for_attributes
-    ].join("\n")
+    expectations_for_attributes.join("\n")
   end
 
 private
