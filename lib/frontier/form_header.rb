@@ -22,9 +22,9 @@ private
 
   def form_options
     {
-      wrapper: "horizontal",
+      wrapper: '"horizontal"',
       html: {
-        class: "form-horizontal"
+        class: '"form-horizontal"'
       }
     }
   end
