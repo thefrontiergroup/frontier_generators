@@ -94,6 +94,26 @@ describe Frontier::Attribute do
     end
   end
 
+  describe "#show_on_form?" do
+    subject { attribute.show_on_form? }
+
+    context "when show_on_form property is set" do
+      context "when show_on_form is true" do
+        let(:options) { {show_on_form: true} }
+        it { should eq(true) }
+      end
+
+      context "when show_on_form is false" do
+        let(:options) { {show_on_form: false} }
+        it { should eq(false) }
+      end
+    end
+
+    context "when show_on_form property is not set" do
+      it { should eq(true) }
+    end
+  end
+
   describe "#show_on_index?" do
     subject { attribute.show_on_index? }
 

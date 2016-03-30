@@ -8,6 +8,33 @@ describe Frontier::ControllerAction::StrongParamsMethod do
       Frontier::ControllerAction::StrongParamsMethod.new(model_configuration)
     end
 
+    describe "omitting fields that are not on the form" do
+      let(:model_configuration) do
+        Frontier::ModelConfiguration.new({
+          test_model: {
+            attributes: {
+              charlie: {type: "string", show_on_form: false},
+              address: {type: "belongs_to", form_type: "select"},
+              bravo: {type: "string"},
+            }
+          }
+        })
+      end
+
+      let(:expected) do
+        raw = <<-STRING
+def strong_params_for_test_model
+  params.require(:test_model).permit([:address_id, :bravo])
+end
+STRING
+        raw.rstrip
+      end
+
+      it "renders the params on a single line" do
+        should eq(expected)
+      end
+    end
+
     context "a simple model" do
       context "with 3 or fewer attributes" do
         let(:model_configuration) do

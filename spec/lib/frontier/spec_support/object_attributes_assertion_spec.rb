@@ -4,6 +4,7 @@ RSpec.describe Frontier::SpecSupport::ObjectAttributesAssertion do
 
   describe '#to_s' do
     subject { Frontier::SpecSupport::ObjectAttributesAssertion.new(model_configuration).to_s }
+
     let(:model_configuration) do
       Frontier::ModelConfiguration.new({
         model_name: {
@@ -19,6 +20,7 @@ RSpec.describe Frontier::SpecSupport::ObjectAttributesAssertion do
               }
             },
             name: {type: "string"},
+            omitted_attribute: {type: "string", show_on_form: false}
           }
         }
       })

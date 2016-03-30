@@ -25,6 +25,7 @@ RSpec.describe Frontier::SpecSupport::ObjectSetup::AttributesSetup do
           model_name: {
             attributes: {
               address: {type: "belongs_to", form_type: form_type},
+              other_thing: {type: "belongs_to", form_type: "inline", show_on_form: false},
               name: {type: "string"},
             }
           }

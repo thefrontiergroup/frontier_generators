@@ -23,7 +23,7 @@ private
   end
 
   def nested_attributes_lets
-    model_configuration.associations.select(&:is_nested?).map do |association|
+    model_configuration.associations.select(&:show_on_form?).select(&:is_nested?).map do |association|
       key            = "#{association.name}_attributes"
       attributes_for = Frontier::FactoryGirlSupport::AttributesFor.new(association).to_s
 

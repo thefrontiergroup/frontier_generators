@@ -11,7 +11,7 @@ class Frontier::SpecSupport::ObjectSetup::AssociatedModelSetup
   #   let(:params) { {address_id: address.id} }
   #
   def to_s
-    model_configuration.associations.map do |association|
+    model_configuration.associations.select(&:show_on_form?).map do |association|
       # Nested forms can have their own associations
       if association.is_nested?
         Frontier::SpecSupport::ObjectSetup::AssociatedModelSetup.new(association).to_s
