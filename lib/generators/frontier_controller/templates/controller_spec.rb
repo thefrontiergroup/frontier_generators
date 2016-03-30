@@ -4,7 +4,7 @@ describe <%= controller_name %> do
 
 <% if model_configuration.show_index? -%>
   describe 'GET index' do
-    subject(:get_index) { get :index }
+    subject { get :index }
 
     authenticated_as(:admin) do
       it { should render_template(:index) }
