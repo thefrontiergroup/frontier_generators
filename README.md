@@ -108,6 +108,9 @@ model_name:
       # Set to false if you don't want this attribute to be represented on the index
       # Note: This is true by default
       show_on_index: false
+      # Set to false to prevent this attribute being used in the form
+      # Note: this is true by default
+      show_on_form: false
 
       # Choose one of the following
       type: boolean

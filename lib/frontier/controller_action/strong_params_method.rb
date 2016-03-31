@@ -17,7 +17,7 @@ private
   end
 
   def strong_params_from_attributes(attributes)
-    attributes.map do |attribute_or_association|
+    attributes.select(&:show_on_form?).map do |attribute_or_association|
       attribute_or_association_as_strong_params(attribute_or_association)
     end
   end

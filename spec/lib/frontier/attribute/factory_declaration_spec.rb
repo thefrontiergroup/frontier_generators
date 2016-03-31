@@ -21,7 +21,7 @@ describe Frontier::Attribute::FactoryDeclaration do
 
     context "type is 'date'" do
       let(:type) { "date" }
-      it { should eq("field_name { 5.days.from_now }") }
+      it { should eq("field_name { 5.days.from_now.to_date }") }
     end
 
     context "type is 'datetime'" do

@@ -24,7 +24,9 @@ private
     case attribute.type
     when "boolean"
       "[true, false].sample"
-    when "datetime", "date"
+    when "date"
+      [date_data, "to_date"].join(".")
+    when "datetime"
       date_data
     when "decimal", "integer"
       number_data

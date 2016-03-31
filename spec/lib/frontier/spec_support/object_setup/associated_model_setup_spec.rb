@@ -14,7 +14,8 @@ RSpec.describe Frontier::SpecSupport::ObjectSetup::AssociatedModelSetup do
               form_type: "inline",
               attributes: {
                 line_1: {type: "string"},
-                state: {type: "belongs_to", form_type: "select"}
+                state: {type: "belongs_to", form_type: "select"},
+                other_thing: {type: "belongs_to", form_type: "select", show_on_form: false}
               }
             },
             name: {type: "string"},

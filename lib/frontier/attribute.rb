@@ -62,8 +62,12 @@ class Frontier::Attribute
     properties[:type] == "enum"
   end
 
+  def show_on_form?
+    properties[:show_on_form].nil? || properties[:show_on_form]
+  end
+
   def show_on_index?
-    properties[:show_on_index].nil? ? true : properties[:show_on_index]
+    properties[:show_on_index].nil? || properties[:show_on_index]
   end
 
   # index refers to the index.html.haml template, nothing to do with DB.

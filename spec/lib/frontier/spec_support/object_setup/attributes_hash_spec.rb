@@ -5,6 +5,27 @@ RSpec.describe Frontier::SpecSupport::ObjectSetup::AttributesHash do
   describe "#to_hash" do
     subject { Frontier::SpecSupport::ObjectSetup::AttributesHash.new(model_configuration).to_hash }
 
+    describe "omitting fields that are not on the form" do
+      let(:model_configuration) do
+        Frontier::ModelConfiguration.new({
+          model_name: {
+            attributes: {
+              name: {type: "string"},
+              other_attribute: {type: "string", show_on_form: false},
+            }
+          }
+        })
+      end
+
+      let(:expected) do
+        {
+          name: "model_name_attributes[:name]"
+        }
+      end
+
+      it { should eq(expected) }
+    end
+
     context "with a simple set of attributes" do
       let(:model_configuration) do
         Frontier::ModelConfiguration.new({

@@ -40,7 +40,7 @@ class Frontier::SpecSupport::ObjectSetup::AttributesHash
   # that can be rendered in the controller spec template.
   def to_hash
     hash = {}
-    model_configuration.attributes.each do |attribute|
+    model_configuration.attributes.select(&:show_on_form?).each do |attribute|
       if attribute.is_attribute?
         # name: "attributes[:name]"
         hash[attribute.name.to_sym] = "#{attributes_name}[#{attribute.as_symbol}]"
