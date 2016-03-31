@@ -16,7 +16,7 @@ class Frontier::HashSingleLineDecorator
       when Symbol
         value = ":#{value}"
       when String
-        value = "\"#{value}\""
+        value = value
       end
       "#{key}: #{value}"
     end.join(", ")

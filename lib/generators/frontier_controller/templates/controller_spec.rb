@@ -4,7 +4,7 @@ describe <%= controller_name %> do
 
 <% if model_configuration.show_index? -%>
   describe 'GET index' do
-    subject(:get_index) { get :index }
+<%= render_with_indent(2, Frontier::ControllerSpec::SubjectBlock.new(model_configuration, :get, :index).to_s) %>
 
     authenticated_as(:admin) do
       it { should render_template(:index) }
@@ -17,7 +17,7 @@ describe <%= controller_name %> do
 <% end -%>
 <% if model_configuration.show_create? -%>
   describe 'GET new' do
-    subject { get :new }
+<%= render_with_indent(2, Frontier::ControllerSpec::SubjectBlock.new(model_configuration, :get, :new).to_s) %>
 
     authenticated_as(:admin) do
       it { should render_template(:new) }
@@ -28,7 +28,7 @@ describe <%= controller_name %> do
   end
 
   describe 'POST create' do
-    subject { post :create, <%= model_configuration.model_name %>: attributes }
+<%= render_with_indent(2, Frontier::ControllerSpec::SubjectBlock.new(model_configuration, :post, :create, {model_configuration.model_name => "attributes"}).to_s) %>
 
     # params.require(<%= model_configuration.as_symbol %>) will raise an exception if the
     # attributes hash provided is blank, so we pass through a fake value to prevent this.
@@ -68,7 +68,7 @@ describe <%= controller_name %> do
 <% end -%>
 <% if model_configuration.show_update? -%>
   describe 'GET edit' do
-    subject { get :edit, id: <%= model_configuration.model_name %>.id }
+<%= render_with_indent(2, Frontier::ControllerSpec::SubjectBlock.new(model_configuration, :get, :edit, {id: "#{model_configuration.model_name}.id"}).to_s) %>
     let(<%= model_configuration.as_symbol %>) { FactoryGirl.create(<%= model_configuration.as_symbol %>) }
 
     authenticated_as(:admin) do
@@ -80,6 +80,7 @@ describe <%= controller_name %> do
   end
 
   describe 'POST update' do
+<%= render_with_indent(2, Frontier::ControllerSpec::SubjectBlock.new(model_configuration, :post, :update, {id: "#{model_configuration.model_name}.id", model_configuration.model_name => "attributes"}).to_s) %>
     subject(:update_resource) { post :update, id: <%= model_configuration.model_name %>.id, <%= model_configuration.model_name %>: attributes }
 
     # params.require(<%= model_configuration.as_symbol %>) will raise an exception if the
@@ -93,7 +94,7 @@ describe <%= controller_name %> do
 <%= render_with_indent(4, Frontier::SpecSupport::ObjectSetup.new(model_configuration).to_s) %>
 
         it "updates the <%= model_configuration.as_constant %> object with the given attributes" do
-          update_resource
+          subject
 
           <%= model_configuration.model_name %>.reload
 <%= render_with_indent(5, Frontier::SpecSupport::ObjectAttributesAssertion.new(model_configuration).to_s) %>
@@ -111,7 +112,7 @@ describe <%= controller_name %> do
         let(:attributes) { parameters_for(<%= model_configuration.as_symbol %>, :invalid) }
 
         it "doesn't update the <%= model_configuration.as_constant %>" do
-          update_resource
+          subject
           expect(<%= model_configuration.model_name %>.reload).not_to have_attributes(attributes)
         end
       end
@@ -124,7 +125,7 @@ describe <%= controller_name %> do
 <% end -%>
 <% if model_configuration.show_delete? -%>
   describe 'DELETE destroy' do
-    subject { delete :destroy, id: <%= model_configuration.model_name %>.id }
+<%= render_with_indent(2, Frontier::ControllerSpec::SubjectBlock.new(model_configuration, :delete, :destroy, {id: "#{model_configuration.model_name}.id"}).to_s) %>
     let(<%= model_configuration.as_symbol %>) { FactoryGirl.create(<%= model_configuration.as_symbol %>) }
 
     authenticated_as(:admin) do

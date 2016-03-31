@@ -35,7 +35,7 @@ private
     render_link_to(
       '"Edit"',
       model_configuration.url_builder.edit_path,
-      {class: "btn btn-small"}
+      {class: '"btn btn-small"'}
     )
   end
 
@@ -45,8 +45,8 @@ private
       model_configuration.url_builder.delete_path,
       {
         method: :delete,
-        data: {confirm: "Are you sure you want to delete this #{model_configuration.as_title.downcase}?"},
-        class: "btn btn-small btn-danger"
+        data: {confirm: "\"Are you sure you want to delete this #{model_configuration.as_title.downcase}?\""},
+        class: '"btn btn-small btn-danger"'
       }
     )
   end

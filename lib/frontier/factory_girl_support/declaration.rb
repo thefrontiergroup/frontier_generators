@@ -1,10 +1,10 @@
 class Frontier::FactoryGirlSupport::Declaration
 
-  attr_reader :model_configuration_or_association, :verb
+  attr_reader :factory_object, :verb
 
-  def initialize(verb, model_configuration_or_association)
+  def initialize(verb, factory_object)
     @verb = verb
-    @model_configuration_or_association = model_configuration_or_association
+    @factory_object = factory_object
   end
 
   def to_s
@@ -14,10 +14,13 @@ class Frontier::FactoryGirlSupport::Declaration
 private
 
   def class_name
-    if model_configuration_or_association.is_a?(Frontier::ModelConfiguration)
-      model_configuration_or_association.model_name
-    elsif model_configuration_or_association.is_a?(Frontier::Association)
-      model_configuration_or_association.association_class.underscore
+    case factory_object
+    when Frontier::ModelConfiguration
+      factory_object.model_name
+    when Frontier::Association
+      factory_object.association_class.underscore
+    else
+      factory_object
     end
   end
 
