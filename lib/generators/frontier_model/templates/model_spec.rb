@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 describe <%= model_configuration.as_constant %> do
-<% model_configuration.attributes.select(&:validation_required?).each do |attribute| -%>
+<% model_configuration.attributes.sort_by(&:name).select(&:validation_required?).each do |attribute| -%>
 
   describe "@<%= attribute.name %>" do
 <% attribute.validations.each do |validation| -%>
