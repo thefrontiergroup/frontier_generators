@@ -12,9 +12,9 @@
       %tr
 <% model_configuration.attributes.select(&:show_on_index?).each do |attribute| -%>
 <% if attribute.sortable? -%>
-        %th <%= attribute.name.titleize %>
+        %th <%= attribute.as_table_heading %>
 <% else -%>
-        %th <%= attribute.name.titleize %>
+        %th <%= attribute.as_table_heading %>
 <% end -%>
 <% end -%>
 <% if instance_actions.has_actions? -%>

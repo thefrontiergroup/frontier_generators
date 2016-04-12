@@ -18,6 +18,10 @@ class Frontier::Attribute
     validations.collect(&:corresponding_constant).compact
   end
 
+  def as_table_heading
+    name.titleize
+  end
+
   # some_thing -> ":some_thing"
   def as_field_name
     as_symbol
