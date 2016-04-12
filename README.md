@@ -119,6 +119,8 @@ model_name:
       # Set to false to prevent this attribute being used in the form
       # Note: this is true by default
       show_on_form: false
+      # Add in support for sorting on this attribute using Ransack.
+      sortable: true
 
       # Choose one of the following
       type: boolean
