@@ -14,4 +14,6 @@ private
     visit(<%= model_configuration.url_builder.index_path(show_nested_model_as_ivar: false) %>)
   end
 
+<%= render_with_indent(2, Frontier::FeatureSpec::OrderExpectationMethod.new(model_configuration)).to_s %>
+
 end
