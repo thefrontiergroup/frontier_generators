@@ -17,11 +17,11 @@ scenario "sorting by '#{attribute_or_association.name}'" do
 
   # Descending
   click_link("#{attribute_or_association.as_table_heading}")
-  expect_#{model_configuration.as_collection}_to_be_ordered(second, first)
+  #{order_expectation_method_name}(second, first)
 
   # Ascending
   click_link("#{attribute_or_association.as_table_heading}")
-  expect_#{model_configuration.as_collection}_to_be_ordered(first, second)
+  #{order_expectation_method_name}(first, second)
 end
 STRING
     raw.rstrip
@@ -31,6 +31,10 @@ private
 
   def ordered_object
     @ordered_object ||= Frontier::FeatureSpec::SortScenario::OrderedObject.new(model_configuration, attribute_or_association)
+  end
+
+  def order_expectation_method_name
+    Frontier::FeatureSpec::OrderExpectationMethod.new(model_configuration).method_name
   end
 
 end
