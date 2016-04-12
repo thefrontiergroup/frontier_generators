@@ -12,7 +12,7 @@
       %tr
 <% model_configuration.attributes.select(&:show_on_index?).each do |attribute| -%>
 <% if attribute.sortable? -%>
-        %th= sortable_heading_for(<%= attribute.as_symbol %>)
+        %th <%= attribute.name.titleize %>
 <% else -%>
         %th <%= attribute.name.titleize %>
 <% end -%>
