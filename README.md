@@ -75,8 +75,6 @@ NOTE: Support for nested resources is a WIP.
 
 Missing features:
 - routes
-- controllers (use nested resources to find resoures)
-- controller specs (pass nested resources through in subject. This will be a whole shitload of work)
 
 ```yaml
 model_name:
@@ -135,6 +133,8 @@ model_name:
       type: enum
       enum_options: ['admin', 'public']
 ```
+
+NOTE: Support for the `sortable` attribute is partially implemented. It is currently missing implementation for nested resources.
 
 ## Associations
 
