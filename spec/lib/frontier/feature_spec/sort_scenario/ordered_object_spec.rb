@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe Frontier::FeatureSpec::SortScenario::OrderedObject do
 
-  let(:ordered_object) { Frontier::FeatureSpec::SortScenario::OrderedObject.new(model_configuration, attribute) }
+  let(:ordered_object) { Frontier::FeatureSpec::SortScenario::OrderedObject.new(attribute) }
   let(:model_configuration) do
     Frontier::ModelConfiguration.new({
       test_model: {

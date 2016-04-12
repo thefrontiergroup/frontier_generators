@@ -2,8 +2,8 @@ class Frontier::FeatureSpec::SortScenario
 
   attr_reader :model_configuration, :attribute_or_association
 
-  def initialize(model_configuration, attribute_or_association)
-    @model_configuration      = model_configuration
+  def initialize(attribute_or_association)
+    @model_configuration      = attribute_or_association.model_configuration
     @attribute_or_association = attribute_or_association
   end
 
@@ -30,7 +30,7 @@ STRING
 private
 
   def ordered_object
-    @ordered_object ||= Frontier::FeatureSpec::SortScenario::OrderedObject.new(model_configuration, attribute_or_association)
+    @ordered_object ||= Frontier::FeatureSpec::SortScenario::OrderedObject.new(attribute_or_association)
   end
 
   def order_expectation_method_name

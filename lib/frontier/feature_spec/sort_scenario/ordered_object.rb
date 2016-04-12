@@ -2,8 +2,8 @@ class Frontier::FeatureSpec::SortScenario::OrderedObject
 
   attr_reader :model_configuration, :attribute_or_association
 
-  def initialize(model_configuration, attribute_or_association)
-    @model_configuration      = model_configuration
+  def initialize(attribute_or_association)
+    @model_configuration      = attribute_or_association.model_configuration
     @attribute_or_association = attribute_or_association
   end
 

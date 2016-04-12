@@ -5,7 +5,7 @@ describe Frontier::FeatureSpec::SortScenario do
   describe "#to_s" do
     subject { sort_scenario.to_s }
 
-    let(:sort_scenario) { Frontier::FeatureSpec::SortScenario.new(model_configuration, attribute) }
+    let(:sort_scenario) { Frontier::FeatureSpec::SortScenario.new(attribute) }
     let(:model_configuration) { build_model_configuration }
     let(:attribute)           { model_configuration.attributes.first }
 
