@@ -32,8 +32,6 @@ You can create a YAML specification of your entities that you can pass directly 
 rails g frontier_scaffold /path/to/yml
 ```
 
-Frontier Generators also provides unit and feature specs where applicable.
-
 ## Model Options
 
 You can define a model with some options as follows:
