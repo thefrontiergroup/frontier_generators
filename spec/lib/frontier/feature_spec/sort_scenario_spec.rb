@@ -16,6 +16,14 @@ scenario "sorting by 'name'" do
   first  = FactoryGirl.create(:test_model, name: "Alpha")
 
   visit_index
+
+  # Descending
+  click_link("Name")
+  expect_test_models_to_be_ordered(second, first)
+
+  # Ascending
+  click_link("Name")
+  expect_test_models_to_be_ordered(first, second)
 end
 STRING
       raw.rstrip
