@@ -13,7 +13,7 @@ scenario "sorting by '#{attribute_or_association.name}'" do
   second = #{ordered_object.second}
   first  = #{ordered_object.first}
 
-  visit_index
+  #{visit_index_method}
 
   # Descending
   click_link("#{attribute_or_association.as_table_heading}")
@@ -35,6 +35,10 @@ private
 
   def order_expectation_method_name
     Frontier::FeatureSpec::OrderExpectationMethod.new(model_configuration).method_name
+  end
+
+  def visit_index_method
+    Frontier::FeatureSpec::VisitIndexMethod.new(model_configuration).method_name
   end
 
 end

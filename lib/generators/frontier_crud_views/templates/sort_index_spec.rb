@@ -10,9 +10,7 @@ feature 'Admin can sort an index of <%= model_configuration.model_name.pluralize
 <% end %>
 private
 
-  def visit_index
-    visit(<%= model_configuration.url_builder.index_path(show_nested_model_as_ivar: false) %>)
-  end
+<%= render_with_indent(2, Frontier::FeatureSpec::VisitIndexMethod.new(model_configuration)).to_s %>
 
 <%= render_with_indent(2, Frontier::FeatureSpec::OrderExpectationMethod.new(model_configuration)).to_s %>
 
