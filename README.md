@@ -10,7 +10,18 @@ By default, you get:
 - Feature and unit tests for all of the above
 - Empty seed rake task
 
-## Important Caveat
+## Important Caveat: In Progress
+
+This gem is a work in progress. I make it for my own use to make my job easier. Some features I've implemented are in a "good enough" state. I use GitHub issues to manage my task list. If you find a deficiency, add an issue.
+
+Once this gem is in 1.0, I will push an actual gem. Things I want in place before I go to 1.0 are:
+
+- Support for sorting via Ransack
+- Support for searching via Ransack
+- Support for has_many associations
+- Support for has_and_belongs_to_many associations
+
+## Important Caveat: Pairing with Rails Template
 
 This gem is specifically made to be paired with the [Frontier Template](https://github.com/thefrontiergroup/rails-template). Technology choices in these generators are completely dependent on what is in the latest version of Frontier Template.
 
