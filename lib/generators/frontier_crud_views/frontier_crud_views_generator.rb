@@ -21,6 +21,9 @@ class FrontierCrudViewsGenerator < Frontier::Generator
       generate_feature_path("create_spec.rb", "create_#{model_configuration.model_name}_spec.rb") if model_configuration.show_create?
       generate_feature_path("update_spec.rb", "update_#{model_configuration.model_name}_spec.rb") if model_configuration.show_update?
 
+      if model_configuration.attributes.any?(&:sortable?)
+        generate_feature_path("sort_index_spec.rb", "#{model_configuration.model_name.pluralize}_sort_index_spec.rb") if model_configuration.show_index?
+      end
     end
   end
 
