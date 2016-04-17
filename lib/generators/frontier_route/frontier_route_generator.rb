@@ -1,7 +1,6 @@
 require_relative "../../frontier"
 
 class FrontierRouteGenerator < Frontier::Generator
-  require_relative "./lib/namespace.rb"
   require_relative "./lib/resource.rb"
   source_root File.expand_path('../templates', __FILE__)
 
@@ -12,7 +11,7 @@ class FrontierRouteGenerator < Frontier::Generator
   def scaffold
     unless model_configuration.skip_ui?
       @route_namespaces = model_configuration.controller_prefixes.each_with_index.collect do |ns, index|
-        FrontierRouteGenerator::Namespace.new(ns.as_snake_case, index)
+        Frontier::Routes::Namespace.new(ns.as_snake_case, index)
       end
       resource = FrontierRouteGenerator::Resource.new(model_configuration, route_namespaces)
 
@@ -25,9 +24,9 @@ class FrontierRouteGenerator < Frontier::Generator
       else
         unless resource.exists_in_routes_file?
           normalized   = route_namespaces.last.namespace_string
-          unnormalized = route_namespaces.last.unnormalized_namespace_string
+          denormalized = route_namespaces.last.denormalized_namespace_string
           # Ensure that the namespace is in the normalized form `namespace :jordan do`
-          gsub_file(ROUTES_FILE_PATH, unnormalized, normalized)
+          gsub_file(ROUTES_FILE_PATH, denormalized, normalized)
           # Append the route to the normalized namespace. EG:
           # namespace :admin do
           #   resources :jordan
@@ -48,8 +47,12 @@ private
     ].join("/")
   end
 
+  def routes_file_content
+    @routes_file_content ||= File.read(ROUTES_FILE_PATH)
+  end
+
   def routes_file_contains_namespaces?
-    route_namespaces.last.exists_in_routes_file?
+    route_namespaces.last.exists_in_routes_file?(routes_file_content)
   end
 
 end

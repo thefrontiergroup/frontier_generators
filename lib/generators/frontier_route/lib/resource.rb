@@ -5,7 +5,7 @@ class FrontierRouteGenerator::Resource
   attr_reader :model_configuration, :namespaces
 
   # model_configuration: Instance of Frontier::ModelConfiguration
-  # namespaces: Collection of FrontierRouteGenerator::Namespace
+  # namespaces: Collection of Frontier::Routes::Namespace
   def initialize(model_configuration, namespaces)
     @model_configuration = model_configuration
     @namespaces = namespaces
