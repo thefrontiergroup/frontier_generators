@@ -38,7 +38,8 @@ RSpec.describe Frontier::FactoryGirlSupport::Declaration do
       let(:factory_object) { "yolotronix" }
 
       context "with no options" do
-
+        subject { factory_declaration.to_s }
+        it { should eq("FactoryGirl.build(:yolotronix)") }
       end
 
       context "with some options" do
