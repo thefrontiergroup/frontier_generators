@@ -1,3 +1,11 @@
+## 0.19.0
+
+- Feature: Add support for first/last name in factories
+- Remove some superfluous comments from controller specs
+- Feature: Add support for 'hide_on_form' property on models
+- Order attributes alphabetically where possible
+- Feature: Add support for 'sortable' property on attributes and associations
+
 ## 0.18.0
 
 - Feature: Support nested models in find methods in controllers
