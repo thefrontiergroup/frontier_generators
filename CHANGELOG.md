@@ -1,3 +1,10 @@
+## 0.19.1
+
+- Fix #127: Remove duplicate subject block
+- Fix #128: Use params.fetch instead of params.require
+- Fix #46: No more duplicate routes in top level namespace
+- Fix reference to #sortable
+
 ## 0.19.0
 
 - Feature: Add support for first/last name in factories
