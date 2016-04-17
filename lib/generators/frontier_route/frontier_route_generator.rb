@@ -14,14 +14,14 @@ class FrontierRouteGenerator < Frontier::Generator
       end
       resource = Frontier::Routes::Resource.new(model_configuration, route_namespaces)
 
-      # If we don't need to namespace (can just chuck route in file anywhere), or a namespace
-      # block doesn't exist (same thing again) we can use the dumb rails generator
-      if route_namespaces.empty? || !routes_file_contains_namespaces?
-        generate("resource_route", model_with_namespaces)
+      # If we don't need to namespace (can just chuck route in file anywhere) we can use
+      # the default rails generator
+      unless resource.exists_in_routes_file?(routes_file_content)
+        if route_namespaces.empty?
+          generate("resource_route", model_with_namespaces)
 
-      # If the namespace block already exists, we should append this route to it.
-      else
-        unless resource.exists_in_routes_file?(routes_file_content)
+        # If the namespace block already exists, we should append this route to it.
+        else
           normalized   = route_namespaces.last.namespace_string
           denormalized = route_namespaces.last.denormalized_namespace_string
           # Ensure that the namespace is in the normalized form `namespace :jordan do`
@@ -48,10 +48,6 @@ private
 
   def routes_file_content
     @routes_file_content ||= File.read(ROUTES_FILE_PATH)
-  end
-
-  def routes_file_contains_namespaces?
-    route_namespaces.last.exists_in_routes_file?(routes_file_content)
   end
 
 end

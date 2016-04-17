@@ -12,25 +12,12 @@ class Frontier::Routes::Namespace
     @depth = depth
   end
 
-  def exists_in_routes_file?(routes_file_contents)
-    (routes_file_contents =~ namespace_regexp(name)).present?
-  end
-
   def namespace_string
     "namespace :#{name} do"
   end
 
   def denormalized_namespace_string
     "namespace(:#{name}) do"
-  end
-
-private
-
-  # Finds:
-  #   * namespace :name
-  #   * namespace(:name)
-  def namespace_regexp(namespace)
-    /namespace(\(|\s):#{namespace}/
   end
 
 end
