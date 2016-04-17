@@ -29,10 +29,7 @@ describe <%= controller_name %> do
 
   describe 'POST create' do
 <%= render_with_indent(2, Frontier::ControllerSpec::SubjectBlock.new(model_configuration, :post, :create, {model_configuration.model_name => "attributes"}).to_s) %>
-
-    # params.require(<%= model_configuration.as_symbol %>) will raise an exception if the
-    # attributes hash provided is blank, so we pass through a fake value to prevent this.
-    let(:attributes) { {id: 666} }
+    let(:attributes) { {} }
 
     authenticated_as(:admin) do
 
@@ -82,9 +79,7 @@ describe <%= controller_name %> do
   describe 'POST update' do
 <%= render_with_indent(2, Frontier::ControllerSpec::SubjectBlock.new(model_configuration, :post, :update, {id: "#{model_configuration.model_name}.id", model_configuration.model_name => "attributes"}).to_s) %>
 
-    # params.require(<%= model_configuration.as_symbol %>) will raise an exception if the
-    # attributes hash provided is blank, so we pass through a fake value to prevent this.
-    let(:attributes) { {id: <%= model_configuration.model_name %>.id} }
+    let(:attributes) { {} }
     let(<%= model_configuration.as_symbol %>) { FactoryGirl.create(<%= model_configuration.as_symbol %>) }
 
     authenticated_as(:admin) do

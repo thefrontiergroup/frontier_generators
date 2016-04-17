@@ -27,7 +27,7 @@ private
   end
 
   def params_require_preamble
-    "params.require(#{model_configuration.as_symbol}).permit"
+    "params.fetch(#{model_configuration.as_symbol}, {}).permit"
   end
 
   def strong_params_method
@@ -58,7 +58,7 @@ STRING
   # EG:
   #
   # def attributs_for_user
-  #   params.require(:user).permit([
+  #   params.fetch(:user, {}).permit([
   #     :email,
   #     :name,
   #     {address_attributes: [:id, :name]}
@@ -76,7 +76,7 @@ STRING
   # EG:
   #
   # def attributs_for_user
-  #   params.require(:user).permit([:email, :name])
+  #   params.fetch(:user, {}).permit([:email, :name])
   # end
   #
   def render_single_line_strong_params
