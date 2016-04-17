@@ -7,8 +7,8 @@ class Frontier::FactoryGirlSupport::Declaration
     @factory_object = factory_object
   end
 
-  def to_s
-    "FactoryGirl.#{verb}(:#{class_name})"
+  def to_s(factory_options={})
+    "FactoryGirl.#{verb}(#{factory_body(factory_options)})"
   end
 
 private
@@ -22,6 +22,13 @@ private
     else
       factory_object
     end
+  end
+
+  def factory_body(factory_options)
+    factory_name = ":#{class_name}"
+    formatted_factory_options = Frontier::HashSingleLineDecorator.new(factory_options).to_s
+
+    [factory_name, formatted_factory_options].select(&:present?).join(", ")
   end
 
 end

@@ -10,7 +10,18 @@ By default, you get:
 - Feature and unit tests for all of the above
 - Empty seed rake task
 
-## Important Caveat
+## Important Caveat: In Progress
+
+This gem is a work in progress. I make it for my own use to make my job easier. Some features I've implemented are in a "good enough" state. I use GitHub issues to manage my task list. If you find a deficiency, add an issue.
+
+Once this gem is in 1.0, I will push an actual gem. Things I want in place before I go to 1.0 are:
+
+- Support for sorting via Ransack
+- Support for searching via Ransack
+- Support for has_many associations
+- Support for has_and_belongs_to_many associations
+
+## Important Caveat: Pairing with Rails Template
 
 This gem is specifically made to be paired with the [Frontier Template](https://github.com/thefrontiergroup/rails-template). Technology choices in these generators are completely dependent on what is in the latest version of Frontier Template.
 
@@ -31,8 +42,6 @@ You can create a YAML specification of your entities that you can pass directly 
 ```
 rails g frontier_scaffold /path/to/yml
 ```
-
-Frontier Generators also provides unit and feature specs where applicable.
 
 ## Model Options
 
@@ -66,8 +75,6 @@ NOTE: Support for nested resources is a WIP.
 
 Missing features:
 - routes
-- controllers (use nested resources to find resoures)
-- controller specs (pass nested resources through in subject. This will be a whole shitload of work)
 
 ```yaml
 model_name:
@@ -110,6 +117,8 @@ model_name:
       # Set to false to prevent this attribute being used in the form
       # Note: this is true by default
       show_on_form: false
+      # Add in support for sorting on this attribute using Ransack.
+      sortable: true
 
       # Choose one of the following
       type: boolean
@@ -124,6 +133,8 @@ model_name:
       type: enum
       enum_options: ['admin', 'public']
 ```
+
+NOTE: Support for the `sortable` attribute is partially implemented. It is currently missing implementation for nested resources.
 
 ## Associations
 

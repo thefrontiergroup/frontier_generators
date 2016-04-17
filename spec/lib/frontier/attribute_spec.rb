@@ -6,6 +6,12 @@ describe Frontier::Attribute do
   let(:name) { "attribute_name" }
   let(:options) { {} }
 
+  describe "#as_table_heading" do
+    subject { attribute.as_table_heading }
+
+    it { should eq("Attribute Name") }
+  end
+
   describe "#as_enum" do
     subject { attribute.as_enum }
 

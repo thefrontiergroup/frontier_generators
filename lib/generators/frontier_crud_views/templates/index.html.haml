@@ -11,11 +11,7 @@
     %thead
       %tr
 <% model_configuration.attributes.select(&:show_on_index?).each do |attribute| -%>
-<% if attribute.sortable? -%>
-        %th <%= attribute.name.titleize %>
-<% else -%>
-        %th <%= attribute.name.titleize %>
-<% end -%>
+<%= render_with_indent(4, Frontier::Views::Index::TableHeading.new(attribute).to_s) %>
 <% end -%>
 <% if instance_actions.has_actions? -%>
         %th.actions Actions
