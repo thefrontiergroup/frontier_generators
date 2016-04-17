@@ -1,6 +1,4 @@
-class FrontierRouteGenerator::Resource
-
-  ROUTES_FILE_PATH = "config/routes.rb"
+class Frontier::Routes::Resource
 
   attr_reader :model_configuration, :namespaces
 
@@ -11,8 +9,8 @@ class FrontierRouteGenerator::Resource
     @namespaces = namespaces
   end
 
-  def exists_in_routes_file?
-    route_file_content.include?(route_string)
+  def exists_in_routes_file?(routes_file_contents)
+    !!(routes_file_contents =~ route_regexp)
   end
 
   def route_string
@@ -39,8 +37,8 @@ private
     1 + namespaces.count
   end
 
-  def route_file_content
-    @route_file_content ||= File.read(ROUTES_FILE_PATH)
+  def route_regexp
+    /#{preceding_whitespace}resources(\(|\s)#{model_configuration.as_symbol_collection}/
   end
 
 end

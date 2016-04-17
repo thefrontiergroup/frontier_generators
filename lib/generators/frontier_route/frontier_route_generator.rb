@@ -1,7 +1,6 @@
 require_relative "../../frontier"
 
 class FrontierRouteGenerator < Frontier::Generator
-  require_relative "./lib/resource.rb"
   source_root File.expand_path('../templates', __FILE__)
 
   ROUTES_FILE_PATH = "config/routes.rb"
@@ -13,7 +12,7 @@ class FrontierRouteGenerator < Frontier::Generator
       @route_namespaces = model_configuration.controller_prefixes.each_with_index.collect do |ns, index|
         Frontier::Routes::Namespace.new(ns.as_snake_case, index)
       end
-      resource = FrontierRouteGenerator::Resource.new(model_configuration, route_namespaces)
+      resource = Frontier::Routes::Resource.new(model_configuration, route_namespaces)
 
       # If we don't need to namespace (can just chuck route in file anywhere), or a namespace
       # block doesn't exist (same thing again) we can use the dumb rails generator
@@ -22,7 +21,7 @@ class FrontierRouteGenerator < Frontier::Generator
 
       # If the namespace block already exists, we should append this route to it.
       else
-        unless resource.exists_in_routes_file?
+        unless resource.exists_in_routes_file?(routes_file_content)
           normalized   = route_namespaces.last.namespace_string
           denormalized = route_namespaces.last.denormalized_namespace_string
           # Ensure that the namespace is in the normalized form `namespace :jordan do`
