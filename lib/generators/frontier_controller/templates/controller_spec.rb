@@ -81,7 +81,6 @@ describe <%= controller_name %> do
 
   describe 'POST update' do
 <%= render_with_indent(2, Frontier::ControllerSpec::SubjectBlock.new(model_configuration, :post, :update, {id: "#{model_configuration.model_name}.id", model_configuration.model_name => "attributes"}).to_s) %>
-    subject(:update_resource) { post :update, id: <%= model_configuration.model_name %>.id, <%= model_configuration.model_name %>: attributes }
 
     # params.require(<%= model_configuration.as_symbol %>) will raise an exception if the
     # attributes hash provided is blank, so we pass through a fake value to prevent this.
