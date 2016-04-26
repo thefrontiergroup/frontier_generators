@@ -3,7 +3,7 @@ require 'rails_helper'
 feature 'Admin can delete an existing <%= model_configuration.as_constant %>' do
 
   sign_in_as(:admin)
-  let!(<%= model_configuration.as_symbol %>) { FactoryGirl.create(<%= model_configuration.as_symbol %>) }
+  <%= Frontier::FeatureSpec::TargetObjectLetStatement.new(model_configuration).to_s %>
 
   before do
     visit(<%= model_configuration.url_builder.index_path(show_nested_model_as_ivar: false) %>)
