@@ -26,7 +26,6 @@ RSpec.describe Frontier::SpecSupport::FeatureSpecAssignmentSet do
 
     let(:expected) do
       raw = <<STRING
-# ModelName assignments
 fill_in("Name", with: model_name_attributes[:name])
 select(address, from: "Address")
 # Address assignments

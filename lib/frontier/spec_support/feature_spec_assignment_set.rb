@@ -10,18 +10,17 @@ class Frontier::SpecSupport::FeatureSpecAssignmentSet
   # Render a set of form assignments for the attributes and associations of a model using
   # Capybara syntax. EG:
   #
-  # # User Assignments
   # fill_in("Name", with: user_attributes[:name])
   # select(address, from: "Address")
   # # Address Assignments
   # fill_in("Line 1", with: other_address_attributes[:line_1])
   # select(state, from: "State")
   #
-  def to_s
+  def to_s(preceding_comment=nil)
     [
-      "# #{model_configuration_or_association.as_constant} assignments",
+      preceding_comment,
       assignments_for_attributes
-    ].join("\n")
+    ].select(&:present?).join("\n")
   end
 
 private
@@ -43,7 +42,7 @@ private
 
   def assignment_for(attribute_or_association)
     if attribute_or_association.is_association? && attribute_or_association.is_nested?
-      Frontier::SpecSupport::FeatureSpecAssignmentSet.new(attribute_or_association).to_s
+      Frontier::SpecSupport::FeatureSpecAssignmentSet.new(attribute_or_association).to_s("# #{attribute_or_association.as_constant} assignments")
     else
       Frontier::FeatureSpecAssignment.new(attribute_or_association).to_s("#{model_configuration_or_association.model_name}_attributes")
     end

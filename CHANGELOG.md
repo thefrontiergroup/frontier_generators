@@ -1,3 +1,7 @@
+## Unreleased
+
+- Remove superfluous comments from feature specs
+
 ## 0.19.1
 
 - Fix #127: Remove duplicate subject block
