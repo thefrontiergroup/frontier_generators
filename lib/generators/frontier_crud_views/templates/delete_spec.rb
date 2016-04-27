@@ -9,7 +9,7 @@ feature 'Admin can delete an existing <%= model_configuration.as_constant %>' do
     visit(<%= model_configuration.url_builder.index_path(show_nested_model_as_ivar: false) %>)
   end
 
-  scenario 'Admin can delete <%= model_configuration.model_name.pluralize %>' do
+  scenario do
     within_row(<%= model_configuration.model_name %>.<%= model_configuration.primary_attribute.name %>) do
       click_link("Delete")
     end
