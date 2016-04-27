@@ -35,7 +35,7 @@ private
 
   def assignments_for_attributes
     # Show attributes first, so they will all be nested under the ModelName comment
-    attributes_and_associations_ordered_by_nested_last.collect do |attribute|
+    attributes_and_associations_ordered_by_nested_last.select(&:show_on_form?).collect do |attribute|
       assignment_for(attribute)
     end
   end

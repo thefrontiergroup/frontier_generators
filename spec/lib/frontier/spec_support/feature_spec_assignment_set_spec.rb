@@ -19,6 +19,7 @@ RSpec.describe Frontier::SpecSupport::FeatureSpecAssignmentSet do
               }
             },
             name: {type: "string"},
+            other_field_not_on_form: {type: "string", show_on_form: false}
           }
         }
       })
