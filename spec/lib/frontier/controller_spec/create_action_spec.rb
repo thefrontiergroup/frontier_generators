@@ -27,7 +27,6 @@ describe 'POST create' do
 
     context "with valid parameters" do
       let(:user_attributes) { FactoryGirl.attributes_for(:user) }
-      
       let(:attributes) do
         {
           name: user_attributes[:name]
