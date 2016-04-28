@@ -1,6 +1,11 @@
 ## Unreleased
 
+## 0.20.0
+
 - Remove superfluous comments from feature specs
+- Fix #134: Don't select fields that shouldn't be on form
+- Fix #129: Add alerts in feature specs
+- Fix #132: Feature specs generate nested resources correctly
 
 ## 0.19.1
 
