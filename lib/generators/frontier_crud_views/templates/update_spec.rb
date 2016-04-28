@@ -19,7 +19,7 @@ feature 'Admin can update an existing <%= model_configuration.as_constant %>' do
 
     submit_form
 
-    expect(page).to have_content("<%= model_configuration.as_name %> was successfully updated.")
+    expect(page).to have_content("<%= model_configuration.as_name.titleize %> was successfully updated.")
     <%= model_configuration.model_name %>.reload
 <%= render_with_indent(2, Frontier::SpecSupport::ObjectAttributesAssertion.new(model_configuration).to_s) %>
   end

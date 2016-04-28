@@ -1,5 +1,7 @@
 ## Unreleased
 
+- Fix flash messages
+
 ## 0.20.0
 
 - Remove superfluous comments from feature specs

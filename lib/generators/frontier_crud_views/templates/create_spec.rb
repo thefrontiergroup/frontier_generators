@@ -17,7 +17,7 @@ feature 'Admin can create a new <%= model_configuration.as_constant %>' do
 
     submit_form
 
-    expect(page).to have_content("<%= model_configuration.as_name %> was successfully created.")
+    expect(page).to have_content("<%= model_configuration.as_name.titleize %> was successfully created.")
     <%= model_configuration.model_name %> = <%= model_configuration.as_constant %>.order(created_at: :desc).first
 <%= render_with_indent(2, Frontier::SpecSupport::ObjectAttributesAssertion.new(model_configuration).to_s) %>
   end
