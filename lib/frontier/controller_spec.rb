@@ -1,6 +1,7 @@
 class Frontier::ControllerSpec
 end
 
+require_relative "./controller_spec/create_action"
 require_relative "./controller_spec/destroy_action"
 require_relative "./controller_spec/edit_action"
 require_relative "./controller_spec/index_action"
