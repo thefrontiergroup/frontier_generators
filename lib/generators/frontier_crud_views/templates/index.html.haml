@@ -3,7 +3,7 @@
 <% if model_configuration.show_create? -%>
   .collection-actions
     - if <%= Frontier::Authorization::Check.new(model_configuration, model_configuration.as_constant, :new) %>
-      = link_to "Add new <%= model_configuration.as_title %>", <%= model_configuration.url_builder.new_path %>, class: "btn"
+      = link_to "Add a <%= model_configuration.as_title %>", <%= model_configuration.url_builder.new_path %>, class: "btn"
 <% end -%>
 
 - if <%= model_configuration.as_ivar_collection %>.exists?

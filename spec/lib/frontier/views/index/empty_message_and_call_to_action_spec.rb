@@ -25,7 +25,7 @@ describe Frontier::Views::Index::EmptyMessageAndCallToAction do
 %p
   There are no user settings.
   - if can?(:new, UserSetting)
-    = link_to("Create a user setting.", new_user_setting_path)
+    = link_to("Add a user setting.", new_user_setting_path)
 STRING
         raw.rstrip
 end
