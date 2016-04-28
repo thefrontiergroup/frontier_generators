@@ -3,16 +3,7 @@ require 'rails_helper'
 describe <%= controller_name %> do
 
 <% if model_configuration.show_index? -%>
-  describe 'GET index' do
-<%= render_with_indent(2, Frontier::ControllerSpec::SubjectBlock.new(model_configuration, :get, :index).to_s) %>
-
-    authenticated_as(:admin) do
-      it { should render_template(:index) }
-    end
-
-    it_behaves_like "action requiring authentication"
-    it_behaves_like "action authorizes roles", [:admin]
-  end
+<%= render_with_indent(1, Frontier::ControllerSpec::IndexAction.new(model_configuration).to_s) %>
 
 <% end -%>
 <% if model_configuration.show_create? -%>
