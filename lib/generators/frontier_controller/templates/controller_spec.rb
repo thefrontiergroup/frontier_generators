@@ -7,16 +7,7 @@ describe <%= controller_name %> do
 
 <% end -%>
 <% if model_configuration.show_create? -%>
-  describe 'GET new' do
-<%= render_with_indent(2, Frontier::ControllerSpec::SubjectBlock.new(model_configuration, :get, :new).to_s) %>
-
-    authenticated_as(:admin) do
-      it { should render_template(:new) }
-    end
-
-    it_behaves_like "action requiring authentication"
-    it_behaves_like "action authorizes roles", [:admin]
-  end
+<%= render_with_indent(1, Frontier::ControllerSpec::NewAction.new(model_configuration).to_s) %>
 
   describe 'POST create' do
 <%= render_with_indent(2, Frontier::ControllerSpec::SubjectBlock.new(model_configuration, :post, :create, {model_configuration.model_name => "attributes"}).to_s) %>
