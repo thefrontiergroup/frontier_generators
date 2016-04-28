@@ -46,17 +46,7 @@ describe <%= controller_name %> do
 
 <% end -%>
 <% if model_configuration.show_update? -%>
-  describe 'GET edit' do
-<%= render_with_indent(2, Frontier::ControllerSpec::SubjectBlock.new(model_configuration, :get, :edit, {id: "#{model_configuration.model_name}.id"}).to_s) %>
-    let(<%= model_configuration.as_symbol %>) { FactoryGirl.create(<%= model_configuration.as_symbol %>) }
-
-    authenticated_as(:admin) do
-      it { should render_template(:edit) }
-    end
-
-    it_behaves_like "action requiring authentication"
-    it_behaves_like "action authorizes roles", [:admin]
-  end
+<%= render_with_indent(1, Frontier::ControllerSpec::EditAction.new(model_configuration).to_s) %>
 
   describe 'POST update' do
 <%= render_with_indent(2, Frontier::ControllerSpec::SubjectBlock.new(model_configuration, :post, :update, {id: "#{model_configuration.model_name}.id", model_configuration.model_name => "attributes"}).to_s) %>
