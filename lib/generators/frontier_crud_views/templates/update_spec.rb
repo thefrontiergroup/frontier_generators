@@ -3,7 +3,7 @@ require 'rails_helper'
 feature 'Admin can update an existing <%= model_configuration.as_constant %>' do
 
   sign_in_as(:admin)
-  <%= Frontier::FeatureSpec::TargetObjectLetStatement.new(model_configuration).to_s %>
+<%= render_with_indent(1, Frontier::FeatureSpec::TargetObjectLetStatement.new(model_configuration).to_s) %>
 <%= render_with_indent(1, Frontier::SpecSupport::ObjectSetup::AttributesSetup.new(model_configuration).to_s) %>
 <%= render_with_indent(1, Frontier::SpecSupport::ObjectSetup::AssociatedModelSetup.new(model_configuration).to_s) %>
 
@@ -14,7 +14,7 @@ feature 'Admin can update an existing <%= model_configuration.as_constant %>' do
     end
   end
 
-  scenario 'Admin updates user with valid data' do
+  scenario 'with valid data' do
 <%= render_with_indent(2, Frontier::SpecSupport::FeatureSpecAssignmentSet.new(model_configuration).to_s) %>
 
     submit_form

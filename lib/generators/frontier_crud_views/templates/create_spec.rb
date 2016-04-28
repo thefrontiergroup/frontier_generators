@@ -3,6 +3,7 @@ require 'rails_helper'
 feature 'Admin can create a new <%= model_configuration.as_constant %>' do
 
   sign_in_as(:admin)
+<%= render_with_indent(1, Frontier::FeatureSpec::TargetObjectLetStatement.new(model_configuration).to_s(include_resource: false)) %>
 <%= render_with_indent(1, Frontier::SpecSupport::ObjectSetup::AttributesSetup.new(model_configuration).to_s) %>
 <%= render_with_indent(1, Frontier::SpecSupport::ObjectSetup::AssociatedModelSetup.new(model_configuration).to_s) %>
 
@@ -11,7 +12,7 @@ feature 'Admin can create a new <%= model_configuration.as_constant %>' do
     click_link("Add new <%= model_configuration.as_title %>")
   end
 
-  scenario 'Admin creates <%= model_configuration.as_constant %> with valid data' do
+  scenario 'with valid data' do
 <%= render_with_indent(2, Frontier::SpecSupport::FeatureSpecAssignmentSet.new(model_configuration).to_s) %>
 
     submit_form
