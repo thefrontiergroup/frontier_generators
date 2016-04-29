@@ -4,28 +4,56 @@ RSpec.describe Frontier::SpecSupport::ObjectSetup do
 
   describe '#to_s' do
     subject { Frontier::SpecSupport::ObjectSetup.new(model_configuration).to_s }
-    let(:model_configuration) do
-      Frontier::ModelConfiguration.new({
-        model_name: {
-          attributes: {
-            address: {type: "belongs_to", form_type: "select"},
-            other_address: {
-              class_name: "Address",
-              type: "belongs_to",
-              form_type: "inline",
-              attributes: {
-                line_1: {type: "string"},
-                state: {type: "belongs_to", form_type: "select"}
-              }
-            },
-            name: {type: "string"},
+
+    context "without nested models" do
+      let(:model_configuration) do
+        Frontier::ModelConfiguration.new({
+          model_name: {
+            attributes: {
+              name: {type: "string"},
+            }
           }
-        }
-      })
+        })
+      end
+
+      let(:expected) do
+        raw = <<STRING
+let(:model_name_attributes) { FactoryGirl.attributes_for(:model_name) }
+let(:attributes) do
+  {
+    name: model_name_attributes[:name]
+  }
+end
+STRING
+        raw.rstrip
+      end
+
+      it { should eq(expected) }
     end
 
-    let(:expected) do
-      raw = <<STRING
+    context "with nested models" do
+      let(:model_configuration) do
+        Frontier::ModelConfiguration.new({
+          model_name: {
+            attributes: {
+              address: {type: "belongs_to", form_type: "select"},
+              other_address: {
+                class_name: "Address",
+                type: "belongs_to",
+                form_type: "inline",
+                attributes: {
+                  line_1: {type: "string"},
+                  state: {type: "belongs_to", form_type: "select"}
+                }
+              },
+              name: {type: "string"},
+            }
+          }
+        })
+      end
+
+      let(:expected) do
+        raw = <<STRING
 let(:model_name_attributes) { FactoryGirl.attributes_for(:model_name) }
 let(:other_address_attributes) { FactoryGirl.attributes_for(:address) }
 let!(:address) { FactoryGirl.create(:address) }
@@ -41,10 +69,11 @@ let(:attributes) do
   }
 end
 STRING
-      raw.rstrip
-    end
+        raw.rstrip
+      end
 
-    it { should eq(expected) }
+      it { should eq(expected) }
+    end
   end
 
 end

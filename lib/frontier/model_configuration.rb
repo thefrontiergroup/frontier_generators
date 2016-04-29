@@ -38,6 +38,9 @@ class Frontier::ModelConfiguration
 
     # Additional utility items
     @url_builder = Frontier::UrlBuilder.new(self)
+
+    # Ensure model name is a string
+    @model_name = @model_name.to_s
   end
 
   def attributes_only
@@ -49,15 +52,15 @@ class Frontier::ModelConfiguration
   end
 
   def as_collection
-    model_name.to_s.pluralize
+    model_name.pluralize
   end
 
   def as_constant
-    "#{model_name.to_s.camelize}"
+    "#{model_name.camelize}"
   end
 
   def as_ivar_collection
-    "@#{model_name.to_s.pluralize}"
+    "@#{model_name.pluralize}"
   end
 
   def as_ivar_instance
@@ -73,11 +76,11 @@ class Frontier::ModelConfiguration
   end
 
   def as_name
-    model_name.to_s.gsub("_", " ")
+    model_name.gsub("_", " ")
   end
 
   def as_title
-    model_name.to_s.titleize
+    model_name.titleize
   end
 
   # The primary attribute is used for:

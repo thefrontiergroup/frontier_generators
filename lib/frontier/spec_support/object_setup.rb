@@ -35,7 +35,7 @@ class Frontier::SpecSupport::ObjectSetup
       Frontier::SpecSupport::ObjectSetup::AttributesSetup.new(model_configuration).to_s,
       Frontier::SpecSupport::ObjectSetup::AssociatedModelSetup.new(model_configuration).to_s,
       Frontier::SpecSupport::ObjectSetup::Attributes.new(model_configuration).to_s
-    ].compact.join("\n")
+    ].select(&:present?).join("\n")
   end
 
 end
