@@ -15,13 +15,13 @@ scenario "sorting by '#{attribute_or_association.name}'" do
 
   #{visit_index_method}
 
-  # Descending
-  click_link("#{attribute_or_association.as_table_heading}")
-  #{order_expectation_method_name}(second, first)
-
   # Ascending
   click_link("#{attribute_or_association.as_table_heading}")
   #{order_expectation_method_name}(first, second)
+
+  # Descending
+  click_link("#{attribute_or_association.as_table_heading}")
+  #{order_expectation_method_name}(second, first)
 end
 STRING
     raw.rstrip

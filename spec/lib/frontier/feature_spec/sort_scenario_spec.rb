@@ -17,13 +17,13 @@ scenario "sorting by 'name'" do
 
   visit_index
 
-  # Descending
-  click_link("Name")
-  expect_test_models_to_be_ordered(second, first)
-
   # Ascending
   click_link("Name")
   expect_test_models_to_be_ordered(first, second)
+
+  # Descending
+  click_link("Name")
+  expect_test_models_to_be_ordered(second, first)
 end
 STRING
       raw.rstrip
