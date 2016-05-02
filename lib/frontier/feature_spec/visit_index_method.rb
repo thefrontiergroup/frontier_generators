@@ -7,7 +7,12 @@ class Frontier::FeatureSpec::VisitIndexMethod
   end
 
   def to_s
-    "visit(#{index_path})"
+    raw = <<-STRING
+def #{method_name}
+  visit(#{index_path})
+end
+STRING
+    raw.rstrip
   end
 
 private

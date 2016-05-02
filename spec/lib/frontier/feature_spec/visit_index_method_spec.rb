@@ -14,7 +14,16 @@ describe Frontier::FeatureSpec::VisitIndexMethod do
 
     let(:visit_index_method) { Frontier::FeatureSpec::VisitIndexMethod.new(build_model_configuration) }
 
-    it { should eq("visit(admin_test_models_path)") }
+    let(:expected) do
+      raw = <<STRING
+def visit_index
+  visit(admin_test_models_path)
+end
+STRING
+      raw.rstrip
+    end
+
+    it { should eq(expected) }
   end
 
 end
