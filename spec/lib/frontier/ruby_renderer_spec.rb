@@ -54,6 +54,30 @@ STRING
         it { should eq(expected) }
       end
     end
+
+    context "with empty lines" do
+      let(:string) do
+        <<-STRING
+Jordan rules
+  again!
+
+still!
+STRING
+      end
+
+      let(:expected) do
+        raw = <<-STRING
+  Jordan rules
+    again!
+
+  still!
+STRING
+        raw.rstrip
+      end
+
+      let(:number_of_indents) { 1 }
+      it { should eq(expected) }
+    end
   end
 
 end

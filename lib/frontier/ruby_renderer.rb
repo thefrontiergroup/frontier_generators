@@ -15,7 +15,11 @@ class Frontier::RubyRenderer
 private
 
   def rubyify_string(string_component, number_of_indents)
-    render_with_indent(number_of_indents, string_component)
+    if string_component.present?
+      render_with_indent(number_of_indents, string_component)
+    else
+      string_component
+    end
   end
 
 end
