@@ -50,8 +50,9 @@ private
   end
 
   def factory_arguments_for(controller_prefixes)
-    if controller_prefixes.any?
-      {controller_prefixes.last.as_snake_case => controller_prefixes.last.as_snake_case}
+    nested_models = controller_prefixes.select(&:nested_model?)
+    if nested_models.any?
+      {nested_models.last.as_snake_case => nested_models.last.as_snake_case}
     else
       {}
     end
