@@ -21,10 +21,11 @@ private
   def object_scope
     if sortable?
       ransack_query = "@ransack_query = #{model_configuration.as_constant}.ransack(params[:q])"
-      merged_query = "#{model_configuration.as_ivar_collection} = #{scopable_object}.merge(@ransack_query.result)"
+      assignment_and_scoped_query = "#{model_configuration.as_ivar_collection} = #{scopable_object}"
+      merged_query = "#{assignment_and_scoped_query}.merge(@ransack_query.result)"
 
       # The leading whitespace will allow the second line of the query to line up with the first
-      leading_whitespace = Array.new(merged_query.split(".").first.length, " ").join("")
+      leading_whitespace = Array.new(assignment_and_scoped_query.length, " ").join("")
       pagination  = "#{leading_whitespace}.page(params[:page])"
 
       [
