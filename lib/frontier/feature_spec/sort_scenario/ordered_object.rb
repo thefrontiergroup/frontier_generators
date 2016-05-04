@@ -43,6 +43,8 @@ private
       [10, 100]
     when "string", "text"
       ["\"Alpha\"", "\"Bravo\""]
+    else
+      ["\"Alpha\"", "\"Bravo\""]
     end
   end
 

@@ -61,5 +61,12 @@ describe Frontier::FeatureSpec::SortScenario::OrderedObject do
     specify { expect(ordered_object.second).to eq("FactoryGirl.create(:test_model, name: \"Bravo\")") }
   end
 
+  context "when an unsupported type" do
+    let(:type) { "donkey" }
+
+    specify { expect(ordered_object.first).to eq("FactoryGirl.create(:test_model, name: \"Alpha\")") }
+    specify { expect(ordered_object.second).to eq("FactoryGirl.create(:test_model, name: \"Bravo\")") }
+  end
+
 
 end
