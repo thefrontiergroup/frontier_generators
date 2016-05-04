@@ -9,7 +9,7 @@ feature 'Admin can create a new <%= model_configuration.as_constant %>' do
 
   before do
     visit(<%= model_configuration.url_builder.index_path(show_nested_model_as_ivar: false) %>)
-    click_link("Add a <%= model_configuration.as_title %>")
+    click_link("Add <%= model_configuration.as_name.with_indefinite_article %>")
   end
 
   scenario 'with valid data' do
