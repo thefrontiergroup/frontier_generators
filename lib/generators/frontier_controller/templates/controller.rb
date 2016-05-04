@@ -18,14 +18,14 @@ class <%= controller_name_and_superclass %>
 <% end -%>
 <% if model_configuration.show_delete? -%>
 <%= render_with_indent(1, Frontier::ControllerAction::DestroyAction.new(model_configuration).to_s) %>
+
 <% end -%>
 <% if model_configuration.show_create? || model_configuration.show_update? || model_configuration.show_delete? -%>
-
 private
 
 <%= render_with_indent(1, Frontier::ControllerAction::StrongParamsMethod.new(model_configuration).to_s) %>
 
 <%= render_with_indent(1, Frontier::ControllerAction::FindMethod.new(model_configuration).to_s) %>
-<% end -%>
 
+<% end -%>
 end
