@@ -37,8 +37,8 @@ STRING
 def index
   authorize(TestModel)
   @ransack_query = TestModel.ransack(params[:q])
-  @test_models = TestModel.merge(@ransack_query.result)
-                          .page(params[:page])
+  @test_models = TestModel.all.merge(@ransack_query.result)
+                              .page(params[:page])
 end
 STRING
           raw.rstrip
