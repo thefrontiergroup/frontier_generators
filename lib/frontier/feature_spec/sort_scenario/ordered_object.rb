@@ -36,7 +36,7 @@ private
   def object_values
     case attribute_or_association.type
     when "boolean"
-      [true, false]
+      [false, true]
     when "datetime", "date"
       ["10.days.ago", "5.days.ago"]
     when "decimal", "integer"

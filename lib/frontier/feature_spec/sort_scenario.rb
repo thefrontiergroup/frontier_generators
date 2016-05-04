@@ -10,8 +10,8 @@ class Frontier::FeatureSpec::SortScenario
   def to_s
     raw = <<STRING
 scenario "sorting by '#{attribute_or_association.name}'" do
-  second = #{ordered_object.second}
   first  = #{ordered_object.first}
+  second = #{ordered_object.second}
 
   #{visit_index_method}
 

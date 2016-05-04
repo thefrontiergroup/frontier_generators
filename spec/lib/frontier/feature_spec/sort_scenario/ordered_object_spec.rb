@@ -15,8 +15,8 @@ describe Frontier::FeatureSpec::SortScenario::OrderedObject do
   context "when 'boolean'" do
     let(:type) { "boolean" }
 
-    specify { expect(ordered_object.first).to eq("FactoryGirl.create(:test_model, name: true)") }
-    specify { expect(ordered_object.second).to eq("FactoryGirl.create(:test_model, name: false)") }
+    specify { expect(ordered_object.first).to eq("FactoryGirl.create(:test_model, name: false)") }
+    specify { expect(ordered_object.second).to eq("FactoryGirl.create(:test_model, name: true)") }
   end
 
   context "when 'datetime'" do

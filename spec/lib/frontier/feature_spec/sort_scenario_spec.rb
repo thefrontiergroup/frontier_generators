@@ -12,8 +12,8 @@ describe Frontier::FeatureSpec::SortScenario do
     let(:expected) do
       raw = <<STRING
 scenario "sorting by 'name'" do
-  second = FactoryGirl.create(:test_model, name: "Bravo")
   first  = FactoryGirl.create(:test_model, name: "Alpha")
+  second = FactoryGirl.create(:test_model, name: "Bravo")
 
   visit_index
 
