@@ -15,4 +15,10 @@ Gem::Specification.new do |s|
 
   s.files         = Dir['README.md', 'lib/**/{*,.[a-z]*}']
   s.require_paths = ["lib"]
+
+  s.add_dependency "rails"
+
+  s.add_development_dependency "rspec"
+  s.add_development_dependency "rspec_junit_formatter"
+  s.add_development_dependency "byebug"
 end
