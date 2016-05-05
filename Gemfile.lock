@@ -1,7 +1,8 @@
 PATH
   remote: .
   specs:
-    frontier_generators (0.9.0)
+    frontier_generators (0.20.0)
+      indefinite_article (>= 0.2.4)
       rails
 
 GEM
@@ -131,8 +132,6 @@ DEPENDENCIES
   frontier_generators!
   rspec
   rspec_junit_formatter
-  indefinite_article
-  rails
 
 BUNDLED WITH
    1.12.2
