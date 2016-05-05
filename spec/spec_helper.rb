@@ -1,13 +1,16 @@
 require 'bundler'
 Bundler.require
 require 'rails/all'
+require 'rails/generators'
 
-Dir.glob("./lib/model_configuration/**/*.rb", &method(:require))
-Dir.glob("./lib/support/**/*.rb", &method(:require))
+require './lib/frontier'
 
 def build_model_configuration
-  test_model_path = File.join("spec", "support", "test_model.yaml")
-  ModelConfiguration::YamlParser.new(test_model_path).model_configuration
+  Frontier::YamlParser.new(test_model_path).model_configuration
+end
+
+def test_model_path
+  File.join("spec", "support", "test_model.yaml")
 end
 
 RSpec.configure do |config|

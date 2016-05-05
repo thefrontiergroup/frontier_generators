@@ -1,36 +1,31 @@
-require_relative "../../model_configuration/model_configuration"
+require_relative "../../frontier"
 
-class FrontierRouteGenerator < Rails::Generators::NamedBase
-  require_relative "./lib/namespace.rb"
-  require_relative "./lib/resource.rb"
+class FrontierRouteGenerator < Frontier::Generator
   source_root File.expand_path('../templates', __FILE__)
 
   ROUTES_FILE_PATH = "config/routes.rb"
 
-  attr_accessor :model_configuration
-  attr_reader :namespaces
+  attr_reader :route_namespaces
 
   def scaffold
-    self.model_configuration = ModelConfiguration::YamlParser.new(ARGV[0]).model_configuration
-
     unless model_configuration.skip_ui?
-      # model_configuration.namespaces will be an array. EG: ["admin", "groups"]
-      @namespaces = model_configuration.namespaces.each_with_index.collect do |ns, index|
-        FrontierRouteGenerator::Namespace.new(ns, index)
+      @route_namespaces = model_configuration.controller_prefixes.each_with_index.collect do |ns, index|
+        Frontier::Routes::Namespace.new(ns.as_snake_case, index)
       end
-      resource = FrontierRouteGenerator::Resource.new(model_configuration, namespaces)
+      resource = Frontier::Routes::Resource.new(model_configuration, route_namespaces)
 
-      # If we don't need to namespace (can just chuck route in file anywhere), or a namespace
-      # block doesn't exist (same thing again) we can use the dumb rails generator
-      if model_configuration.namespaces.empty? || !routes_file_contains_namespaces?
-        generate("resource_route", model_with_namespaces)
-      # If the namespace block already exists, we should append this route to it.
-      else
-        unless resource.exists_in_routes_file?
-          normalized   = namespaces.last.namespace_string
-          unnormalized = namespaces.last.unnormalized_namespace_string
+      # If we don't need to namespace (can just chuck route in file anywhere) we can use
+      # the default rails generator
+      unless resource.exists_in_routes_file?(routes_file_content)
+        if route_namespaces.empty?
+          generate("resource_route", model_with_namespaces)
+
+        # If the namespace block already exists, we should append this route to it.
+        else
+          normalized   = route_namespaces.last.namespace_string
+          denormalized = route_namespaces.last.denormalized_namespace_string
           # Ensure that the namespace is in the normalized form `namespace :jordan do`
-          gsub_file(ROUTES_FILE_PATH, unnormalized, normalized)
+          gsub_file(ROUTES_FILE_PATH, denormalized, normalized)
           # Append the route to the normalized namespace. EG:
           # namespace :admin do
           #   resources :jordan
@@ -43,12 +38,16 @@ class FrontierRouteGenerator < Rails::Generators::NamedBase
 
 private
 
+  # EG: admin/user
   def model_with_namespaces
-    [*model_configuration.namespaces, model_configuration.model_name].join("/")
+    [
+      *model_configuration.controller_prefixes.map(&:as_snake_case),
+      model_configuration.model_name
+    ].join("/")
   end
 
-  def routes_file_contains_namespaces?
-    namespaces.last.exists_in_routes_file?
+  def routes_file_content
+    @routes_file_content ||= File.read(ROUTES_FILE_PATH)
   end
 
 end

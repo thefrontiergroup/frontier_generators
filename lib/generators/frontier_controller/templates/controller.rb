@@ -1,55 +1,31 @@
 class <%= controller_name_and_superclass %>
 
 <% if model_configuration.show_index? -%>
-  def index
-    authorize(<%= model_configuration.as_constant %>)
-    <%= model_configuration.ivar_collection %> = sort(policy_scope(<%= model_configuration.as_constant %>.all)).page(params[:page])
-  end
+<%= render_with_indent(1, Frontier::ControllerAction::IndexAction.new(model_configuration).to_s) %>
 
 <% end -%>
 <% if model_configuration.show_create? -%>
-  def new
-    <%= model_configuration.ivar_instance %> = <%= model_configuration.as_constant %>.new
-    authorize(<%= model_configuration.ivar_instance %>)
-  end
+<%= render_with_indent(1, Frontier::ControllerAction::NewAction.new(model_configuration).to_s) %>
 
-  def create
-    <%= model_configuration.ivar_instance %> = <%= model_configuration.as_constant %>.new(strong_params_for(<%= model_configuration.as_constant %>))
-    <%= model_configuration.ivar_instance %>.save if authorize(<%= model_configuration.ivar_instance %>)
-
-    respond_with(<%= model_configuration.ivar_instance %>, location: <%= model_configuration.url_builder.index_path %>)
-  end
+<%= render_with_indent(1, Frontier::ControllerAction::CreateAction.new(model_configuration).to_s) %>
 
 <% end -%>
 <% if model_configuration.show_update? -%>
-  def edit
-    <%= model_configuration.ivar_instance %> = find_<%= model_configuration.model_name %>
-    authorize(<%= model_configuration.ivar_instance %>)
-  end
+<%= render_with_indent(1, Frontier::ControllerAction::EditAction.new(model_configuration).to_s) %>
 
-  def update
-    <%= model_configuration.ivar_instance %> = find_<%= model_configuration.model_name %>
-    <%= model_configuration.ivar_instance %>.assign_attributes(strong_params_for(<%= model_configuration.ivar_instance %>))
-    <%= model_configuration.ivar_instance %>.save if authorize(<%= model_configuration.ivar_instance %>)
-
-    respond_with(<%= model_configuration.ivar_instance %>, location: <%= model_configuration.url_builder.index_path %>)
-  end
+<%= render_with_indent(1, Frontier::ControllerAction::UpdateAction.new(model_configuration).to_s) %>
 
 <% end -%>
 <% if model_configuration.show_delete? -%>
-  def destroy
-    <%= model_configuration.ivar_instance %> = find_<%= model_configuration.model_name %>
-    authorize(<%= model_configuration.ivar_instance %>)
-    <%= model_configuration.ivar_instance %>.destroy
-    respond_with(<%= model_configuration.ivar_instance %>, location: <%= model_configuration.url_builder.index_path %>)
-  end
+<%= render_with_indent(1, Frontier::ControllerAction::DestroyAction.new(model_configuration).to_s) %>
 
 <% end -%>
 <% if model_configuration.show_create? || model_configuration.show_update? || model_configuration.show_delete? -%>
 private
 
-  def find_<%= model_configuration.model_name %>
-    <%= model_configuration.as_constant %>.find(params[:id])
-  end
+<%= render_with_indent(1, Frontier::ControllerAction::StrongParamsMethod.new(model_configuration).to_s) %>
+
+<%= render_with_indent(1, Frontier::ControllerAction::FindMethod.new(model_configuration).to_s) %>
+
 <% end -%>
 end

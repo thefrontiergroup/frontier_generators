@@ -1,9 +1,9 @@
 = <%= Frontier::FormHeader.new(model_configuration).to_s %>
 
-<% model_configuration.attributes.each_with_index do |attribute, index| -%>
+<% model_configuration.attributes.select(&:show_on_form?).each_with_index do |attribute, index| -%>
 <% options = {} -%>
 <% options = {autofocus: true} if index.zero? -%>
-  = <%= Frontier::Input::Factory.build_for(attribute).to_s(options) %>
+<%= render_with_indent(1, Frontier::Input::Factory.build_for(attribute).to_s(options)) %>
 <% end -%>
   .form-actions
     = f.button :submit

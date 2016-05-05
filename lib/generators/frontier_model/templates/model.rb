@@ -7,25 +7,25 @@ class <%= model_configuration.as_constant %> < ActiveRecord::Base
 <% end -%>
 <% # The whitespace here is very important, we only want to include a blank line if there are some enums, etc -%>
 <% if model_configuration.attributes.flat_map(&:constants).any? -%>
-<% model_configuration.attributes.flat_map(&:constants).each do |constant| -%>
+<% model_configuration.attributes.sort_by(&:name).flat_map(&:constants).each do |constant| -%>
   <%= constant.model_implementation %>
 <% end -%>
 
 <% end -%>
 <% if model_configuration.attributes.select(&:is_enum?).any? -%>
-<% model_configuration.attributes.select(&:is_enum?).each do |attribute| -%>
+<% model_configuration.attributes.sort_by(&:name).select(&:is_enum?).each do |attribute| -%>
   <%= attribute.as_enum %>
 <% end -%>
 
 <% end -%>
 <% if model_configuration.attributes.select(&:is_association?).any? -%>
-<% model_configuration.attributes.select(&:is_association?).each do |attribute| -%>
-  <%= attribute.association_implementation %>
+<% model_configuration.attributes.sort_by(&:name).select(&:is_association?).each do |association| -%>
+<%= render_with_indent(1, Frontier::Association::ModelImplementation.new(association).to_s) %>
 <% end -%>
 
 <% end -%>
 <% if model_configuration.attributes.select(&:validation_required?).any? -%>
-<% model_configuration.attributes.select(&:validation_required?).each do |attribute| -%>
+<% model_configuration.attributes.sort_by(&:name).select(&:validation_required?).each do |attribute| -%>
   <%= attribute.validation_implementation %>
 <% end -%>
 

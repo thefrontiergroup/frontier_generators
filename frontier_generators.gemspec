@@ -3,7 +3,7 @@ $:.push File.expand_path("../lib", __FILE__)
 
 Gem::Specification.new do |s|
   s.name        = "frontier_generators"
-  s.version     = "0.9.0"
+  s.version     = "0.20.0"
   s.authors     = ["Jordan Maguire", "Vinicius Osiro"]
   s.email       = ["jordan@thefrontiergroup.com.au", "vinny@thefrontiergroup.com.au"]
   s.homepage    = "https://github.com/thefrontiergroup/frontier_generators"
@@ -13,10 +13,14 @@ Gem::Specification.new do |s|
     to quickly scaffold usable admin interfaces for models.
   EOF
 
+  # For differentiating between 'a' and 'an'
+  s.add_dependency 'indefinite_article', [">= 0.2.4"]
+
   s.files         = Dir['README.md', 'lib/**/{*,.[a-z]*}']
   s.require_paths = ["lib"]
 
   s.add_dependency "rails"
+  s.add_dependency "indefinite_article"
 
   s.add_development_dependency "rspec"
   s.add_development_dependency "rspec_junit_formatter"

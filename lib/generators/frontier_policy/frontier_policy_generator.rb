@@ -1,14 +1,10 @@
-require_relative "../../model_configuration/model_configuration"
+require_relative "../../frontier"
 
-class FrontierPolicyGenerator < Rails::Generators::NamedBase
+class FrontierPolicyGenerator < Frontier::Generator
   source_root File.expand_path('../templates', __FILE__)
 
-  attr_accessor :model_configuration
-
   def scaffold
-    self.model_configuration = ModelConfiguration::YamlParser.new(ARGV[0]).model_configuration
-
-    unless model_configuration.skip_ui?
+    if model_configuration.using_pundit? && !model_configuration.skip_ui? && !model_configuration.skip_policies?
       template "policy.rb", policy_path
       template "policy_spec.rb", policy_spec_path
     end

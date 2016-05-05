@@ -1,14 +1,9 @@
-require_relative "../../model_configuration/model_configuration"
 require_relative "../../frontier"
 
-class FrontierCrudViewsGenerator < Rails::Generators::NamedBase
+class FrontierCrudViewsGenerator < Frontier::Generator
   source_root File.expand_path('../templates', __FILE__)
 
-  attr_accessor :model_configuration
-
   def scaffold
-    self.model_configuration = ModelConfiguration::YamlParser.new(ARGV[0]).model_configuration
-
     unless model_configuration.skip_ui?
       [
         ["index.html.haml", model_configuration.show_index?],
@@ -17,27 +12,29 @@ class FrontierCrudViewsGenerator < Rails::Generators::NamedBase
         ["edit.html.haml", model_configuration.show_update?]
       ].each do |template_filename, should_generate|
         if should_generate
-          template template_filename, File.join(generate_base_path, template_filename)
+          template template_filename, File.join(Frontier::Views::ViewsFolderPath.new(model_configuration).to_s, template_filename)
         end
       end
 
-      plural = model_configuration.model_name.pluralize
+      generate_feature_path("index_spec.rb", "#{model_configuration.as_collection}_index_spec.rb") if model_configuration.show_index?
+      generate_feature_path("delete_spec.rb", "delete_#{model_configuration.model_name}_spec.rb") if model_configuration.show_delete?
+      generate_feature_path("create_spec.rb", "create_#{model_configuration.model_name}_spec.rb") if model_configuration.show_create?
+      generate_feature_path("update_spec.rb", "update_#{model_configuration.model_name}_spec.rb") if model_configuration.show_update?
 
-      generate_feature_path("index_spec.rb", "admin_index_#{plural}_spec.rb") if model_configuration.show_index?
-      generate_feature_path("delete_spec.rb", "admin_delete_#{plural}_spec.rb") if model_configuration.show_delete?
-      generate_feature_path("create_spec.rb", "admin_create_#{plural}_spec.rb") if model_configuration.show_create?
-      generate_feature_path("update_spec.rb", "admin_update_#{plural}_spec.rb") if model_configuration.show_update?
+      if model_configuration.attributes.any?(&:sortable?)
+        generate_feature_path("sort_index_spec.rb", "#{model_configuration.as_collection}_sort_index_spec.rb") if model_configuration.show_index?
+      end
     end
   end
 
 private
 
-  def generate_base_path
-    File.join("app", "views", *model_configuration.namespaces, model_configuration.model_name.pluralize)
+  def instance_actions
+    @instance_actions ||= Frontier::Views::Index::InstanceActions.new(model_configuration)
   end
 
   def generate_feature_path(template_name, feature_name)
-    feature_path = File.join("spec", "features", *model_configuration.namespaces, model_configuration.model_name.pluralize, feature_name)
+    feature_path = File.join(Frontier::Views::FeatureSpecPath.new(model_configuration).to_s, feature_name)
     template(template_name, feature_path)
   end
 

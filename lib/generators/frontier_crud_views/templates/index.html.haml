@@ -1,28 +1,32 @@
-%h1 <%= model_configuration.as_title %> Management
-
-%p= link_to "Add new <%= model_configuration.as_title %>", <%= model_configuration.url_builder.new_path %>, class: "button"
-
-%table
-  %thead
-    %tr
-<% model_configuration.attributes.select(&:show_on_index?).each do |attribute| -%>
-<% if attribute.sortable? -%>
-      %th= sortable_heading_for(<%= attribute.as_symbol %>)
-<% else -%>
-      %th <%= attribute.name.titleize %>
+.content-header
+  %h1 <%= model_configuration.as_title %> Management
+<% if model_configuration.show_create? -%>
+  .collection-actions
+    - if <%= Frontier::Authorization::Check.new(model_configuration, model_configuration.as_constant, :new) %>
+      = link_to "Add <%= model_configuration.as_name.with_indefinite_article %>", <%= model_configuration.url_builder.new_path %>, class: "btn"
 <% end -%>
-<% end -%>
-      %th.actions Actions
-  %tbody
-    - <%= model_configuration.ivar_collection %>.each do |<%= model_configuration.model_name %>|
+
+- if <%= model_configuration.as_ivar_collection %>.exists?
+  %table
+    %thead
       %tr
 <% model_configuration.attributes.select(&:show_on_index?).each do |attribute| -%>
-        %td= <%= attribute.as_index_string %>
+<%= render_with_indent(4, Frontier::Views::Index::TableHeading.new(attribute).to_s) %>
 <% end -%>
-        %td.actions
-          - if policy(<%= model_configuration.model_name %>).edit?
-            = link_to("Edit", <%= model_configuration.url_builder.edit_path %>, class: "button")
-          - if policy(<%= model_configuration.model_name %>).destroy?
-            = link_to("Delete", <%= model_configuration.url_builder.delete_path %>, method: :delete, data: { confirm: "Are you sure you want to delete this <%= model_configuration.as_title %>?" }, class: "button")
+<% if instance_actions.has_actions? -%>
+        %th.actions Actions
+<% end -%>
+    %tbody
+      - <%= model_configuration.as_ivar_collection %>.each do |<%= model_configuration.model_name %>|
+        %tr
+<% model_configuration.attributes.select(&:show_on_index?).each do |attribute| -%>
+          %td= <%= attribute.as_index_string %>
+<% end -%>
+<% if instance_actions.has_actions? -%>
+          %td.actions
+<%= render_with_indent(6, instance_actions.to_s) %>
+<% end -%>
 
-= paginate <%= model_configuration.ivar_collection %>
+  = paginate <%= model_configuration.as_ivar_collection %>
+- else
+<%= render_with_indent(1, Frontier::Views::Index::EmptyMessageAndCallToAction.new(model_configuration).to_s) %>

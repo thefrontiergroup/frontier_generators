@@ -1,9 +1,7 @@
-require_relative "../../model_configuration/model_configuration"
+require_relative "../../frontier"
 
-class FrontierScaffoldGenerator < Rails::Generators::NamedBase
+class FrontierScaffoldGenerator < Frontier::Generator
   source_root File.expand_path('../templates', __FILE__)
-
-  attr_accessor :model_configuration
 
   # What we scaffold:
   #
@@ -17,12 +15,10 @@ class FrontierScaffoldGenerator < Rails::Generators::NamedBase
   #   * Build feature tests (index, create, update, destroy with soft-delete)
   #
   def scaffold
-    self.model_configuration = ModelConfiguration::YamlParser.new(ARGV[0]).model_configuration
-
     # Generate models
     generate("frontier_model", ARGV[0])
 
-    unless model_configuration.skip_ui
+    unless model_configuration.skip_ui?
       # Generate controllers
       generate("frontier_controller", ARGV[0])
 

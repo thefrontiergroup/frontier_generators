@@ -3,25 +3,22 @@ require 'rails_helper'
 feature 'Admin can create a new <%= model_configuration.as_constant %>' do
 
   sign_in_as(:admin)
-<% model_configuration.attributes.select(&:is_association?).each do |association| -%>
-  let!(<%= association.as_symbol %>) { FactoryGirl.create(<%= association.as_factory_name %>) }
-<% end -%>
+<%= render_with_indent(1, Frontier::FeatureSpec::TargetObjectLetStatement.new(model_configuration).to_s(include_resource: false)) %>
+<%= render_with_indent(1, Frontier::SpecSupport::ObjectSetup::AttributesSetup.new(model_configuration).to_s) %>
+<%= render_with_indent(1, Frontier::SpecSupport::ObjectSetup::AssociatedModelSetup.new(model_configuration).to_s) %>
 
   before do
-    visit(<%= model_configuration.url_builder.index_path %>)
-    click_link("Add new <%= model_configuration.as_title %>")
+    visit(<%= model_configuration.url_builder.index_path(show_nested_model_as_ivar: false) %>)
+    click_link("Add <%= model_configuration.as_name.with_indefinite_article %>")
   end
 
-  scenario 'Admin creates <%= model_configuration.as_constant %> with valid data' do
-    attributes = FactoryGirl.attributes_for(<%= model_configuration.as_symbol %>)
-    fill_in_form("<%= model_configuration.model_name %>", attributes)
-<% model_configuration.attributes.select(&:is_association?).each do |attribute| -%>
-    select(<%= attribute.name %>, from: "<%= attribute.capitalized %>")
-<% end -%>
+  scenario 'with valid data' do
+<%= render_with_indent(2, Frontier::SpecSupport::FeatureSpecAssignmentSet.new(model_configuration).to_s) %>
 
     submit_form
 
-    target_object = <%= model_configuration.as_constant %>.order(:created_at).first
-    expect(target_object).to have_attributes(attributes)
+    expect(page).to have_content("<%= model_configuration.as_name.capitalize %> was successfully created.")
+    <%= model_configuration.model_name %> = <%= model_configuration.as_constant %>.order(created_at: :desc).first
+<%= render_with_indent(2, Frontier::SpecSupport::ObjectAttributesAssertion.new(model_configuration).to_s) %>
   end
 end

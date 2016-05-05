@@ -1,5 +1,6 @@
 god:
-  namespaces: ["admin"]
+  controller_prefixes: ["admin"]
+
   attributes:
     name:
       searchable: true
