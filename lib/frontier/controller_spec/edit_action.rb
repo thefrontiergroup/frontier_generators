@@ -1,12 +1,9 @@
-class Frontier::ControllerSpec::EditAction
-
-  include Frontier::ModelConfigurationProperty
+class Frontier::ControllerSpec::EditAction < Frontier::ControllerSpec::MemberAction
 
   def to_s
     raw = <<STRING
 describe 'GET edit' do
-#{render_with_indent(1, subject_block)}
-#{render_with_indent(1, Frontier::FeatureSpec::TargetObjectLetStatement.new(model_configuration).to_s)}
+#{render_with_indent(1, render_setup)}
 
   authenticated_as(:admin) do
     it { should render_template(:edit) }

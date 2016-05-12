@@ -1,12 +1,9 @@
-class Frontier::ControllerSpec::UpdateAction
-
-  include Frontier::ModelConfigurationProperty
+class Frontier::ControllerSpec::UpdateAction < Frontier::ControllerSpec::MemberAction
 
   def to_s
     raw = <<STRING
 describe 'POST update' do
-#{render_with_indent(1, subject_block)}
-#{render_with_indent(1, Frontier::FeatureSpec::TargetObjectLetStatement.new(model_configuration).to_s)}
+#{render_with_indent(1, render_setup)}
 
   let(:attributes) { {} }
 

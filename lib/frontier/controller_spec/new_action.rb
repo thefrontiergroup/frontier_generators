@@ -1,6 +1,4 @@
-class Frontier::ControllerSpec::NewAction
-
-  include Frontier::ModelConfigurationProperty
+class Frontier::ControllerSpec::NewAction < Frontier::ControllerSpec::CollectionAction
 
   def to_s
     raw = <<STRING
@@ -20,16 +18,8 @@ STRING
 
 private
 
-  def render_setup
-    [subject_block, nested_models_setup].select(&:present?).join("\n")
-  end
-
   def subject_block
     Frontier::ControllerSpec::SubjectBlock.new(model_configuration, :get, :new).to_s
-  end
-
-  def nested_models_setup
-    Frontier::Spec::NestedModelLetSetup.new(model_configuration).to_s
   end
 
 end
