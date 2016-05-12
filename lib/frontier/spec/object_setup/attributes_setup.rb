@@ -1,4 +1,4 @@
-class Frontier::SpecSupport::ObjectSetup::AttributesSetup
+class Frontier::Spec::ObjectSetup::AttributesSetup
 
   include Frontier::ModelConfigurationProperty
 
@@ -19,7 +19,7 @@ private
 
   def model_attributes_let
     attributes_for = Frontier::FactoryGirlSupport::AttributesFor.new(model_configuration).to_s
-    Frontier::SpecSupport::LetStatement.new("#{model_configuration.model_name}_attributes", attributes_for).to_s
+    Frontier::Spec::LetStatement.new("#{model_configuration.model_name}_attributes", attributes_for).to_s
   end
 
   def nested_attributes_lets
@@ -27,7 +27,7 @@ private
       key            = "#{association.name}_attributes"
       attributes_for = Frontier::FactoryGirlSupport::AttributesFor.new(association).to_s
 
-      Frontier::SpecSupport::LetStatement.new(key, attributes_for).to_s
+      Frontier::Spec::LetStatement.new(key, attributes_for).to_s
     end
   end
 

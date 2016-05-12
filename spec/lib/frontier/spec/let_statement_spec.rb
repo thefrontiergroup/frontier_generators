@@ -1,9 +1,9 @@
 require 'spec_helper'
 
-RSpec.describe Frontier::SpecSupport::LetStatement do
+RSpec.describe Frontier::Spec::LetStatement do
 
   describe "#to_s" do
-    subject { Frontier::SpecSupport::LetStatement.new("jordan", text).to_s(options) }
+    subject { Frontier::Spec::LetStatement.new("jordan", text).to_s(options) }
 
     let(:options) do
       {

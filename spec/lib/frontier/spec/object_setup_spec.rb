@@ -1,9 +1,9 @@
 require 'spec_helper'
 
-RSpec.describe Frontier::SpecSupport::ObjectSetup do
+RSpec.describe Frontier::Spec::ObjectSetup do
 
   describe '#to_s' do
-    subject { Frontier::SpecSupport::ObjectSetup.new(model_configuration).to_s }
+    subject { Frontier::Spec::ObjectSetup.new(model_configuration).to_s }
 
     context "without nested models" do
       let(:model_configuration) do

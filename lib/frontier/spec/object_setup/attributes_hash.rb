@@ -1,4 +1,4 @@
-class Frontier::SpecSupport::ObjectSetup::AttributesHash
+class Frontier::Spec::ObjectSetup::AttributesHash
 
   attr_reader :attributes_name, :model_configuration
 

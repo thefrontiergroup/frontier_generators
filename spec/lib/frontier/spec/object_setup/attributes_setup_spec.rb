@@ -1,9 +1,9 @@
 require 'spec_helper'
 
-RSpec.describe Frontier::SpecSupport::ObjectSetup::AttributesSetup do
+RSpec.describe Frontier::Spec::ObjectSetup::AttributesSetup do
 
   describe "#to_s" do
-    subject { Frontier::SpecSupport::ObjectSetup::AttributesSetup.new(model_configuration).to_s }
+    subject { Frontier::Spec::ObjectSetup::AttributesSetup.new(model_configuration).to_s }
 
     context "with no associations" do
       let(:model_configuration) do

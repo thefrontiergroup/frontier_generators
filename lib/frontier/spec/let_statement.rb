@@ -1,4 +1,4 @@
-class Frontier::SpecSupport::LetStatement
+class Frontier::Spec::LetStatement
 
   include Frontier::IndentRenderer
 

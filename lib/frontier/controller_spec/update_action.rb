@@ -13,13 +13,13 @@ describe 'POST update' do
   authenticated_as(:admin) do
 
     context "with valid parameters" do
-#{render_with_indent(3, Frontier::SpecSupport::ObjectSetup.new(model_configuration).to_s)}
+#{render_with_indent(3, Frontier::Spec::ObjectSetup.new(model_configuration).to_s)}
 
       it "updates the #{model_configuration.as_constant} object with the given attributes" do
         subject
 
         #{model_configuration.model_name}.reload
-#{render_with_indent(4, Frontier::SpecSupport::ObjectAttributesAssertion.new(model_configuration).to_s)}
+#{render_with_indent(4, Frontier::Spec::ObjectAttributesAssertion.new(model_configuration).to_s)}
       end
 
       it { should redirect_to(#{model_configuration.url_builder.index_path(show_nested_model_as_ivar: false)}) }

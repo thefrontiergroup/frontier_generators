@@ -1,4 +1,4 @@
-class Frontier::SpecSupport::ObjectSetup::Attributes
+class Frontier::Spec::ObjectSetup::Attributes
 
   include Frontier::ModelConfigurationProperty
 
@@ -19,13 +19,13 @@ class Frontier::SpecSupport::ObjectSetup::Attributes
   #   end
   #
   def to_s
-    Frontier::SpecSupport::LetStatement.new("attributes", let_body).to_s({is_multiline: true})
+    Frontier::Spec::LetStatement.new("attributes", let_body).to_s({is_multiline: true})
   end
 
 private
 
   def let_body
-    attributes_hash = Frontier::SpecSupport::ObjectSetup::AttributesHash.new(model_configuration).to_hash
+    attributes_hash = Frontier::Spec::ObjectSetup::AttributesHash.new(model_configuration).to_hash
     Frontier::HashMultilineDecorator.new(attributes_hash).to_s(1)
   end
 

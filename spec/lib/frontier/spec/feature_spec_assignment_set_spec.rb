@@ -1,9 +1,9 @@
 require 'spec_helper'
 
-RSpec.describe Frontier::SpecSupport::ObjectSetup::Attributes do
+RSpec.describe Frontier::Spec::FeatureSpecAssignmentSet do
 
   describe '#to_s' do
-    subject { Frontier::SpecSupport::ObjectSetup::Attributes.new(model_configuration).to_s }
+    subject { Frontier::Spec::FeatureSpecAssignmentSet.new(model_configuration).to_s }
     let(:model_configuration) do
       Frontier::ModelConfiguration.new({
         model_name: {
@@ -19,6 +19,7 @@ RSpec.describe Frontier::SpecSupport::ObjectSetup::Attributes do
               }
             },
             name: {type: "string"},
+            other_field_not_on_form: {type: "string", show_on_form: false}
           }
         }
       })
@@ -26,16 +27,11 @@ RSpec.describe Frontier::SpecSupport::ObjectSetup::Attributes do
 
     let(:expected) do
       raw = <<STRING
-let(:attributes) do
-  {
-    address_id: address.id,
-    other_address_attributes: {
-      line_1: other_address_attributes[:line_1],
-      state_id: state.id
-    },
-    name: model_name_attributes[:name]
-  }
-end
+fill_in("Name", with: model_name_attributes[:name])
+select(address, from: "Address")
+# Address assignments
+fill_in("Line 1", with: other_address_attributes[:line_1])
+select(state, from: "State")
 STRING
       raw.rstrip
     end

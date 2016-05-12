@@ -11,14 +11,14 @@ describe 'POST create' do
   authenticated_as(:admin) do
 
     context "with valid parameters" do
-#{render_with_indent(3, Frontier::SpecSupport::ObjectSetup.new(model_configuration).to_s)}
+#{render_with_indent(3, Frontier::Spec::ObjectSetup.new(model_configuration).to_s)}
 
       it "creates a #{model_configuration.as_constant} object with the given attributes" do
         subject
 
         #{model_configuration.model_name} = #{model_configuration.as_constant}.order(:created_at).last
         expect(#{model_configuration.model_name}).to be_present
-#{render_with_indent(4, Frontier::SpecSupport::ObjectAttributesAssertion.new(model_configuration).to_s)}
+#{render_with_indent(4, Frontier::Spec::ObjectAttributesAssertion.new(model_configuration).to_s)}
       end
 
       it { should redirect_to(#{model_configuration.url_builder.index_path(show_nested_model_as_ivar: false)}) }

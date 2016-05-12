@@ -1,4 +1,4 @@
-class Frontier::SpecSupport::ObjectSetup
+class Frontier::Spec::ObjectSetup
 
   include Frontier::ModelConfigurationProperty
 
@@ -32,9 +32,9 @@ class Frontier::SpecSupport::ObjectSetup
   #   end
   def to_s
     [
-      Frontier::SpecSupport::ObjectSetup::AttributesSetup.new(model_configuration).to_s,
-      Frontier::SpecSupport::ObjectSetup::AssociatedModelSetup.new(model_configuration).to_s,
-      Frontier::SpecSupport::ObjectSetup::Attributes.new(model_configuration).to_s
+      Frontier::Spec::ObjectSetup::AttributesSetup.new(model_configuration).to_s,
+      Frontier::Spec::ObjectSetup::AssociatedModelSetup.new(model_configuration).to_s,
+      Frontier::Spec::ObjectSetup::Attributes.new(model_configuration).to_s
     ].select(&:present?).join("\n")
   end
 

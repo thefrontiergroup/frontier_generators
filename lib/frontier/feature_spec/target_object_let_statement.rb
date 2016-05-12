@@ -59,7 +59,7 @@ private
   end
 
   def let_statement_for_resource(resouce_name, controller_prefixes, has_bang: true)
-    let_statement = Frontier::SpecSupport::LetStatement.new(resouce_name, factory_girl_call(resouce_name, controller_prefixes))
+    let_statement = Frontier::Spec::LetStatement.new(resouce_name, factory_girl_call(resouce_name, controller_prefixes))
     let_statement.to_s(has_bang: has_bang)
   end
 

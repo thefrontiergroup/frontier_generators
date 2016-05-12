@@ -1,9 +1,9 @@
 require 'spec_helper'
 
-RSpec.describe Frontier::SpecSupport::ObjectSetup::AttributesHash do
+RSpec.describe Frontier::Spec::ObjectSetup::AttributesHash do
 
   describe "#to_hash" do
-    subject { Frontier::SpecSupport::ObjectSetup::AttributesHash.new(model_configuration).to_hash }
+    subject { Frontier::Spec::ObjectSetup::AttributesHash.new(model_configuration).to_hash }
 
     describe "omitting fields that are not on the form" do
       let(:model_configuration) do

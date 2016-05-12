@@ -1,4 +1,4 @@
-class Frontier::SpecSupport::FeatureSpecAssignmentSet
+class Frontier::Spec::FeatureSpecAssignmentSet
 
   attr_reader :model_configuration_or_association
 
@@ -42,7 +42,7 @@ private
 
   def assignment_for(attribute_or_association)
     if attribute_or_association.is_association? && attribute_or_association.is_nested?
-      Frontier::SpecSupport::FeatureSpecAssignmentSet.new(attribute_or_association).to_s("# #{attribute_or_association.as_constant} assignments")
+      Frontier::Spec::FeatureSpecAssignmentSet.new(attribute_or_association).to_s("# #{attribute_or_association.as_constant} assignments")
     else
       Frontier::FeatureSpecAssignment.new(attribute_or_association).to_s("#{model_configuration_or_association.model_name}_attributes")
     end

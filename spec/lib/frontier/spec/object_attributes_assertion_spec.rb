@@ -1,9 +1,10 @@
 require 'spec_helper'
 
-RSpec.describe Frontier::SpecSupport::FeatureSpecAssignmentSet do
+RSpec.describe Frontier::Spec::ObjectAttributesAssertion do
 
   describe '#to_s' do
-    subject { Frontier::SpecSupport::FeatureSpecAssignmentSet.new(model_configuration).to_s }
+    subject { Frontier::Spec::ObjectAttributesAssertion.new(model_configuration).to_s }
+
     let(:model_configuration) do
       Frontier::ModelConfiguration.new({
         model_name: {
@@ -19,7 +20,7 @@ RSpec.describe Frontier::SpecSupport::FeatureSpecAssignmentSet do
               }
             },
             name: {type: "string"},
-            other_field_not_on_form: {type: "string", show_on_form: false}
+            omitted_attribute: {type: "string", show_on_form: false}
           }
         }
       })
@@ -27,11 +28,10 @@ RSpec.describe Frontier::SpecSupport::FeatureSpecAssignmentSet do
 
     let(:expected) do
       raw = <<STRING
-fill_in("Name", with: model_name_attributes[:name])
-select(address, from: "Address")
-# Address assignments
-fill_in("Line 1", with: other_address_attributes[:line_1])
-select(state, from: "State")
+expect(model_name.name).to eq(model_name_attributes[:name])
+expect(model_name.address).to eq(address)
+expect(model_name.other_address.line_1).to eq(other_address_attributes[:line_1])
+expect(model_name.other_address.state).to eq(state)
 STRING
       raw.rstrip
     end

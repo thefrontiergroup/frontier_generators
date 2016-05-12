@@ -1,4 +1,4 @@
-class Frontier::SpecSupport::ObjectAttributesAssertion
+class Frontier::Spec::ObjectAttributesAssertion
 
   attr_reader :model_configuration_or_association, :prefix
 
@@ -8,7 +8,7 @@ class Frontier::SpecSupport::ObjectAttributesAssertion
   end
 
   # Render a set of assertions that prove that an object has been updated with the attributes
-  # generated from Frontier::SpecSupport::ObjectSetup#to_s.
+  # generated from Frontier::Spec::ObjectSetup#to_s.
   #
   # For the following attributes:
   #
