@@ -3,9 +3,9 @@ $:.push File.expand_path("../lib", __FILE__)
 
 Gem::Specification.new do |s|
   s.name        = "frontier_generators"
-  s.version     = "0.20.0"
-  s.authors     = ["Jordan Maguire", "Vinicius Osiro"]
-  s.email       = ["jordan@thefrontiergroup.com.au", "vinny@thefrontiergroup.com.au"]
+  s.version     = "0.21.0"
+  s.authors     = ["Jordan Maguire"]
+  s.email       = ["jordan@thefrontiergroup.com.au"]
   s.homepage    = "https://github.com/thefrontiergroup/frontier_generators"
   s.summary     = "Comprehensive generators for CRUD"
   s.description = <<-EOF
