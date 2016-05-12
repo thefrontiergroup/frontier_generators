@@ -16,13 +16,9 @@ class Frontier::FeatureSpec::TargetObjectLetStatement
   #
   # * The parent object (client) will be used in route generation in other parts of the feature spec.
   #
-  # Example: With include_resource false (In some specs, we are only interested in having the children objects)
-  #
-  # let(:client) { FactoryGirl.create(:client) }
-  #
-  def to_s(include_resource: true)
+  def to_s
     [
-      (let_statement_for_resource(model_configuration.model_name, model_configuration.controller_prefixes) if include_resource),
+      let_statement_for_resource(model_configuration.model_name, model_configuration.controller_prefixes),
       let_statements_for_nested_resources
     ].select(&:present?).join("\n")
   end
