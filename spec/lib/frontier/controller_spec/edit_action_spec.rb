@@ -8,7 +8,7 @@ describe Frontier::ControllerSpec::EditAction do
     let(:model_configuration) do
       Frontier::ModelConfiguration.new({
         user: {
-          controller_prefixes: ["@company"],
+          controller_prefixes: controller_prefixes,
           attributes: {
             name: {type: "string"}
           }
@@ -16,12 +16,14 @@ describe Frontier::ControllerSpec::EditAction do
       })
     end
 
-    let(:expected) do
-      raw = <<STRING
+    context "with no nested models" do
+      let(:controller_prefixes) { [] }
+
+      let(:expected) do
+        raw = <<STRING
 describe 'GET edit' do
-  subject { get :edit, company_id: company.id, id: user.id }
-  let(:company) { FactoryGirl.create(:company) }
-  let(:user) { FactoryGirl.create(:user) }
+  subject { get :edit, id: user.id }
+  let!(:user) { FactoryGirl.create(:user) }
 
   authenticated_as(:admin) do
     it { should render_template(:edit) }
@@ -31,10 +33,35 @@ describe 'GET edit' do
   it_behaves_like "action authorizes roles", [:admin]
 end
 STRING
-      raw.rstrip
+        raw.rstrip
+      end
+
+      it { should eq(expected) }
     end
 
-    it { should eq(expected) }
+    context "with nested models" do
+      let(:controller_prefixes) { ["@company"] }
+
+      let(:expected) do
+        raw = <<STRING
+describe 'GET edit' do
+  subject { get :edit, company_id: company.id, id: user.id }
+  let!(:user) { FactoryGirl.create(:user, company: company) }
+  let(:company) { FactoryGirl.create(:company) }
+
+  authenticated_as(:admin) do
+    it { should render_template(:edit) }
+  end
+
+  it_behaves_like "action requiring authentication"
+  it_behaves_like "action authorizes roles", [:admin]
+end
+STRING
+        raw.rstrip
+      end
+
+      it { should eq(expected) }
+    end
   end
 
 end
