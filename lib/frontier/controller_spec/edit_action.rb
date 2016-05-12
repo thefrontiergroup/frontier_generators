@@ -6,7 +6,7 @@ class Frontier::ControllerSpec::EditAction
     raw = <<STRING
 describe 'GET edit' do
 #{render_with_indent(1, subject_block)}
-  let(#{model_configuration.as_symbol}) { FactoryGirl.create(#{model_configuration.as_symbol}) }
+#{render_with_indent(1, Frontier::FeatureSpec::TargetObjectLetStatement.new(model_configuration).to_s)}
 
   authenticated_as(:admin) do
     it { should render_template(:edit) }

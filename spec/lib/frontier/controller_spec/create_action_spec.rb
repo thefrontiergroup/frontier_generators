@@ -8,7 +8,7 @@ describe Frontier::ControllerSpec::CreateAction do
     let(:model_configuration) do
       Frontier::ModelConfiguration.new({
         user: {
-          controller_prefixes: ["@company"],
+          controller_prefixes: controller_prefixes,
           attributes: {
             name: {type: "string"}
           }
@@ -16,8 +16,60 @@ describe Frontier::ControllerSpec::CreateAction do
       })
     end
 
-    let(:expected) do
-      raw = <<STRING
+    context "without nested models" do
+      let(:controller_prefixes) { [] }
+      let(:expected) do
+        raw = <<STRING
+describe 'POST create' do
+  subject { post :create, user: attributes }
+  let(:attributes) { {} }
+
+  authenticated_as(:admin) do
+
+    context "with valid parameters" do
+      let(:user_attributes) { FactoryGirl.attributes_for(:user) }
+      let(:attributes) do
+        {
+          name: user_attributes[:name]
+        }
+      end
+
+      it "creates a User object with the given attributes" do
+        subject
+
+        user = User.order(:created_at).last
+        expect(user).to be_present
+        expect(user.name).to eq(user_attributes[:name])
+      end
+
+      it { should redirect_to(users_path) }
+
+      it "sets a notice for the user" do
+        subject
+        expect(flash[:notice]).to be_present
+      end
+    end
+
+    context "with invalid parameters" do
+      let(:attributes) { parameters_for(:user, :invalid) }
+      specify { expect { subject }.not_to change(User, :count) }
+    end
+  end
+
+  it_behaves_like "action requiring authentication"
+  it_behaves_like "action authorizes roles", [:admin]
+end
+STRING
+        raw.rstrip
+      end
+
+      it { should eq(expected) }
+    end
+
+    context "with nested models" do
+      let(:controller_prefixes) { ["@company"] }
+      let(:expected) do
+        raw = <<STRING
 describe 'POST create' do
   subject { post :create, company_id: company.id, user: attributes }
   let(:company) { FactoryGirl.create(:company) }
@@ -59,10 +111,12 @@ describe 'POST create' do
   it_behaves_like "action authorizes roles", [:admin]
 end
 STRING
-      raw.rstrip
+        raw.rstrip
+      end
+
+      it { should eq(expected) }
     end
 
-    it { should eq(expected) }
   end
 
 end

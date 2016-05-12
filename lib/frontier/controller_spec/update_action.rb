@@ -6,9 +6,9 @@ class Frontier::ControllerSpec::UpdateAction
     raw = <<STRING
 describe 'POST update' do
 #{render_with_indent(1, subject_block)}
+#{render_with_indent(1, Frontier::FeatureSpec::TargetObjectLetStatement.new(model_configuration).to_s)}
 
   let(:attributes) { {} }
-  let(#{model_configuration.as_symbol}) { FactoryGirl.create(#{model_configuration.as_symbol}) }
 
   authenticated_as(:admin) do
 

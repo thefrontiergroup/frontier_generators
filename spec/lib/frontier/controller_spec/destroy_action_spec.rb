@@ -8,7 +8,7 @@ describe Frontier::ControllerSpec::DestroyAction do
     let(:model_configuration) do
       Frontier::ModelConfiguration.new({
         user: {
-          controller_prefixes: ["@company"],
+          controller_prefixes: controller_prefixes,
           attributes: {
             name: {type: "string"}
           }
@@ -16,12 +16,40 @@ describe Frontier::ControllerSpec::DestroyAction do
       })
     end
 
-    let(:expected) do
-      raw = <<STRING
+    context "with one nested model" do
+      let(:controller_prefixes) { [] }
+      let(:expected) do
+        raw = <<STRING
+describe 'DELETE destroy' do
+  subject { delete :destroy, id: user.id }
+  let!(:user) { FactoryGirl.create(:user) }
+
+  authenticated_as(:admin) do
+    it "deletes the User" do
+      subject
+      expect(user.reload.deleted_at).to be_present
+    end
+    it { should redirect_to(users_path) }
+  end
+
+  it_behaves_like "action requiring authentication"
+  it_behaves_like "action authorizes roles", [:admin]
+end
+STRING
+        raw.rstrip
+      end
+
+      it { should eq(expected) }
+    end
+
+    context "with one nested model" do
+      let(:controller_prefixes) { ["@company"] }
+      let(:expected) do
+        raw = <<STRING
 describe 'DELETE destroy' do
   subject { delete :destroy, company_id: company.id, id: user.id }
+  let!(:user) { FactoryGirl.create(:user, company: company) }
   let(:company) { FactoryGirl.create(:company) }
-  let(:user) { FactoryGirl.create(:user) }
 
   authenticated_as(:admin) do
     it "deletes the User" do
@@ -35,10 +63,11 @@ describe 'DELETE destroy' do
   it_behaves_like "action authorizes roles", [:admin]
 end
 STRING
-      raw.rstrip
-    end
+        raw.rstrip
+      end
 
-    it { should eq(expected) }
+      it { should eq(expected) }
+    end
   end
 
 end

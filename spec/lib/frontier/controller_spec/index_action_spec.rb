@@ -8,7 +8,7 @@ describe Frontier::ControllerSpec::IndexAction do
     let(:model_configuration) do
       Frontier::ModelConfiguration.new({
         user: {
-          controller_prefixes: ["@company"],
+          controller_prefixes: controller_prefixes,
           attributes: {
             name: {type: "string"}
           }
@@ -16,8 +16,31 @@ describe Frontier::ControllerSpec::IndexAction do
       })
     end
 
-    let(:expected) do
-      raw = <<STRING
+    context "with no nested models" do
+      let(:controller_prefixes) { [] }
+      let(:expected) do
+        raw = <<STRING
+describe 'GET index' do
+  subject { get :index }
+
+  authenticated_as(:admin) do
+    it { should render_template(:index) }
+  end
+
+  it_behaves_like "action requiring authentication"
+  it_behaves_like "action authorizes roles", [:admin]
+end
+STRING
+        raw.rstrip
+      end
+
+      it { should eq(expected) }
+    end
+
+    context "with one nested model" do
+      let(:controller_prefixes) { ["@company"] }
+      let(:expected) do
+        raw = <<STRING
 describe 'GET index' do
   subject { get :index, company_id: company.id }
   let(:company) { FactoryGirl.create(:company) }
@@ -30,10 +53,11 @@ describe 'GET index' do
   it_behaves_like "action authorizes roles", [:admin]
 end
 STRING
-      raw.rstrip
-    end
+        raw.rstrip
+      end
 
-    it { should eq(expected) }
+      it { should eq(expected) }
+    end
   end
 
 end
