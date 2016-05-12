@@ -23,30 +23,14 @@ class Frontier::FeatureSpec::TargetObjectLetStatement
   def to_s(include_resource: true)
     [
       (let_statement_for_resource(model_configuration.model_name, model_configuration.controller_prefixes) if include_resource),
-      *let_statements_for_nested_resources
+      let_statements_for_nested_resources
     ].select(&:present?).join("\n")
   end
 
 private
 
   def let_statements_for_nested_resources
-    nested_models = model_configuration.controller_prefixes.select(&:nested_model?)
-
-    # We reverse here because we want the statements to be ordered by how close they are
-    # to the resource.
-    #
-    # Example: controller_prefixes: [@company, @client]
-    #
-    # let!(:claim) { FactoryGirl.create(:claim, client: client) }
-    # let(:client) { FactoryGirl.create(:client, company: company) }
-    # let(:company) { FactoryGirl.create(:company) }
-    #
-    nested_models.reverse.map do |controller_prefix|
-      # In the above example, the preceding_controller_prefixes will be [@company] for @client
-      # and [] for @company
-      preceding_controller_prefixes = nested_models.first(nested_models.index(controller_prefix))
-      let_statement_for_resource(controller_prefix.as_snake_case, preceding_controller_prefixes, has_bang: false)
-    end
+    Frontier::Spec::NestedModelLetSetup.new(model_configuration).to_s
   end
 
   def factory_arguments_for(controller_prefixes)
