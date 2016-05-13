@@ -3,7 +3,7 @@ require 'rails_helper'
 feature 'Admin can create a new <%= model_configuration.as_constant %>' do
 
   sign_in_as(:admin)
-<%= render_with_indent(1, Frontier::FeatureSpec::TargetObjectLetStatement.new(model_configuration).to_s(include_resource: false)) %>
+<%= render_with_indent(1, Frontier::Spec::NestedModelLetSetup.new(model_configuration).to_s) %>
 <%= render_with_indent(1, Frontier::Spec::ObjectSetup::AttributesSetup.new(model_configuration).to_s) %>
 <%= render_with_indent(1, Frontier::Spec::ObjectSetup::AssociatedModelSetup.new(model_configuration).to_s) %>
 

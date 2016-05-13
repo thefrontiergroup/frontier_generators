@@ -1,11 +1,9 @@
-class Frontier::ControllerSpec::CreateAction
-
-  include Frontier::ModelConfigurationProperty
+class Frontier::ControllerSpec::CreateAction < Frontier::ControllerSpec::CollectionAction
 
   def to_s
     raw = <<STRING
 describe 'POST create' do
-#{render_with_indent(1, subject_block)}
+#{render_with_indent(1, render_setup)}
   let(:attributes) { {} }
 
   authenticated_as(:admin) do

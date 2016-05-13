@@ -1,6 +1,10 @@
 class Frontier::ControllerSpec
 end
 
+# Superclasses
+require_relative "./controller_spec/collection_action"
+require_relative "./controller_spec/member_action"
+
 require_relative "./controller_spec/create_action"
 require_relative "./controller_spec/destroy_action"
 require_relative "./controller_spec/edit_action"

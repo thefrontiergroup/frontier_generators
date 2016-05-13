@@ -1,14 +1,11 @@
-class Frontier::ControllerSpec::UpdateAction
-
-  include Frontier::ModelConfigurationProperty
+class Frontier::ControllerSpec::UpdateAction < Frontier::ControllerSpec::MemberAction
 
   def to_s
     raw = <<STRING
 describe 'POST update' do
-#{render_with_indent(1, subject_block)}
+#{render_with_indent(1, render_setup)}
 
   let(:attributes) { {} }
-  let(#{model_configuration.as_symbol}) { FactoryGirl.create(#{model_configuration.as_symbol}) }
 
   authenticated_as(:admin) do
 

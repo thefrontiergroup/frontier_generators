@@ -41,12 +41,7 @@ describe Frontier::ControllerSpec::SubjectBlock do
       let(:params) { {user: "attributes"} }
 
       let(:expected) do
-        raw = <<STRING
-subject { get :index, cat_id: cat.id, user_id: user.id, user: attributes }
-let(:cat) { FactoryGirl.create(:cat) }
-let(:user) { FactoryGirl.create(:user) }
-STRING
-        raw.rstrip
+        "subject { get :index, cat_id: cat.id, user_id: user.id, user: attributes }"
       end
 
       it { should eq(expected) }

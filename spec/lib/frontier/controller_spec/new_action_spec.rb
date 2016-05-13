@@ -8,7 +8,7 @@ describe Frontier::ControllerSpec::NewAction do
     let(:model_configuration) do
       Frontier::ModelConfiguration.new({
         user: {
-          controller_prefixes: ["@company"],
+          controller_prefixes: controller_prefixes,
           attributes: {
             name: {type: "string"}
           }
@@ -16,8 +16,31 @@ describe Frontier::ControllerSpec::NewAction do
       })
     end
 
-    let(:expected) do
-      raw = <<STRING
+    context "with no nested models" do
+      let(:controller_prefixes) { [] }
+      let(:expected) do
+        raw = <<STRING
+describe 'GET new' do
+  subject { get :new }
+
+  authenticated_as(:admin) do
+    it { should render_template(:new) }
+  end
+
+  it_behaves_like "action requiring authentication"
+  it_behaves_like "action authorizes roles", [:admin]
+end
+STRING
+        raw.rstrip
+      end
+
+      it { should eq(expected) }
+    end
+
+    context "with one nested model" do
+      let(:controller_prefixes) { ["@company"] }
+      let(:expected) do
+        raw = <<STRING
 describe 'GET new' do
   subject { get :new, company_id: company.id }
   let(:company) { FactoryGirl.create(:company) }
@@ -30,10 +53,12 @@ describe 'GET new' do
   it_behaves_like "action authorizes roles", [:admin]
 end
 STRING
-      raw.rstrip
+        raw.rstrip
+      end
+
+      it { should eq(expected) }
     end
 
-    it { should eq(expected) }
   end
 
 end

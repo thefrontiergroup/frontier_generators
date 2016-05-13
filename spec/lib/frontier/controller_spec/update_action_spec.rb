@@ -20,10 +20,10 @@ describe Frontier::ControllerSpec::UpdateAction do
       raw = <<STRING
 describe 'POST update' do
   subject { post :update, company_id: company.id, id: user.id, user: attributes }
+  let!(:user) { FactoryGirl.create(:user, company: company) }
   let(:company) { FactoryGirl.create(:company) }
 
   let(:attributes) { {} }
-  let(:user) { FactoryGirl.create(:user) }
 
   authenticated_as(:admin) do
 

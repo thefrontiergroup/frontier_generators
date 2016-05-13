@@ -1,12 +1,9 @@
-class Frontier::ControllerSpec::DestroyAction
-
-  include Frontier::ModelConfigurationProperty
+class Frontier::ControllerSpec::DestroyAction < Frontier::ControllerSpec::MemberAction
 
   def to_s
     raw = <<STRING
 describe 'DELETE destroy' do
-#{render_with_indent(1, subject_block)}
-  let(#{model_configuration.as_symbol}) { FactoryGirl.create(#{model_configuration.as_symbol}) }
+#{render_with_indent(1, render_setup)}
 
   authenticated_as(:admin) do
     it "deletes the #{model_configuration.as_title}" do

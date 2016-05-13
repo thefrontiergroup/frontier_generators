@@ -1,11 +1,9 @@
-class Frontier::ControllerSpec::NewAction
-
-  include Frontier::ModelConfigurationProperty
+class Frontier::ControllerSpec::NewAction < Frontier::ControllerSpec::CollectionAction
 
   def to_s
     raw = <<STRING
 describe 'GET new' do
-#{render_with_indent(1, subject_block)}
+#{render_with_indent(1, render_setup)}
 
   authenticated_as(:admin) do
     it { should render_template(:new) }
