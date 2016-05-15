@@ -29,7 +29,7 @@ class Frontier::Attribute::FactoryDeclaration::String
     elsif attribute.name =~ /suburb/
       "FFaker::AddressAU.suburb"
     else
-      "FFaker::Company.bs"
+      "FFaker::Lorem.sentence"
     end
   end
 

@@ -65,7 +65,7 @@ describe Frontier::Attribute::FactoryDeclaration::String do
 
     context "attribute name doesn't contain any of the above matches" do
       let(:name) { "field" }
-      it { should eq("FFaker::Company.bs") }
+      it { should eq("FFaker::Lorem.sentence") }
     end
   end
 
