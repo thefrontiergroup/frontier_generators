@@ -18,6 +18,11 @@ describe Frontier::Attribute::FactoryDeclaration::String do
       it { should eq("FFaker::Internet.email") }
     end
 
+    context "attribute name contains fax" do
+      let(:name) { "field_fax" }
+      it { should eq("FFaker::PhoneNumberAU.phone_number") }
+    end
+
     context "attribute name contains line_1" do
       let(:name) { "line_1" }
       it { should eq("FFaker::AddressAU.street_address") }
@@ -61,6 +66,11 @@ describe Frontier::Attribute::FactoryDeclaration::String do
     context "attribute name contains suburb" do
       let(:name) { "suburb" }
       it { should eq("FFaker::AddressAU.suburb") }
+    end
+
+    context "attribute name contains surname" do
+      let(:name) { "field_surname" }
+      it { should eq("FFaker::Name.last_name") }
     end
 
     context "attribute name doesn't contain any of the above matches" do
