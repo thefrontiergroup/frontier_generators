@@ -23,12 +23,12 @@ FactoryGirl.define do
   factory :user do
     association :address, strategy: :build
     first_name { FFaker::Name.first_name }
-    surname { FFaker::Name.last_name }
+    surname    { FFaker::Name.last_name }
 
     trait :invalid do
-      address nil
+      address    nil
       first_name nil
-      surname nil
+      surname    nil
     end
   end
 end

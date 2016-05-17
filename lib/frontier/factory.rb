@@ -6,10 +6,10 @@ class Frontier::Factory
     raw = <<-STRING
 FactoryGirl.define do
   factory #{model_configuration.as_symbol} do
-#{render_with_indent(2, factoried_attributes.join("\n"))}
+#{render_aligned_and_indented(2, "{", factoried_attributes)}
 
     trait :invalid do
-#{render_with_indent(3, invalid_attributes.join("\n"))}
+#{render_aligned_and_indented(3, "nil", invalid_attributes)}
     end
   end
 end
@@ -18,6 +18,11 @@ STRING
   end
 
 private
+
+  def render_aligned_and_indented(indents, token, content)
+    aligned_content = Frontier::StringAligner.new(content, token).aligned.join("\n")
+    render_with_indent(indents, aligned_content)
+  end
 
   def factoried_attributes
     model_configuration.attributes.sort_by(&:name).map do |attribute|
