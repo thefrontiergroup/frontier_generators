@@ -1,4 +1,18 @@
-## Unreleased
+## 0.23.0
+
+- Fix #130: Line up factory output
+- Fix #140, #151: Use human readable names in specs
+- Fix #145: Use diff assertion when soft delete is off
+
+## 0.22.0
+
+- Add support for fax and surname factory fields
+- Use Lorem.sentence for a default (over FFaker::Company.bs)
+- Fix #131: Correctly setup nested models in controllers
+
+## 0.21.0
+
+- Fix #139: Remove extra WS
 
 - Fix flash messages
 
