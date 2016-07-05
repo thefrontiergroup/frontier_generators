@@ -18,7 +18,7 @@ describe Frontier::ControllerSpec::DestroyAction do
     end
     let(:soft_delete) { true }
 
-    context "with no nested model" do
+    context "with no nested models" do
       let(:controller_prefixes) { [] }
 
       context "using soft delete" do
