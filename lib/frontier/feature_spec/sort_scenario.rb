@@ -9,7 +9,7 @@ class Frontier::FeatureSpec::SortScenario
 
   def to_s
     raw = <<STRING
-scenario "sorting by '#{attribute_or_association.name}'" do
+scenario "sorting by '#{attribute_or_association.capitalized}'" do
   first  = #{ordered_object.first}
   second = #{ordered_object.second}
 
