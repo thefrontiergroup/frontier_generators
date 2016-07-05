@@ -7,8 +7,7 @@ describe 'DELETE destroy' do
 
   authenticated_as(:admin) do
     it "deletes the #{model_configuration.as_title}" do
-      subject
-      expect(#{model_configuration.model_name}.reload.deleted_at).to be_present
+#{render_with_indent(3, successful_deletion_assertion)}
     end
     it { should redirect_to(#{model_configuration.url_builder.index_path(show_nested_model_as_ivar: false)}) }
   end
@@ -21,6 +20,14 @@ STRING
   end
 
 private
+
+  def successful_deletion_assertion
+    if model_configuration.soft_delete
+      "subject\nexpect(#{model_configuration.model_name}.reload.deleted_at).to be_present"
+    else
+      "expect { subject }.to change { #{model_configuration.as_constant}.count }.by(-1)"
+    end
+  end
 
   def subject_block
     Frontier::ControllerSpec::SubjectBlock.new(model_configuration, :delete, :destroy, {id: "#{model_configuration.model_name}.id"}).to_s

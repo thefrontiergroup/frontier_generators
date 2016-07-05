@@ -11,15 +11,19 @@ describe Frontier::ControllerSpec::DestroyAction do
           controller_prefixes: controller_prefixes,
           attributes: {
             name: {type: "string"}
-          }
+          },
+          soft_delete: soft_delete
         }
       })
     end
+    let(:soft_delete) { true }
 
-    context "with one nested model" do
+    context "with no nested model" do
       let(:controller_prefixes) { [] }
-      let(:expected) do
-        raw = <<STRING
+
+      context "using soft delete" do
+        let(:expected) do
+          raw = <<STRING
 describe 'DELETE destroy' do
   subject { delete :destroy, id: user.id }
   let!(:user) { FactoryGirl.create(:user) }
@@ -36,10 +40,36 @@ describe 'DELETE destroy' do
   it_behaves_like "action authorizes roles", [:admin]
 end
 STRING
-        raw.rstrip
+          raw.rstrip
+        end
+
+        it { should eq(expected) }
       end
 
-      it { should eq(expected) }
+      context "not using soft delete" do
+        let(:soft_delete) { false }
+        let(:expected) do
+          raw = <<STRING
+describe 'DELETE destroy' do
+  subject { delete :destroy, id: user.id }
+  let!(:user) { FactoryGirl.create(:user) }
+
+  authenticated_as(:admin) do
+    it "deletes the User" do
+      expect { subject }.to change { User.count }.by(-1)
+    end
+    it { should redirect_to(users_path) }
+  end
+
+  it_behaves_like "action requiring authentication"
+  it_behaves_like "action authorizes roles", [:admin]
+end
+STRING
+          raw.rstrip
+        end
+
+        it { should eq(expected) }
+      end
     end
 
     context "with one nested model" do
