@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe Frontier::Association do
 
-  let(:association) { Frontier::Association.new(build_model_configuration, name, options) }
+  let(:association) { Frontier::Association.new(build_model, name, options) }
   let(:name) { "association_name" }
   let(:options) { {} }
 

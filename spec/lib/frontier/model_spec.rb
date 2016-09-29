@@ -1,53 +1,53 @@
 require 'spec_helper'
 
-describe Frontier::ModelConfiguration do
+describe Frontier::Model do
 
-  let(:model_configuration) { build_model_configuration }
+  let(:model) { build_model }
 
   describe "#as_collection" do
-    subject { model_configuration.as_collection }
+    subject { model.as_collection }
     it { should eq("test_models") }
   end
 
   describe "#as_constant" do
-    subject { model_configuration.as_constant }
+    subject { model.as_constant }
     it { should eq("TestModel") }
   end
 
   describe "#as_ivar_collection" do
-    subject { model_configuration.as_ivar_collection }
+    subject { model.as_ivar_collection }
     it { should eq("@test_models") }
   end
 
   describe "#as_symbol" do
-    subject { model_configuration.as_symbol }
+    subject { model.as_symbol }
     it { should eq(":test_model") }
   end
 
   describe "#as_symbol_collection" do
-    subject { model_configuration.as_symbol_collection }
+    subject { model.as_symbol_collection }
     it { should eq(":test_models") }
   end
 
   describe "#as_name" do
-    subject { model_configuration.as_name }
+    subject { model.as_name }
     it { should eq("test model") }
   end
 
   describe "#as_title" do
-    subject { model_configuration.as_title }
+    subject { model.as_title }
     it { should eq("Test Model") }
   end
 
   describe "#as_ivar_instance" do
-    subject { model_configuration.as_ivar_instance }
+    subject { model.as_ivar_instance }
     it { should eq("@test_model") }
   end
 
   describe "#primary_attribute" do
-    subject(:primary_attribute) { model_configuration.primary_attribute }
+    subject(:primary_attribute) { model.primary_attribute }
 
-    let(:model_configuration) { Frontier::ModelConfiguration.new(model_options) }
+    let(:model) { Frontier::Model.new(model_options) }
     let(:model_options) do
       {
         test_model: {
@@ -85,8 +85,8 @@ describe Frontier::ModelConfiguration do
   describe '#initialize' do
 
     describe "assigning @authorization" do
-      subject { model_configuration.authorization }
-      let(:model_configuration) { Frontier::ModelConfiguration.new(model_options) }
+      subject { model.authorization }
+      let(:model) { Frontier::Model.new(model_options) }
       let(:model_options) { {test_model: {authorization: authorization}} }
 
       context "when authorization is provided as a config option" do
@@ -101,8 +101,8 @@ describe Frontier::ModelConfiguration do
     end
 
     describe "assigning @controller_prefixes" do
-      subject { model_configuration.controller_prefixes.map(&:name) }
-      let(:model_configuration) { Frontier::ModelConfiguration.new(model_options) }
+      subject { model.controller_prefixes.map(&:name) }
+      let(:model) { Frontier::Model.new(model_options) }
       let(:model_options) { {test_model: {controller_prefixes: controller_prefixes}} }
 
       context "when an array is passed through" do
@@ -123,9 +123,9 @@ describe Frontier::ModelConfiguration do
     end
 
     describe "assigning @skip_factory" do
-      subject { model_configuration.skip_factory? }
+      subject { model.skip_factory? }
 
-      let(:model_configuration) { Frontier::ModelConfiguration.new(model_options) }
+      let(:model) { Frontier::Model.new(model_options) }
       let(:model_options) { {test_model: {skip_factory: skip_factory}} }
 
       context "when skip_factory is true" do
@@ -145,9 +145,9 @@ describe Frontier::ModelConfiguration do
     end
 
     describe "assigning @skip_model" do
-      subject { model_configuration.skip_model? }
+      subject { model.skip_model? }
 
-      let(:model_configuration) { Frontier::ModelConfiguration.new(model_options) }
+      let(:model) { Frontier::Model.new(model_options) }
       let(:model_options) { {test_model: {skip_model: skip_model}} }
 
       context "when skip_model is true" do
@@ -167,9 +167,9 @@ describe Frontier::ModelConfiguration do
     end
 
     describe "assigning @skip_seeds" do
-      subject { model_configuration.skip_seeds? }
+      subject { model.skip_seeds? }
 
-      let(:model_configuration) { Frontier::ModelConfiguration.new(model_options) }
+      let(:model) { Frontier::Model.new(model_options) }
       let(:model_options) { {test_model: {skip_seeds: skip_seeds}} }
 
       context "when skip_seeds is true" do
@@ -189,9 +189,9 @@ describe Frontier::ModelConfiguration do
     end
 
     describe "assigning @skip_policies" do
-      subject { model_configuration.skip_policies? }
+      subject { model.skip_policies? }
 
-      let(:model_configuration) { Frontier::ModelConfiguration.new(model_options) }
+      let(:model) { Frontier::Model.new(model_options) }
       let(:model_options) { {test_model: {skip_policies: skip_policies}} }
 
       context "when skip_policies is true" do
@@ -211,7 +211,7 @@ describe Frontier::ModelConfiguration do
     end
 
     describe "hiding/showing UI elements" do
-      let(:model_configuration) { Frontier::ModelConfiguration.new(model_options) }
+      let(:model) { Frontier::Model.new(model_options) }
       let(:model_options) { {test_model: {skip_ui: skip_ui}} }
 
       [
@@ -222,7 +222,7 @@ describe Frontier::ModelConfiguration do
       ].each do |method_name, action|
 
         describe "##{method_name}" do
-          subject { model_configuration.send(method_name) }
+          subject { model.send(method_name) }
 
           context "when skip_ui is true" do
             let(:skip_ui) { true }
@@ -255,8 +255,8 @@ describe Frontier::ModelConfiguration do
   end
 
   describe "#using_pundit?" do
-    subject { model_configuration.using_pundit? }
-    let(:model_configuration) { Frontier::ModelConfiguration.new(model_options) }
+    subject { model.using_pundit? }
+    let(:model) { Frontier::Model.new(model_options) }
     let(:model_options) { {test_model: {authorization: authorization}} }
 
     context "when authorization is pundit" do

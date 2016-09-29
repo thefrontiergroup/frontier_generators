@@ -1,11 +1,11 @@
 class Frontier::Factory
 
-  include Frontier::ModelConfigurationProperty
+  include Frontier::ModelProperty
 
   def to_s
     raw = <<-STRING
 FactoryGirl.define do
-  factory #{model_configuration.as_symbol} do
+  factory #{model.as_symbol} do
 #{render_aligned_and_indented(2, "{", factoried_attributes)}
 
     trait :invalid do
@@ -25,13 +25,13 @@ private
   end
 
   def factoried_attributes
-    model_configuration.attributes.sort_by(&:name).map do |attribute|
+    model.attributes.sort_by(&:name).map do |attribute|
       attribute.as_factory_declaration
     end
   end
 
   def invalid_attributes
-    model_configuration.attributes.sort_by(&:name).map do |attribute|
+    model.attributes.sort_by(&:name).map do |attribute|
       "#{attribute.name} nil"
     end
   end

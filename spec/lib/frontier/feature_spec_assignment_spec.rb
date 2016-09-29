@@ -8,7 +8,7 @@ describe Frontier::FeatureSpecAssignment do
     let(:options)     { {} }
 
     context "when association" do
-      let(:attribute_or_association) { Frontier::Association.new(build_model_configuration, name, options) }
+      let(:attribute_or_association) { Frontier::Association.new(build_model, name, options) }
 
       it "delegates to Frontier::Association::FeatureSpecAssignment" do
         expect_any_instance_of(Frontier::Association::FeatureSpecAssignment).to receive(:to_s)
@@ -17,7 +17,7 @@ describe Frontier::FeatureSpecAssignment do
     end
 
     context "when attribute" do
-      let(:attribute_or_association) { Frontier::Attribute.new(build_model_configuration, name, options) }
+      let(:attribute_or_association) { Frontier::Attribute.new(build_model, name, options) }
 
       it "delegates to Frontier::Attribute::FeatureSpecAssignment" do
         expect_any_instance_of(Frontier::Attribute::FeatureSpecAssignment).to receive(:to_s)

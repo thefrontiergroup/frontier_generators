@@ -1,6 +1,6 @@
 class Frontier::ControllerAction::EditAction
 
-  include Frontier::ModelConfigurationProperty
+  include Frontier::ModelProperty
 
   ##
   # Renders the edit action for a controller. EG:
@@ -26,9 +26,9 @@ private
 
   def action_contents
     [
-      "#{model_configuration.as_ivar_instance} = find_#{model_configuration.model_name}",
-      Frontier::Authorization::Assertion.new(model_configuration, :edit).to_s,
-      Frontier::ControllerActionSupport::NestedAssociationBuilder.new(model_configuration, model_configuration.as_ivar_instance).to_s
+      "#{model.as_ivar_instance} = find_#{model.model_name}",
+      Frontier::Authorization::Assertion.new(model, :edit).to_s,
+      Frontier::ControllerActionSupport::NestedAssociationBuilder.new(model, model.as_ivar_instance).to_s
     ].flatten.compact
   end
 

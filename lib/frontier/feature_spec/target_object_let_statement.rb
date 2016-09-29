@@ -1,6 +1,6 @@
 class Frontier::FeatureSpec::TargetObjectLetStatement
 
-  include Frontier::ModelConfigurationProperty
+  include Frontier::ModelProperty
 
   # Sets up the object that we are using in our spec and any other objects that are required
   # to use this object (like nested objects).
@@ -18,7 +18,7 @@ class Frontier::FeatureSpec::TargetObjectLetStatement
   #
   def to_s
     [
-      let_statement_for_resource(model_configuration.model_name, model_configuration.controller_prefixes),
+      let_statement_for_resource(model.model_name, model.controller_prefixes),
       let_statements_for_nested_resources
     ].select(&:present?).join("\n")
   end
@@ -26,7 +26,7 @@ class Frontier::FeatureSpec::TargetObjectLetStatement
 private
 
   def let_statements_for_nested_resources
-    Frontier::Spec::NestedModelLetSetup.new(model_configuration).to_s
+    Frontier::Spec::NestedModelLetSetup.new(model).to_s
   end
 
   def factory_arguments_for(controller_prefixes)

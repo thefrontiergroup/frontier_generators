@@ -2,9 +2,9 @@ require 'spec_helper'
 
 describe Frontier::UrlBuilder do
 
-  let(:url_builder) { Frontier::UrlBuilder.new(model_configuration) }
-  let(:model_configuration) do
-    Frontier::ModelConfiguration.new({
+  let(:url_builder) { Frontier::UrlBuilder.new(model) }
+  let(:model) do
+    Frontier::Model.new({
       "user" => {controller_prefixes: controller_prefixes}
     })
   end

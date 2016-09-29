@@ -1,9 +1,9 @@
 class Frontier::Views::Index::EmptyMessageAndCallToAction
 
-  include Frontier::ModelConfigurationProperty
+  include Frontier::ModelProperty
 
   def to_s
-    if model_configuration.show_create?
+    if model.show_create?
       empty_message_with_call_to_action
     else
       "%p #{empty_message_without_call_to_action}"
@@ -16,8 +16,8 @@ private
     raw = <<-STRING
 %p
   #{empty_message_without_call_to_action}
-  - if #{Frontier::Authorization::Check.new(model_configuration, model_configuration.as_constant, :new)}
-    = link_to(\"Add #{model_configuration.as_name.with_indefinite_article}.\", #{model_configuration.url_builder.new_path})
+  - if #{Frontier::Authorization::Check.new(model, model.as_constant, :new)}
+    = link_to(\"Add #{model.as_name.with_indefinite_article}.\", #{model.url_builder.new_path})
 STRING
     raw.rstrip
   end
@@ -27,7 +27,7 @@ STRING
   end
 
   def model_pluralized
-    model_configuration.as_title.pluralize.downcase
+    model.as_title.pluralize.downcase
   end
 
 end

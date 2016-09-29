@@ -3,7 +3,7 @@ require 'spec_helper'
 describe Frontier::Input::Attribute do
 
   let(:input_implementation) { Frontier::Input::Attribute.new(attribute) }
-  let(:attribute) { Frontier::Attribute.new(build_model_configuration, name, options) }
+  let(:attribute) { Frontier::Attribute.new(build_model, name, options) }
   let(:name) { "attribute_name" }
   let(:options) { {} }
 

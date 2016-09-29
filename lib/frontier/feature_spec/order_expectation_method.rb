@@ -1,9 +1,9 @@
 class Frontier::FeatureSpec::OrderExpectationMethod
 
-  include Frontier::ModelConfigurationProperty
+  include Frontier::ModelProperty
 
   def method_name
-    "expect_#{model_configuration.as_collection}_to_be_ordered"
+    "expect_#{model.as_collection}_to_be_ordered"
   end
 
   def to_s
@@ -19,7 +19,7 @@ STRING
 private
 
   def primary_attribute_name
-    model_configuration.primary_attribute.name
+    model.primary_attribute.name
   end
 
 end

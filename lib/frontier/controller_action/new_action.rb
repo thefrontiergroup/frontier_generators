@@ -1,6 +1,6 @@
 class Frontier::ControllerAction::NewAction
 
-  include Frontier::ModelConfigurationProperty
+  include Frontier::ModelProperty
 
   ##
   # Renders the new action for a controller. EG:
@@ -23,14 +23,14 @@ private
 
   def action_contents
     [
-      "#{model_configuration.as_ivar_instance} = #{scopable_object}.new",
-      Frontier::Authorization::Assertion.new(model_configuration, :new).to_s,
-      Frontier::ControllerActionSupport::NestedAssociationBuilder.new(model_configuration, model_configuration.as_ivar_instance).to_s
+      "#{model.as_ivar_instance} = #{scopable_object}.new",
+      Frontier::Authorization::Assertion.new(model, :new).to_s,
+      Frontier::ControllerActionSupport::NestedAssociationBuilder.new(model, model.as_ivar_instance).to_s
     ].flatten.compact
   end
 
   def scopable_object
-    Frontier::ControllerActionSupport::ScopableObject.new(model_configuration).to_s
+    Frontier::ControllerActionSupport::ScopableObject.new(model).to_s
   end
 
 end

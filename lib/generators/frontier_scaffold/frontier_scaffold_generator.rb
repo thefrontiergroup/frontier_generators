@@ -18,7 +18,7 @@ class FrontierScaffoldGenerator < Frontier::Generator
     # Generate models
     generate("frontier_model", ARGV[0])
 
-    unless model_configuration.skip_ui?
+    unless model.skip_ui?
       # Generate controllers
       generate("frontier_controller", ARGV[0])
 

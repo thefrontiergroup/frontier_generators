@@ -3,7 +3,7 @@ require 'spec_helper'
 describe Frontier::Attribute::Validation::Factory do
 
   let(:factory) { Frontier::Attribute::Validation::Factory.new }
-  let(:attribute) { Frontier::Attribute.new(build_model_configuration, "who_cares", {}) }
+  let(:attribute) { Frontier::Attribute.new(build_model, "who_cares", {}) }
 
   describe "build" do
     subject { factory.build(attribute, key, args) }

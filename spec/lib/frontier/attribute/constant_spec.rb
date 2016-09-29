@@ -5,7 +5,7 @@ describe Frontier::Attribute::Constant do
   describe ".build_from_validation" do
     subject(:constant)   { Frontier::Attribute::Constant.build_from_validation(attribute, validation) }
 
-    let(:attribute)  { Frontier::Attribute.new(build_model_configuration, name, options) }
+    let(:attribute)  { Frontier::Attribute.new(build_model, name, options) }
     let(:name)       { "field_name" }
     let(:options)    { {} }
     let(:validation) { Frontier::Attribute::Validation.new(attribute, "inclusion", [1,2,3]) }
@@ -21,7 +21,7 @@ describe Frontier::Attribute::Constant do
     subject { constant.model_implementation }
 
     let(:constant)   { Frontier::Attribute::Constant.build_from_validation(attribute, validation) }
-    let(:attribute)  { Frontier::Attribute.new(build_model_configuration, name, options) }
+    let(:attribute)  { Frontier::Attribute.new(build_model, name, options) }
     let(:name)       { "field_name" }
     let(:options)    { {} }
     let(:validation) { Frontier::Attribute::Validation.new(attribute, "inclusion", [1,2,3]) }

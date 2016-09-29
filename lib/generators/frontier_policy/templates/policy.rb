@@ -11,7 +11,7 @@ class <%= policy_class_name %> < ApplicationPolicy
 
   def permitted_attributes
     if is_admin? || is_member?
-      [<%= model_configuration.attributes.map(&:as_field_name).join(", ") %>]
+      [<%= model.attributes.map(&:as_field_name).join(", ") %>]
     else
       []
     end

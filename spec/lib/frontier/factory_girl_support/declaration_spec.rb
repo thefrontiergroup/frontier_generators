@@ -7,13 +7,13 @@ RSpec.describe Frontier::FactoryGirlSupport::Declaration do
     let(:factory_declaration) { Frontier::FactoryGirlSupport::Declaration.new("build", factory_object) }
 
     describe "generating factory name" do
-      context "with a Frontier::ModelConfiguration" do
-        let(:factory_object) { build_model_configuration }
+      context "with a Frontier::Model" do
+        let(:factory_object) { build_model }
         it { should eq("FactoryGirl.build(:test_model)") }
       end
 
       context "with a Frontier::Association" do
-        let(:factory_object) { Frontier::Association.new(build_model_configuration, name, options) }
+        let(:factory_object) { Frontier::Association.new(build_model, name, options) }
         let(:name) { "association_name" }
         let(:options) { {class_name: class_name} }
 

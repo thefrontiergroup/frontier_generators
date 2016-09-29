@@ -3,14 +3,14 @@ require 'spec_helper'
 describe Frontier::FeatureSpec::SortScenario::OrderedObject do
 
   let(:ordered_object) { Frontier::FeatureSpec::SortScenario::OrderedObject.new(attribute) }
-  let(:model_configuration) do
-    Frontier::ModelConfiguration.new({
+  let(:model) do
+    Frontier::Model.new({
       test_model: {
         attributes: {name: {type: type}}
       }
     })
   end
-  let(:attribute) { model_configuration.attributes.first }
+  let(:attribute) { model.attributes.first }
 
   context "when 'boolean'" do
     let(:type) { "boolean" }

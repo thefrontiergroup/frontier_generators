@@ -3,7 +3,7 @@ require 'spec_helper'
 describe Frontier::MigrationStringBuilder do
 
   let(:builder)       { Frontier::MigrationStringBuilder.new(configuration) }
-  let(:configuration) { build_model_configuration }
+  let(:configuration) { build_model }
 
   describe "#to_s" do
     subject(:output) { builder.to_s }

@@ -48,7 +48,7 @@ private
   end
 
   def enum_data
-    "#{attribute.model_configuration.as_constant}.#{attribute.name.pluralize}.keys.sample"
+    "#{attribute.model.as_constant}.#{attribute.name.pluralize}.keys.sample"
   end
 
   def number_data

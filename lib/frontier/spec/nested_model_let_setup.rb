@@ -1,8 +1,8 @@
 class Frontier::Spec::NestedModelLetSetup
 
-  include Frontier::ModelConfigurationProperty
+  include Frontier::ModelProperty
 
-  # When a Frontier::ModelConfiguration has one or more nested models we can generate let
+  # When a Frontier::Model has one or more nested models we can generate let
   # statements for them. EG:
   #
   # # One nested
@@ -13,7 +13,7 @@ class Frontier::Spec::NestedModelLetSetup
   # let(:company) { FactoryGirl.create(:company) }
   #
   def to_s
-    nested_models = model_configuration.controller_prefixes.select(&:nested_model?)
+    nested_models = model.controller_prefixes.select(&:nested_model?)
 
     # We reverse here because we want the statements to be ordered by how close they are
     # to the resource.

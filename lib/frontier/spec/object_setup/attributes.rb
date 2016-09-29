@@ -1,6 +1,6 @@
 class Frontier::Spec::ObjectSetup::Attributes
 
-  include Frontier::ModelConfigurationProperty
+  include Frontier::ModelProperty
 
   # Return a string that represents the attributes that would be used in the setup for a controller
   # spec. EG:
@@ -25,7 +25,7 @@ class Frontier::Spec::ObjectSetup::Attributes
 private
 
   def let_body
-    attributes_hash = Frontier::Spec::ObjectSetup::AttributesHash.new(model_configuration).to_hash
+    attributes_hash = Frontier::Spec::ObjectSetup::AttributesHash.new(model).to_hash
     Frontier::HashMultilineDecorator.new(attributes_hash).to_s(1)
   end
 

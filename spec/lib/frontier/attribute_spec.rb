@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe Frontier::Attribute do
 
-  let(:attribute) { Frontier::Attribute.new(build_model_configuration, name, options) }
+  let(:attribute) { Frontier::Attribute.new(build_model, name, options) }
   let(:name) { "attribute_name" }
   let(:options) { {} }
 

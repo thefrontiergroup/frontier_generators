@@ -1,6 +1,6 @@
 class Frontier::ControllerAction::CreateAction
 
-  include Frontier::ModelConfigurationProperty
+  include Frontier::ModelProperty
 
   ##
   # Renders the create action for a controller. EG:
@@ -15,11 +15,11 @@ class Frontier::ControllerAction::CreateAction
   def to_s
     raw = <<-STRING
 def create
-  #{model_configuration.as_ivar_instance} = #{scopable_object}.new(strong_params_for_#{model_configuration.model_name})
-  #{Frontier::Authorization::Assertion.new(model_configuration, :create).to_s}
-  #{model_configuration.as_ivar_instance}.save
+  #{model.as_ivar_instance} = #{scopable_object}.new(strong_params_for_#{model.model_name})
+  #{Frontier::Authorization::Assertion.new(model, :create).to_s}
+  #{model.as_ivar_instance}.save
 
-  respond_with(#{model_configuration.as_ivar_instance}, location: #{model_configuration.url_builder.index_path})
+  respond_with(#{model.as_ivar_instance}, location: #{model.url_builder.index_path})
 end
 STRING
     raw.rstrip
@@ -28,7 +28,7 @@ STRING
 private
 
   def scopable_object
-    Frontier::ControllerActionSupport::ScopableObject.new(model_configuration).to_s
+    Frontier::ControllerActionSupport::ScopableObject.new(model).to_s
   end
 
 end

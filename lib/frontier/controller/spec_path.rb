@@ -1,6 +1,6 @@
 class Frontier::Controller::SpecPath
 
-  include Frontier::ModelConfigurationProperty
+  include Frontier::ModelProperty
 
   # EG: Admin::Users::DriversController
   # EG: Admin::DriversController
@@ -9,7 +9,7 @@ class Frontier::Controller::SpecPath
     File.join(
       "spec",
       "controllers",
-      *model_configuration.controller_prefixes.map(&:as_snake_case),
+      *model.controller_prefixes.map(&:as_snake_case),
       file_name
     ).to_s
   end
@@ -17,7 +17,7 @@ class Frontier::Controller::SpecPath
 private
 
   def file_name
-    "#{model_configuration.model_name.pluralize}_controller_spec.rb"
+    "#{model.model_name.pluralize}_controller_spec.rb"
   end
 
 end

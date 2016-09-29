@@ -3,18 +3,18 @@ require 'spec_helper'
 describe Frontier::FeatureSpec::TargetObjectLetStatement do
 
   describe "#to_s" do
-    let(:let_statement) { Frontier::FeatureSpec::TargetObjectLetStatement.new(model_configuration) }
+    let(:let_statement) { Frontier::FeatureSpec::TargetObjectLetStatement.new(model) }
 
     subject { let_statement.to_s }
 
     context "with no nested models" do
-      let(:model_configuration) { Frontier::ModelConfiguration.new({model_name: {}}) }
+      let(:model) { Frontier::Model.new({model_name: {}}) }
       it { should eq("let!(:model_name) { FactoryGirl.create(:model_name) }") }
     end
 
     context "with a namespace" do
-      let(:model_configuration) do
-        Frontier::ModelConfiguration.new({
+      let(:model) do
+        Frontier::Model.new({
           model_name: {
             controller_prefixes: ["admin"]
           }
@@ -33,8 +33,8 @@ STRING
     end
 
     context "with a nested model" do
-      let(:model_configuration) do
-        Frontier::ModelConfiguration.new({
+      let(:model) do
+        Frontier::Model.new({
           model_name: {
             controller_prefixes: ["@cat"]
           }
@@ -54,8 +54,8 @@ STRING
     end
 
     context "with some nested models" do
-      let(:model_configuration) do
-        Frontier::ModelConfiguration.new({
+      let(:model) do
+        Frontier::Model.new({
           model_name: {
             controller_prefixes: ["@user", "@cat"]
           }

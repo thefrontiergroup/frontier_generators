@@ -3,9 +3,9 @@ require 'spec_helper'
 RSpec.describe Frontier::ControllerAction::FindMethod do
 
   describe "#to_s" do
-    subject { Frontier::ControllerAction::FindMethod.new(model_configuration).to_s }
-    let(:model_configuration) do
-      Frontier::ModelConfiguration.new({
+    subject { Frontier::ControllerAction::FindMethod.new(model).to_s }
+    let(:model) do
+      Frontier::Model.new({
         "test_model" => {controller_prefixes: controller_prefixes}
       })
     end

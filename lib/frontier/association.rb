@@ -8,7 +8,7 @@ class Frontier::Association < Frontier::Attribute
 
   ID_REGEXP = /_id\z/
 
-  def initialize(model_configuration, name, properties)
+  def initialize(model, name, properties)
     super
 
     # Convert:

@@ -4,7 +4,7 @@ describe Frontier::FeatureSpec::VisitIndexMethod do
 
   describe '#method_name' do
     subject { visit_index_method.method_name }
-    let(:visit_index_method) { Frontier::FeatureSpec::VisitIndexMethod.new(build_model_configuration) }
+    let(:visit_index_method) { Frontier::FeatureSpec::VisitIndexMethod.new(build_model) }
 
     it { should eq("visit_index") }
   end
@@ -12,7 +12,7 @@ describe Frontier::FeatureSpec::VisitIndexMethod do
   describe "#to_s" do
     subject { visit_index_method.to_s }
 
-    let(:visit_index_method) { Frontier::FeatureSpec::VisitIndexMethod.new(build_model_configuration) }
+    let(:visit_index_method) { Frontier::FeatureSpec::VisitIndexMethod.new(build_model) }
 
     let(:expected) do
       raw = <<STRING

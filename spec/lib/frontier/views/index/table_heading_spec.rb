@@ -6,14 +6,14 @@ describe Frontier::Views::Index::TableHeading do
     subject { table_heading.to_s }
 
     let(:table_heading) { Frontier::Views::Index::TableHeading.new(attribute) }
-    let(:model_configuration) do
-      Frontier::ModelConfiguration.new({
+    let(:model) do
+      Frontier::Model.new({
         test_model: {
           attributes: {name: {sortable: sortable}}
         }
       })
     end
-    let(:attribute) { model_configuration.attributes.first }
+    let(:attribute) { model.attributes.first }
 
     context "sortable" do
       let(:sortable) { true }

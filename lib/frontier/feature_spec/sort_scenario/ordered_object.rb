@@ -1,18 +1,18 @@
 class Frontier::FeatureSpec::SortScenario::OrderedObject
 
-  attr_reader :model_configuration, :attribute_or_association
+  attr_reader :model, :attribute_or_association
 
   def initialize(attribute_or_association)
-    @model_configuration      = attribute_or_association.model_configuration
+    @model      = attribute_or_association.model
     @attribute_or_association = attribute_or_association
   end
 
   def first
-    Frontier::FactoryGirlSupport::Declaration.new(:create, model_configuration).to_s(first_options)
+    Frontier::FactoryGirlSupport::Declaration.new(:create, model).to_s(first_options)
   end
 
   def second
-    Frontier::FactoryGirlSupport::Declaration.new(:create, model_configuration).to_s(second_options)
+    Frontier::FactoryGirlSupport::Declaration.new(:create, model).to_s(second_options)
   end
 
 private

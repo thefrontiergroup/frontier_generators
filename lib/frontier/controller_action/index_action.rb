@@ -1,11 +1,11 @@
 class Frontier::ControllerAction::IndexAction
 
-  include Frontier::ModelConfigurationProperty
+  include Frontier::ModelProperty
 
   def to_s
     raw = <<-STRING
 def index
-  #{Frontier::Authorization::Assertion.new(model_configuration, :index).to_s}
+  #{Frontier::Authorization::Assertion.new(model, :index).to_s}
 #{Frontier::RubyRenderer.new(object_scope).render(1)}
 end
 STRING
@@ -15,17 +15,17 @@ STRING
 private
 
   def sortable?
-    model_configuration.attributes.any?(&:sortable?)
+    model.attributes.any?(&:sortable?)
   end
 
   def object_scope
     if sortable?
       # @ransack_query = User.ransack(params[:q])
-      ransack_query = "@ransack_query = #{model_configuration.as_constant}.ransack(params[:q])"
+      ransack_query = "@ransack_query = #{model.as_constant}.ransack(params[:q])"
 
       # @users = User.all, or
       # @users = @client.users
-      assignment_and_scoped_query = "#{model_configuration.as_ivar_collection} = #{scoped_object}"
+      assignment_and_scoped_query = "#{model.as_ivar_collection} = #{scoped_object}"
 
       # @users = User.all.merge(@ransack_query.result), or
       # @users = @client.users.merge(@ransack_query.result)
@@ -44,17 +44,17 @@ private
         pagination
       ].join("\n")
     else
-      "#{model_configuration.as_ivar_collection} = #{scopable_object}.page(params[:page])"
+      "#{model.as_ivar_collection} = #{scopable_object}.page(params[:page])"
     end
   end
 
   def scopable_object
-    Frontier::ControllerActionSupport::ScopableObject.new(model_configuration).to_s
+    Frontier::ControllerActionSupport::ScopableObject.new(model).to_s
   end
 
   # .merge cannot be called on a class, must be called on a scoped object
   def scoped_object
-    if model_configuration.controller_prefixes.any?(&:nested_model?)
+    if model.controller_prefixes.any?(&:nested_model?)
       scopable_object
     else
       "#{scopable_object}.all"

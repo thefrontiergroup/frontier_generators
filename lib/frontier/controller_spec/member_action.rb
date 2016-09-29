@@ -1,6 +1,6 @@
 class Frontier::ControllerSpec::MemberAction
 
-  include Frontier::ModelConfigurationProperty
+  include Frontier::ModelProperty
 
 protected
 
@@ -9,7 +9,7 @@ protected
   end
 
   def target_and_nested_models_setup
-    Frontier::FeatureSpec::TargetObjectLetStatement.new(model_configuration).to_s
+    Frontier::FeatureSpec::TargetObjectLetStatement.new(model).to_s
   end
 
 end

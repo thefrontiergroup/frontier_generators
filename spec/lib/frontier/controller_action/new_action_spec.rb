@@ -3,10 +3,10 @@ require 'spec_helper'
 RSpec.describe Frontier::ControllerAction::NewAction do
 
   describe "#to_s" do
-    subject { Frontier::ControllerAction::NewAction.new(model_configuration).to_s }
+    subject { Frontier::ControllerAction::NewAction.new(model).to_s }
 
     context "a model without any associations" do
-      let(:model_configuration) { build_model_configuration }
+      let(:model) { build_model }
 
       let(:expected) do
         raw = <<-STRING
@@ -22,8 +22,8 @@ STRING
     end
 
     context "a model with shallow nested associations" do
-      let(:model_configuration) do
-        Frontier::ModelConfiguration.new({
+      let(:model) do
+        Frontier::Model.new({
           test_model: {
             attributes: {
               address: {type: "belongs_to", form_type: "select"},
@@ -59,8 +59,8 @@ STRING
     end
 
     context "a model with deeply nested associations" do
-      let(:model_configuration) do
-        Frontier::ModelConfiguration.new({
+      let(:model) do
+        Frontier::Model.new({
           test_model: {
             attributes: {
               address: {type: "belongs_to", form_type: "select"},
@@ -103,8 +103,8 @@ STRING
     end
 
     context "a model with a nested association that has multiple nested associations" do
-      let(:model_configuration) do
-        Frontier::ModelConfiguration.new({
+      let(:model) do
+        Frontier::Model.new({
           test_model: {
             attributes: {
               address: {type: "belongs_to", form_type: "select"},

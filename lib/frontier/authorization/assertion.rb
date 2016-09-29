@@ -1,28 +1,28 @@
 class Frontier::Authorization::Assertion
 
-  attr_reader :action, :model_configuration
+  attr_reader :action, :model
 
-  def initialize(model_configuration, action)
-    @model_configuration = model_configuration
+  def initialize(model, action)
+    @model = model
     @action = action
   end
 
   def to_s
-    if model_configuration.using_pundit?
+    if model.using_pundit?
       # Pundit will infer the action from the controller action being used, so there is
       # no reason to pass it through.
       #
       # authorize(User)
-      "authorize(#{model_configuration.as_constant})"
+      "authorize(#{model.as_constant})"
     else
       if action.to_sym == :index
         # Index action should be authorized against the class
         # authorize!(:index, User)
-        "authorize!(:#{action}, #{model_configuration.as_constant})"
+        "authorize!(:#{action}, #{model.as_constant})"
       else
         # All other actions should be authorized against the instance
         # authorize!(:new, @user)
-        "authorize!(:#{action}, #{model_configuration.as_ivar_instance})"
+        "authorize!(:#{action}, #{model.as_ivar_instance})"
       end
     end
   end

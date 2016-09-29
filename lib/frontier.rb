@@ -7,7 +7,7 @@ require_relative "./frontier/error_reporter"
 
 # Modules
 require_relative "./frontier/indent_renderer"
-require_relative "./frontier/model_configuration_property"
+require_relative "./frontier/model_property"
 
 # Classes
 require_relative "./frontier/association"
@@ -28,7 +28,7 @@ require_relative "./frontier/hash_multiline_decorator"
 require_relative "./frontier/hash_single_line_decorator"
 require_relative "./frontier/input"
 require_relative "./frontier/migration_string_builder"
-require_relative "./frontier/model_configuration"
+require_relative "./frontier/model"
 require_relative "./frontier/routes"
 require_relative "./frontier/ruby_renderer"
 require_relative "./frontier/spec"

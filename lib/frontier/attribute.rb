@@ -1,9 +1,9 @@
 class Frontier::Attribute
 
-  attr_reader :model_configuration, :is_primary, :name, :properties
+  attr_reader :model, :is_primary, :name, :properties
 
-  def initialize(model_configuration, name, properties)
-    @model_configuration = model_configuration
+  def initialize(model, name, properties)
+    @model = model
     @name = name.to_s
     @properties = properties
     @is_primary = @properties[:primary] == true
@@ -77,8 +77,8 @@ class Frontier::Attribute
   # index refers to the index.html.haml template, nothing to do with DB.
   def as_index_string
     case type
-      when "text" then "truncate(#{model_configuration.model_name}.#{name}, length: 30)"
-      else "#{model_configuration.model_name}.#{name}"
+      when "text" then "truncate(#{model.model_name}.#{name}, length: 30)"
+      else "#{model.model_name}.#{name}"
     end
   end
 

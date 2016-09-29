@@ -4,9 +4,9 @@ describe Frontier::Factory do
 
   describe "#to_s" do
     subject { factory.to_s }
-    let(:factory) { Frontier::Factory.new(model_configuration) }
-    let(:model_configuration) do
-      Frontier::ModelConfiguration.new({
+    let(:factory) { Frontier::Factory.new(model) }
+    let(:model) do
+      Frontier::Model.new({
         user: {
           attributes: {
             first_name: {type: "string"},

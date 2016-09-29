@@ -2,8 +2,8 @@ require 'spec_helper'
 
 describe Frontier::FormHeader do
 
-  let(:form_header) { Frontier::FormHeader.new(model_configuration) }
-  let(:model_configuration) { Frontier::ModelConfiguration.new(attributes) }
+  let(:form_header) { Frontier::FormHeader.new(model) }
+  let(:model) { Frontier::Model.new(attributes) }
 
   describe "#to_s" do
     subject { form_header.to_s }

@@ -2,13 +2,13 @@ require 'spec_helper'
 
 describe Frontier::Views::Index::InstanceActions do
 
-  let(:actions) { Frontier::Views::Index::InstanceActions.new(model_configuration) }
-  let(:model_configuration) do
+  let(:actions) { Frontier::Views::Index::InstanceActions.new(model) }
+  let(:model) do
     skip_ui_options = []
     skip_ui_options << "update" unless show_update
     skip_ui_options << "delete" unless show_delete
 
-    Frontier::ModelConfiguration.new({
+    Frontier::Model.new({
       user: {
         authorization: "cancancan",
         skip_ui: skip_ui_options

@@ -5,12 +5,12 @@ describe Frontier::Views::Index::EmptyMessageAndCallToAction do
   describe "#to_s" do
     subject { empty_message.to_s }
 
-    let(:empty_message) { Frontier::Views::Index::EmptyMessageAndCallToAction.new(model_configuration) }
-    let(:model_configuration) do
+    let(:empty_message) { Frontier::Views::Index::EmptyMessageAndCallToAction.new(model) }
+    let(:model) do
       skip_ui_options = []
       skip_ui_options << "create" unless show_create
 
-      Frontier::ModelConfiguration.new({
+      Frontier::Model.new({
         user_setting: {
           authorization: "cancancan",
           skip_ui: skip_ui_options

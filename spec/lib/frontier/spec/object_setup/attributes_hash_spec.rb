@@ -3,11 +3,11 @@ require 'spec_helper'
 RSpec.describe Frontier::Spec::ObjectSetup::AttributesHash do
 
   describe "#to_hash" do
-    subject { Frontier::Spec::ObjectSetup::AttributesHash.new(model_configuration).to_hash }
+    subject { Frontier::Spec::ObjectSetup::AttributesHash.new(model).to_hash }
 
     describe "omitting fields that are not on the form" do
-      let(:model_configuration) do
-        Frontier::ModelConfiguration.new({
+      let(:model) do
+        Frontier::Model.new({
           model_name: {
             attributes: {
               name: {type: "string"},
@@ -27,8 +27,8 @@ RSpec.describe Frontier::Spec::ObjectSetup::AttributesHash do
     end
 
     context "with a simple set of attributes" do
-      let(:model_configuration) do
-        Frontier::ModelConfiguration.new({
+      let(:model) do
+        Frontier::Model.new({
           model_name: {
             attributes: {
               name: {type: "string"},
@@ -49,8 +49,8 @@ RSpec.describe Frontier::Spec::ObjectSetup::AttributesHash do
     end
 
     context "with an association that is not nested" do
-      let(:model_configuration) do
-        Frontier::ModelConfiguration.new({
+      let(:model) do
+        Frontier::Model.new({
           model_name: {
             attributes: {
               address: {type: "belongs_to", form_type: "select"},
@@ -73,8 +73,8 @@ RSpec.describe Frontier::Spec::ObjectSetup::AttributesHash do
     end
 
     context "with a shallow nested set of attributes" do
-      let(:model_configuration) do
-        Frontier::ModelConfiguration.new({
+      let(:model) do
+        Frontier::Model.new({
           model_name: {
             attributes: {
               address: {type: "belongs_to", form_type: "select"},
@@ -107,8 +107,8 @@ RSpec.describe Frontier::Spec::ObjectSetup::AttributesHash do
     end
 
     context "with a deeply nested set of attributes" do
-      let(:model_configuration) do
-        Frontier::ModelConfiguration.new({
+      let(:model) do
+        Frontier::Model.new({
           model_name: {
             attributes: {
               address: {type: "belongs_to", form_type: "select"},

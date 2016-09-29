@@ -4,9 +4,9 @@ class FrontierControllerGenerator < Frontier::Generator
   source_root File.expand_path('../templates', __FILE__)
 
   def scaffold
-    unless model_configuration.skip_ui?
-      template "controller.rb", Frontier::Controller::ImplementationPath.new(model_configuration).to_s
-      template "controller_spec.rb", Frontier::Controller::SpecPath.new(model_configuration).to_s
+    unless model.skip_ui?
+      template "controller.rb", Frontier::Controller::ImplementationPath.new(model).to_s
+      template "controller_spec.rb", Frontier::Controller::SpecPath.new(model).to_s
     end
   end
 
@@ -20,7 +20,7 @@ protected
   # EG: Admin::DriversController
   # EG: DriversController
   def controller_name
-    Frontier::Controller::ClassName.new(model_configuration).to_s
+    Frontier::Controller::ClassName.new(model).to_s
   end
 
   # EG: Admin::DriversController < Admin::BaseController
@@ -35,7 +35,7 @@ private
   # EG: Admin::BaseController
   # EG: ApplicationController
   def controller_superclass_name
-    Frontier::Controller::SuperClassName.new(model_configuration).to_s
+    Frontier::Controller::SuperClassName.new(model).to_s
   end
 
 end

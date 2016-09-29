@@ -4,8 +4,8 @@ describe Frontier::Authorization::Assertion do
 
   describe "#to_s" do
     subject { authorize_statement.to_s }
-    let(:authorize_statement) { Frontier::Authorization::Assertion.new(model_configuration, action) }
-    let(:model_configuration) { Frontier::ModelConfiguration.new(attributes) }
+    let(:authorize_statement) { Frontier::Authorization::Assertion.new(model, action) }
+    let(:model) { Frontier::Model.new(attributes) }
     let(:attributes) { {test_model: {authorization: authorization}}.stringify_keys }
 
     context "when using Pundit" do

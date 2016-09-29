@@ -3,7 +3,7 @@ require 'spec_helper'
 describe Frontier::Attribute::Factory do
 
   describe ".build_attribute_or_association" do
-    subject { Frontier::Attribute::Factory.build_attribute_or_association(build_model_configuration, name, options) }
+    subject { Frontier::Attribute::Factory.build_attribute_or_association(build_model, name, options) }
     let(:name)    { "field_name" }
     let(:options) { {type: type} }
 

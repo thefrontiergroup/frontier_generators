@@ -4,9 +4,9 @@ describe Frontier::ControllerSpec::EditAction do
 
   describe "#to_s" do
     subject { index_action.to_s }
-    let(:index_action) { Frontier::ControllerSpec::EditAction.new(model_configuration) }
-    let(:model_configuration) do
-      Frontier::ModelConfiguration.new({
+    let(:index_action) { Frontier::ControllerSpec::EditAction.new(model) }
+    let(:model) do
+      Frontier::Model.new({
         user: {
           controller_prefixes: controller_prefixes,
           attributes: {

@@ -15,7 +15,7 @@ private
 
   def class_name
     case factory_object
-    when Frontier::ModelConfiguration
+    when Frontier::Model
       factory_object.model_name
     when Frontier::Association
       factory_object.association_class.underscore

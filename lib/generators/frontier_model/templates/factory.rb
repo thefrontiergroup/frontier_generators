@@ -1,1 +1,1 @@
-<%= Frontier::Factory.new(model_configuration).to_s -%>
+<%= Frontier::Factory.new(model).to_s -%>

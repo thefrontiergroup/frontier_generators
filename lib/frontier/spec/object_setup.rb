@@ -1,6 +1,6 @@
 class Frontier::Spec::ObjectSetup
 
-  include Frontier::ModelConfigurationProperty
+  include Frontier::ModelProperty
 
   # Render a set of params that can be used in the controller specs. We need to use FactoryGirl
   # as much as possible to reduce duplication in the code.
@@ -32,9 +32,9 @@ class Frontier::Spec::ObjectSetup
   #   end
   def to_s
     [
-      Frontier::Spec::ObjectSetup::AttributesSetup.new(model_configuration).to_s,
-      Frontier::Spec::ObjectSetup::AssociatedModelSetup.new(model_configuration).to_s,
-      Frontier::Spec::ObjectSetup::Attributes.new(model_configuration).to_s
+      Frontier::Spec::ObjectSetup::AttributesSetup.new(model).to_s,
+      Frontier::Spec::ObjectSetup::AssociatedModelSetup.new(model).to_s,
+      Frontier::Spec::ObjectSetup::Attributes.new(model).to_s
     ].select(&:present?).join("\n")
   end
 

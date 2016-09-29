@@ -1,9 +1,9 @@
 class Frontier::Spec::FeatureSpecAssignmentSet
 
-  attr_reader :model_configuration_or_association
+  attr_reader :model_or_association
 
-  def initialize(model_configuration_or_association)
-    @model_configuration_or_association = model_configuration_or_association
+  def initialize(model_or_association)
+    @model_or_association = model_or_association
   end
 
   ##
@@ -29,8 +29,8 @@ private
   # Association (Not nested)
   # Association (Nested)
   def attributes_and_associations_ordered_by_nested_last
-    model_configuration_or_association.attributes.select(&:is_attribute?) +
-    model_configuration_or_association.attributes.select(&:is_association?).partition(&:is_nested?).flatten.reverse
+    model_or_association.attributes.select(&:is_attribute?) +
+    model_or_association.attributes.select(&:is_association?).partition(&:is_nested?).flatten.reverse
   end
 
   def assignments_for_attributes
@@ -44,7 +44,7 @@ private
     if attribute_or_association.is_association? && attribute_or_association.is_nested?
       Frontier::Spec::FeatureSpecAssignmentSet.new(attribute_or_association).to_s("# #{attribute_or_association.as_constant} assignments")
     else
-      Frontier::FeatureSpecAssignment.new(attribute_or_association).to_s("#{model_configuration_or_association.model_name}_attributes")
+      Frontier::FeatureSpecAssignment.new(attribute_or_association).to_s("#{model_or_association.model_name}_attributes")
     end
   end
 

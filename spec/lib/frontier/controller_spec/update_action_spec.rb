@@ -4,9 +4,9 @@ describe Frontier::ControllerSpec::UpdateAction do
 
   describe "#to_s" do
     subject { index_action.to_s }
-    let(:index_action) { Frontier::ControllerSpec::UpdateAction.new(model_configuration) }
-    let(:model_configuration) do
-      Frontier::ModelConfiguration.new({
+    let(:index_action) { Frontier::ControllerSpec::UpdateAction.new(model) }
+    let(:model) do
+      Frontier::Model.new({
         user: {
           controller_prefixes: ["@company"],
           attributes: {

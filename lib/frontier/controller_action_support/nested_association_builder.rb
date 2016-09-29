@@ -3,7 +3,7 @@ class Frontier::ControllerActionSupport::NestedAssociationBuilder
   include Frontier::IndentRenderer
 
   attr_reader :indent_level
-  # EG: Frontier::ModelConfiguration or Frontier::Association
+  # EG: Frontier::Model or Frontier::Association
   attr_reader :object_with_attributes
   # EG: @model_name
   # EG: @model_name.address

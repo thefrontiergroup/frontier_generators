@@ -4,9 +4,9 @@ describe Frontier::Spec::NestedModelLetSetup do
 
   describe "#to_s" do
     subject { setup.to_s }
-    let(:setup) { Frontier::Spec::NestedModelLetSetup.new(model_configuration) }
-    let(:model_configuration) do
-      Frontier::ModelConfiguration.new({user: {controller_prefixes: controller_prefixes}})
+    let(:setup) { Frontier::Spec::NestedModelLetSetup.new(model) }
+    let(:model) do
+      Frontier::Model.new({user: {controller_prefixes: controller_prefixes}})
     end
 
     context "with no nested models" do

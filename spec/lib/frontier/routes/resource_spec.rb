@@ -4,10 +4,10 @@ describe Frontier::Routes::Resource do
 
   describe '#exists_in_routes_file?' do
     subject { resource.exists_in_routes_file?(routes_file_content) }
-    let(:model_configuration) { Frontier::ModelConfiguration.new({"user" => {}}) }
+    let(:model) { Frontier::Model.new({"user" => {}}) }
 
     context "without namespaces" do
-      let(:resource) { Frontier::Routes::Resource.new(model_configuration, []) }
+      let(:resource) { Frontier::Routes::Resource.new(model, []) }
 
       context "when the resource exists with brackets" do
         let(:routes_file_content) do
@@ -47,7 +47,7 @@ STRING
     end
 
     context "with namespaces" do
-      let(:resource) { Frontier::Routes::Resource.new(model_configuration, [namespace]) }
+      let(:resource) { Frontier::Routes::Resource.new(model, [namespace]) }
 
       let(:namespace) { Frontier::Routes::Namespace.new(name, depth) }
       let(:name)  { "admin" }
@@ -99,8 +99,8 @@ STRING
 
   describe "#route_string" do
     subject { resource.route_string }
-    let(:resource) { Frontier::Routes::Resource.new(model_configuration, [namespace]) }
-    let(:model_configuration) { Frontier::ModelConfiguration.new({"user" => {}}) }
+    let(:resource) { Frontier::Routes::Resource.new(model, [namespace]) }
+    let(:model) { Frontier::Model.new({"user" => {}}) }
 
     let(:namespace) { Frontier::Routes::Namespace.new(name, depth) }
     let(:name)  { "admin" }

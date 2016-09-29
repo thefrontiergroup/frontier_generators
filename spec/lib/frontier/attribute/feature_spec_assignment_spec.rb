@@ -4,7 +4,7 @@ describe Frontier::Attribute::FeatureSpecAssignment do
 
   describe "#to_s" do
     subject { Frontier::Attribute::FeatureSpecAssignment.new(attribute).to_s }
-    let(:attribute)  { Frontier::Attribute.new(build_model_configuration, name, options) }
+    let(:attribute)  { Frontier::Attribute.new(build_model, name, options) }
     let(:name)       { "attribute_name" }
     let(:options)    { {type: attribute_type} }
 

@@ -3,9 +3,9 @@ require 'spec_helper'
 RSpec.describe Frontier::ControllerActionSupport::ScopableObject do
 
   describe "#to_s" do
-    subject { Frontier::ControllerActionSupport::ScopableObject.new(model_configuration).to_s }
-    let(:model_configuration) do
-      Frontier::ModelConfiguration.new({
+    subject { Frontier::ControllerActionSupport::ScopableObject.new(model).to_s }
+    let(:model) do
+      Frontier::Model.new({
         "test_model" => {controller_prefixes: controller_prefixes}
       })
     end

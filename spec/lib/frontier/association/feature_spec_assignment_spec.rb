@@ -4,7 +4,7 @@ describe Frontier::Association::FeatureSpecAssignment do
 
   describe "#to_s" do
     subject { Frontier::Association::FeatureSpecAssignment.new(association).to_s }
-    let(:association) { Frontier::Association.new(build_model_configuration, name, options) }
+    let(:association) { Frontier::Association.new(build_model, name, options) }
     let(:name)        { "association_name" }
     let(:options)     { {} }
 

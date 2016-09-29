@@ -6,7 +6,7 @@ describe Frontier::ControllerSpec::SubjectBlock do
     subject { subject_block.to_s }
     let(:subject_block) do
       Frontier::ControllerSpec::SubjectBlock.new(
-        model_configuration,
+        model,
         method,
         action,
         params
@@ -18,21 +18,21 @@ describe Frontier::ControllerSpec::SubjectBlock do
     let(:params) { {} }
 
     context "with no additional arguments and no nested models" do
-      let(:model_configuration) { build_model_configuration }
+      let(:model) { build_model }
 
       it { should eq("subject { get :index }") }
     end
 
     context "with some additional arguments" do
-      let(:model_configuration) { build_model_configuration }
+      let(:model) { build_model }
       let(:params) { {user: "attributes"} }
 
       it { should eq("subject { get :index, user: attributes }") }
     end
 
     context "with some nested models" do
-      let(:model_configuration) do
-        Frontier::ModelConfiguration.new({
+      let(:model) do
+        Frontier::Model.new({
           model_name: {
             controller_prefixes: ["@user", "@cat"]
           }

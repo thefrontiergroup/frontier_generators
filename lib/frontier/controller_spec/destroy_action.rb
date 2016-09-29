@@ -6,10 +6,10 @@ describe 'DELETE destroy' do
 #{render_with_indent(1, render_setup)}
 
   authenticated_as(:admin) do
-    it "deletes the #{model_configuration.as_title}" do
+    it "deletes the #{model.as_title}" do
 #{render_with_indent(3, successful_deletion_assertion)}
     end
-    it { should redirect_to(#{model_configuration.url_builder.index_path(show_nested_model_as_ivar: false)}) }
+    it { should redirect_to(#{model.url_builder.index_path(show_nested_model_as_ivar: false)}) }
   end
 
   it_behaves_like "action requiring authentication"
@@ -22,15 +22,15 @@ STRING
 private
 
   def successful_deletion_assertion
-    if model_configuration.soft_delete
-      "subject\nexpect(#{model_configuration.model_name}.reload.deleted_at).to be_present"
+    if model.soft_delete
+      "subject\nexpect(#{model.model_name}.reload.deleted_at).to be_present"
     else
-      "expect { subject }.to change { #{model_configuration.as_constant}.count }.by(-1)"
+      "expect { subject }.to change { #{model.as_constant}.count }.by(-1)"
     end
   end
 
   def subject_block
-    Frontier::ControllerSpec::SubjectBlock.new(model_configuration, :delete, :destroy, {id: "#{model_configuration.model_name}.id"}).to_s
+    Frontier::ControllerSpec::SubjectBlock.new(model, :delete, :destroy, {id: "#{model.model_name}.id"}).to_s
   end
 
 end

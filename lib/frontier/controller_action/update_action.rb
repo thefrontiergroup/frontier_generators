@@ -1,6 +1,6 @@
 class Frontier::ControllerAction::UpdateAction
 
-  include Frontier::ModelConfigurationProperty
+  include Frontier::ModelProperty
 
   ##
   # Renders the update action for a controller. EG:
@@ -16,12 +16,12 @@ class Frontier::ControllerAction::UpdateAction
   def to_s
     raw = <<-STRING
 def update
-  #{model_configuration.as_ivar_instance} = find_#{model_configuration.model_name}
-  #{model_configuration.as_ivar_instance}.assign_attributes(strong_params_for_#{model_configuration.model_name})
-  #{Frontier::Authorization::Assertion.new(model_configuration, :update).to_s}
-  #{model_configuration.as_ivar_instance}.save
+  #{model.as_ivar_instance} = find_#{model.model_name}
+  #{model.as_ivar_instance}.assign_attributes(strong_params_for_#{model.model_name})
+  #{Frontier::Authorization::Assertion.new(model, :update).to_s}
+  #{model.as_ivar_instance}.save
 
-  respond_with(#{model_configuration.as_ivar_instance}, location: #{model_configuration.url_builder.index_path})
+  respond_with(#{model.as_ivar_instance}, location: #{model.url_builder.index_path})
 end
 STRING
     raw.rstrip

@@ -1,7 +1,7 @@
 class Frontier::Attribute::Factory
 
-  def self.build_attribute_or_association(model_configuration, name, options)
-    get_class_for_name_and_options(name, options).new(model_configuration, name, options)
+  def self.build_attribute_or_association(model, name, options)
+    get_class_for_name_and_options(name, options).new(model, name, options)
   end
 
 private

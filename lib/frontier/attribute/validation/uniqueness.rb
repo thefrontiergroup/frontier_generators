@@ -16,7 +16,7 @@ class Frontier::Attribute::Validation::Uniqueness < Frontier::Attribute::Validat
     if args.present?
       raw = <<-STRING
 describe "validating uniqueness" do
-  subject { FactoryGirl.create(#{attribute.model_configuration.as_symbol}) }
+  subject { FactoryGirl.create(#{attribute.model.as_symbol}) }
   it { should #{full_assertion} }
 end
 STRING

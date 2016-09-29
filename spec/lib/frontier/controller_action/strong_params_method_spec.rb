@@ -5,12 +5,12 @@ describe Frontier::ControllerAction::StrongParamsMethod do
   describe "#to_s" do
     subject { strongs_params_method.to_s }
     let(:strongs_params_method) do
-      Frontier::ControllerAction::StrongParamsMethod.new(model_configuration)
+      Frontier::ControllerAction::StrongParamsMethod.new(model)
     end
 
     describe "omitting fields that are not on the form" do
-      let(:model_configuration) do
-        Frontier::ModelConfiguration.new({
+      let(:model) do
+        Frontier::Model.new({
           test_model: {
             attributes: {
               charlie: {type: "string", show_on_form: false},
@@ -37,8 +37,8 @@ STRING
 
     context "a simple model" do
       context "with 3 or fewer attributes" do
-        let(:model_configuration) do
-          Frontier::ModelConfiguration.new({
+        let(:model) do
+          Frontier::Model.new({
             test_model: {
               attributes: {
                 charlie: {type: "string"},
@@ -64,8 +64,8 @@ STRING
       end
 
       context "with 4 or more attributes" do
-        let(:model_configuration) do
-          Frontier::ModelConfiguration.new({
+        let(:model) do
+          Frontier::Model.new({
             test_model: {
               attributes: {
                 delta: {type: "string"},
@@ -98,8 +98,8 @@ STRING
     end
 
     context "a model with a nested association" do
-      let(:model_configuration) do
-        Frontier::ModelConfiguration.new({
+      let(:model) do
+        Frontier::Model.new({
           test_model: {
             attributes: {
               address: {type: "belongs_to", form_type: "select"},
@@ -135,8 +135,8 @@ STRING
     end
 
     context "a model with a deeply nested association" do
-      let(:model_configuration) do
-        Frontier::ModelConfiguration.new({
+      let(:model) do
+        Frontier::Model.new({
           test_model: {
             attributes: {
               address: {type: "belongs_to", form_type: "select"},

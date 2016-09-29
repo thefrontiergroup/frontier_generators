@@ -1,6 +1,6 @@
 class Frontier::Spec::ObjectSetup::AssociatedModelSetup
 
-  include Frontier::ModelConfigurationProperty
+  include Frontier::ModelProperty
 
   # Provide the let declarations that will setup the associated models to be used in the params:
   #
@@ -11,7 +11,7 @@ class Frontier::Spec::ObjectSetup::AssociatedModelSetup
   #   let(:params) { {address_id: address.id} }
   #
   def to_s
-    model_configuration.associations.select(&:show_on_form?).map do |association|
+    model.associations.select(&:show_on_form?).map do |association|
       # Nested forms can have their own associations
       if association.is_nested?
         Frontier::Spec::ObjectSetup::AssociatedModelSetup.new(association).to_s

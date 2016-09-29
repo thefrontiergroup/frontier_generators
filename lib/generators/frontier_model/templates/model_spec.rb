@@ -1,7 +1,7 @@
 require 'rails_helper'
 
-describe <%= model_configuration.as_constant %> do
-<% model_configuration.attributes.sort_by(&:name).select(&:validation_required?).each do |attribute| -%>
+describe <%= model.as_constant %> do
+<% model.attributes.sort_by(&:name).select(&:validation_required?).each do |attribute| -%>
 
   describe "@<%= attribute.name %>" do
 <% attribute.validations.each do |validation| -%>
@@ -11,7 +11,7 @@ describe <%= model_configuration.as_constant %> do
 <% end -%>
 
   describe "#to_s" do
-    subject { <%= model_configuration.as_constant %>.new(<%= model_configuration.primary_attribute.name %>: "Name").to_s }
+    subject { <%= model.as_constant %>.new(<%= model.primary_attribute.name %>: "Name").to_s }
     it { should eq("Name") }
   end
 

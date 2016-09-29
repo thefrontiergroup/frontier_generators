@@ -1,6 +1,6 @@
 class Frontier::FeatureSpec::VisitIndexMethod
 
-  include Frontier::ModelConfigurationProperty
+  include Frontier::ModelProperty
 
   def method_name
     "visit_index"
@@ -18,7 +18,7 @@ STRING
 private
 
   def index_path
-    model_configuration.url_builder.index_path(show_nested_model_as_ivar: false)
+    model.url_builder.index_path(show_nested_model_as_ivar: false)
   end
 
 end

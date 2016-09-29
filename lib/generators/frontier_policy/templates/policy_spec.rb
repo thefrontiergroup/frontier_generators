@@ -2,12 +2,12 @@ require 'rails_helper'
 
 describe <%= policy_class_name %> do
   subject { policy }
-  let(:policy) { <%= policy_class_name %>.new(user, <%= model_configuration.model_name %>) }
-  let(<%= model_configuration.as_symbol %>) { FactoryGirl.create(<%= model_configuration.as_symbol %>) }
+  let(:policy) { <%= policy_class_name %>.new(user, <%= model.model_name %>) }
+  let(<%= model.as_symbol %>) { FactoryGirl.create(<%= model.as_symbol %>) }
 
   describe <%= policy_class_name %>::Scope do
     let(:policy_scope) { <%= policy_class_name %>::Scope.new(user, scope) }
-    let(:scope) { <%= model_configuration.as_constant %>.all }
+    let(:scope) { <%= model.as_constant %>.all }
 
     describe "#resolve" do
       subject { policy_scope.resolve }
@@ -23,13 +23,13 @@ describe <%= policy_class_name %> do
       context "for an admin" do
         let(:user) { FactoryGirl.build(:user, :admin) }
 
-        it { should include(FactoryGirl.create(<%= model_configuration.as_symbol %>)) }
+        it { should include(FactoryGirl.create(<%= model.as_symbol %>)) }
       end
 
       context "for a member" do
         let(:user) { FactoryGirl.build(:user, :member) }
 
-        it { should include(FactoryGirl.create(<%= model_configuration.as_symbol %>)) }
+        it { should include(FactoryGirl.create(<%= model.as_symbol %>)) }
       end
     end
   end
@@ -50,7 +50,7 @@ describe <%= policy_class_name %> do
 
     describe '#permitted_attributes' do
       subject { policy.permitted_attributes }
-<% model_configuration.attributes.each do |attribute| -%>
+<% model.attributes.each do |attribute| -%>
       it { should include(<%= attribute.as_field_name %>) }
 <% end -%>
     end
@@ -63,7 +63,7 @@ describe <%= policy_class_name %> do
 
     describe '#permitted_attributes' do
       subject { policy.permitted_attributes }
-<% model_configuration.attributes.each do |attribute| -%>
+<% model.attributes.each do |attribute| -%>
       it { should include(<%= attribute.as_field_name %>) }
 <% end -%>
     end

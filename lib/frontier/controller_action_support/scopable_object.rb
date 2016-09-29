@@ -1,15 +1,15 @@
 class Frontier::ControllerActionSupport::ScopableObject
 
-  include Frontier::ModelConfigurationProperty
+  include Frontier::ModelProperty
 
   def to_s
-    deepest_nested_model = model_configuration.controller_prefixes.select(&:nested_model?).last
+    deepest_nested_model = model.controller_prefixes.select(&:nested_model?).last
     if deepest_nested_model.present?
       # @user.test_models
-      "#{deepest_nested_model.name}.#{model_configuration.as_collection}"
+      "#{deepest_nested_model.name}.#{model.as_collection}"
     else
       # TestModel
-      model_configuration.as_constant
+      model.as_constant
     end
   end
 

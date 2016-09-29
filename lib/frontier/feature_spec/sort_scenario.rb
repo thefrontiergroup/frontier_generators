@@ -1,9 +1,9 @@
 class Frontier::FeatureSpec::SortScenario
 
-  attr_reader :model_configuration, :attribute_or_association
+  attr_reader :model, :attribute_or_association
 
   def initialize(attribute_or_association)
-    @model_configuration      = attribute_or_association.model_configuration
+    @model      = attribute_or_association.model
     @attribute_or_association = attribute_or_association
   end
 
@@ -34,11 +34,11 @@ private
   end
 
   def order_expectation_method_name
-    Frontier::FeatureSpec::OrderExpectationMethod.new(model_configuration).method_name
+    Frontier::FeatureSpec::OrderExpectationMethod.new(model).method_name
   end
 
   def visit_index_method
-    Frontier::FeatureSpec::VisitIndexMethod.new(model_configuration).method_name
+    Frontier::FeatureSpec::VisitIndexMethod.new(model).method_name
   end
 
 end

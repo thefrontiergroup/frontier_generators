@@ -1,9 +1,9 @@
 class Frontier::ControllerAction::StrongParamsMethod
 
-  include Frontier::ModelConfigurationProperty
+  include Frontier::ModelProperty
 
   def to_s
-    if model_configuration.attributes.count > 3 || contains_nested_associations?
+    if model.attributes.count > 3 || contains_nested_associations?
       render_multi_line_strong_params
     else
       render_single_line_strong_params
@@ -13,7 +13,7 @@ class Frontier::ControllerAction::StrongParamsMethod
 private
 
   def attributes_as_strong_params
-    strong_params_from_attributes(model_configuration.attributes)
+    strong_params_from_attributes(model.attributes)
   end
 
   def strong_params_from_attributes(attributes)
@@ -23,16 +23,16 @@ private
   end
 
   def contains_nested_associations?
-    model_configuration.associations.any?(&:is_nested?)
+    model.associations.any?(&:is_nested?)
   end
 
   def params_require_preamble
-    "params.fetch(#{model_configuration.as_symbol}, {}).permit"
+    "params.fetch(#{model.as_symbol}, {}).permit"
   end
 
   def strong_params_method
     raw = <<-STRING
-def strong_params_for_#{model_configuration.model_name}
+def strong_params_for_#{model.model_name}
   #{yield}
 end
 STRING

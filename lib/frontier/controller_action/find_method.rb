@@ -1,6 +1,6 @@
 class Frontier::ControllerAction::FindMethod
 
-  include Frontier::ModelConfigurationProperty
+  include Frontier::ModelProperty
 
   ##
   # Renders the find method for a controller. EG:
@@ -11,7 +11,7 @@ class Frontier::ControllerAction::FindMethod
   #
   def to_s
     [
-      "def find_#{model_configuration.model_name}",
+      "def find_#{model.model_name}",
       Frontier::RubyRenderer.new(action_contents).render(1),
       "end"
     ].join("\n")
@@ -24,7 +24,7 @@ private
   end
 
   def scopable_object
-    Frontier::ControllerActionSupport::ScopableObject.new(model_configuration).to_s
+    Frontier::ControllerActionSupport::ScopableObject.new(model).to_s
   end
 
 end

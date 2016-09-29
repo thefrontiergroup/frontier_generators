@@ -5,8 +5,8 @@ require 'rails/generators'
 
 require './lib/frontier'
 
-def build_model_configuration
-  Frontier::YamlParser.new(test_model_path).model_configuration
+def build_model
+  Frontier::YamlParser.new(test_model_path).model
 end
 
 def test_model_path

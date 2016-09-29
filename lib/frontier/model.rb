@@ -1,4 +1,4 @@
-class Frontier::ModelConfiguration
+class Frontier::Model
 
   attr_reader *[
     :attributes,

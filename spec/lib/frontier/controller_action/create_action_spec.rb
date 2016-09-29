@@ -3,8 +3,8 @@ require 'spec_helper'
 RSpec.describe Frontier::ControllerAction::CreateAction do
 
   describe "#to_s" do
-    subject { Frontier::ControllerAction::CreateAction.new(model_configuration).to_s }
-    let(:model_configuration) { build_model_configuration }
+    subject { Frontier::ControllerAction::CreateAction.new(model).to_s }
+    let(:model) { build_model }
 
     let(:expected) do
       raw = <<-STRING

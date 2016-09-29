@@ -5,7 +5,7 @@ describe Frontier::Attribute::Validation::Numericality do
   let(:validation) do
     Frontier::Attribute::Validation::Numericality.new(attribute, key, args)
   end
-  let(:attribute) { Frontier::Attribute.new(build_model_configuration, name, {}) }
+  let(:attribute) { Frontier::Attribute.new(build_model, name, {}) }
   let(:name)      { "field_name" }
   let(:key)       { "numericality" }
 

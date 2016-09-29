@@ -3,9 +3,9 @@ require 'spec_helper'
 RSpec.describe Frontier::Spec::ObjectSetup::Attributes do
 
   describe '#to_s' do
-    subject { Frontier::Spec::ObjectSetup::Attributes.new(model_configuration).to_s }
-    let(:model_configuration) do
-      Frontier::ModelConfiguration.new({
+    subject { Frontier::Spec::ObjectSetup::Attributes.new(model).to_s }
+    let(:model) do
+      Frontier::Model.new({
         model_name: {
           attributes: {
             address: {type: "belongs_to", form_type: "select"},

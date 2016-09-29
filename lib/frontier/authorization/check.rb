@@ -1,15 +1,15 @@
 class Frontier::Authorization::Check
 
-  attr_reader :action, :authorizable_object, :model_configuration
+  attr_reader :action, :authorizable_object, :model
 
-  def initialize(model_configuration, authorizable_object, action)
+  def initialize(model, authorizable_object, action)
     @action = action
     @authorizable_object = authorizable_object
-    @model_configuration = model_configuration
+    @model = model
   end
 
   def to_s
-    if model_configuration.using_pundit?
+    if model.using_pundit?
       # policy(User).new?
       "policy(#{authorizable_object}).#{action}?"
     else

@@ -10,16 +10,16 @@ describe 'POST update' do
   authenticated_as(:admin) do
 
     context "with valid parameters" do
-#{render_with_indent(3, Frontier::Spec::ObjectSetup.new(model_configuration).to_s)}
+#{render_with_indent(3, Frontier::Spec::ObjectSetup.new(model).to_s)}
 
-      it "updates the #{model_configuration.as_constant} object with the given attributes" do
+      it "updates the #{model.as_constant} object with the given attributes" do
         subject
 
-        #{model_configuration.model_name}.reload
-#{render_with_indent(4, Frontier::Spec::ObjectAttributesAssertion.new(model_configuration).to_s)}
+        #{model.model_name}.reload
+#{render_with_indent(4, Frontier::Spec::ObjectAttributesAssertion.new(model).to_s)}
       end
 
-      it { should redirect_to(#{model_configuration.url_builder.index_path(show_nested_model_as_ivar: false)}) }
+      it { should redirect_to(#{model.url_builder.index_path(show_nested_model_as_ivar: false)}) }
 
       it "sets a notice for the user" do
         subject
@@ -28,11 +28,11 @@ describe 'POST update' do
     end
 
     context "with invalid parameters" do
-      let(:attributes) { parameters_for(#{model_configuration.as_symbol}, :invalid) }
+      let(:attributes) { parameters_for(#{model.as_symbol}, :invalid) }
 
-      it "doesn't update the #{model_configuration.as_constant}" do
+      it "doesn't update the #{model.as_constant}" do
         subject
-        expect(#{model_configuration.model_name}.reload).not_to have_attributes(attributes)
+        expect(#{model.model_name}.reload).not_to have_attributes(attributes)
       end
     end
   end
@@ -47,7 +47,7 @@ STRING
 private
 
   def subject_block
-    Frontier::ControllerSpec::SubjectBlock.new(model_configuration, :post, :update, {id: "#{model_configuration.model_name}.id", model_configuration.model_name => "attributes"}).to_s
+    Frontier::ControllerSpec::SubjectBlock.new(model, :post, :update, {id: "#{model.model_name}.id", model.model_name => "attributes"}).to_s
   end
 
 end

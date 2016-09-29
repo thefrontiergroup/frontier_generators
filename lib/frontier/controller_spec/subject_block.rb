@@ -1,9 +1,9 @@
 class Frontier::ControllerSpec::SubjectBlock
 
-  attr_reader :model_configuration, :method, :action, :params
+  attr_reader :model, :method, :action, :params
 
-  def initialize(model_configuration, method, action, params={})
-    @model_configuration = model_configuration
+  def initialize(model, method, action, params={})
+    @model = model
     @method = method
     @action = action
     @params = params
@@ -16,7 +16,7 @@ class Frontier::ControllerSpec::SubjectBlock
 private
 
   def nested_model_prefixes
-    model_configuration.controller_prefixes
+    model.controller_prefixes
                        .select(&:nested_model?)
                        .sort_by(&:as_snake_case)
   end

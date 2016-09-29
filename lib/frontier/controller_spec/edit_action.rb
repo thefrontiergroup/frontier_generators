@@ -19,7 +19,7 @@ STRING
 private
 
   def subject_block
-    Frontier::ControllerSpec::SubjectBlock.new(model_configuration, :get, :edit, {id: "#{model_configuration.model_name}.id"}).to_s
+    Frontier::ControllerSpec::SubjectBlock.new(model, :get, :edit, {id: "#{model.model_name}.id"}).to_s
   end
 
 end

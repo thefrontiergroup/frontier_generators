@@ -4,9 +4,9 @@ describe Frontier::Controller::SpecPath do
 
   describe '#to_s' do
     subject { class_name.to_s }
-    let(:class_name) { Frontier::Controller::SpecPath.new(model_configuration) }
-    let(:model_configuration) do
-      Frontier::ModelConfiguration.new({
+    let(:class_name) { Frontier::Controller::SpecPath.new(model) }
+    let(:model) do
+      Frontier::Model.new({
         "user_document" => {
           controller_prefixes: controller_prefixes
         }

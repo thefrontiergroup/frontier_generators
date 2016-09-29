@@ -4,7 +4,7 @@ describe Frontier::Attribute::MigrationComponent do
 
   describe "#to_s" do
     subject { Frontier::Attribute::MigrationComponent.new(attribute).to_s }
-    let(:attribute) { Frontier::Attribute.new(build_model_configuration, name, options) }
+    let(:attribute) { Frontier::Attribute.new(build_model, name, options) }
     let(:name)      { "field_name" }
     let(:options)   { {type: type} }
     let(:type)      { "string" }

@@ -1,6 +1,6 @@
 class Frontier::ControllerSpec::CollectionAction
 
-  include Frontier::ModelConfigurationProperty
+  include Frontier::ModelProperty
 
 protected
 
@@ -9,7 +9,7 @@ protected
   end
 
   def nested_models_setup
-    Frontier::Spec::NestedModelLetSetup.new(model_configuration).to_s
+    Frontier::Spec::NestedModelLetSetup.new(model).to_s
   end
 
 end

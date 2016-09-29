@@ -3,7 +3,7 @@ require 'spec_helper'
 describe Frontier::Input::SelectFormAssociation do
 
   let(:input_implementation) { Frontier::Input::SelectFormAssociation.new(association) }
-  let(:association) { Frontier::Association.new(build_model_configuration, name, options) }
+  let(:association) { Frontier::Association.new(build_model, name, options) }
   let(:name) { "association_name_id" }
   let(:options) { {} }
 

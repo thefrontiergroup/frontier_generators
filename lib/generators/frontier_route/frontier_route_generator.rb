@@ -8,11 +8,11 @@ class FrontierRouteGenerator < Frontier::Generator
   attr_reader :route_namespaces
 
   def scaffold
-    unless model_configuration.skip_ui?
-      @route_namespaces = model_configuration.controller_prefixes.each_with_index.collect do |ns, index|
+    unless model.skip_ui?
+      @route_namespaces = model.controller_prefixes.each_with_index.collect do |ns, index|
         Frontier::Routes::Namespace.new(ns.as_snake_case, index)
       end
-      resource = Frontier::Routes::Resource.new(model_configuration, route_namespaces)
+      resource = Frontier::Routes::Resource.new(model, route_namespaces)
 
       # If we don't need to namespace (can just chuck route in file anywhere) we can use
       # the default rails generator
@@ -41,8 +41,8 @@ private
   # EG: admin/user
   def model_with_namespaces
     [
-      *model_configuration.controller_prefixes.map(&:as_snake_case),
-      model_configuration.model_name
+      *model.controller_prefixes.map(&:as_snake_case),
+      model.model_name
     ].join("/")
   end
 

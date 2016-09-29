@@ -4,9 +4,9 @@ describe Frontier::Views::FeatureSpecPath do
 
   describe '#to_s' do
     subject { feature_spec_path.to_s }
-    let(:feature_spec_path) { Frontier::Views::FeatureSpecPath.new(model_configuration) }
-    let(:model_configuration) do
-      Frontier::ModelConfiguration.new({
+    let(:feature_spec_path) { Frontier::Views::FeatureSpecPath.new(model) }
+    let(:model) do
+      Frontier::Model.new({
         "user_document" => {
           controller_prefixes: controller_prefixes
         }

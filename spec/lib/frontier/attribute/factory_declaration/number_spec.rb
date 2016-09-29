@@ -4,7 +4,7 @@ describe Frontier::Attribute::FactoryDeclaration::Number do
 
   describe "#to_s" do
     subject { Frontier::Attribute::FactoryDeclaration::Number.new(attribute).to_s }
-    let(:attribute) { Frontier::Attribute.new(build_model_configuration, name, options) }
+    let(:attribute) { Frontier::Attribute.new(build_model, name, options) }
     let(:name)      { "field_name" }
     let(:options)   { {type: "integer"} }
 

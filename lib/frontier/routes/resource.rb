@@ -1,11 +1,11 @@
 class Frontier::Routes::Resource
 
-  attr_reader :model_configuration, :namespaces
+  attr_reader :model, :namespaces
 
-  # model_configuration: Instance of Frontier::ModelConfiguration
+  # model: Instance of Frontier::Model
   # namespaces: Collection of Frontier::Routes::Namespace
-  def initialize(model_configuration, namespaces)
-    @model_configuration = model_configuration
+  def initialize(model, namespaces)
+    @model = model
     @namespaces = namespaces
   end
 
@@ -14,7 +14,7 @@ class Frontier::Routes::Resource
   end
 
   def route_string
-    "#{preceding_whitespace}resources #{model_configuration.as_symbol_collection}"
+    "#{preceding_whitespace}resources #{model.as_symbol_collection}"
   end
 
 private
@@ -38,7 +38,7 @@ private
   end
 
   def route_regexp
-    /#{preceding_whitespace}resources(\(|\s)#{model_configuration.as_symbol_collection}/
+    /#{preceding_whitespace}resources(\(|\s)#{model.as_symbol_collection}/
   end
 
 end

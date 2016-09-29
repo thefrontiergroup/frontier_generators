@@ -4,7 +4,7 @@ describe Frontier::Association::ModelImplementation do
 
   describe "#to_s" do
     subject { Frontier::Association::ModelImplementation.new(attribute).to_s }
-    let(:attribute) { Frontier::Association.new(build_model_configuration, name, options) }
+    let(:attribute) { Frontier::Association.new(build_model, name, options) }
     let(:name)      { "association_name" }
     let(:options)   { {type: type}.merge(additional_options) }
     let(:additional_options) { {} }

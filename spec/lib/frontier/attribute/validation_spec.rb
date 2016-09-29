@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe Frontier::Attribute::Validation do
-  let(:attribute) { Frontier::Attribute.new(build_model_configuration, name, options) }
+  let(:attribute) { Frontier::Attribute.new(build_model, name, options) }
 
   describe "#as_implementation" do
     subject { Frontier::Attribute::Validation.new(attribute, key, args).as_implementation }

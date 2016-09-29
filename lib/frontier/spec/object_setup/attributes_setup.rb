@@ -1,6 +1,6 @@
 class Frontier::Spec::ObjectSetup::AttributesSetup
 
-  include Frontier::ModelConfigurationProperty
+  include Frontier::ModelProperty
 
   # Provide the let declarations that will be the basis of the attributes to be used in
   # the params:
@@ -18,12 +18,12 @@ class Frontier::Spec::ObjectSetup::AttributesSetup
 private
 
   def model_attributes_let
-    attributes_for = Frontier::FactoryGirlSupport::AttributesFor.new(model_configuration).to_s
-    Frontier::Spec::LetStatement.new("#{model_configuration.model_name}_attributes", attributes_for).to_s
+    attributes_for = Frontier::FactoryGirlSupport::AttributesFor.new(model).to_s
+    Frontier::Spec::LetStatement.new("#{model.model_name}_attributes", attributes_for).to_s
   end
 
   def nested_attributes_lets
-    model_configuration.associations.select(&:show_on_form?).select(&:is_nested?).map do |association|
+    model.associations.select(&:show_on_form?).select(&:is_nested?).map do |association|
       key            = "#{association.name}_attributes"
       attributes_for = Frontier::FactoryGirlSupport::AttributesFor.new(association).to_s
 

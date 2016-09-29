@@ -9,17 +9,17 @@ describe 'POST create' do
   authenticated_as(:admin) do
 
     context "with valid parameters" do
-#{render_with_indent(3, Frontier::Spec::ObjectSetup.new(model_configuration).to_s)}
+#{render_with_indent(3, Frontier::Spec::ObjectSetup.new(model).to_s)}
 
-      it "creates a #{model_configuration.as_constant} object with the given attributes" do
+      it "creates a #{model.as_constant} object with the given attributes" do
         subject
 
-        #{model_configuration.model_name} = #{model_configuration.as_constant}.order(:created_at).last
-        expect(#{model_configuration.model_name}).to be_present
-#{render_with_indent(4, Frontier::Spec::ObjectAttributesAssertion.new(model_configuration).to_s)}
+        #{model.model_name} = #{model.as_constant}.order(:created_at).last
+        expect(#{model.model_name}).to be_present
+#{render_with_indent(4, Frontier::Spec::ObjectAttributesAssertion.new(model).to_s)}
       end
 
-      it { should redirect_to(#{model_configuration.url_builder.index_path(show_nested_model_as_ivar: false)}) }
+      it { should redirect_to(#{model.url_builder.index_path(show_nested_model_as_ivar: false)}) }
 
       it "sets a notice for the user" do
         subject
@@ -28,8 +28,8 @@ describe 'POST create' do
     end
 
     context "with invalid parameters" do
-      let(:attributes) { parameters_for(#{model_configuration.as_symbol}, :invalid) }
-      specify { expect { subject }.not_to change(#{model_configuration.as_constant}, :count) }
+      let(:attributes) { parameters_for(#{model.as_symbol}, :invalid) }
+      specify { expect { subject }.not_to change(#{model.as_constant}, :count) }
     end
   end
 
@@ -43,7 +43,7 @@ STRING
 private
 
   def subject_block
-    Frontier::ControllerSpec::SubjectBlock.new(model_configuration, :post, :create, {model_configuration.model_name => "attributes"}).to_s
+    Frontier::ControllerSpec::SubjectBlock.new(model, :post, :create, {model.model_name => "attributes"}).to_s
   end
 
 end

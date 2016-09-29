@@ -3,11 +3,11 @@ require 'spec_helper'
 RSpec.describe Frontier::Spec::ObjectSetup::AttributesSetup do
 
   describe "#to_s" do
-    subject { Frontier::Spec::ObjectSetup::AttributesSetup.new(model_configuration).to_s }
+    subject { Frontier::Spec::ObjectSetup::AttributesSetup.new(model).to_s }
 
     context "with no associations" do
-      let(:model_configuration) do
-        Frontier::ModelConfiguration.new({
+      let(:model) do
+        Frontier::Model.new({
           model_name: {
             attributes: {
               name: {type: "string"},
@@ -20,8 +20,8 @@ RSpec.describe Frontier::Spec::ObjectSetup::AttributesSetup do
     end
 
     context "with associations" do
-      let(:model_configuration) do
-        Frontier::ModelConfiguration.new({
+      let(:model) do
+        Frontier::Model.new({
           model_name: {
             attributes: {
               address: {type: "belongs_to", form_type: form_type},

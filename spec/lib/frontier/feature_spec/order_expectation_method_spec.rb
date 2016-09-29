@@ -4,7 +4,7 @@ describe Frontier::FeatureSpec::OrderExpectationMethod do
 
   describe '#method_name' do
     subject { order_expectation_method.method_name }
-    let(:order_expectation_method) { Frontier::FeatureSpec::OrderExpectationMethod.new(build_model_configuration) }
+    let(:order_expectation_method) { Frontier::FeatureSpec::OrderExpectationMethod.new(build_model) }
 
     it { should eq("expect_test_models_to_be_ordered") }
   end
@@ -12,8 +12,8 @@ describe Frontier::FeatureSpec::OrderExpectationMethod do
   describe "#to_s" do
     subject { order_expectation_method.to_s }
 
-    let(:order_expectation_method) { Frontier::FeatureSpec::OrderExpectationMethod.new(model_configuration) }
-    let(:model_configuration) { build_model_configuration }
+    let(:order_expectation_method) { Frontier::FeatureSpec::OrderExpectationMethod.new(model) }
+    let(:model) { build_model }
 
     let(:expected) do
       raw = <<STRING

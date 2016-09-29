@@ -3,11 +3,11 @@ require 'spec_helper'
 RSpec.describe Frontier::ControllerAction::IndexAction do
 
   describe "#to_s" do
-    subject { Frontier::ControllerAction::IndexAction.new(model_configuration).to_s }
+    subject { Frontier::ControllerAction::IndexAction.new(model).to_s }
 
     context "with no nested models" do
-      let(:model_configuration) do
-        Frontier::ModelConfiguration.new({
+      let(:model) do
+        Frontier::Model.new({
           test_model: {
             attributes: {name: {sortable: sortable}}
           }
@@ -50,8 +50,8 @@ STRING
     end
 
     context "with nested models" do
-      let(:model_configuration) do
-        Frontier::ModelConfiguration.new({
+      let(:model) do
+        Frontier::Model.new({
           test_model: {
             attributes: {name: {sortable: sortable}},
             controller_prefixes: ["@cat"]
