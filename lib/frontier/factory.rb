@@ -5,7 +5,7 @@ class Frontier::Factory
   def to_s
     raw = <<-STRING
 FactoryGirl.define do
-  factory #{model.as_symbol} do
+  factory #{model.name.as_symbol} do
 #{render_aligned_and_indented(2, "{", factoried_attributes)}
 
     trait :invalid do

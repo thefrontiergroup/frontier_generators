@@ -16,12 +16,12 @@ class Frontier::ControllerAction::UpdateAction
   def to_s
     raw = <<-STRING
 def update
-  #{model.as_ivar_instance} = find_#{model.model_name}
-  #{model.as_ivar_instance}.assign_attributes(strong_params_for_#{model.model_name})
+  #{model.name.as_ivar_instance} = find_#{model.name.as_singular}
+  #{model.name.as_ivar_instance}.assign_attributes(strong_params_for_#{model.name.as_singular})
   #{Frontier::Authorization::Assertion.new(model, :update).to_s}
-  #{model.as_ivar_instance}.save
+  #{model.name.as_ivar_instance}.save
 
-  respond_with(#{model.as_ivar_instance}, location: #{model.url_builder.index_path})
+  respond_with(#{model.name.as_ivar_instance}, location: #{model.url_builder.index_path})
 end
 STRING
     raw.rstrip

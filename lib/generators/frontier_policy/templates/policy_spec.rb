@@ -2,12 +2,12 @@ require 'rails_helper'
 
 describe <%= policy_class_name %> do
   subject { policy }
-  let(:policy) { <%= policy_class_name %>.new(user, <%= model.model_name %>) }
-  let(<%= model.as_symbol %>) { FactoryGirl.create(<%= model.as_symbol %>) }
+  let(:policy) { <%= policy_class_name %>.new(user, <%= model.name.as_singular %>) }
+  let(<%= model.name.as_symbol %>) { FactoryGirl.create(<%= model.name.as_symbol %>) }
 
   describe <%= policy_class_name %>::Scope do
     let(:policy_scope) { <%= policy_class_name %>::Scope.new(user, scope) }
-    let(:scope) { <%= model.as_constant %>.all }
+    let(:scope) { <%= model.name.as_constant %>.all }
 
     describe "#resolve" do
       subject { policy_scope.resolve }
@@ -23,13 +23,13 @@ describe <%= policy_class_name %> do
       context "for an admin" do
         let(:user) { FactoryGirl.build(:user, :admin) }
 
-        it { should include(FactoryGirl.create(<%= model.as_symbol %>)) }
+        it { should include(FactoryGirl.create(<%= model.name.as_symbol %>)) }
       end
 
       context "for a member" do
         let(:user) { FactoryGirl.build(:user, :member) }
 
-        it { should include(FactoryGirl.create(<%= model.as_symbol %>)) }
+        it { should include(FactoryGirl.create(<%= model.name.as_symbol %>)) }
       end
     end
   end

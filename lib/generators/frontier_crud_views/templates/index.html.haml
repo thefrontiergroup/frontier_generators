@@ -1,12 +1,12 @@
 .content-header
-  %h1 <%= model.as_title %> Management
+  %h1 <%= model.name.as_title %> Management
 <% if model.show_create? -%>
   .collection-actions
-    - if <%= Frontier::Authorization::Check.new(model, model.as_constant, :new) %>
-      = link_to "Add <%= model.as_name.with_indefinite_article %>", <%= model.url_builder.new_path %>, class: "btn"
+    - if <%= Frontier::Authorization::Check.new(model, model.name.as_constant, :new) %>
+      = link_to "Add <%= model.name.as_singular_with_spaces.with_indefinite_article %>", <%= model.url_builder.new_path %>, class: "btn"
 <% end -%>
 
-- if <%= model.as_ivar_collection %>.exists?
+- if <%= model.name.as_ivar_collection %>.exists?
   %table
     %thead
       %tr
@@ -17,7 +17,7 @@
         %th.actions Actions
 <% end -%>
     %tbody
-      - <%= model.as_ivar_collection %>.each do |<%= model.model_name %>|
+      - <%= model.name.as_ivar_collection %>.each do |<%= model.name.as_singular %>|
         %tr
 <% model.attributes.select(&:show_on_index?).each do |attribute| -%>
           %td= <%= attribute.as_index_string %>
@@ -27,6 +27,6 @@
 <%= render_with_indent(6, instance_actions.to_s) %>
 <% end -%>
 
-  = paginate <%= model.as_ivar_collection %>
+  = paginate <%= model.name.as_ivar_collection %>
 - else
 <%= render_with_indent(1, Frontier::Views::Index::EmptyMessageAndCallToAction.new(model).to_s) %>

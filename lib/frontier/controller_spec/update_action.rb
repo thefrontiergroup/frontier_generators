@@ -12,10 +12,10 @@ describe 'POST update' do
     context "with valid parameters" do
 #{render_with_indent(3, Frontier::Spec::ObjectSetup.new(model).to_s)}
 
-      it "updates the #{model.as_constant} object with the given attributes" do
+      it "updates the #{model.name.as_constant} object with the given attributes" do
         subject
 
-        #{model.model_name}.reload
+        #{model.name.as_singular}.reload
 #{render_with_indent(4, Frontier::Spec::ObjectAttributesAssertion.new(model).to_s)}
       end
 
@@ -28,11 +28,11 @@ describe 'POST update' do
     end
 
     context "with invalid parameters" do
-      let(:attributes) { parameters_for(#{model.as_symbol}, :invalid) }
+      let(:attributes) { parameters_for(#{model.name.as_symbol}, :invalid) }
 
-      it "doesn't update the #{model.as_constant}" do
+      it "doesn't update the #{model.name.as_constant}" do
         subject
-        expect(#{model.model_name}.reload).not_to have_attributes(attributes)
+        expect(#{model.name.as_singular}.reload).not_to have_attributes(attributes)
       end
     end
   end
@@ -47,7 +47,7 @@ STRING
 private
 
   def subject_block
-    Frontier::ControllerSpec::SubjectBlock.new(model, :post, :update, {id: "#{model.model_name}.id", model.model_name => "attributes"}).to_s
+    Frontier::ControllerSpec::SubjectBlock.new(model, :post, :update, {id: "#{model.name.as_singular}.id", model.name.as_singular => "attributes"}).to_s
   end
 
 end

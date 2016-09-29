@@ -14,7 +14,7 @@ class Frontier::Routes::Resource
   end
 
   def route_string
-    "#{preceding_whitespace}resources #{model.as_symbol_collection}"
+    "#{preceding_whitespace}resources #{model.name.as_symbol_collection}"
   end
 
 private
@@ -38,7 +38,7 @@ private
   end
 
   def route_regexp
-    /#{preceding_whitespace}resources(\(|\s)#{model.as_symbol_collection}/
+    /#{preceding_whitespace}resources(\(|\s)#{model.name.as_symbol_collection}/
   end
 
 end

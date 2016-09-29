@@ -5,7 +5,7 @@ class Frontier::Attribute::Constant
   attr_reader :name, :values
 
   def self.build_from_validation(attribute, validation)
-    name = "#{attribute.model.as_constant}::#{attribute.name.upcase}_VALUES"
+    name = "#{attribute.model.name.as_constant}::#{attribute.name.upcase}_VALUES"
     new(name, validation.args)
   end
 

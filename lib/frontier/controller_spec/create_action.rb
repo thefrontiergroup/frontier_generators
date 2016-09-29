@@ -11,11 +11,11 @@ describe 'POST create' do
     context "with valid parameters" do
 #{render_with_indent(3, Frontier::Spec::ObjectSetup.new(model).to_s)}
 
-      it "creates a #{model.as_constant} object with the given attributes" do
+      it "creates a #{model.name.as_constant} object with the given attributes" do
         subject
 
-        #{model.model_name} = #{model.as_constant}.order(:created_at).last
-        expect(#{model.model_name}).to be_present
+        #{model.name.as_singular} = #{model.name.as_constant}.order(:created_at).last
+        expect(#{model.name.as_singular}).to be_present
 #{render_with_indent(4, Frontier::Spec::ObjectAttributesAssertion.new(model).to_s)}
       end
 
@@ -28,8 +28,8 @@ describe 'POST create' do
     end
 
     context "with invalid parameters" do
-      let(:attributes) { parameters_for(#{model.as_symbol}, :invalid) }
-      specify { expect { subject }.not_to change(#{model.as_constant}, :count) }
+      let(:attributes) { parameters_for(#{model.name.as_symbol}, :invalid) }
+      specify { expect { subject }.not_to change(#{model.name.as_constant}, :count) }
     end
   end
 
@@ -43,7 +43,7 @@ STRING
 private
 
   def subject_block
-    Frontier::ControllerSpec::SubjectBlock.new(model, :post, :create, {model.model_name => "attributes"}).to_s
+    Frontier::ControllerSpec::SubjectBlock.new(model, :post, :create, {model.name.as_singular => "attributes"}).to_s
   end
 
 end

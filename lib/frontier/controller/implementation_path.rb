@@ -17,7 +17,7 @@ class Frontier::Controller::ImplementationPath
 private
 
   def file_name
-    "#{model.model_name.pluralize}_controller.rb"
+    "#{model.name.as_collection}_controller.rb"
   end
 
 end

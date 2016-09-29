@@ -16,7 +16,7 @@ private
   def class_name
     case factory_object
     when Frontier::Model
-      factory_object.model_name
+      factory_object.name.as_singular
     when Frontier::Association
       factory_object.association_class.underscore
     else

@@ -3,7 +3,7 @@ class Frontier::Spec::ObjectSetup::AttributesHash
   attr_reader :attributes_name, :model
 
   def initialize(model, attributes_name=nil)
-    @attributes_name = attributes_name || "#{model.model_name}_attributes"
+    @attributes_name = attributes_name || "#{model.name.as_singular}_attributes"
     @model = model
   end
 

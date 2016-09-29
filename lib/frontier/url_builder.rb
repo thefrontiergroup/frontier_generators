@@ -24,7 +24,7 @@ private
   def route_objects(show_member:, show_nested_model_as_ivar:)
     components = [
       *model.controller_prefixes.select(&:nested_model?).map {|cp| show_nested_model(cp, show_nested_model_as_ivar)},
-      (model.model_name if show_member)
+      (model.name.as_singular if show_member)
     ].compact
 
     if components.any?
@@ -35,13 +35,13 @@ private
   # Namespace: Admin::Dongle::Resource
   # Becomes admin_dongle_resources_path
   def plural_resource_route_with_controller_prefixes
-    resource_with_controller_prefixes(model.model_name.pluralize)
+    resource_with_controller_prefixes(model.name.as_singular.pluralize)
   end
 
   # Namespace: Admin::Dongle::Resource
   # Becomes admin_dongle_resource_path
   def singular_resource_route_with_controller_prefixes
-    resource_with_controller_prefixes(model.model_name)
+    resource_with_controller_prefixes(model.name.as_singular)
   end
 
   def show_nested_model(controller_prefix, show_nested_model_as_ivar)
