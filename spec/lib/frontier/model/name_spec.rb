@@ -4,8 +4,8 @@ describe Frontier::Model::Name do
 
   let(:name) { Frontier::Model::Name.new("test_model") }
 
-  describe "#as_collection" do
-    subject { name.as_collection }
+  describe "#as_plural" do
+    subject { name.as_plural }
     it { should eq("test_models") }
   end
 
@@ -24,13 +24,13 @@ describe Frontier::Model::Name do
     it { should eq("TestModel") }
   end
 
-  describe "#as_ivar_collection" do
-    subject { name.as_ivar_collection }
+  describe "#as_plural_ivar" do
+    subject { name.as_plural_ivar }
     it { should eq("@test_models") }
   end
 
-  describe "#as_ivar_instance" do
-    subject { name.as_ivar_instance }
+  describe "#as_singular_ivar" do
+    subject { name.as_singular_ivar }
     it { should eq("@test_model") }
   end
 
@@ -39,8 +39,8 @@ describe Frontier::Model::Name do
     it { should eq(":test_model") }
   end
 
-  describe "#as_symbol_collection" do
-    subject { name.as_symbol_collection }
+  describe "#as_plural_symbol" do
+    subject { name.as_plural_symbol }
     it { should eq(":test_models") }
   end
 

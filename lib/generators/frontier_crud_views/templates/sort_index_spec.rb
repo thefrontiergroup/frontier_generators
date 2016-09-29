@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-feature 'Admin can sort an index of <%= model.name.as_collection %>' do
+feature 'Admin can sort an index of <%= model.name.as_plural %>' do
 
   sign_in_as(:admin)
 

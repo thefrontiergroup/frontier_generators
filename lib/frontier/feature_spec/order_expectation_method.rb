@@ -3,7 +3,7 @@ class Frontier::FeatureSpec::OrderExpectationMethod
   include Frontier::ModelProperty
 
   def method_name
-    "expect_#{model.name.as_collection}_to_be_ordered"
+    "expect_#{model.name.as_plural}_to_be_ordered"
   end
 
   def to_s

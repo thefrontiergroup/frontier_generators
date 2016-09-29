@@ -22,7 +22,7 @@ class Frontier::Authorization::Assertion
       else
         # All other actions should be authorized against the instance
         # authorize!(:new, @user)
-        "authorize!(:#{action}, #{model.name.as_ivar_instance})"
+        "authorize!(:#{action}, #{model.name.as_singular_ivar})"
       end
     end
   end

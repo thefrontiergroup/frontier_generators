@@ -6,7 +6,7 @@ class Frontier::Model::Name
   end
 
   # "user_preferences"
-  def as_collection
+  def as_plural
     as_singular.pluralize
   end
 
@@ -26,12 +26,12 @@ class Frontier::Model::Name
   end
 
   # "@user_preferences"
-  def as_ivar_collection
-    "@#{as_collection}"
+  def as_plural_ivar
+    "@#{as_plural}"
   end
 
   # "@user_preference"
-  def as_ivar_instance
+  def as_singular_ivar
     "@#{as_singular}"
   end
 
@@ -41,8 +41,8 @@ class Frontier::Model::Name
   end
 
   # ":user_preferences"
-  def as_symbol_collection
-    ":#{as_collection}"
+  def as_plural_symbol
+    ":#{as_plural}"
   end
 
   # "User Preference"

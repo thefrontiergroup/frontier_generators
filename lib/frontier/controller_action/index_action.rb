@@ -25,7 +25,7 @@ private
 
       # @users = User.all, or
       # @users = @client.users
-      assignment_and_scoped_query = "#{model.name.as_ivar_collection} = #{scoped_object}"
+      assignment_and_scoped_query = "#{model.name.as_plural_ivar} = #{scoped_object}"
 
       # @users = User.all.merge(@ransack_query.result), or
       # @users = @client.users.merge(@ransack_query.result)
@@ -44,7 +44,7 @@ private
         pagination
       ].join("\n")
     else
-      "#{model.name.as_ivar_collection} = #{scopable_object}.page(params[:page])"
+      "#{model.name.as_plural_ivar} = #{scopable_object}.page(params[:page])"
     end
   end
 

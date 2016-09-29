@@ -15,7 +15,7 @@ class FrontierModelGenerator < Frontier::Generator
       template("model_spec.rb", "spec/models/#{model.name.as_singular}_spec.rb")
     end
     unless model.skip_factory?
-      template("factory.rb", "spec/factories/#{model.name.as_collection}.rb")
+      template("factory.rb", "spec/factories/#{model.name.as_plural}.rb")
     end
   end
 end
