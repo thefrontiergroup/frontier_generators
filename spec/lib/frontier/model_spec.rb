@@ -275,4 +275,20 @@ describe Frontier::Model do
     end
   end
 
+  describe "#view_paths" do
+    subject { model.view_paths }
+    let(:model) { Frontier::Model.new(model_options) }
+    let(:model_options) { {test_model: {view_path_attributes: view_path_attributes}} }
+
+    context "when nil" do
+      let(:view_path_attributes) { nil }
+      it { should be_kind_of(Frontier::Model::ViewPaths) }
+    end
+
+    context "when set" do
+      let(:view_path_attributes) { {} }
+      it { should be_kind_of(Frontier::Model::ViewPaths) }
+    end
+  end
+
 end

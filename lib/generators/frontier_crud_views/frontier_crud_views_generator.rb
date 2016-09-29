@@ -6,10 +6,10 @@ class FrontierCrudViewsGenerator < Frontier::Generator
   def scaffold
     unless model.skip_ui?
       [
-        ["index.html.haml", model.show_index?],
-        ["_form.html.haml", model.show_create? || model.show_update?],
-        ["new.html.haml", model.show_create?],
-        ["edit.html.haml", model.show_update?]
+        [model.view_paths.index_path || "index.html.haml", model.show_index?],
+        [model.view_paths.form_path || "_form.html.haml", model.show_create? || model.show_update?],
+        [model.view_paths.new_path || "new.html.haml", model.show_create?],
+        [model.view_paths.edit_path || "edit.html.haml", model.show_update?]
       ].each do |template_filename, should_generate|
         if should_generate
           template template_filename, File.join(Frontier::Views::ViewsFolderPath.new(model).to_s, template_filename)
