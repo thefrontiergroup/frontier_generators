@@ -6,7 +6,7 @@ By default, you get:
 - Models with validations
 - Factories for models using [FFaker](https://github.com/ffaker/ffaker). Factoried attributes take validations into account.
 - Index, new, edit, destroy actions
-- Authorization via [Pundit](https://github.com/elabs/pundit) policies
+- Authorization via [CanCanCan](https://github.com/CanCanCommunity/cancancan) abilities or [Pundit](https://github.com/elabs/pundit) policies
 - Feature and unit tests for all of the above
 - Empty seed rake task
 
