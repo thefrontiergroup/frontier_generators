@@ -23,7 +23,7 @@ class Frontier::Model::ViewPaths
 private
 
   def path_doesnt_exist?(path)
-    !path.nil? && !File.exist?(path)
+    !(path.nil? || File.exist?(path))
   end
 
   def verify_paths_exist!
