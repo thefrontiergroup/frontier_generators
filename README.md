@@ -83,7 +83,7 @@ model_name:
   # Controller: Admin::ModelNamesController
   # Route:      admin_model_names_path (admin/model_names)
   # Views:      views/admin/model_names
-  controller_prefixes: [:admin]
+  controller_prefixes: ['admin']
 
   # Example: A single nested resource
   #
@@ -97,7 +97,7 @@ model_name:
   # Controller: Admin::Client::ModelNamesController
   # Route:      admin_client_model_names_path(@client) (admin/client/:id/model_names)
   # Views:      views/admin/client/model_names
-  controller_prefixes: [:admin, @client]
+  controller_prefixes: ['admin', @client]
 ```
 
 ## Attributes
