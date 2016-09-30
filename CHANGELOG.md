@@ -1,3 +1,17 @@
+## 0.24.2
+
+- Create absolute paths from relative paths when finding template overrides
+
+## 0.24.1
+
+- Use syntax consistent with README for template overrides
+
+## 0.24.0
+
+- Can override templates
+- Remove autofocus in forms
+- Large code clean up
+
 ## 0.23.0
 
 - Fix #130: Line up factory output
