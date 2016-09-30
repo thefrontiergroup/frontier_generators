@@ -11,19 +11,20 @@ class Frontier::Model
     :skip_seeds,
     :skip_ui,
     :soft_delete,
-    :url_builder
+    :url_builder,
+    :view_paths
   ]
 
   def initialize(attributes)
     # Basic data about the model
-    @model_name    = attributes.keys.first
+    @model_name = attributes.keys.first
     @controller_prefixes = attributes[@model_name][:controller_prefixes] || []
     unless controller_prefixes.is_a?(Array)
       raise(ArgumentError, "Invalid value for 'controller_prefixes' passed through: #{controller_prefixes}. Must be an array. EG: [:admin]")
     end
     @controller_prefixes = @controller_prefixes.map {|prefix| Frontier::ControllerPrefix.new(prefix)}
     # TODO: Assert validity of attributes
-    @attributes    = (attributes[@model_name][:attributes] || []).collect do |name, properties|
+    @attributes = (attributes[@model_name][:attributes] || []).collect do |name, properties|
       Frontier::Attribute::Factory.build_attribute_or_association(self, name, properties)
     end
 
@@ -38,6 +39,7 @@ class Frontier::Model
 
     # Additional utility items
     @url_builder = Frontier::UrlBuilder.new(self)
+    @view_paths  = Frontier::Model::ViewPaths.new(attributes[@model_name][:view_path_attributes])
 
     # Ensure model name is a string
     @model_name = @model_name.to_s
@@ -141,3 +143,5 @@ private
     end
   end
 end
+
+require_relative "model/view_paths"
