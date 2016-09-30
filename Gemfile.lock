@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    frontier_generators (0.23.0)
+    frontier_generators (0.24.0)
       indefinite_article (>= 0.2.4)
       rails
 
