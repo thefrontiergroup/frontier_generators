@@ -29,7 +29,7 @@ describe 'POST create' do
 
     context "with invalid parameters" do
       let(:attributes) { parameters_for(#{model.name.as_symbol}, :invalid) }
-      specify { expect { subject }.not_to change(#{model.name.as_constant}, :count) }
+      specify { expect { subject }.not_to change { #{model.name.as_constant}.count } }
     end
   end
 
