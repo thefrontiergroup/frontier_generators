@@ -39,7 +39,7 @@ class Frontier::Model
 
     # Additional utility items
     @url_builder = Frontier::UrlBuilder.new(self)
-    @view_paths  = Frontier::Model::ViewPaths.new(attributes[model_name][:view_path_attributes])
+    @view_paths  = Frontier::Model::ViewPaths.new(attributes[model_name][:view_paths])
 
     # Ensure model name is a string
     @name = Frontier::Model::Name.new(model_name.to_s)
