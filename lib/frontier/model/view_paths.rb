@@ -11,16 +11,20 @@ class Frontier::Model::ViewPaths
   # }
   def initialize(view_path_attributes)
     if !view_path_attributes.nil?
-      @index_path = view_path_attributes[:index]
-      @new_path   = view_path_attributes[:new]
-      @edit_path  = view_path_attributes[:edit]
-      @form_path  = view_path_attributes[:form]
+      @index_path = generate_full_path(view_path_attributes[:index])
+      @new_path   = generate_full_path(view_path_attributes[:new])
+      @edit_path  = generate_full_path(view_path_attributes[:edit])
+      @form_path  = generate_full_path(view_path_attributes[:form])
 
       verify_paths_exist!
     end
   end
 
 private
+
+  def generate_full_path(path)
+    File.expand_path(path) if !path.nil?
+  end
 
   def path_doesnt_exist?(path)
     !(path.nil? || File.exist?(path))
