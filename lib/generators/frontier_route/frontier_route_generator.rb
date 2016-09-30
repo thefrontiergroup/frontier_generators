@@ -42,7 +42,7 @@ private
   def model_with_namespaces
     [
       *model.controller_prefixes.map(&:as_snake_case),
-      model.model_name
+      model.name.as_singular
     ].join("/")
   end
 

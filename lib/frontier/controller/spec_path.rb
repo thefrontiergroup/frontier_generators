@@ -17,7 +17,7 @@ class Frontier::Controller::SpecPath
 private
 
   def file_name
-    "#{model.model_name.pluralize}_controller_spec.rb"
+    "#{model.name.as_plural}_controller_spec.rb"
   end
 
 end

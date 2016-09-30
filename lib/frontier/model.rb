@@ -4,7 +4,7 @@ class Frontier::Model
     :attributes,
     :authorization,
     :controller_prefixes,
-    :model_name,
+    :name,
     :skip_factory,
     :skip_model,
     :skip_policies,
@@ -17,32 +17,32 @@ class Frontier::Model
 
   def initialize(attributes)
     # Basic data about the model
-    @model_name = attributes.keys.first
-    @controller_prefixes = attributes[@model_name][:controller_prefixes] || []
+    model_name = attributes.keys.first
+    @controller_prefixes = attributes[model_name][:controller_prefixes] || []
     unless controller_prefixes.is_a?(Array)
       raise(ArgumentError, "Invalid value for 'controller_prefixes' passed through: #{controller_prefixes}. Must be an array. EG: [:admin]")
     end
     @controller_prefixes = @controller_prefixes.map {|prefix| Frontier::ControllerPrefix.new(prefix)}
     # TODO: Assert validity of attributes
-    @attributes = (attributes[@model_name][:attributes] || []).collect do |name, properties|
+    @attributes = (attributes[model_name][:attributes] || []).collect do |name, properties|
       Frontier::Attribute::Factory.build_attribute_or_association(self, name, properties)
     end
 
     # Configuration of generated items
-    @authorization = configuration_for(attributes[@model_name][:authorization], default: "pundit")
-    @skip_factory  = configuration_for(attributes[@model_name][:skip_factory])
-    @skip_model    = configuration_for(attributes[@model_name][:skip_model])
-    @skip_seeds    = configuration_for(attributes[@model_name][:skip_seeds])
-    @skip_policies = configuration_for(attributes[@model_name][:skip_policies])
-    parse_skip_ui_options(configuration_for(attributes[@model_name][:skip_ui]))
-    @soft_delete   = configuration_for(attributes[@model_name][:soft_delete], default: true)
+    @authorization = configuration_for(attributes[model_name][:authorization], default: "pundit")
+    @skip_factory  = configuration_for(attributes[model_name][:skip_factory])
+    @skip_model    = configuration_for(attributes[model_name][:skip_model])
+    @skip_seeds    = configuration_for(attributes[model_name][:skip_seeds])
+    @skip_policies = configuration_for(attributes[model_name][:skip_policies])
+    parse_skip_ui_options(configuration_for(attributes[model_name][:skip_ui]))
+    @soft_delete   = configuration_for(attributes[model_name][:soft_delete], default: true)
 
     # Additional utility items
     @url_builder = Frontier::UrlBuilder.new(self)
-    @view_paths  = Frontier::Model::ViewPaths.new(attributes[@model_name][:view_path_attributes])
+    @view_paths  = Frontier::Model::ViewPaths.new(attributes[model_name][:view_path_attributes])
 
     # Ensure model name is a string
-    @model_name = @model_name.to_s
+    @name = Frontier::Model::Name.new(model_name.to_s)
   end
 
   def attributes_only
@@ -51,38 +51,6 @@ class Frontier::Model
 
   def associations
     attributes.select(&:is_association?)
-  end
-
-  def as_collection
-    model_name.pluralize
-  end
-
-  def as_constant
-    "#{model_name.camelize}"
-  end
-
-  def as_ivar_collection
-    "@#{model_name.pluralize}"
-  end
-
-  def as_ivar_instance
-    "@#{model_name}"
-  end
-
-  def as_symbol
-    ":#{model_name}"
-  end
-
-  def as_symbol_collection
-    ":#{as_collection}"
-  end
-
-  def as_name
-    model_name.gsub("_", " ")
-  end
-
-  def as_title
-    model_name.titleize
   end
 
   # The primary attribute is used for:
@@ -144,4 +112,5 @@ private
   end
 end
 
+require_relative "model/name"
 require_relative "model/view_paths"

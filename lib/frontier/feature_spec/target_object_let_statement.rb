@@ -18,7 +18,7 @@ class Frontier::FeatureSpec::TargetObjectLetStatement
   #
   def to_s
     [
-      let_statement_for_resource(model.model_name, model.controller_prefixes),
+      let_statement_for_resource(model.name.as_singular, model.controller_prefixes),
       let_statements_for_nested_resources
     ].select(&:present?).join("\n")
   end

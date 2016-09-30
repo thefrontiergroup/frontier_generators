@@ -8,7 +8,7 @@ class Frontier::Controller::ClassName
   def to_s
     [
       *model.controller_prefixes.map(&:as_snake_case).map(&:camelize),
-      "#{model.model_name.pluralize.camelize}Controller"
+      "#{model.name.as_plural.camelize}Controller"
     ].join("::")
   end
 

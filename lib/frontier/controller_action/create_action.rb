@@ -15,11 +15,11 @@ class Frontier::ControllerAction::CreateAction
   def to_s
     raw = <<-STRING
 def create
-  #{model.as_ivar_instance} = #{scopable_object}.new(strong_params_for_#{model.model_name})
+  #{model.name.as_singular_ivar} = #{scopable_object}.new(strong_params_for_#{model.name.as_singular})
   #{Frontier::Authorization::Assertion.new(model, :create).to_s}
-  #{model.as_ivar_instance}.save
+  #{model.name.as_singular_ivar}.save
 
-  respond_with(#{model.as_ivar_instance}, location: #{model.url_builder.index_path})
+  respond_with(#{model.name.as_singular_ivar}, location: #{model.url_builder.index_path})
 end
 STRING
     raw.rstrip

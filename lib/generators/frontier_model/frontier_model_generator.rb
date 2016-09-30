@@ -11,11 +11,11 @@ class FrontierModelGenerator < Frontier::Generator
 
     unless model.skip_model?
       generate("migration", Frontier::MigrationStringBuilder.new(model).to_s)
-      template("model.rb", "app/models/#{model.model_name}.rb")
-      template("model_spec.rb", "spec/models/#{model.model_name}_spec.rb")
+      template("model.rb", "app/models/#{model.name.as_singular}.rb")
+      template("model_spec.rb", "spec/models/#{model.name.as_singular}_spec.rb")
     end
     unless model.skip_factory?
-      template("factory.rb", "spec/factories/#{model.model_name.pluralize}.rb")
+      template("factory.rb", "spec/factories/#{model.name.as_plural}.rb")
     end
   end
 end

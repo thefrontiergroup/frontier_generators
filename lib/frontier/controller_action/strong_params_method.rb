@@ -27,12 +27,12 @@ private
   end
 
   def params_require_preamble
-    "params.fetch(#{model.as_symbol}, {}).permit"
+    "params.fetch(#{model.name.as_symbol}, {}).permit"
   end
 
   def strong_params_method
     raw = <<-STRING
-def strong_params_for_#{model.model_name}
+def strong_params_for_#{model.name.as_singular}
   #{yield}
 end
 STRING

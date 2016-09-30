@@ -26,9 +26,9 @@ private
 
   def action_contents
     [
-      "#{model.as_ivar_instance} = find_#{model.model_name}",
+      "#{model.name.as_singular_ivar} = find_#{model.name.as_singular}",
       Frontier::Authorization::Assertion.new(model, :edit).to_s,
-      Frontier::ControllerActionSupport::NestedAssociationBuilder.new(model, model.as_ivar_instance).to_s
+      Frontier::ControllerActionSupport::NestedAssociationBuilder.new(model, model.name.as_singular_ivar).to_s
     ].flatten.compact
   end
 

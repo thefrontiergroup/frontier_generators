@@ -52,7 +52,7 @@ describe 'POST create' do
 
     context "with invalid parameters" do
       let(:attributes) { parameters_for(:user, :invalid) }
-      specify { expect { subject }.not_to change(User, :count) }
+      specify { expect { subject }.not_to change { User.count } }
     end
   end
 
@@ -103,7 +103,7 @@ describe 'POST create' do
 
     context "with invalid parameters" do
       let(:attributes) { parameters_for(:user, :invalid) }
-      specify { expect { subject }.not_to change(User, :count) }
+      specify { expect { subject }.not_to change { User.count } }
     end
   end
 

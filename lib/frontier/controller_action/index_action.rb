@@ -21,11 +21,11 @@ private
   def object_scope
     if sortable?
       # @ransack_query = User.ransack(params[:q])
-      ransack_query = "@ransack_query = #{model.as_constant}.ransack(params[:q])"
+      ransack_query = "@ransack_query = #{model.name.as_constant}.ransack(params[:q])"
 
       # @users = User.all, or
       # @users = @client.users
-      assignment_and_scoped_query = "#{model.as_ivar_collection} = #{scoped_object}"
+      assignment_and_scoped_query = "#{model.name.as_plural_ivar} = #{scoped_object}"
 
       # @users = User.all.merge(@ransack_query.result), or
       # @users = @client.users.merge(@ransack_query.result)
@@ -44,7 +44,7 @@ private
         pagination
       ].join("\n")
     else
-      "#{model.as_ivar_collection} = #{scopable_object}.page(params[:page])"
+      "#{model.name.as_plural_ivar} = #{scopable_object}.page(params[:page])"
     end
   end
 

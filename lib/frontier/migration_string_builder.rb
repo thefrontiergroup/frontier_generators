@@ -4,7 +4,7 @@ class Frontier::MigrationStringBuilder
 
   # EG: CreateDriver name:string contact_number:string
   def to_s
-    "Create#{model.as_constant} #{extra_columns}"
+    "Create#{model.name.as_constant} #{extra_columns}"
   end
 
 private

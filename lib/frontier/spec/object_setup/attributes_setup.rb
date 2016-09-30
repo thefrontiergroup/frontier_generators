@@ -19,7 +19,7 @@ private
 
   def model_attributes_let
     attributes_for = Frontier::FactoryGirlSupport::AttributesFor.new(model).to_s
-    Frontier::Spec::LetStatement.new("#{model.model_name}_attributes", attributes_for).to_s
+    Frontier::Spec::LetStatement.new("#{model.name.as_singular}_attributes", attributes_for).to_s
   end
 
   def nested_attributes_lets

@@ -13,16 +13,16 @@ class Frontier::Authorization::Assertion
       # no reason to pass it through.
       #
       # authorize(User)
-      "authorize(#{model.as_constant})"
+      "authorize(#{model.name.as_constant})"
     else
       if action.to_sym == :index
         # Index action should be authorized against the class
         # authorize!(:index, User)
-        "authorize!(:#{action}, #{model.as_constant})"
+        "authorize!(:#{action}, #{model.name.as_constant})"
       else
         # All other actions should be authorized against the instance
         # authorize!(:new, @user)
-        "authorize!(:#{action}, #{model.as_ivar_instance})"
+        "authorize!(:#{action}, #{model.name.as_singular_ivar})"
       end
     end
   end

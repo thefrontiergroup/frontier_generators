@@ -61,25 +61,29 @@ private
   def expectation_for(attribute)
     instance_comparison = [
       prefix,
-      model_or_association.model_name,
+      model_name,
       attribute.name
     ].compact.join(".")
 
     if attribute.is_attribute?
       # EG: expect(model_name.name).to eq(model_attributes[:name])
-      expectation(instance_comparison, "#{model_or_association.model_name}_attributes[#{attribute.as_symbol}]")
+      expectation(instance_comparison, "#{model_name}_attributes[#{attribute.as_symbol}]")
     else
       if attribute.is_nested?
         # EG:
         #  expect(model_name.address.line_1).to eq(address_attributes[:line_1])
         #  expect(model_name.address.line_2).to eq(address_attributes[:line_2])
         #  expect(model_name.address.city).to eq(address_attributes[:city])
-        self.class.new(attribute, [prefix, model_or_association.model_name].compact.join(".")).to_s
+        self.class.new(attribute, [prefix, model_name].compact.join(".")).to_s
       else
         # EG: expect(model_name.address.state).to eq(state)
         expectation(instance_comparison, "#{attribute.name}")
       end
     end
+  end
+
+  def model_name
+    model_or_association.is_a?(Frontier::Model) ? model_or_association.name.as_singular : model_or_association.model_name
   end
 
 end

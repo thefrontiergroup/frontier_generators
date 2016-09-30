@@ -7,7 +7,7 @@ class Frontier::Views::FeatureSpecPath
       "spec",
       "features",
       *model.controller_prefixes.map(&:as_snake_case),
-      model.model_name.pluralize
+      model.name.as_plural
     ).to_s
   end
 

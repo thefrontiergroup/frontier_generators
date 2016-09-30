@@ -1,4 +1,4 @@
-class <%= model.as_constant %> < ActiveRecord::Base
+class <%= model.name.as_constant %> < ActiveRecord::Base
 
 <% if model.soft_delete -%>
   # Soft delete - uses deleted_at field

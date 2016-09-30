@@ -16,8 +16,8 @@ private
     raw = <<-STRING
 %p
   #{empty_message_without_call_to_action}
-  - if #{Frontier::Authorization::Check.new(model, model.as_constant, :new)}
-    = link_to(\"Add #{model.as_name.with_indefinite_article}.\", #{model.url_builder.new_path})
+  - if #{Frontier::Authorization::Check.new(model, model.name.as_constant, :new)}
+    = link_to(\"Add #{model.name.as_singular_with_spaces.with_indefinite_article}.\", #{model.url_builder.new_path})
 STRING
     raw.rstrip
   end
@@ -27,7 +27,7 @@ STRING
   end
 
   def model_pluralized
-    model.as_title.pluralize.downcase
+    model.name.as_title.pluralize.downcase
   end
 
 end

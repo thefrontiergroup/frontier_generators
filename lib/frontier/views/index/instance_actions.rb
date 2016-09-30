@@ -45,14 +45,14 @@ private
       model.url_builder.delete_path,
       {
         method: :delete,
-        data: {confirm: "\"Are you sure you want to delete this #{model.as_title.downcase}?\""},
+        data: {confirm: "\"Are you sure you want to delete this #{model.name.as_title.downcase}?\""},
         class: '"btn btn-small btn-danger"'
       }
     )
   end
 
   def render_authorization(action)
-    "- if #{Frontier::Authorization::Check.new(model, model.model_name, action)}"
+    "- if #{Frontier::Authorization::Check.new(model, model.name.as_singular, action)}"
   end
 
   def render_link_to(name, path, options)

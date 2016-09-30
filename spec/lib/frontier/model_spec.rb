@@ -4,46 +4,6 @@ describe Frontier::Model do
 
   let(:model) { build_model }
 
-  describe "#as_collection" do
-    subject { model.as_collection }
-    it { should eq("test_models") }
-  end
-
-  describe "#as_constant" do
-    subject { model.as_constant }
-    it { should eq("TestModel") }
-  end
-
-  describe "#as_ivar_collection" do
-    subject { model.as_ivar_collection }
-    it { should eq("@test_models") }
-  end
-
-  describe "#as_symbol" do
-    subject { model.as_symbol }
-    it { should eq(":test_model") }
-  end
-
-  describe "#as_symbol_collection" do
-    subject { model.as_symbol_collection }
-    it { should eq(":test_models") }
-  end
-
-  describe "#as_name" do
-    subject { model.as_name }
-    it { should eq("test model") }
-  end
-
-  describe "#as_title" do
-    subject { model.as_title }
-    it { should eq("Test Model") }
-  end
-
-  describe "#as_ivar_instance" do
-    subject { model.as_ivar_instance }
-    it { should eq("@test_model") }
-  end
-
   describe "#primary_attribute" do
     subject(:primary_attribute) { model.primary_attribute }
 

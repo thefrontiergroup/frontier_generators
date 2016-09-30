@@ -16,13 +16,13 @@ class FrontierCrudViewsGenerator < Frontier::Generator
         end
       end
 
-      generate_feature_path("index_spec.rb", "#{model.as_collection}_index_spec.rb") if model.show_index?
-      generate_feature_path("delete_spec.rb", "delete_#{model.model_name}_spec.rb") if model.show_delete?
-      generate_feature_path("create_spec.rb", "create_#{model.model_name}_spec.rb") if model.show_create?
-      generate_feature_path("update_spec.rb", "update_#{model.model_name}_spec.rb") if model.show_update?
+      generate_feature_path("index_spec.rb", "#{model.name.as_plural}_index_spec.rb") if model.show_index?
+      generate_feature_path("delete_spec.rb", "delete_#{model.name.as_singular}_spec.rb") if model.show_delete?
+      generate_feature_path("create_spec.rb", "create_#{model.name.as_singular}_spec.rb") if model.show_create?
+      generate_feature_path("update_spec.rb", "update_#{model.name.as_singular}_spec.rb") if model.show_update?
 
       if model.attributes.any?(&:sortable?)
-        generate_feature_path("sort_index_spec.rb", "#{model.as_collection}_sort_index_spec.rb") if model.show_index?
+        generate_feature_path("sort_index_spec.rb", "#{model.name.as_plural}_sort_index_spec.rb") if model.show_index?
       end
     end
   end

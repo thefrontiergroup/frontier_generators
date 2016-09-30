@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-feature 'Admin can view an index of <%= model.as_constant.pluralize %>' do
+feature 'Admin can view an index of <%= model.name.as_constant.pluralize %>' do
 
   sign_in_as(:admin)
 <%= render_with_indent(1, Frontier::FeatureSpec::TargetObjectLetStatement.new(model).to_s) %>
@@ -11,7 +11,7 @@ feature 'Admin can view an index of <%= model.as_constant.pluralize %>' do
 
   scenario do
     within("table") do
-      expect(page).to have_content(<%= model.model_name %>.<%= model.primary_attribute.name %>)
+      expect(page).to have_content(<%= model.name.as_singular %>.<%= model.primary_attribute.name %>)
     end
   end
 

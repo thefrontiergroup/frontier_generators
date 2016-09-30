@@ -44,7 +44,8 @@ private
     if attribute_or_association.is_association? && attribute_or_association.is_nested?
       Frontier::Spec::FeatureSpecAssignmentSet.new(attribute_or_association).to_s("# #{attribute_or_association.as_constant} assignments")
     else
-      Frontier::FeatureSpecAssignment.new(attribute_or_association).to_s("#{model_or_association.model_name}_attributes")
+      prefix = model_or_association.is_a?(Frontier::Model) ? model_or_association.name.as_singular : model_or_association.model_name
+      Frontier::FeatureSpecAssignment.new(attribute_or_association).to_s("#{prefix}_attributes")
     end
   end
 

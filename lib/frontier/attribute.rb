@@ -77,8 +77,8 @@ class Frontier::Attribute
   # index refers to the index.html.haml template, nothing to do with DB.
   def as_index_string
     case type
-      when "text" then "truncate(#{model.model_name}.#{name}, length: 30)"
-      else "#{model.model_name}.#{name}"
+      when "text" then "truncate(#{model.name.as_singular}.#{name}, length: 30)"
+      else "#{model.name.as_singular}.#{name}"
     end
   end
 

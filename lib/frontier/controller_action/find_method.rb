@@ -11,7 +11,7 @@ class Frontier::ControllerAction::FindMethod
   #
   def to_s
     [
-      "def find_#{model.model_name}",
+      "def find_#{model.name.as_singular}",
       Frontier::RubyRenderer.new(action_contents).render(1),
       "end"
     ].join("\n")
