@@ -14,7 +14,7 @@ feature 'Admin can delete an existing <%= model.name.as_constant %>' do
       click_link("Delete")
     end
 
-    expect(page).to have_flash(:notice)
+    expect(page).to have_flash(:notice, "<%= model.name.as_singular_with_spaces.capitalize %> was successfully archived.")
     expect(page).not_to have_content(<%= model.name.as_singular %>.<%= model.primary_attribute.name %>)
     # Ensure object is deleted
     expect(<%= model.name.as_singular %>.reload).to be_deleted
