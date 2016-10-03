@@ -66,8 +66,13 @@ private
     ].compact.join(".")
 
     if attribute.is_attribute?
-      # EG: expect(model_name.name).to eq(model_attributes[:name])
-      expectation(instance_comparison, "#{model_name}_attributes[#{attribute.as_symbol}]")
+      # The setup for boolean is always: 'check(attribute_name)' so it will always be set to true
+      if attribute.type == "boolean"
+        expectation(instance_comparison, "true")
+      else
+        # EG: expect(model_name.name).to eq(model_attributes[:name])
+        expectation(instance_comparison, "#{model_name}_attributes[#{attribute.as_symbol}]")
+      end
     else
       if attribute.is_nested?
         # EG:

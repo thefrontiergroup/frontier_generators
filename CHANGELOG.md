@@ -1,3 +1,7 @@
+## Unreleased
+
+- Fix #118: Ensure booleans are compared to true in feature specs
+
 ## 0.24.2
 
 - Create absolute paths from relative paths when finding template overrides

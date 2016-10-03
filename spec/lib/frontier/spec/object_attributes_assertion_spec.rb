@@ -19,6 +19,7 @@ RSpec.describe Frontier::Spec::ObjectAttributesAssertion do
                 state: {type: "belongs_to", form_type: "select"}
               }
             },
+            a_boolean: {type: "boolean"},
             name: {type: "string"},
             omitted_attribute: {type: "string", show_on_form: false}
           }
@@ -28,6 +29,7 @@ RSpec.describe Frontier::Spec::ObjectAttributesAssertion do
 
     let(:expected) do
       raw = <<STRING
+expect(model_name.a_boolean).to eq(true)
 expect(model_name.name).to eq(model_name_attributes[:name])
 expect(model_name.address).to eq(address)
 expect(model_name.other_address.line_1).to eq(other_address_attributes[:line_1])
