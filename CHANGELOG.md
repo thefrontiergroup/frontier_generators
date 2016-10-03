@@ -1,6 +1,7 @@
 ## Unreleased
 
 - Fix #118: Ensure booleans are compared to true in feature specs
+- Fix #146: Handle cases where soft delete is false in delete specs
 - Fix #161: Check for flash when destroying a record
 
 ## 0.24.2
